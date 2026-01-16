@@ -1,0 +1,56 @@
+{
+  "version": "1.0",
+  "description": "RAG konfiguracija za EES dokumentaciju",
+  
+  "paths": {
+    "chunks_file": "/home/synsoft/gridmind_v0.9/chunks/output/all_chunks.jsonl",
+    "faiss_index": "/home/synsoft/gridmind_v0.9/chunks/index/faiss_index.bin",
+    "chunk_mapping": "/home/synsoft/gridmind_v0.9/chunks/index/chunk_mapping.json"
+  },
+  
+  "embedding": {
+    "model_name": "BAAI/bge-m3",
+    "model_type": "bge-m3",
+    "device": "cpu",
+    "batch_size": 32,
+    "max_length": 512,
+    "normalize_embeddings": true,
+    "use_fp16": false,
+    "local_files_only": true
+  },
+  
+  "reranker": {
+    "model_name": "BAAI/bge-reranker-v2-m3",
+    "model_name_finetuned": "/home/synsoft/gridmind_v0.9/chunks/finetune_rerank/output/bge-reranker-finetuned_20260116_145353/final",
+    "use_finetuned": true,
+    "device": "cuda",
+    "local_files_only": true
+  },
+  
+  "faiss": {
+    "index_type": "IndexFlatIP",
+    "metric": "inner_product",
+    "nlist": 100,
+    "nprobe": 10
+  },
+  
+  "retrieval": {
+    "top_k": 5,
+    "embedding_top_k": 80,
+    "score_threshold": 0.9,
+    "rerank": true,
+    "use_hybrid_search": true,
+    "hybrid_alpha": 0.6,
+    "use_rerank_bm25_boost": true,
+    "rerank_bm25_weight": 0.3,
+    "use_title_boost": true,
+    "title_boost_weight": 0.15,
+    "use_exact_phrase_boost": true,
+    "exact_phrase_boost_weight": 0.1
+  },
+  
+  "preprocessing": {
+    "query_prefix": "Pronađi informacije o: ",
+    "document_prefix": ""
+  }
+}

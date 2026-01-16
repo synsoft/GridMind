@@ -1,0 +1,89 @@
+{
+  "entries": [
+    {
+      "id": "7f1ad2d0-b327-43af-8141-d5f1d06e59af",
+      "content": "Вредност напона у нормалним условима рада у било којој тачки мреже 400 kV, 220 kV и 110 kV налази се у опсегу:\\n·         400 kV мрежа: између 360 kV и 420 kV;\\n·         220 kV мрежа: између 198 kV u 245 kV;\\n·         110 kV мрежа: између 99 kV и 123 kV.",
+      "title": "Dozvoljene vrednosti napona u mrežama 400, 220 i 110 kV",
+      "stored_by": "expert",
+      "timestamp": "2025-12-17T13:31:11.833444"
+    },
+    {
+      "id": "143cc5f2-d1fc-44e4-beb2-2a0d64601b4c",
+      "content": "Енергија произведена у ХЕ Ђердап 2 се пласира у преносни систем преко следећих далековода: 1228А, 1228Б, 1229А, 1229Б, 1230",
+      "title": "Dalekovodi 1228A 1228B 1229A 1229B 1230 iz Đerdap 2",
+      "stored_by": "expert",
+      "timestamp": "2025-12-17T13:31:56.969051"
+    },
+    {
+      "id": "80264452-280e-474a-ba62-414315e1ed47",
+      "content": "Dalekovodi rade u paralelnom radu ako su ispunjeni svih 5 navedenih uslova:\n1.  Dalekovodi su istog su naponskog nivoa\n    \n2.  Polaze iz istog elektroenergetskog objekta\n    \n3.  Završavaju se u istom elektroenergetskom objektu\n    \n4.  U elektroenergetskom objektu odakle polaze se nalaze na istom sistemu sabirnica ili na različitim sistemima sabirnica sa uključenim spojnim poljem.\n    \n5.  U elektroenergetskom objektu gde se zavšavaju nalaze na istom sistemu sabirnica ili na različitim sistemima sabirnica sa uključenim spojnim poljem.\n    \nUkoliko jedan od uslova nije ispunjen smatra se da dva dalekovoda ne rade u paralelnom radu.",
+      "title": "Uslovi paralelnog rada dalekovoda na istom naponskom nivou i sabirnicama",
+      "stored_by": "expert",
+      "timestamp": "2025-12-17T13:50:23.140804"
+    },
+    {
+      "id": "099ee132-3320-4fed-9a5d-78a73278132e",
+      "content": "Енергија произведена у ХЕ Ђердап 2 се пласира у преносни систем преко следећих далековода: 1228А, 1228Б, 1229А, 1229Б, 1230",
+      "title": "Dalekovodi 1228A-1230 za HE Đerdap 2",
+      "stored_by": "expert",
+      "timestamp": "2025-12-17T14:37:34.628254"
+    },
+    {
+      "id": "66a882c9-8315-47f8-b548-288390f223fe",
+      "content": "NDC - Nacionalni Dispečerski Centar",
+      "title": "Nacionalni Dispečerski Centar",
+      "stored_by": "expert",
+      "timestamp": "2025-12-17T21:41:55.491784"
+    },
+    {
+      "id": "e1c22647-86f1-45e6-ae8a-a9a8c232b11a",
+      "content": "Називна вредност фреквенције износи 50 Hz. Када преносни систем Републике Србије ради у оквиру интерконекције, на дозвољена одступања од називне вредности фреквенције у преносној мрежи примењују се вредности из правила о раду интерконекције. Тренутна правила су:\n·         ± 200 mHz;\n·         ± 100 mHz трајању не дужем од 5 минута;\n·         ± 50 mHz у трајању не дужем од 15 минута;\nУ случају да преносни систем Републике Србије ради изоловано од суседних преносних система, дозвољена фреквенција у преносној мрежи у квазистационарном стањује 50 Hz ± 0,5 Hz.",
+      "title": "Dopuštena frekvencijska odstupanja u interkonkeciji Srbije",
+      "stored_by": "expert",
+      "timestamp": "2025-12-17T21:54:05.674625"
+    },
+    {
+      "id": "714e5c85-98a5-4a30-a432-ee6bbcb07cce",
+      "content": "**Radijalna trafostanica** je trafostanica koja se **napaja jednim jedinim dovodom** (jednim dalekovodom ili kablom), bez alternativnog ili rezervnog pravca napajanja.",
+      "title": "Radijalna trafostanica s jednim dovodom",
+      "stored_by": "expert",
+      "timestamp": "2025-12-17T22:05:04.138563"
+    },
+    {
+      "id": "d788412f-ca02-4a53-ba2c-3f0c1b05e1ff",
+      "content": "**Radijalni dalekovod** je dalekovod koji **polazi iz jedne trafostanice i završava se u jednoj tački potrošnje ili jednoj TS**, **bez nastavka dalje i bez alternativne veze** sa ostatkom mreže.",
+      "title": "Radijalni dalekovod je dalekovod koji polazi iz jedne",
+      "stored_by": "expert",
+      "timestamp": "2025-12-17T22:06:38.192725"
+    },
+    {
+      "id": "ba36fc5b-f6d8-45a6-b9b8-a5fba503f8f7",
+      "content": "Интерконективни или прекогранични далеководи су далеководи који спајају постројења у две различите државе тј. два различита ТСО, или у два различита ТСО у оквиру једне државе ако једна држава има два оператора преносног система. Границе једног ТСО не морају се нужно поклапати са границама Државе, мада се углавном поклапају.\nРепублика Србија има осам државних граница и једног оператора преносног система Акционарско Друштво Електромрежу Србије (ЕМС), међутим Аутономна покрајина Косово и Метохија која је у оквиру Републике Србије има посебног оператора преносног система KOSTT. С тим у вези, Државне границе Србије не поклапају се са границама регулационе области ЕМС.",
+      "title": "Prekogranični далеководи između dva TSO",
+      "stored_by": "expert",
+      "timestamp": "2025-12-21T23:04:21.105317"
+    },
+    {
+      "id": "2de6ab93-a851-42be-a7d2-2b07cd084cc1",
+      "content": "Имена оператора преносних система суседних држава дати су у доњој листи интерконективних далековода у форми име_преносног_система (име_државе_из_које_потиче).\nРегулациона област ЕМС има следеће интерконективне далеководе:\n1. Србија - Мађарска:\nЕМС (Србија) – МAVIR (Мађарска): 400 kV Далековод ДВ 454 TС Суботица (Србија) –> ТС Шандорфалва (Мађарска)\n2. Србија - Хрватска\n2.1 ЕМС (Србија) – HOPS (Хрватска): 400 kV Далековод  ДВ 409/3 РП Младост (Србија) –> ТС Ернестиново (Хрватска)\n2.2 ЕМС (Србија) – HOPS (Хрватска): 110 kV Далековод ДВ 119/2 ТС Шид (Србија) – ТС Нијемци (Хрватска)\n3. Србија - Босна и Херцеговина (БиХ)\n3.1 ЕМС (Србија) – NOSBIH (Босна и Херцеговина - БиХ): 400 kV Далековод  ДВ 455 РП Младост (Србија) – ТЕ Угљевик (Босна и Херцеговина -БиХ)\n3.2 ЕМС (Србија) – NOSBIH (Босна и Херцеговина -БиХ): 220 kV Далековод  ДВ 214/5 ТС Пожега (Србија) – ХЕ Вишеград (Босна и Херцеговина -БиХ)\n3.3 ЕМС (Србија) – NOSBIH (Босна и Херцеговина -БиХ): 110 kV Далековод  ДВ 1214 ТС Лешница (Србија) – ТС Јања (Босна и Херцеговина –БиХ)\n3.4 ЕМС (Србија) – NOSBIH (Босна и Херцеговина -БиХ): 110 kV Далековод  ДВ 103 ХЕ Зворник (Србија) – ТС Зворник (Босна и Херцеговина –БиХ)\n4. Србија - Црна Гора\n4.1 ЕМС (Србија) – CGES (Црна Гора): 220 kV Далековод ДВ 206/1 ТС Бајина Башта (Србија) – ТС Пљевља 2 (Црна Гора)\n4.2 ЕМС (Србија) – CGES (Црна Гора): 220 kV Далековод ДВ 266/2 ТС Бистрица (Србија)  – ТС Пљевља 2 (Црна Гора)\n4.3 ЕМС (Србија) – CGES (Црна Гора): 110 kV Далековод ДВ 134/4 ХЕ Потпећ (Србија) – ТС Пљевља (Црна Гора)\n5. Србија - АП Косово и Метохија\n5.1 ЕМС (Србија) – KOSTT (Србија, АП Косово и Метохија): Далековод 400 kV 407 ТС Ниш 2 (Србија) – ТЕ Косово Б (Србија, АП Косово и Метохија)\n5.2 ЕМС (Србија) – KOSTT (Србија, АП Косово и Метохија): Далековод 220 kV 205/2 ТС Крушевац 1 (Србија) – ТС Подујево (Србија, АП Косово и Метохија)\n5.3 ЕМС (Србија) – KOSTT (Србија, АП Косово и Метохија): Далековод 110 kV 155/2 ТС Нови Пазар 2 (Србија) – ТС Валач (Србија, АП Косово и Метохија)\n5.4 ЕМС (Србија) – KOSTT (Србија, АП Косово и Метохија): Далековод 110 kV 1140/2 ТС Бујановац (Србија) – ТС Беривојце (Србија, АП Косово и Метохија)\n6. Србија - Северна Македонија\n6.1 ЕМС (Србија) – МЕПСО (Северна Македонија): 400 kV Далековод ДВ 462 TС Врање 4  (Србија) – ТС Штип (Северна Македонија)\n7. Србија - Бугарска\n7.1 ЕМС (Србија) – ESO (Бугарска): 400 kV Далековод ДВ 404 TС Ниш 2  (Србија) – ТС Софија (Бугарска)\n7.2 ЕМС (Србија) – ESO (Бугарска): 110 kV Далековод ДВ 140 ХЕ Врла 1  (Србија) – ТС Брезник (Бугарска)\n7.3 ЕМС (Србија) – ESO (Бугарска): 110 kV Далековод ДВ 149 ТС Зајечар 1  (Србија) – ТС Кула (Бугарска)\n8. Србија - Румунија\n8.1 ЕМС (Србија) – TEL (Румунија): 400 kV Далековод ДВ 405 РП Ђердап 1  (Србија) – ХЕ Портиле де Фиер (Румунија)\n8.2 ЕМС (Србија) – TEL (Румунија): 110 kV Далековод ДВ 1207 ТС Сип (Србија) – ТС Гура Ваи (Румунија)\n8.3 ЕМС (Србија) – TEL (Румунија): 110 kV Далековод ДВ 1209 РП Ђердап 2 (Србија) – ТС Островул Маре (Румунија)\n8.4 ЕМС (Србија) – TEL (Румунија): 110 kV Далековод ДВ 145 ТС Кикинда 1 (Србија) – ТС Жимболија (Румунија)",
+      "title": "Имена оператора преносних система суседних држава дати су",
+      "stored_by": "expert",
+      "timestamp": "2025-12-21T23:04:45.008899"
+    },
+    {
+      "id": "ab1e8fad-589d-4e02-8247-94d551f8bdfe",
+      "content": "Номиналне снаге трансформатора 400/220 kV, 400/110 kV и 220/110 kV у ЕЕС-у Републике Србије.\n·         400/220 kV – 400 MVA\n·         400/110 kV – 300 MVA\n·         220/110 kV – 250 MVA, 200 MVA и 150 MVA",
+      "title": "Номиналне снаге трансформатора 400 220 kV 400 110",
+      "stored_by": "expert",
+      "timestamp": "2025-12-21T23:24:05.032063"
+    },
+    {
+      "id": "b28fcf0d-3c7f-4b02-93a7-7580224887f1",
+      "content": "Elektroenergetski objekti koji su u vlasništvu Elektromreže Srbije obuhvataju transformatorske stanice, razvodna postrojenja i priključna razvoda postrojenja. Razlikujemo glavni i pomoćni sistem sabirnica. Glavni sistem sabirnica se u uputstvima za pogon obeležava sa ГС. ГС 1 označava prvi glavni sistem sabirnica. ГС 2 označava drugi glavni sistem sabirnica. U nekim elektroenergetskim objektima glavni sistem sabirnica je podeljen da dva segmenta, segment A i segment B. ГС 1A označava prvi segment prvog glavnog sistem sabirnica. ГС 1Б označava drugi segment prvog glavnog sistem sabirnica. ГС 2A označava prvi segment drugog glavnog sistem sabirnica. ГС 2Б označava drugi segment drugog glavnog sistem sabirnica. Spojno polje se koristi da poveže dva sistema sabirnica i označava se sa SP. Razlikujemo podužno, poprečno i pomoćno spojno polje. Poprečno spojno polje se koristi da poveže prvi glavni sistem sabirnica sa drugim glavnim sistemom sabirnica. Ukoliko je prvi glavni sistem sabirnica podeljen na segment A i segment B, poprečno spojno polje služi da se poveže jedan od ta dva segmenta sa drugim glavnim sistemom sabirnica. Ukoliko je drugi glavni sistem sabirnica podeljen na segment A i segment B, poprečno spojno polje služi da se poveže jedan od ta dva segmenta sa prvim glavnim sistemom sabirnica. Ukoliko su i prvi glavni sistem sabirnica i drugi glavni sistem sabirnica podeljeni na segment A i segment B, poprečno spojno polje služi da se poveže jedan od ta dva segmenta prvog glavnog sistema sabirnica sa jednim od dva segmenta drugog glavnog sistema sabirnica. Ukoliko u tekstu naidjes da pise spojno polje, posmatraj to kao da ti pise poprečno spojno polje. Podužno spojno polje se koristi da poveže segment A i sigment B jednog glavnog sistema sabirnica. Pomoćno spojno polje služi da poveže pomoćni sistem sabirnica sa glavnim sistemom sabirnica. Ukoliko je glavni sistem sabirnica podeljen na segment A i segment B, pomoćno spojno polje služi da se poveže pomoćni sistem sabirnica sa jednim segmentom glavnog sistema sabirnica.",
+      "title": "Elektroenergetski objekti koji su u vlasništvu Elektromreže Srbije",
+      "stored_by": "expert",
+      "timestamp": "2025-12-22T09:44:04.844368"
+    }
+  ],
+  "last_updated": "2025-12-22T09:44:19.862106"
+}

@@ -1,0 +1,794 @@
+[
+  {
+    "num": "24",
+    "question": "Преко којих далековода се енергија произведена у ХЕ Ђердап 2 пласира у преносни систем?",
+    "answer": "1228А, 1228Б, 1229А, 1229Б, 1230",
+    "llm_answer": "Energija proizvedena u HE Đerdap 2 se plošira u prenosni sistem preko sledećih dalekovoda: DV 1166/1, DV 1150/1, DV 177/1, DV 1165, DV 147/2, DV 1168, DV 165, DV 1204, DV 148/5 i DV 148/4. Ovi dalekovodi su navedeni u eksploatacionim uslovima RP Đerdap 2 kao putovi za povezivanje sa prenosnim sistemom 110 kV.\n\n---\nIzvori:\n- Fajl: 8.12 Uputstvo za pogon RP 110 kV Đerdap 2, Sekcija: 2.3, Item: 8.12",
+    "score": 0.0,
+    "llm_thinking": "Parser nije pronašao score. Raw: SCORE: 0.0\nEXPLANATION: Odgovor LLM-a opisuje dalekovode sa hidroelektrane Đerdap 2, dok originalni odgovor navodi seriju brojeva (1228А, 1228Б, итд.). Ne postoji semantička sličnost između ova dva od"
+  },
+  {
+    "num": "19",
+    "question": "Написати уклопно стање на 220 kV и 110 kV напону у ТС Крушевац 1 за случај нерасположивости диференцијалне заштите сабирница 220 kV.",
+    "answer": "Постројење 220 kV ГС 1(или ГС 11) систем сабирница: ДВ 226, ДВ 205/2, ДВ 214/1, ТР1 и ТР2 спојно поље искључено, растављачи искључени. Постројење 110 kV ГС 1(или ГС 11) систем сабирница: ДВ 114/1, ДВ 191 /1, ДВ 152/1, ДВ 1158 А, ДВ 1161 /1, ТР1 (или ТР2), ТРЗ (или ТР4) и МТК1 (или МТК2) ГС 11 (или ГС 1) систем сабирница: ДВ 108, ДВ 109/4, ДВ 191/2, ДВ 1158Б, КБ 1232, ТР2 (или ТР1) и ТР4 (или ТРЗ) спојно поље укључено активна диференцијална заштита сабирница",
+    "llm_answer": "Na osnovu dostupnih dokumenata, ne mogu pronaći specifičan opis uklopno g stanja na 220 kV i 110 kV naponu u TS Kruševac 1 za slučaj nerazpoloživosti diferencijalne zaštite sabirnica. Dokumenti koji se odnose na TS Kruševac 1 (dokument 8.16) sadrže samo opis normalnog uklopno g stanja (sekcije 5.1 i 5.2), ali ne i proceduru za slučaj nerazpoloživosti diferencijalne zaštite. Dokumenti vezani za TS Bistrica (8.36) sadrže informacije za slučaj nerazpoloživosti diferencijalne zaštite, ali se ti podaci odnose na drugu transformatorsku stanicu (Bistrica), a ne na Kruševac 1. Prema pravilima, ne smem koristiti informacije iz drugih transformatorskih stanica ili svoje opšte znanje.\n\nNe mogu pronaći tu informaciju u dostupnim dokumentima.\n\n---\nIzvori:\n- Fajl: 8.16 Uputstvo za pogon TS 220/110/35 kV Kruševac 1, Sekcija: 5.1, Item: 8.16\n- Fajl: 8.16 Uputstvo za pogon TS 220/110/35 kV Kruševac 1, Sekcija: 5.2, Item: 8.16\n- Fajl: 8.36 Uputstvo za pogon TS 220/110 kV Bistrica, Sekcija: 7.2.1, Item: 8.36\n- Fajl: 8.36 Uputstvo za pogon TS 220/110 kV Bistrica, Sekcija: 7.1.2, Item: 8.36",
+    "score": 0.1,
+    "llm_thinking": "ЉМЛ одговор наводи да не може да пронађе тражену информацију у документима, док оригинални текст описује стање постројења. Иако оба текста се односе на трансформаторске станице, садржај је потпуно различит."
+  },
+  {
+    "num": "91",
+    "question": "Шта је неопходно да диспечер на обуци назначи руковаоцу пре почетка манипулација?",
+    "answer": "У случају да је саговорник на обуци то се посебно наглашава, комуникацију обавезно прати одговорна особа чије се име и презиме такође наводи у комуникацији.",
+    "llm_answer": "Ne mogu pronaći tu informaciju u dostupnim dokumentima. Dokument opisuje odgovornosti rukovalca (operatora), koji je dužan da obaveštava dispečera o uklopnom stanju i zapažanjima pre manipulacija, ali ne navodi ništa o tome da dispečer mora da obaveštava rukovaoca pre početka manipulacija.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 4.2, Item: 2.01",
+    "score": 0.2,
+    "llm_thinking": "LLM одговор не говори о ситуацији са обуком, већ се фокусира на комуникацију између оператера и диспечера, што је другачија тема од оригиналног текста. LLM не преноси никакву информацију из оригиналног текста."
+  },
+  {
+    "num": "48",
+    "question": "Које су границе дозвољених напона у ЕЕС-у Србије?",
+    "answer": "Вредност напона у нормалним условима рада у било којој тачки мреже 400 kV, 220 kV и 110 kV налази се у опсегу: 400 kV мрежа: између 360 kV и 420 kV; 220 kV мрежа: између 198 kV u 245 kV; 110 kV мрежа: између 99 kV и 123 kV.",
+    "llm_answer": "Na osnovu dostupnih dokumenata, nisu navedene granice dodeljenih napona (dovoljene granice) u EES-u Srbije. Dokumenti definišu samo nazivne vrednosti napona u prenosnoj mreži Republike Srbije, a ne i dozvoljene granice napona. \n\nSpecifično, u dokumentu \"3.01 Pravila o radu prenosnog sistema\", sekcija 3.3.1, item 3.01, navedeno je:\n> \"Nazivne vrednosti napona u prenosnoj mreži Republike Srbije su: 400 kV, 220 kV i 110 kV.\"\n\nOvi podaci se odnose na nazivne (standardne) vrednosti napona, a ne na dozvoljene granice napona. Dokumenti ne sadrže informacije o dopuštenim odstupanjima ili granicama napona (npr. ±5% od nazivne vrednosti).\n\n---\nIzvori:\n- Fajl: 3.01 Pravila o radu prenosnog sistema, Sekcija: 3.3.1, Item: 3.01",
+    "score": 0.3,
+    "llm_thinking": "ЉМЛ одговор не пружа информације о вредностима напона које су наведене у оригиналном тексту, већ објашњава да документи не садрже информације о дозвољеним границама напона, што је другачија информација. Иако се теме теме тичу преносног система, садржај је различит."
+  },
+  {
+    "num": "34",
+    "question": "Да ли за случај нерасположивости диференцијалне заштите 400 kV сабирница у ТС Ниш 2 долази до промене нормалног уклопног стања на 220 kV страни?",
+    "answer": "Не, уклопно стање остаје исто.",
+    "llm_answer": "Ne mogu pronaći tu informaciju u dostupnim dokumentima. Dokument \"8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2\" se odnosi na neraspoloživost diferencijalne zaštite **sabirnica 110 kV**, a ne 400 kV. U sekciji 7.2.2, item 8.20 navodi se normalno uklopno stanje na 220 kV strani u slučaju nedostupnosti diferencijalne zaštite 110 kV sabirnica, ali nije navedeno ništa o 400 kV sabirnicama.\n\n---\nIzvori:\n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 7.2.2, Item: 8.20",
+    "score": 0.5,
+    "llm_thinking": "Одговор ЛЛМ-а је много дужи и пружа контекст из документа, али се директно не слаже са оригиналним одговором који је једноставан потврдни одговор. ЛЛМ објашњава да информација није доступна у документу, док оригинални одговор подразумева да је стање непромењено."
+  },
+  {
+    "num": "96",
+    "question": "Диспечер на SCADA систему види да је прекидач 400 kV далековод број 436 у ТС Обреновац укључен. Након провере руковалац на ТС Обреновац обавештава диспечера да је прекидач искључен. Коју информацију диспечер сматра за валидну у наведенoj ситуацији?",
+    "answer": "Да је прекидач искључен.",
+    "llm_answer": "Dispečer u navedenoj situaciji smatra za validnu informaciju koju daje rukovalac posle provere. Prema dokumentu \"2.01 TUEKS-01 TU-EKS-01\", sekcija 6.7.7, item 2.01, u slučaju neslaganja informacija o uklopnom stanju između SCADA sistema i rukovalca, dispečer je dužan da rukovaocu da nalog da proveri uklopno stanje. Nakon provere, kao ispravna i tačna smatra se ona informacija koju daje rukovalac.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.7.7, Item: 2.01",
+    "score": 0.5,
+    "llm_thinking": "Одговор LLM-а је много дужи и описује процедуру верификације стања прекидача, док оригинални одговор једноставно потврђује да је прекидач искључен. Иако се тема тиче стања прекидача, LLM даје контекст и правила, што га чини само делимично сличним оригиналу."
+  },
+  {
+    "num": "46",
+    "question": "Који је дозвољени опсег фреквенције у ЕЕС?",
+    "answer": "Називна вредност фреквенције износи 50 Hz. Када преносни систем Републике Србије ради у оквиру интерконекције, на дозвољена одступања од називне вредности фреквенције у преносној мрежи примењују се вредности из правила о раду интерконекције. Тренутна правила су: ± 200 mHz; ± 100 mHz трајању не дужем од 5 минута; ± 50 mHz у трајању не дужем од 15 минута; У случају да преносни систем Републике Србије ради изоловано од суседних преносних система, дозвољена фреквенција у преносној мрежи у квазистационарном стањује 50 Hz ± 0,5 Hz.",
+    "llm_answer": "Ne mogu pronaći informaciju o dозвољеном опсегу фреквенције у ЕЕС у dostupnim dokumentima. Dokumenti помињу уздржавање фреквенције и реаговање на одступање од квазистационарног стања (±200 mHz), али не наводе експлицитно дозвољени опсег фреквенције (нпр. 50 Hz ± 0.2 Hz). \n\n---\nIzvori:\n- Fajl: 3.00 Pravila za priključenje objekata na prenosni sistem, Sekcija: 5.6.1.2, Item: 3.00",
+    "score": 0.6,
+    "llm_thinking": "LLM одговор признаје да не може да пронађе тражену информацију, али наводи релевантне вредности из документа, што показује делимичну семантичку сличност са оригиналним текстом који садржи те вредности. Иако LLM не даје директан одговор на питање, препознаје и наводи релевантне податке."
+  },
+  {
+    "num": "94",
+    "question": "Да ли руковалац сме да манипулише из погонског механизма растављача уколико је далековод без напона?",
+    "answer": "Сме, уколико сматра да је наставак манипулације из погонског механизма безбедан.",
+    "llm_answer": "Rukovalac može da manipuliše iz pogonskog mehanizma rasklopnih aparata samo ukoliko ne postoji električna komanda za taj rasklopni uređaj, a uklopno stanje (sa stanovišta trenutnog uklopnog stanja) dozvoljava manipulaciju tim elementom. Dejstvo bez napona na далековodu nije izričiti uslov koji je potreban za ovu manipulaciju. Odluka o manipulaciji iz pogonskog mehanizma zavisi isključivo od dostupnosti električne komande i trenutnog uklopnog stanja, a ne od statusa napona na далековodu.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.7.2, Item: 2.01",
+    "score": 0.6,
+    "llm_thinking": "LLM odgovor je mnogo duži i detaljniji, ali se bavi istom temom manipulacije iz pogonskog mehanizma. Ipak, LLM dodaje informacije o električnoj komandi i uklopnom stanju koje nisu eksplicitno pomenute u originalnom odgovoru, što ga čini delimično sličnim."
+  },
+  {
+    "num": "6",
+    "question": "Који су поступци диспечера за случај да један од два система сабирница 110 kV у ТС Јагодина 4 није расположив у трајању од неколико дана?",
+    "answer": "Диспечер искључује један од трансформатора. Пожељно је да у погону остане трансформатор који има могућност регулације напона под оптерећењем. Додатно, диспечер искључује далековод бр. 108. ОБРАЗЛОЖЕЊЕ: Када један СС није расположив, сви изводи се налазе на оном другом СС. То је еквивалетно као да су изводи разврстани на два СС са укљученим спојним пољем.",
+    "llm_answer": "U slučaju da jedan od dva sistema sabirnica 110 kV u TS Jagodina 4 nije dostupan tokom nekoliko dana (dugogodišnjeg perioda), dispečer mora primeniti sledeće postupke prema dokumentima:\n\n1. Isključiti jedan transformator 400/110 kV u TS Jagodina 4 (kao osnovna mera).\n2. Dodatno isključiti dalekovod 110 kV broj 108 TS Kruševac 1–TS Jagodina 1 u TS Kruševac 1 (jer trajanje uklopno stanje prelazi jedan dan).\n\nOvi postupci su detaljno opisani u dokumentu koji se odnosi na situaciju kada je postrojenje 110 kV u TS Jagodina 4 u radu sa uključenim spojnim poljem (ili izvodima na jednom sistemu sabirnica) duže od jednog dana.\n\n---\n\nIzvori:\n- Fajl: 8.16 Uputstvo za pogon TS 220/110/35 kV Kruševac 1, Sekcija: 3.4, Item: 8.16",
+    "score": 0.7,
+    "llm_thinking": "Одговор ЛЛМ-а је дужи и детаљнији, али садржи кључне информације из оригиналног текста, као што је искључење трансформатора и далековода 108. ЛЛМ додаје контекст у виду документације и трајања стања, што га чини мање директним, али ипак семантички сличним."
+  },
+  {
+    "num": "59",
+    "question": "Дошло је до испада далековода који спаја постројења А и Б. У постројењу А локатор квара показује да је квар на 40 km од постројења А а у постројењу Б локатор квара показује да је квар на 20 km од постројења Б. Из ког постројења диспечер треба да стави далековод под напон?",
+    "answer": "Iz postrojenja А",
+    "llm_answer": "Na osnovu dostupnih dokumenta, dispečer treba da stavi далековод pod напон iz постројења Б. Prema dokumentu \"2.00 TUEKS-03 TU-EKS-03\", sekcija 7.1.5, postupak nakon delovanja zaštite je sledeći: nakon detaljnog pregleda дaleководног полја у постројењу А, далековод AB се пушта у празан ход у постројењу Б, уколико се не уочи узрок кvara. Ово је основни поступак, а изузетак се примењује само када постројење Б припада или је близу електране и постоји опасност да квар угрози рад преносног система (што није наведено у питању).\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 7.1.5, Item: 2.00",
+    "score": 0.7,
+    "llm_thinking": "LLM daje detaljniji odgovor sa referencom na dokument i postupak, ali se fokusira na постројење Б уместо А као у оригиналном одговору. Ипак, постоји преклапање у информацијама о поступку након деловања заштите."
+  },
+  {
+    "num": "25",
+    "question": "При којој производњи ХЕ Ђердап 2 лети и за које далеководе који полазе из РП Ђердап 2 није задовољен критеријум N-1 за далеководе?",
+    "answer": "N-1 критеријум сигурности није задовољен у случају испада ДВ бр. 1204 (ХЕ Ђердап 2 - ТС Зајечар 2) или ДВ бр.1166/1 (ХЕ Ђердап 2 - ПРП Велики Кривељ 2) при летњем вршном конзуму када је производња ХЕ Ђердап 2 изнад 190 MW. Том приликом долази до преоптерећења ДВ бр.147/2 (ТС Неготин - ТС Бор 2).",
+    "llm_answer": "Kriterijum N-1 nije zadovoljen u sledećim slučajevima:  \n- Pri letnjem vršnom konzumu, kada je proizvodnja HE Đerdap 2 iznad 190 MW, u slučaju ispada далековoda DV br.1204 (HE Đerdap 2 - TS Zaječar 2) ili DV br.1166/1 (HE Đerdap 2 - PRP Veliki Krivelj 2).  \n- Pri zimskom vršnom konzumu, kada je proizvodnja HE Đerdap 2 iznad 230 MW, u slučaju ispada далекovoda DV br.1165 (HE Đerdap 2 - TS Negotin).  \n\nOvi slučajevi rezultiraju preopterećenjem drugih далековoda (DV br.147/2, DV br.1168 i DV br.165), ali kriterijum N-1 nije zadovoljen zbog ispada конкретних далековoda koji polaze iz HE Đerdap 2.  \n\n---\nIzvori:  \n- Fajl: 8.12 Uputstvo za pogon RP 110 kV Đerdap 2, Sekcija: 3.3, Item: 8.12",
+    "score": 0.75,
+    "llm_thinking": "LLM одговор је дужи и додаје информације о зимском вршном конзуму и додатним преоптерећењима, али задржава основно значење оригиналног текста о неиспуњавању N-1 критеријума у летњем периоду. Иако постоје додатне информације, кључни део текста је пренет и разумељив."
+  },
+  {
+    "num": "95",
+    "question": "Да ли руковалац сме да манипулише из погонског механизма прекидача ако је далековод под напоном и оптерећен?",
+    "answer": "Сме, уколико сматра да је наставак манипулације из погонског механизма безбедан.",
+    "llm_answer": "Ne, rukovalac ne sme da manipuliše iz pogonskog mehanizma rasklopnih aparata ukoliko je dalekovod pod naponom i opterećen. Prema dokumentima, manipulacija iz pogonskog mehanizma je dozvoljena **samo ako ne postoji električna komanda za rasklopni uređaj i ukoliko uklopno stanje (sa stanovišta trenutnog uklopnog stanja) dozvoljava manipulaciju tim elementom**. \n\nU dokumentu **2.01 TUEKS-01 TU-EKS-01, sekcija 6.5.1 (item 2.01)** jasno je definisano da pri isključenju dalekovoda mora biti utvrđeno da **dalekovod nije opterećen** pre nego što se izvrši isključenje prekidača. Ovo ukazuje da **opterećenje dalekovoda predstavlja uslov koji ne dozvoljava manipulaciju** iz pogonskog mehanizma, jer se procedura zahteva prethodno utvrđivanje da dalekovod nije opterećen.\n\nTakođe, u dokumentu **2.00 TUEKS-03 TU-EKS-03, sekcija 10.8.2 (item 2.00)** je naglašeno da se rukovalac mora osloniti na trenutno uklopno stanje, što uključuje i stanje opterećenja dalekovoda. Ako je dalekovod opterećen, uklopno stanje **ne dozvoljava** manipulaciju iz pogonskog mehanizma.\n\n---\n\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.5.1, Item: 2.01\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 10.8.2, Item: 2.00",
+    "score": 0.75,
+    "llm_thinking": "LLM daje mnogo detaljniji odgovor sa referencama na dokumentaciju, ali se u suštini slaže sa originalnom izjavom da se manipulacija ne sme vršiti ukoliko je dalekovod pod naponom i opterećen. LLM objašnjava *zašto* to nije dozvoljeno, dok originalna izjava to samo konstatuje."
+  },
+  {
+    "num": "65",
+    "question": "Диспечер је искључио један од двоструких далековода и отворио дозволу за радове у близини далековода. Други двоструки далековод који је све време био у погону испада деловањем дистантне заштите на оба краја у првом степену. Да ли диспечер сме након 3 минута да проба укључење испалог далековода?",
+    "answer": "Не",
+    "llm_answer": "Da, dispečer sme nakon 3 minute da proba uključenje ispaleg dalekovoda. Prema dokumentu sekcija 5.2.2, ako nakon delovanja zaštitnih uređaja postoji neuspešan APU (automatsko ponovno uključenje) sa obe strane dalekovoda, dispečer može posle najmanje 3 minuta da daje nalog za uključenje dalekovoda, pod uslovom da nema informacije o trajnom kvaru ili riziku za ljude ili imovinu. U ovom slučaju, dalekovod je ispao delovanjem dinstantne zaštite na oba kraja (što znači da je došlo do delovanja zaštitnih uređaja), a iz konteksta pitanja proizilazi da je APU neuspešan (jer je dalekovod ostao isključen), što zadovoljava uslov iz sekcije 5.2.2.\n\n---\n\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.2.2, Item: 2.00",
+    "score": 0.8,
+    "llm_thinking": "LLM daje detaljan odgovor koji objašnjava zašto je odgovor potvrdan, pozivajući se na relevantnu sekciju dokumenta i objašnjavajući uslove. Iako je duži od originala, sadrži sve ključne informacije i logičan je u svom objašnjenju."
+  },
+  {
+    "num": "1",
+    "question": "Навести номиналне снаге трансформатора 400/220 kV, 400/110 kV и 220/110 kV у ЕЕС-у Републике Србије.",
+    "answer": "400/220 kV – 400 MVA 400/110 kV – 300 MVA 220/110 kV – 250 MVA, 200 MVA и 150 MVA Извор су сва упутсва за погон где он треба да прође кроз сва и донесе закључак.",
+    "llm_answer": "Na osnovu dostupnih dokumenata, nalazimo sledeće informacije o nominalnim snagama transformatora:\n\n- **400/110 kV**: Transformator TR3 u TS Smederevo 3 ima nominalnu snagu od **300 MVA** (navedeno u dokumentu 8.25, sekcija 2.1).\n- **220/110 kV**: U TS Smederevo 3 postoje dva transformatora:\n  - TR1: **150 MVA**\n  - TR2: **250 MVA** (navedeno u dokumentu 8.25, sekcija 2.1).\n- **400/220 kV**: U dostupnim dokumentima nije navedena nominalna snaga transformatora za naponski nivo 400/220 kV.\n\n---\n\nIzvori:\n- Fajl: 8.25 Uputstvo za pogon TS 220/110 kV Smederevo 3, Sekcija: 2.1, Item: 8.25",
+    "score": 0.85,
+    "llm_thinking": "Одговор ЛЛМ-а је дужи, али садржи све кључне информације из оригиналног текста о номиналним снагама трансформатора, уз додатну референцу на извор документа. Иако је преформулисан и структурисан детаљније, главна порука и садржај су идентични."
+  },
+  {
+    "num": "2",
+    "question": "Колика је инсталисана снага ТС Јагодина 4?",
+    "answer": "600 MVA",
+    "llm_answer": "Instalisana snaga TS Jagodina 4 iznosi 600 MVA, što se sastoji od dva transformatora: TR1 sa 300 MVA (sa mogućnošću regulacije napona pod opterećenjem) i TR2 sa 300 MVA (bez regulacije napona pod opterećenjem).\n\n---\nIzvori:\n- Fajl: 8.14 Uputstvo za pogon TS 400/110 kV Jagodina 4, Sekcija: 2.1, Item: 8.14",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor daje tačnu informaciju o ukupnoj snazi (600 MVA) kao i detaljniji opis konfiguracije transformatora, što je u skladu sa originalnim odgovorom. Iako je duži, LLM odgovor ne uvodi nove informacije, već pruža dodatni kontekst."
+  },
+  {
+    "num": "3",
+    "question": "Да ли постоји трансформатор у ТС Јагодина 4 који има могућност регулације напона под оптерећењем?",
+    "answer": "Да. ТР1.",
+    "llm_answer": "Da, u TS Jagodina 4 postoji transformator koji ima mogućnost regulacije napona pod opterećenjem. Konkretno, transformator TR1 (300 MVA) poseduje tu mogućnost, dok transformator TR2 (300 MVA) ne poseduje regulaciju napona pod opterećenjem. \n\n---\nIzvori:\n- Fajl: 8.14 Uputstvo za pogon TS 400/110 kV Jagodina 4, Sekcija: 2.1, Item: 8.14",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je duži ali sadrži ključne informacije iz originala, potvrđujući postojanje transformatora TR1 sa regulacijom napona pod opterećenjem. Dodatno pruža detalje o TR2 i izvor informacije."
+  },
+  {
+    "num": "8",
+    "question": "Који РДЦ је надлежан за даљинско управљање ТС Јагодина 4?",
+    "answer": "РДЦ Југ – Крушевац",
+    "llm_answer": "RDC Jug - Kruševac je nadležan za daljinsko upravljanje TS Jagodina 4. Prema dokumentu, TS Jagodina 4 je u sistemu daljinskog upravljanja iz RDC Jug - Kruševac, pri čemu su načini nadzora, upravljanja, daljinskog komandovanja i manipulisanja definisani Protokolom.\n\n---\nIzvori:\n- Fajl: 8.14 Uputstvo za pogon TS 400/110 kV Jagodina 4, Sekcija: 2.5, Item: 8.14",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je duži i pruža dodatne informacije o nadležnosti i načinu upravljanja TS Jagodina 4, ali sadrži i osnovnu informaciju iz originala – da je RDC Jug – Kruševac nadležan. Odgovor je semantički veoma sličan, iako proširen."
+  },
+  {
+    "num": "10",
+    "question": "Да ли ТС Београд 5 и ТС Београд 20 раде у паралелном раду? Образложити.",
+    "answer": "Нису. У нормалном погону ТС Београд 20 je раздвојена од ТС Београд 5 (тачка секционисања је прекидач KБП 110 kV бр. 172/1 у ТС Београд 6) и ТС Београд 17 (тачке секционисања су прекидач КБП 110 kV бр.1203/2 у ТС Београд 28, прекидач КБП 110 kV бр.1216   ТС Београд 14 као и прекидач KБП 110 kV бр. 172/1 у ТС Београд 6 и прекидач СП 110 kV у ТС Београд 45).",
+    "llm_answer": "Ne, TS Beograd 5 i TS Beograd 20 ne rade u paralelnom radu. Prema dokumentu \"8.05 Uputstvo za pogon TS 220/110 kV Beograd 5\", u sekciji 2.6, eksploatacioni uslovi jasno navode da \"Trajan paralelan rad TS Beograd 5 sa TS Beograd 20, Beograd 17 i TS Beograd 3 nije dozvoljen\". Ovo direktno ukazuje da trajni paralelni rad između ovih transformatorskih stanica nije dopušten. Dodatno, u dokumentu \"8.04 Uputstvo za pogon TS 220/110 kV Beograd 3\", sekcija 2.4, navodi se da je TS Beograd 3 u paralelnom radu sa TS Beograd 20, ali je razdvojena od TS Beograd 5 (tačka sekcionisanja je prekidač SP 110 kV u TS Beograd 2), što potvrđuje da TS Beograd 5 nije u paralelnom radu sa TS Beograd 20.\n\n---\n\nIzvori:\n- Fajl: 8.05 Uputstvo za pogon TS 220/110 kV Beograd 5, Sekcija: 2.6, Item: 8.05\n- Fajl: 8.04 Uputstvo za pogon TS 220/110 kV Beograd 3, Sekcija: 2.4, Item: 8.04",
+    "score": 0.85,
+    "llm_thinking": "Одговор ЛЛМ-а је дужи и детаљнији, али садржи све кључне информације из оригиналног текста и додаје релевантне референце на документе из којих је извукао закључак, потврђујући да ТС Београд 5 и ТС Београд 20 не раде у паралелном погону."
+  },
+  {
+    "num": "16",
+    "question": "Да ли је у свим случајевима задовољен критеријум N-1 у ТС Краљево 3?",
+    "answer": "Није у случају радијално напајаних трансформаторских станица.",
+    "llm_answer": "Ne, kriterijum N-1 nije zadovoljen u svim slučajevima u TS Kraljevo 3. Prema dokumentu, N-1 kriterijum je zadovoljen izuzev za radijalno napajane transformatorske stanice. To znači da u slučajevima kada se transformatorske stanice napajaju radijalno (nepovezanim putanjama), kriterijum N-1 nije ispunjen.\n\n---\nIzvori:\n- Fajl: 8.17 Uputstvo za pogon TS 220/110 kV Kraljevo 3, Sekcija: 3.3, Item: 8.17",
+    "score": 0.85,
+    "llm_thinking": "LLM одговор је дужи и пружа више контекста, али у суштини се слаже са оригиналним тврђењем да N-1 критеријум није испуњен за радијално напајане трансформаторске станице, као што је наведено у изворима. LLM је проширио објашњење, али задржао основно значење."
+  },
+  {
+    "num": "17",
+    "question": "Да ли постоји диференцијална заштита 400 kV, 220 kV и 110 kV сабирница у ТС Краљево 3?",
+    "answer": "Постоји само на 400 kV сабирницама.",
+    "llm_answer": "Na osnovu dostupnih dokumenata, diferencijalna zaštita sabirnica je aktivna za 400 kV postrojenje u TS Kraljevo 3. Međutim, dokumenti ne navode postojanje diferencijalne zaštite za 220 kV i 110 kV sabirnice u ovoj postrojenju. \n\nKonkretno, u dokumentima se navodi:\n- U sekciji 7.1 i 5.1 dokumenta \"8.17 Uputstvo za pogon TS 220/110 kV Kraljevo 3\" jasno se navodi da je aktivna diferencijalna zaštita sabirnica za 400 kV postrojenje (prilikom normalnog uklopno stanja i pogona bez jednog transformatora).\n\nDokumenti ne sadrže informaciju o diferencijalnoj zaštiti za 220 kV i 110 kV sabirnice u TS Kraljevo 3. Ostali dokumenti (npr. za Novi Sad 3 i Beograd 3) se odnose na različita postrojenja i nisu relevantni za Kraljevo 3.\n\n---\nIzvori:\n- Fajl: 8.17 Uputstvo za pogon TS 220/110 kV Kraljevo 3, Sekcija: 7.1, Item: 8.17\n- Fajl: 8.17 Uputstvo za pogon TS 220/110 kV Kraljevo 3, Sekcija: 5.1, Item: 8.17",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je duži i detaljniji, ali u suštini potvrđuje originalnu tvrdnju da postoji diferencijalna zaštita samo na 400 kV sabirnicama, uz precizno navođenje izvora informacija i objašnjenje zašto ne postoji za ostale nivoe napona."
+  },
+  {
+    "num": "18",
+    "question": "Да ли је ТС Крушевац 1 у паралелном раду преко 110 kV мреже са ТС Јагодина 4? Уколико јесте, образложити одговор.",
+    "answer": "Јесте у паралелном раду преко 110 kV мреже са ТС Крушевац 1 преко ТС Јагодина 1 (по ДВ 1141/1 и ДВ 105/3) и преко ДВ 108, као и преко ТС Параћин 1 (по ДВ 152/4), ТС Параћин 3 (по ДВ 152/3), ТС Ћићевац (по ДВ 152/2) и преко ДВ 152/1.",
+    "llm_answer": "Da, TS Kruševac 1 je u normalnom pogonu u paralelnom radu preko 110 kV mreže sa TC Jagodina 4. Ovo je izričito navedeno u sekciji 2.7 dokumenta \"8.16 Uputstvo za pogon TS 220/110/35 kV Kruševac 1\", gde se navodi: \"TS Kruševac 1 je u normalnom pogonu u paralelnom radu preko mreže 110 kV ca TC Jagodina 4 po DV 108, DV 1141/1 i DV 105/3 (TS Jagodina 1)\". \n\nOva informacija potvrđuje da postoji paralelni rad između TS Kruševac 1 i TC Jagodina 4 preko 110 kV mreže, a specifični dalekovodi koji povezuju ove stanice su DV 108, DV 1141/1 i DV 105/3. \n\nU sekciji 3.4 dokumenta se dodatno potvrđuje da se u slučaju radnog stanja TC Jagodina 4 sa uključenim spojnim poljem (ili izvodima na jednom sistemu sabirnica) potrebno je isključiti dalekovod 110 kV broj 108, što ukazuje na postojeću paralelnu vezu između TS Kruševac 1 i TC Jagodina 4.\n\n---\n\nIzvori:\n- Fajl: 8.16 Uputstvo za pogon TS 220/110/35 kV Kruševac 1, Sekcija: 2.7, Item: 8.16\n- Fajl: 8.16 Uputstvo za pogon TS 220/110/35 kV Kruševac 1, Sekcija: 3.4, Item: 8.16",
+    "score": 0.85,
+    "llm_thinking": "Одговор ЛЛМ-а је дужи и детаљнији, али садржи све кључне информације из оригиналног текста, потврђујући паралелни рад између TS Крушевац 1 и TS Јагодина 1 (такође помиње TS Јагодина 4), наводећи релевантне далеководе и позивајући се на изворе."
+  },
+  {
+    "num": "20",
+    "question": "Навести све 400 kV, 220 kV и 110 kV интерконективне далеководе.",
+    "answer": "400 kV ДВ 454 TС Суботица (Србија) – ТС Шандорфалва (Мађарска) 400 kV ДВ 409/3 РП Младост (Србија) – ТС Ернестиново (Хрватска) 110 kV ДВ 119/2 ТС Шид (Србија) – ТС Нијемци (Хрватска) 400 kV ДВ 455 РП Младост (Србија) – ТЕ Угљевик (Босна и Херцеговина -БиХ) 220 kV ДВ 214/5 ТС Пожега (Србија) – ХЕ Вишеград (Босна и Херцеговина -БиХ) 110 kV ДВ 1214 ТС Лешница (Србија) – ТС Јања (Босна и Херцеговина –БиХ) 110 kV ДВ 103 ХЕ Зворник (Србија) – ТС Зворник (Босна и Херцеговина –БиХ) 220 kV ДВ 206/1 ТС Бајина Башта (Србија) – ТС Пљевља 2 (Црна Гора) 220 kV ДВ 266/2 ТС Бистрица (Србија) – ТС Пљевља 2 (Црна Гора) 110 kV ДВ 134/4 ХЕ Потпећ (Србија) – ТС Пљевља (Црна Гора) 400 kV ДВ 407 ТС Ниш 2 (Србија) – ТЕ Косово Б (Србија, АП Косово и Метохија) 220 kV ДВ 205/2 ТС Крушевац 1 (Србија) – ТС Подујево (Србија, АП Косово и Метохија) 110 kV ДВ 155/2 ТС Нови Пазар 2 (Србија) – ТС Валач (Србија, АП Косово и Метохија) 110 kV ДВ 1140/2 ТС Бујановац (Србија) – ТС Беривојце (Србија, АП Косово и Метохија) 400 kV ДВ 462 TС Врање 4 Србија) – ТС Штип (Северна Македонија) 400 kV ДВ 404 TС Ниш 2 (Србија) – ТС Софија (Бугарска) 110 kV ДВ 140 ХЕ Врла 1(Србија) – ТС Брезник (Бугарска) 110 kV ДВ 149 ТС Зајечар 1 (Србија) – ТС Кула (Бугарска) 400 kV ДВ 405 РП Ђердап 1 (Србија) – ХЕ Портиле де Фиер (Румунија) 110 kV ДВ 1207 ТС Сип (Србија) – ТС Гура Ваи (Румунија) 110 kV ДВ 1209 РП Ђердап 2 (Србија) – ТС Островул Маре (Румунија) 110 kV ДВ 145 ТС Кикинда 1 (Србија) – ТС Жимболија (Румунија) Interkonektivni dalekovodi. *Пробати да се избаци овај документ из базе и поновити питање. Тада би он требао из свих упутстава за погон да нађе и наброји интерконективне далеководе.",
+    "llm_answer": "Na osnovu dostupnih dokumenata, ne mogu pružiti listu svih 400 kV, 220 kV i 110 kV interkonektivnih dalekovoda jer dokumenti ne sadrže konkretni spisak dalekovoda, već samo navode da EMS AD izrađuje dokument \"Kategorizacija elemenata EES 400 kV, 220 kV i 110 kV\" koji obuhvata spisak svih dalekovoda, kablova i drugih elemenata. Dokumenti nisu dostavili sam spisak interkonektivnih dalekovoda, već samo opisuju proces kategorizacije i postojanje ovog dokumenta.\n\nDokumenti pokazuju da postoji dokument \"Kategorizacija\" koji treba da sadrži spisak svih elemenata (uključujući interkonektivne dalekovode), ali ne pružaju konkretne podatke o imenima ili numeraciji dalekovoda. Svi ostali delovi dokumenta se bave opštim pravilima, naponskim nivoima i merama za siguran rad, ali ne sadrže spisak interkonektivnih vodova.\n\n---\nIzvori:\n- Fajl: 3.01 Pravila o radu prenosnog sistema, Sekcija: 1.2.3, Item: 3.01\n- Fajl: 3.01 Pravila o radu prenosnog sistema, Sekcija: 1.2.2, Item: 3.01",
+    "score": 0.85,
+    "llm_thinking": "ЉМЛ одговор је дужи, али прецизно објашњава да документ не садржи листу интерконективних далековода, већ само информацију о постојању документа који би ту листу требао да садржи, што је у складу са оригиналним текстом."
+  },
+  {
+    "num": "26",
+    "question": "Да ли је ТС Ниш 2 у трајном паралелном раду са ТС Бор 2? Уколико је одговор не, написати тачку секционисања и разлог због чега трајни паралелан рад није остварен.",
+    "answer": "ТС Ниш 2 и ТС Бор 2 нису у трајном паралелном раду преко 110 kV мреже (у ТС Књажевац искључен је прекидач у подужном спојном пољу 110 kV и у трансформаторском пољу 110 kV од ТР1) зато што паралелан рад доводи до повећања губитака у ЕЕС-у Србије. Додатни разлог за овакво уклопно стање је што би у нормалном уклопном стању, а при укљученом ДВ 193/1, у зависности од режима рада ЕЕС-а Србије могли доћи у ситуацију неадекватног рад заштите. Краткотраја паралелан рад приликом манипулација у ТС Књажевацје дозвољен.  Дуготрајан паралелан рад је дозвољен уз услов да се анализом сигурности провери подешење усмерене прекострујне заштите на ДВ 193/1 у ТС Сврљиг (заштита је активирана у смеру од ТС Књажевац ка ТС Сврљиг).",
+    "llm_answer": "TS Niš 2 nije u trajnom paralelnom radu sa TS Bor 2. Trajni paralelan rad nije održiv zbog sledećih razloga:  \n1. Paralelan rad dovodi do povećanja gubitaka u Elektroprivredi Srbije (EES).  \n2. U normalnom uklopnom stanju, pri uključenom DV 193/1, postoji rizik od neadekvatnog rada zaštite u zavisnosti od režima rada EES-a Srbije.  \n\nTačka sekcionisanja je TS Knjaževac, gde je u 110 kV podužnom spojnom polju i 110 kV transformatorskom polju od TR1 isključen prekidač.  \n\nIzvori:  \n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 2.7, Item: 8.20",
+    "score": 0.85,
+    "llm_thinking": "Одговор ЛЛМ-а је скраћена верзија оригиналног текста, али садржи све кључне информације о разлозима зашто ТС Ниш 2 и ТС Бор 2 нису у трајном паралелном раду, као и место где је искључен прекидач. ЛЛМ је представио информације у форматиранијем облику са набројаним разлозима."
+  },
+  {
+    "num": "28",
+    "question": "Под којим условима је дозвољено паралелисање TR1 и TR2 у ТС Ниш 3 на ниженапонској страни, тј. страни 35 kV?",
+    "answer": "Под условом да је у ТС Ниш 2 укључено СП 110 kV или да су ДВ 187 и ДВ 188 на истом систему сабирница.",
+    "llm_answer": "Paralelisanje TR1 i TR2 na niženaponskoj strani (35 kV) u TS Niš 3 je dozvoljeno pod uslovom da je u TS Niš 2 uključeno SP 110 kV ili da su DV 187 i DV 188 priključeni na isti sistem sabirnica.\n\n---\nIzvori:\n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 2.11, Item: 8.20",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je duži i dodaje informaciju o TR1 i TR2, ali zadržava ključne uslove iz originalnog teksta vezane za TS Niš 2, SP 110 kV i DV 187/188. Zadržava se ista suština i značenje originalnog teksta."
+  },
+  {
+    "num": "30",
+    "question": "Преко којих 220 kV далековода су генератори у ТЕНТ-у А повезани на преносни систем?",
+    "answer": "256А, 256Б, 263А и 263Б",
+    "llm_answer": "Prema dostupnim dokumentima, generatori u TENT-u A su povezani na prenosni sistem kroz 220 kV далеководе DV 256A (od G1) i DV 256B (od G2). Ove линије су izričito navedene u dokumentima kao osnovni putevi za napajanje iz TENT-A na 220 kV strani.\n\n---\n\nIzvori:\n- Fajl: 8.22 Uputstvo za pogon TS 400/220 kV Obrenovac, Sekcija: 2.3, Item: 8.22\n- Fajl: 8.22 Uputstvo za pogon TS 400/220 kV Obrenovac, Sekcija: 4.10, Item: 8.22",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je duži i pruža kontekst o generatorima i dalekovodima, ali sadrži sve ključne informacije iz originalnog teksta (256A, 256B) i objašnjava njihovu vezu sa TENT-A. Odgovor je detaljniji, ali semantički vrlo sličan originalu."
+  },
+  {
+    "num": "33",
+    "question": "Да ли за случај нерасположивости диференцијалне заштите 400 kV сабирница у ТС Ниш 2 долази до промене нормалног уклопног стања на 400 kV страни?",
+    "answer": "Да. Сви изводи се пребацују на једнан систем сабирница, ГС 1 или ГС 2, док је спојно поље искључено и растављено.",
+    "llm_answer": "Da, u slučaju nerazpoloživosti diferencijalne zaštite sabirnica 400 kV u TS Niš 2 dolazi do promene normalnog uklopnog stanja na 400 kV strani. U normalnom stanju spojno polje je uključeno (vidi sekciju 5.1), dok u slučaju nerazpoloživosti diferencijalne zaštite sabirnica 400 kV spojno polje postaje isključeno i rastavljeno (vidi sekciju 7.1.1).\n\n---\nIzvori:\n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 5.1, Item: 8.20\n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 7.1.1, Item: 8.20",
+    "score": 0.85,
+    "llm_thinking": "LLM одговор је дужи и пружа више контекста, али садржи све кључне информације из оригиналног одговора, потврђујући да се сви изводи пребацују на један систем сабирница и да је спојно поље искључено и растављено у случају неисправности. LLM додаје информације о нормалном стању и референцима на секције у упутству за погон."
+  },
+  {
+    "num": "35",
+    "question": "Да ли је ТС Ниш 2 повезана са неком ТС која не припада електроенергетском систему Републике Србије? Уколико је одговор да, навести назив далековода преко кога је остварена та веза.",
+    "answer": "Да. Са ТЕ Косово Б преко ДВ 400 kV бр. 407 ТС Ниш 2 – ТЕ Косово Б и ТС Софија Запад преко ДВ 400 kV бр. 404 ТС Ниш 2 – ТС Софија Запад.",
+    "llm_answer": "Da, TS Niš 2 je povezana sa TS koja ne pripada elektroenergetskom sistemu Republike Srbije. Konkretno, povezana je sa TS Sofija Zapad (Bugarska) preko dalekovoda DV 404. \n\nTS Sofija Zapad se nalazi u Bugarskoj, što znači da je ova veza izvan elektroenergetskog sistema Republike Srbije. \n\n---\n\nIzvori:\n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 2.2, Item: 8.20\n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 4.5, Item: 8.20",
+    "score": 0.85,
+    "llm_thinking": "LLM одговор је дужи и детаљнији, али садржи све кључне информације из оригиналног текста о повезаности трафостанице Ниш 2 са трафостаницом Софија Запад и њој припадању систему Бугарске, а не Србије. Иако је LLM додао објашњење, основни смисао је идентичан."
+  },
+  {
+    "num": "39",
+    "question": "Како се зове ПРП на који је повезана ВЕ Чибук 1?",
+    "answer": "ПРП Чибук 1",
+    "llm_answer": "PRP na koji je povezana VE Čibuk 1 se zove PRP Čibuk 1. Prema dokumentu \"8.32 Uputstvo za pogon PRP 400 kV Čibuk 1\", sekcija 2.2, PRP Čibuk 1 je povezana sa prenosnim sistemom 400 kV kroz DV 453/1 prema RP Drmno i DV 453/2 prema TS Pančevo 2.\n\n---\nIzvori:\n- Fajl: 8.32 Uputstvo za pogon PRP 400 kV Čibuk 1, Sekcija: 2.2, Item: 8.32",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je duži i detaljniji, ali sadrži sve ključne informacije iz originala, potvrđujući vezu PRP Čibuk 1 sa prenosnim sistemom i navodeći relevantne detalje iz dokumenta. Odgovor je semantički vrlo sličan originalu."
+  },
+  {
+    "num": "40",
+    "question": "Да ли из РП Чибук 1 полази неки од интерконективних далековода? Ако је одговор ДА, навести назив тих далековода.",
+    "answer": "Не",
+    "llm_answer": "Da, iz PRP Čibuk 1 polaze interkonvektivni далековodi. Prema dokumentima, PRP Čibuk 1 je povezana sa prenosnim sistemom 400 kV putem sledećih далековода:  \n- DV 453/1 (povezuje PRP Čibuk 1 sa RP Drmno)  \n- DV 453/2 (povezuje PRP Čibuk 1 sa TS Pančevo 2)  \n\nOvi далековodi predstavljaju interkonvektivne veze koje omogućavaju povezivanje postrojenja sa širim prenosnim sistemom.\n\n---\nIzvori:\n- Fajl: 8.32 Uputstvo za pogon PRP 400 kV Čibuk 1, Sekcija: 2.2, Item: 8.32\n- Fajl: 8.32 Uputstvo za pogon PRP 400 kV Čibuk 1, Sekcija: 6.1, Item: 8.32",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor potvrđuje da iz PRP Čibuk 1 polaze interkonvektivni dalekovodi i navodi konkretne linije (DV 453/1 i DV 453/2) što je u skladu sa originalnim odgovorom, iako je LLM odgovor znatno duži i detaljniji."
+  },
+  {
+    "num": "41",
+    "question": "Колико ветроагрегата постоји у ВЕ Чибук 1?",
+    "answer": "57",
+    "llm_answer": "Ukupno postoji 57 vetroagregata u VE Čibuk 1, kako je navedeno u dokumentu. \n\n---\nIzvori:\n- Fajl: 8.32 Uputstvo za pogon PRP 400 kV Čibuk 1, Sekcija: 2.6, Item: 8.32",
+    "score": 0.85,
+    "llm_thinking": "LLM daje isti broj (57) kao i originalni odgovor, ali ga stavlja u kontekst – ukupan broj vetroagregata u VE Čibuk 1, uz navođenje izvora. Iako je rečenica duža, ona sadrži sve ključne informacije iz originalnog odgovora."
+  },
+  {
+    "num": "42",
+    "question": "За који опсег напона, изражен у процентима, објекат купца остаје трајно у погону без испада за случај да је објекат купца прикључен на 400 kV напону?",
+    "answer": "90%Unom ≤ U≤ 105%Unom",
+    "llm_answer": "Objekat kupca ostaje tajno u pogonu bez ispada kada je priključen na 400 kV napon u intervalu od 90% do 105% nazivne vrednosti napona (Unom). Ovo je izraženo u dokumentu u sekciji 4.3.1, gde se navodi: \"za interval 90%Unom ≤ U ≤ 105%Unom, trajno\".\n\n---\nIzvori:\n- Fajl: 3.00 Pravila za priključenje objekata na prenosni sistem, Sekcija: 4.3.1, Item: 3.00",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je duži i daje kontekst, ali sadrži ključne informacije iz originalnog teksta o rasponu napona (90%Unom ≤ U≤ 105%Unom) i njegovoj važnosti za rad objekta kupca. LLM je proširio odgovor sa dodatnim detaljima o izvoru informacija."
+  },
+  {
+    "num": "43",
+    "question": "За који опсег напона, изражен у процентима, објекат купца остаје трајно у погону без испада за случај да је објекат купца прикључен на 220 kV напону?",
+    "answer": "90%Unom ≤ U≤ 111.8 %Unom",
+    "llm_answer": "Objekat kupca priključen na 220 kV napon ostaje trajno u pogonu bez ispada u intervalu od 90% do 111,8% nazivne vrednosti napona (Unom), prema odredbama u tački 4.3.1, stavku b) dokumenta \"Pravila za priključenje objekata na prenosni sistem\".\n\n---\nIzvori:\n- Fajl: 3.00 Pravila za priključenje objekata na prenosni sistem, Sekcija: 4.3.1, Item: 3.00",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je duži i pruža kontekst u obliku reference na dokument i tačku, ali sadrži sve ključne informacije iz originalnog odgovora o procentualnom rasponu napona u kojem objekat kupca ostaje u pogonu. Zato je ocena visoka, iako je odgovor proširen."
+  },
+  {
+    "num": "44",
+    "question": "За који опсег напона, изражен у процентима, објекат купца остаје најмање 60 минута у погону без испада за случај да је објекат купца прикључен на 400 kV напону?",
+    "answer": "105%Unom ≤ U≤ 110 %Unom",
+    "llm_answer": "Objekat kupca priključen na 400 kV sistem ostaje u pogonu bez ispada najmanje 60 minuta u sledećim opsegovima napona:  \n- 85% do 90% Unom  \n- 105% do 110% Unom  \n\nOvi podaci su iz dva intervala iz dokumenta koji se odnose na zahteve za priključenje objekata na prenosni sistem. U intervalu 90% do 105% Unom sistem ostaje u pogonu trajno (bez ograničenja na 60 minuta), što nije relevantno za pitanje.  \n\n---\nIzvori:  \n- Fajl: 3.00 Pravila za priključenje objekata na prenosni sistem, Sekcija: 4.3.1, Item: 3.00",
+    "score": 0.85,
+    "llm_thinking": "LLM daje detaljniji odgovor sa kontekstom i objašnjenjem, ali sadrži ključne informacije iz originalnog odgovora o rasponu napona (105% do 110% Unom) u kojem objekat ostaje u pogonu. Iako je duži, LLM uspešno pokriva osnovno značenje originalnog odgovora."
+  },
+  {
+    "num": "50",
+    "question": "Да ли План успостављања преносног система спада у планове одбране преносног система?",
+    "answer": "Не. Правила о раду преносног система.",
+    "llm_answer": "Ne, Plan uspostavljanja prenosnog sistema nije dio planova odbrane prenosnog sistema. Prema dokumentima, Plan uspostavljanja prenosnog sistema i Planovi odbrane prenosnog sistema predstavljaju dva odvojena plana koji se izrađuju u saradnji sa korisnicima prenosnog sistema, ali nisu uključeni jedan u drugi. Uvodni deo dokumenta (sekcija 6.3.1.1) navodi da ovi planovi imaju zajedničku svrhu, ali su tehnički i organizaciono odvojeni. Dodatno, sekcija 6.3.1.5 potvrđuje da EMS AD izrađuje ova dva plana zasebno, dok se sekcija 6.3.1.3 detaljno opisuje šta obuhvataju samo Planovi odbrane (npr. plan podfrekventne zaštite), ali ne i Plan uspostavljanja.\n\n---\nIzvori:\n- Fajl: 3.01 Pravila o radu prenosnog sistema, Sekcija: 6.3.1.1, Item: 3.01\n- Fajl: 3.01 Pravila o radu prenosnog sistema, Sekcija: 6.3.1.5, Item: 3.01\n- Fajl: 3.01 Pravila o radu prenosnog sistema, Sekcija: 6.3.1.3, Item: 3.01",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je znatno duži i detaljniji, ali u potpunosti odgovara na pitanje i objašnjava razliku između dva plana navedena u originalnom tekstu, potvrđujući da nisu deo istog plana. Odgovor pruža relevantne detalje iz izvora i jasno objašnjava razdvajanje dva plana."
+  },
+  {
+    "num": "52",
+    "question": "Долази до испада далековода који спаја трафостанице А и Б од којих ни једна није радијална ТС. Диспечер има податке о реаговању заштите само из постројења Б. Да ли се ово може сматрати довољним за процену врсте квара?",
+    "answer": "Не",
+    "llm_answer": "Ne, dispečer ne može smatrati da su podaci o reagovanju zaštite samo iz postrojenja B dovoljni za procenu vrste kvara. Prema dokumentima, vrsta kvara na dalekovodu se procenjuje **na osnovu podataka o delovanju zaštita sa oba kraja dalekovoda**, osim u slučaju radijalnih dalekovoda. U ovom slučaju, ni jedna od dve trafo stanice (A i B) nije radijalna, što znači da je potrebno podataka sa oba kraja za validnu procenu vrste kvara (broj faza, sa/ili bez zemljene veze, oznaka faze).\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.1.2, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "Odgovor LLM-a je duži od originala, ali u potpunosti pokriva ključne informacije iz njega, objašnjavajući zašto podaci samo sa jedne strane dalekovoda nisu dovoljni za procenu kvara, uz pozivanje na relevantan dokument."
+  },
+  {
+    "num": "53",
+    "question": "Дошло је до испада далековода са успешним циклусом АПУ, да ли је далековод у погону?",
+    "answer": "Да",
+    "llm_answer": "Na osnovu dostupnih dokumenata, ako je došlo do ispada dalekovoda uz uspešan ciklus APU (Automatskog Ponovnog Uključivanja), dalekovod je u pogonu. Ovo je zasnovano na činjenici da uspešan ciklus APU ukazuje na prolazni kvar, što znači da je dalekovod automatski vraćen u rad. Dokument 5.1.3 navodi da se na osnovu podataka o radu uređaja funkcije APU (da li je APU uspešan sa bar jednog kraja) utvrđuje priroda kvara, a uspešan APU pokazuje da je kvar prolaznog karaktera, što podrazumeva da je dalekovod vraćen u normalan rad.\n\nDokument 5.2.12 potvrđuje da delovanje zaštite od uključenja na kvar (SOTF) dolazi nakon neuspešnog ciklusa APU, što znači da uspešan APU ne aktivira ovu zaštitu, već se dalekovod automatski vraća u pogon.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.1.3, Item: 2.00\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.2.12, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je znatno duži od originalnog, ali u potpunosti pokriva njegovu suštinu, objašnjavajući logiku iza odgovora \"da\" uz pozivanje na relevantne izvore. LLM daje detaljnije objašnjenje o funkciji APU i njenoj vezi sa radom dalekovoda."
+  },
+  {
+    "num": "55",
+    "question": "У постројењу А на далеководу који спаја трафостанице А и Б деловала је дистантна заштита у првом степену, у постројењу Б деловала је дистантна заштита у другом степену. На којој деоници од постројења А је потенцијалан квар?",
+    "answer": "На првих 15%.",
+    "llm_answer": "Potencijalni kvar se nalazi na deonici prvih 15% dužine dalekovoda od postrojenja A. Ovo je izračunato na osnovu informacija o stepenu delovanja distancnih zaštita: kada se na jednom kraju (postrojenje A) deluje distanta u prvom stepenu, a na drugom kraju (postrojenje B) u drugom stepenu, kvar je orijentaciono na deonici prvih 15% dužine dalekovoda od objekta gde je zaštita delovala u prvom stepenu.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.1.4, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je znatno duži i daje detaljnije objašnjenje, ali sadrži ključnu informaciju iz originala – da je potencijalni kvar lociran na prvih 15% dužine dalekovoda. LLM daje kontekst i objašnjenje kako je do te lokacije došlo, što čini odgovor sveobuhvatnijim."
+  },
+  {
+    "num": "56",
+    "question": "У постројењу А на далеководу који спаја трафостанице А и Б деловала је дистантна заштита у првом степену, у постројењу Б деловала је дистантна заштита у првом степену. На којој деоници од постројења Б је потенцијалан квар?",
+    "answer": "На 15 – 85%.",
+    "llm_answer": "Potencijalni kvar se nalazi na deonici od 15% do 85% dužine dalekovoda od postrojenja B. Ovo je zaključeno na osnovu informacija u dokumentu koji navodi da kada oba releja (na postrojenju A i B) deluju u prvom stepenu, kvar je orijentaciono na deonici od 15% do 85% dužine dalekovoda od jednog ili drugog objekta (u ovom slučaju postrojenja B).\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.1.4, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je znatno duži i daje kontekst, ali sadrži istu ključnu informaciju kao i originalni odgovor – da je potencijalni kvar lociran između 15% i 85% dužine dalekovoda. LLM objašnjava kako je do zaključka došlo, što povećava njegovu vrednost, ali ne menja osnovno značenje."
+  },
+  {
+    "num": "57",
+    "question": "Да ли диспечер сме да укључи далековод уколико нема познате сигнале деловања заштите, а постоји повратни напон на далеководу?",
+    "answer": "Да",
+    "llm_answer": "Da, dispečer može da uključi dalekovod ukoliko postoji povratni napon na dalekovodu, iako nema poznatih signala delovanja zaštite. Prema dokumentu 5.2.1, kada nakon delovanja zaštitnih uređaja prekidač sa jedne strane dalekovoda ostane isključen, a prekidač sa druge strane uključen (postoji povratni napon), kvar je prolazan i dispečer je ovlašćen da daje nalog za uključenje dalekovoda.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.2.1, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "Odgovor LLM-a je mnogo duži od originalnog, ali u potpunosti objašnjava zašto je odgovor \"da\" ispravan, pozivajući se na relevantan deo dokumenta i objašnjavajući uslove za uključenje dalekovoda. Sadrži sve ključne informacije iz originala, samo detaljnije razjašnjene."
+  },
+  {
+    "num": "60",
+    "question": "Дошло је до испада далековода који спаја постројења А и Б. У постројењу А је прикључена електрана и локатор квара показује да је квар на 40 km од постројења А а у постројењу Б локатор квара показује да је квар на 20 km од постројења Б. Из ког постројења диспечер треба да стави далековод под напон?",
+    "answer": "Из постројења Б",
+    "llm_answer": "Na osnovu dostupnih dokumenata, dispečer treba da stavi далековод pod напон iz постројења А. Ово je zato što у постројењу А је прикључена електрана, што представља изузетак у прописима који гласи да се далековод укључује у празан ход ка постројењу на које је прикључена електрана (ако далековод спаја постројење са електраном).\n\nДокуменат 5.2.9, у одељку \"MERE I POSTUPCI NAKON DELOVANjA ZAŠTITNIH I AUTOMATSKIH UREĐAJA NA VNVODOVIMA\", одредбом за изузетак: \"ако се ради о далеководу који пoveзује постројење на које је прикључена електрана, тада се далековод укључује у празан ход ка постројењу на које је прикључена електрана\".\n\nУпитано постројење А има прикључену електрану, што значи да се далековод мора укључити из постројења А, не зависно од локације квара (40 km од А и 20 km од Б).\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.2.9, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "LLM одговор је дужи и детаљнији, али садржи све кључне информације из оригиналног одговора и правилно објашњава логику укључивања далековода из постројења А, позивајући се на релевантне прописе. Иако је дужи, не мења суштину одговора."
+  },
+  {
+    "num": "61",
+    "question": "Дошло је до испада 400 kV далековода број 401/2 који спаја РП Дрмно на које је прикључена ТЕ Костолац Б и РП Ђердап 1 на које је прикључена ХЕ Ђердап 1. Локатор квара у РП Дрмно показује 100 km а у ХЕ Ђердап 1 локатор показује 55 km. Из ког постројења диспечер треба да стави далековод под напон?",
+    "answer": "Из постројења РП Ђердап 1",
+    "llm_answer": "Na osnovu dokumenta \"2.00 TUEKS-03 TU-EKS-03\" (sekcija 7.1.5, stavka 2.00), kada je postrojenje \"B\" (u ovom slučaju HE Đerdap 1, koje pripada elektrani) blisko elektrani, dispečer mora izvršiti sledeći postupak: \n- Dajem nalog da se dalekovod u postrojenju \"A\" (RP Drmno) izdvoji na poseban sistem sabirnica,\n- Uključi se spojno polje u postrojenju \"A\",\n- Uključi se prekidač dalekovoda za probu uključenja.\n\nU ovom slučaju, HE Đerdap 1 je elektrana (blisko elektrani), pa se dalekovod mora aktivirati iz RP Drmno, iako je lokator kvara bliži HE Đerdap 1 (55 km) nego RP Drmno (100 km). Ovo je u skladu sa procedurom iz sekcije 7.1.5 koja se primenjuje kada postrojenje \"B\" pripada elektrani.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 7.1.5, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "Одговор ЛЛМ-а је дужи и детаљнији, али садржи све кључне информације из оригиналног текста и објашњава поступак у контексту документације, што га чини веома сличним по значењу. ЛЛМ је проширио објашњење са додатним детаљима о процедури и локацији."
+  },
+  {
+    "num": "64",
+    "question": "На којим напонским нивоима се код далекова уграђују заштите од преоптерећења у преносној мрежи?",
+    "answer": "Заштита од преоптерећења се примењује на свим далеководима 400 и 220 kV и неким ДВ",
+    "llm_answer": "Zaštita od preopterećenja se kod dalekovoda ugladjuje na naponskim nivoima od 400 kV, 220 kV i nekim dalekovodima 110 kV. Prema dokumentima, zaštita od preopterećenja se primenjuje na svim dalekovodima 400 i 220 kV, kao i na nekim dalekovodima 110 kV. \n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.5.1, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "Одговор ЛЛМ-а је дужи и додаје информацију о 110 kV далеководима, али задржава основно значење оригиналног текста о заштити од преоптерећења на 400 kV и 220 kV. ЛЛМ је проширио информацију, али није променио основну тврдњу."
+  },
+  {
+    "num": "66",
+    "question": "Да ли диспечер сме да блокира заштите од преоптерећења на далеководима?",
+    "answer": "Надлежни диспечер може да изда налог за блокаду искључења од стране првог степена заштите од преоптерећења далековода, ако процени да за то постоји оправдан разлог. Блокада искључења од стране другог степена заштите од преоптерећења далековода није дозвољена. Изузетно, у претхаваријским ситуацијама са поремећајем у преносној мрежи, ради санирања ситуације или спречавања ширења поремећаја, као и у конкретним случајевима, који су обрађени у Прилогу 5, диспечер НДЦ-а може дати налог за блокирање искључења од стране другог степена заштите од преоптерећења далековода. У случају блокирања искључења од стране другог степена заштите од преоптерећења, дежурно особље објекта и надлежни диспечер прате оптерећење и воде рачуна да се оптерећење хитно врати испод подешења другог степена заштите од преоптерећења.",
+    "llm_answer": "Dispečer može blokirati zaštitu od preopterećenja na dalekovodima **samo na prvom stepenu** ako postoji opravdan razlog, što je navedeno u dokumentu Sekcija 5.7.1. Međutim, blokiranje isključenja od strane **drugog stepena zaštite od preopterećenja dalekovoda** nije dozvoljeno općenito, osim u izuzetnim situacijama sa poremećajem u prenosnoj mreži radi saniranja situacije ili sprečavanja širenja poremećaja (Sekcija 5.7.2). \n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.7.1, Item: 2.00\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.7.2, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "LLM одговор је скраћена верзија оригиналног текста, али садржи све кључне информације о блокаде искључења од стране првог и другог степена заштите од преоптерећења далековода, као и изузецима у претходним ситуацијама. LLM је додатно навео релевантне секције из документа."
+  },
+  {
+    "num": "70",
+    "question": "Уколико се у току извођења радова на једном од двоструких далековода јави квар главне заштите на другом далеководу, да ли је неопходно прекинути започете радове?",
+    "answer": "Јесте, радови се прекидају",
+    "llm_answer": "Da, neophodno je prekinuti započete radove. Prema dokumentu, u slučaju kvara glavne zaštite na jednom sistemu dvostrukog dalekovoda koji je u pogonu, već započeti radovi se prekidaju (u skladu sa TU DV-10).\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.6.5, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "LLM одговор је дужи, али садржи исту основну информацију као и оригинални одговор – потврду да се радови прекидају. Додатно, LLM даје контекст и референцу на документ и секцију, што га чини информативнијим."
+  },
+  {
+    "num": "73",
+    "question": "Долази до испада трансформатора деловањем Бухолц заштите, диспечер има информацију о земљотресу у региону у којем се налази инсталиран трансформатор. Да ли диспечер сме да укључи испали трансформатор и шта је потребно проверити пре укључења трансформатора?",
+    "answer": "Сме да га укључи, али је потребно да провери да није било побуде ни искључења од електричних заштита и да сигнал искључења бухолц заштите може да се квитира.",
+    "llm_answer": "Dispečer može da uključi ispaljen transformator nakon potvrde da se zemljotres stvarno dogodio u regionu trafostanice, provere da nije bilo pobude ili isključenja od električnih zaštita, potvrde da se signal isključenja Buholc zaštite može kvitirati i nakon vizuelnog pregleda transformatora i pripadajućih polja od strane rukovaoca. \n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 6.5.2, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "LLM одговор је дужи и додаје детаље о земљотресу и визуелној инспекцији, али садржи све кључне информације из оригиналног текста о проверама које су потребне пре укључења трансформатора, укључујући провере заштите и квитирање сигнала. Због тога је семантичка сличност висока."
+  },
+  {
+    "num": "77",
+    "question": "Када је могуће трајно блокирати кућишну заштиту на трансформатору? Да ли диспечер доноси одлуку о блокади кућишне заштите?",
+    "answer": "Ако је у функцији ограничена земљоспојна заштита (REF), кућишна заштита се може блокирати трајно. Не, одлуку о блокади кућишне заштите доноси Сектор за релејну заштиту и локално управљање након консултација са надлежним службама РЦО.",
+    "llm_answer": "Kućišna zaštita na transformatoru može trajno da se blokira **samo kada je u funkciji ograničena zemljospojna zaštita (REF)**, prema dokumentu TUEKS-03, sekcija 6.8.4, item 2.00. Odluka o blokadi kućišne zaštite **ne donosi dispečer**, već je odgovornost Sektor za relejnu zaštitu i lokalno upravljanje, koji donosi odluku nakon konsultacija sa nadležnim službama RCO i obaveštava nadležni centar upravljanja, prema dokumentu TUEKS-03, sekcija 6.8.5, item 2.00.\n\n---\n\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 6.8.4, Item: 2.00\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 6.8.5, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "LLM одговор је дужи и додаје референце до докумената, али садржи све кључне информације из оригиналног текста и преноси исту основну поруку о условима за блокирање кућишне заштите и ко је за то одговоран. Додате информације о релевантним секцијама докумената су корисне и не мењају значење."
+  },
+  {
+    "num": "78",
+    "question": "Уколико долази до испада прекидача свих далековода, који полазе са истог система сабирница из једног постројења, у суседним постројењима реаговањем дистантне заштите у другом степену као и испада свих трансформатора везаних на исте сабирнице деловањем дистантне заштите у другом степену, где се налази потенцијалан квар?",
+    "answer": "Потенцијални квар се налази на систему сабирница одакле полазе далеководи ка суседним постројењима где су  реаговањем дистантне заштите у другом степену.",
+    "llm_answer": "Potencijalni kvar se nalazi u dalekovodnom polju dalekovoda AB, u zoni između strujnih transformatora i prekidača, u postrojenju ''A''. Ovo je utvrđeno na osnovu slučaja kada diferencijalna zaštita sabirnica u postrojenju ''A'' proradi istovremeno sa delovanjem distantne zaštite u drugom stepenu u susednom postrojenju ''B'' na dalekovodu AB. Prema dokumentima, kvar se nalazi na dalekovodu između strujnih transformatora i prekidača u postrojenju ''A''.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 7.1.5, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "LLM одговор је дужи и детаљнији, али садржи све кључне информације из оригиналног текста, укључујући локацију потенцијалног квара и рад дистантне заштите у суседном постројењу. LLM пружа конкретније детаље о локацији унутар постројења."
+  },
+  {
+    "num": "80",
+    "question": "Трансформатор је испао из погона због грешке испитивача релејне заштите. Да ли диспечер сме да укључи трансформатор након испада?",
+    "answer": "Да, али је неопходно да се изврше следеће активности . извршилац радова писаном изјавом у Дневнику радова на трафостаници наводи разлоге испада трансформатора због радова у секундарним колима по РЗ-1/2014 или Н-1/2014 или Н-3/2014, и да се трансформатор може укључити без испитивања; руковалац на основу изјаве извршиоца радова обавештава надлежног диспечера (путем телефонске везе која се снима) „да је трансформатор испао деловањем основне заштите (навести назив заштите) због радова у секундарним колима и да се трансформатор (навести број трансформатора) може укључити“; на основу добијеног обавештења од стране руковаоца, надлежни диспечер даје налог за укључење испалог трансформатора.",
+    "llm_answer": "Prema dostupnim dokumentima, dispečer može uključiti transformator nakon ispada ako je uzrok ispada greška ispitivača rелејне заштите koja je nastala prilikom radova u sekundarnim kolima. Ovo je regulisano u sekciji 6.5.4 dokumenta \"2.00 TUEKS-03 TU-EKS-03\", gde se navodi da se u slučaju ispada transformatora delovanjem osnovne zaštite zbog slučajne greške ili prolaznog kvara u sekundarnim kolima (npr. prilikom radova u transformatorskoj stanici), postupak uključivanja može biti izvršen bez posebnih provera i ispitivanja. \n\nKonkretno, potrebno je da:\n1. Izvršilac radova u Dnevniku radova na trafostanici navede razloge ispada (referencirajući RZ-1/2014 ili N-1/2014/N-3/2014) i da transformator može biti uključen bez ispitivanja.\n2. Rukovalac obaveštava dispečera putem snimljene telefonske veze da je transformator ispao zbog radova u sekundarnim kolima i da se može uključiti.\n3. Dispečer na osnovu ove izjave daje nalog za uključenje.\n\nS obzirom da je problem nastao prilikom ispitivanja rелејне заштите (što je deo sekundarnih kolima), ova procedura se primenjuje, pa dispečer **može** uključiti transformator nakon ispada.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 6.5.4, Item: 2.00",
+    "score": 0.85,
+    "llm_thinking": "LLM одговор је дужи и укључује додатне информације о изворишту документа, али преноси све кључне кораке и услове из оригиналног текста, објашњавајући процедуру укључивања трансформатора након испада. Иако је дужи, садржи све потребне информације и преноси исту суштину."
+  },
+  {
+    "num": "81",
+    "question": "Напиши редослед манипулација за прелазак са првог на други систем сабирница у ТС Крагујевац 2 на 400 kV страни.",
+    "answer": "8.15 UP-KG2_2022 Uputstvo za pogon TS 400_110 kV Kragujevac 2 ТУ-ЕКС 01",
+    "llm_answer": "Redosled manipulacija za prelazak sa prvog na drugi sistem sabirnica u TS Kragujevac 2 na 400 kV strani je sledeći:\n\n1. Uključiti rastavljače spojnog polja.  \n2. Uključiti prekidač spojnog polja.  \n3. Utvrditi da je sistem sabirnica na koji se prebacuju izvodi pod naponom.  \n4. Prebaciti sve aktivne izvode sa jednog na drugi sistem sabirnica: u istom polju uključiti sabirnički rastavljač SS na koji se prebacuju izvodi, zatim isključiti sabirnički rastavljač SS sa kog se prebacuju izvodi, i ponoviti postupak u ostalim poljima.  \n5. Isključiti prekidač spojnog polja. Utvrditi da sistem sabirnica sa kog su prebačeni izvodi nije pod naponom.  \n6. Isključiti rastavljače spojnog polja.  \n\n---\n\nIzvori:  \n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.5.5, Item: 2.01",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor detaljno opisuje postupak prelaska sa jednog sistema sabirnica na drugi u TS Kragujevac 2, što je u skladu sa originalnim dokumentom. Iako je LLM odgovor duži i pruža korak-po-korak instrukcije, on obuhvata sve ključne informacije iz originalnog izvora."
+  },
+  {
+    "num": "92",
+    "question": "Објаснити постпука диспечера уколико има информацију да нема могућност снимања разговора приликом давања налога за манипулацију руковаоцу.",
+    "answer": "Налог се даје факсом или скенираним дописом на коме је написан налог за манипулације преко електронске поште.",
+    "llm_answer": "Ukoliko dispečer ima informaciju da nema mogućnosti snimanja razgovora prilikom davanja naloga za manipulaciju, nalog se izdaje putem faksa ili skeniranog dopisa koji se šalje elektronskom poštom. Ovo je jasno propisano u dokumentu koji opisuje procedure identifikacije sagovornika prilikom sprovođenja manipulacija.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.2.2, Item: 2.01",
+    "score": 0.85,
+    "llm_thinking": "LLM одговор је дужи и даје додатни контекст о процедури и документацији, али садржи све кључне информације из оригиналног текста о начину достављања налога факсом или скенираним дописом. Сличност у основном значењу је висока."
+  },
+  {
+    "num": "98",
+    "question": "Диспечер врши искључење далековода који иде од постројења А до постројења Б. У постројењу А је искључен прекидач, а у постројењу Б је искључен прекидач и руковалац има налог за искључење сабирничког и излазног растављача. Диспечер је на SCADA систему примио сигнализацију да су сабирнички и излазни растављач искључени у постројењу Б, али још увек од руковаоца није добио информацију о извршењу налога. Да ли диспечер сме да да налог за искључење сабирничког и излазног растављача у постројењу А да би скратио време манипулација?",
+    "answer": "Не",
+    "llm_answer": "Ne, dispečer ne sme da daje налог za isključenje sabilničkog i izlaznog raстављачa u постројењу А пре nego što dobije informaciju od руковаоца o izvršenju naloga. Prema dokumentima, dispečer je dužan da \"traži informaciju o izvršenim nalozima\" (4.1), a SCADA signal nije dovoljan za potvrdu izvršenja bez formalne informacije od руковаоца. Iako SCADA sistema prikazuje da su raстављачi u постројењу Б isključeni, postupak zahteva da dispečer potvrdi izvršenje naloga putem direktne komunikacije sa руковаоцем, pre nego što pređe na sledeće korake.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 4.1, Item: 2.01\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.7.6, Item: 2.01",
+    "score": 0.85,
+    "llm_thinking": "LLM odgovor je duži i detaljniji, ali u potpunosti pokriva ključne informacije iz originalnog teksta, objašnjavajući zašto dispečer ne sme da se oslanja samo na SCADA signal i potrebu za potvrdom od rukovaoca. Odgovor je veoma sličan po značenju, samo proširen."
+  },
+  {
+    "num": "4",
+    "question": "Због чега је спојно поље 110 kV у ТС Јагодина 4 искључено у нормалном уклопном стању?",
+    "answer": "Прекидачи 110 kV у ТС Јагодина 1 и ЕВП Јагодина не задовољавају са аспкета за све струје кратког споја за укључено СП 110 kV у ТС Јагодина 4 када су у погону два трансформатора 400/110 kV, а што представља нормално уклопно стање. Због тога је СП 110 kV у ТС Јагодина 4 искључено за нормално уклопно стање.",
+    "llm_answer": "Spoјно поље 110 kV у ТС Јагодина 4 је искључено у нормалном уклопном стању због недовољне сигурности опреме у односу на стрuje кратког споја. Специфично, преkидачи 110 kV у ТС Јагодина 1 и EVP Јагодина не задовољавају стрuje кратког споја за укључено спојно поље (СП 110 kV) у ТС Јагодина 4 када су у погону два трансформатора 400/110 kV. Ово је констатовано у анализи сигурности и стрuja кратког споја, која је извршена у програму PSS\\E.\n\n---\nIzvori:\n- Fajl: 8.14 Uputstvo za pogon TS 400/110 kV Jagodina 4, Sekcija: 3.4, Item: 8.14",
+    "score": 0.9,
+    "llm_thinking": "LLM одговор је дужи и детаљнији, али преноси исту основну информацију као и оригинални текст – да је СП 110 kV у ТС Јагодина 4 искључено због недовољне сигурности прекидача при струјама кратког споја. Додатно, LLM наводи и начин провере (PSS\\E анализа), што обогаћује одговор."
+  },
+  {
+    "num": "5",
+    "question": "Који су поступци диспечера за случај да је потребно укључити спојно поље 110 kV у ТС Јагодина 4 у периоду не дужем од сат времена?",
+    "answer": "Када је укључење спојног поља 110 kV потребно ради краткотрајног паралелисања нема потребе за искључењем једног трансформатора. Диспечер у овој ситуиспаацији не ради никакве додатне манипулације.",
+    "llm_answer": "Na osnovu dostupnih dokumenata, procedura za uključivanje spojnog polja 110 kV u TS Jagodina 4 u periodu ne dužem od sata je sledeća:  \n\n**Nema potrebe za isključenjem jednog transformatora** kada je uključenje spojnog polja 110 kV potrebno radi kratkotrajnog paralelisanja (nije duže od sat vremena). Ovo se primenjuje kada je potrebno izvršiti hitne manipulacije, termoviziju i sl.  \n\n---\n\nIzvori:  \n- Fajl: 8.14 Uputstvo za pogon TS 400/110 kV Jagodina 4, Sekcija: 3.7, Item: 8.14",
+    "score": 0.9,
+    "llm_thinking": "LLM одговор је дужи, али у суштини преноси исту информацију као и оригинални текст, потврђујући да није потребно искључивати трансформатор при укључењу спојног поља 110 kV за краткотрајно паралелисање. Додатно, LLM наводи извор информације, што је корисно."
+  },
+  {
+    "num": "11",
+    "question": "Објаснити поступак диспечера за случај да је потребно краткотрајно успоставити паралелан рад између ТС Београд 20 и ТС Београд 5.",
+    "answer": "У случају потребе за укључењем прекидача у KБП 110 kV бр. 172/1 у ТС Београд 6 ради краткотрајног паралелисања ТС Београд 5 и ТС Београд 20, да не би дошло до преоптерећења каблова КБ 171, КБ 172/1 и КБ 1265 диспечер прво мора да одради анализу сигурности. У зависности од резултата анализа сигурности могу применити неку од мера уколико је потребно: а) У ТС Београд 20 направити следеће уклопно стање: један систем сабирница 110 kV: трансформатори ТР1, ТР2, ДВ 129А/1, ДВ 129Б/1, МВ 1250, МВ 1251 и МВ 1288; други систем сабирница 110 kV: ДВ 129А/2, ДВ 129Б/2, ДВ 1240А, ДВ 1240Б; главно спојно поље 110 kV искључено. б) Искључењем једног трансформатора у ТС Београд 20, чиме би се избегао велики број манипулација из тачке а). в) Искључењем далековода ДВ 129А/2 и ДВ 129Б/2, чиме би се избегао велики број манипулација из тачке а).",
+    "llm_answer": "Za kratkotrajno uspostavljanje paralelnog rada između TS Beograd 20 i TS Beograd 5, dispečer mora prouzrokovati sledeće korake na osnovu dokumenta \"8.05 Uputstvo za pogon TS 220/110/35 kV Beograd 5\" (sekcija 2.7) i \"8.03 Uputstvo za pogon TS 400/110 kV Beograd 20\" (sekcija 2.7):\n\n1. **Uključiti prekidač u KBP 110 kV br. 172/1 u TS Beograd 6** radi kratkotrajnog paralelisanja TS Beograd 5 i TS Beograd 20.  \n2. **Proveriti rezultate analize sigurnosti** kako bi se izbeglo preopterećenje kablova KB 171, KB 172/1 i KB 1265.  \n3. **U TS Beograd 20 primeniti jednu od sledećih mera** (u zavisnosti od analize sigurnosti):  \n   - **a)** Postaviti uklopno stanje u TS Beograd 20:  \n     - Jedan sistem sabirnica 110 kV: transformatori TR1, TR2, DV 129A/1, DV 129B/1, MV 1250, MV 1251, MV 1288;  \n     - Drugi sistem sabirnica 110 kV: DV 129A/2, DV 129B/2, DV 1240A, DV 1240B;  \n     - Glavno spojno polje 110 kV isključeno.  \n   - **b)** Isključiti jedan transformator u TS Beograd 20 (umesto složenijeg uklopnog stanja iz tačke a).  \n   - **v)** Isključiti dalekovode DV 129A/2 i DV 129B/2 (umesto složenijeg uklopnog stanja iz tačke a).  \n\nOve mere su potrebne da se izbegne preopterećenje kablova i osigura bezbedan rad tokom kratkotrajnog paralelisanja. Trajno paralelisanje TS Beograd 5 i TS Beograd 20 nije dozvoljeno, ali kratkotrajno paralelisanje je moguće uz primenu navedenih mera.\n\n---\nIzvori:\n- Fajl: 8.05 Uputstvo za pogon TS 220/110/35 kV Beograd 5, Sekcija: 2.7, Item: 8.05\n- Fajl: 8.03 Uputstvo za pogon TS 400/110 kV Beograd 20, Sekcija: 2.7, Item: 8.03",
+    "score": 0.9,
+    "llm_thinking": "Одговор ЛЛМ-а је дужи и детаљнији, али садржи све кључне информације из оригиналног текста и преноси исту суштину у вези са поступком укључивања прекидача и мерама за спречавање преоптерећења. Додатно, ЛЛМ наводи изворе информација, што је корисно."
+  },
+  {
+    "num": "12",
+    "question": "Да ли је ТС Београд 20 у систему даљинског управљања?",
+    "answer": "Да",
+    "llm_answer": "Da, TS Beograd 20 je u sistemu daljinskog upravljanja, kako je definisano u dokumentu \"8.03 Uputstvo za pogon TS 400/110 kV Beograd 20\" u sekciji 2.9, gde se navodi da je TS Beograd 20 u sistemu daljinskog upravljanja iz RDC Centar - Beograd, a način nadzora, upravljanja, daljinskog komandovanja i manipulisanja definisan Protokolom.\n\n---\nIzvori:\n- Fajl: 8.03 Uputstvo za pogon TS 400/110 kV Beograd 20, Sekcija: 2.9, Item: 8.03",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor potvrđuje originalni odgovor (\"Да\") i pruža detaljno objašnjenje sa izvorom i referencom na dokumentaciju, što ga čini semantički vrlo sličnim, iako duži. Odgovor LLM-a daje kontekst i dokaz za potvrdu."
+  },
+  {
+    "num": "13",
+    "question": "Да ли OPGW ужади код ДВ 129A/1 и ДВ 129B/1 задовољавају прорачун на термичко напрезање у случају појаве струја кратких спојева?",
+    "answer": "На основу извршених анализа, коришћењем програма PSS\\E за прорачун струја кратких спојева и програма EMTP-ATP за проверу термичког напрезања OPGW ужета може се закључити да ОPGW уже на ДВ бр.129A/1 и бр.129Б/1 (ТС Бeоград 19 - ТС Београд 20), као и ДВ бр.129A/2 и бр.129Б/2 (ТС Бeоград 3 - ТС Београд 20) не задовољава са становишта струја кратких спојева.",
+    "llm_answer": "Ne, OPGW užad kod DV 129A/1 i DV 129B/1 **ne zadovoljava** uslove termičkog naprezanja u slučaju pojavljivanja struja kratkih spojeva. Prema dokumentu, analizom je utvrđeno da OPGW užad na DV br. 129A/1 i br. 129B/1 (TS Beograd 19 - TS Beograd 20) ne zadovoljava sa stanovišta struja kratkih spojeva.\n\n---\nIzvori:\n- Fajl: 8.03 Uputstvo za pogon TS 400/110 kV Beograd 20, Sekcija: 3.5, Item: 8.03",
+    "score": 0.9,
+    "llm_thinking": "LLM одговор је дужи, али садржи све кључне информације из оригиналног текста и преноси исту суштину – да OPGW ужићи на наведеним деловима не задовољавају стандарде услед струја кратких спојева. Разлика је у томе што LLM наводи да је проблем термичког напрезања, али то је у суштини повезано са струјама кратких спојева."
+  },
+  {
+    "num": "14",
+    "question": "Написати уклопно стање у ТС Београд 20 на свим напонским нивоима у случају нерасположивости диференцијалне заштите сабирница на 400 kV. Које су промене у односу на нормално уклопно стање на 110 kV страни?",
+    "answer": "Постројење 400 kV: (или 2.) систем сабирница: ДВ 451/1, ДВ 451/2, ТР1 и ТР2; спојно поље искључено и растављено. Постројење 110 kV: (или 2.) систем сабирница: ДВ 129А/1, ДВ 129А/2, МВ 1250, ДВ 1240А, МВ 1288 и ТР1 (или ТР2); (или 1.)  систем сабирница:  ДВ 129Б/1, ДВ 129Б/2, МВ 1251, ДВ1240Б иТР2 (или ТР1); спојно поље укључено; активна је диференцијална заштита сабирница. Нема промена уклопног стања на 110 kV напону при нерасположивости диференцијалне заштите сабирница на 400 kV у односу на нормално уклопно стање на 110 kV напону. ОБРАЗЛОЖЕЊЕ: Погледати нормално уклопно стање.",
+    "llm_answer": "U slučaju nerazpoloživosti diferencijalne zaštite sabilnica na 400 kV, uklopno stanje na 110 kV strani ostaje identično normalnom uklopnom stanju. Konkretno, postrojenje 110 kV je u sledećem stanju:\n\n- 1. (ili 2.) sistem sabirnica: DV 129A/1, DV 129A/2, MV 1250, DV 1240A, MV 1288 i TR1 (ili TR2);\n- 2. (ili 1.) sistem sabirnica: DV 129B/1, DV 129B/2, MV 1251, DV 1240B i TR2 (ili TR1);\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica.\n\nNema promena u odnosu na normalno uklopno stanje na 110 kV strani, jer je opisano stanje identično onom u normalnom režimu (vidi sekciju 5.2).\n\n---\n\nIzvori:\n- Fajl: 8.03 Uputstvo za pogon TS 400/110 kV Beograd 20, Sekcija: 7.1.2, Item: 8.03",
+    "score": 0.9,
+    "llm_thinking": "ЛЛМ одговор је дужи, али садржи све кључне информације из оригиналног текста и прецизно објашњава стање у случају нерасположивости заштите, уз позивање на извор. Сличност у значењу је веома висока."
+  },
+  {
+    "num": "21",
+    "question": "На којим далеководима 110 kV у ТС Србобран је активна заштита од преоптерећења?",
+    "answer": "142/1, 127/2 и 1267",
+    "llm_answer": "Aktivna zaštita od preopterećenja u 110 kV mreži u TS Srbobran je aktivirana na sledećim dalekovodima:  \n- DV 127/2 (aktivirana u slučaju ispada DV 400 kV broj 444/1 TS Novi Sad 3 – TS Srbobran pri određenim režimima rada)  \n- DV 1267  \n- DV 142/1 (aktivirana u slučaju ispada transformacije TS Zrenjanin 2)  \n\n---\n\nIzvori:  \n- Fajl: 8.28 Uputstvo za pogon TS 220/110/35 kV Srbobran, Sekcija: 2.6, Item: 8.28  \n- Fajl: 8.28 Uputstvo za pogon TS 220/110/35 kV Srbobran, Sekcija: 2.7, Item: 8.28  \n- Fajl: 8.28 Uputstvo za pogon TS 220/110/35 kV Srbobran, Sekcija: 2.5, Item: 8.28",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor je znatno duži i pruža kontekst aktiviranja zaštite, ali sadrži sve ključne informacije iz originalnog teksta – dalekovode 142/1, 127/2 i 1267. Iako detaljniji, LLM odgovor semantički pokriva originalni unos."
+  },
+  {
+    "num": "23",
+    "question": "Да ли је задовољен критеријум N-1 за ТС Зрењанин 2?",
+    "answer": "На основу извршених анализа, коришћењем програма за прорачун токова снага TNA, може се закључити да је N-1 критеријум сигурности задовољен, осим за летње вршно оптерећење у случају испада ДВ 220 kV бр. 254/2 ПРП Ковачица - ТС Зрењанин 2 када се преоптерећује ДВ 110 kV бр. 142/1 ТС Србобран - ТС Бечеј (за 23%). Ово преоптерећење се може решити променом топологије у мрежи, променом положаја отцепа на трансформаторима тако што ће се на сабирницама 110 kV подићи напон у ТС Зрењанин 2, односно спустити напон у ТС Србобран и искључити ДВ 110 kV бр. 1147 ТС Кикинда 2 - ТС Н. Бечеј.",
+    "llm_answer": "N-1 kriterijum sigurnosti je zadovoljen, osim za slučaj letnjeg vršnog opterećenja u kojem dolazi do ispada DV 220 kV br. 254/2 (PRP Kovačica - TS Zrenjanin 2), kada dođe do preopterećenja DV 110 kV br. 142/1 (TS Srbobran - TS Bečej) za 23%. U ovom specifičnom slučaju, kriterijum nije zadovoljen, ali se preopterećenje može rešiti promenom topologije mreže ili regulacijom napona na transformatorima.\n\n---\nIzvori:\n- Fajl: 8.13 Uputstvo za pogon TS 220/110 kV Zrenjanin 2, Sekcija: 3.3, Item: 8.13",
+    "score": 0.9,
+    "llm_thinking": "LLM одговор је веома сличан оригиналном, са истом основном информацијом и закључцима. LLM је мало краћи и формулисан је мало једноставније, али не мења значење оригиналног текста."
+  },
+  {
+    "num": "27",
+    "question": "Навести све 110 kV далеководе који у ТС Ниш 2 имају активну заштиту од преоптерећења.",
+    "answer": "113/1, 1245, 113/6, 1278",
+    "llm_answer": "Aktivna zaštita od preopterećenja u TS Niš 2 je aktivirana na sledećim 110 kV dalekovodima:  \n- DV 113/1  \n- DV 113/6  \n- DV 1245  \n- DV 1278  \n\nOvi dalekovodi su izdvojeni iz dokumenta na osnovu izjava u sekcijama koje navode aktivnu zaštitu od preopterećenja.  \n\n---  \nIzvori:  \n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 2.10, Item: 8.20  \n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 2.5, Item: 8.20  \n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 2.8, Item: 8.20",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor je duži i pruža kontekst o tome odakle su podaci uzeti, ali sadrži sve ključne informacije iz originalnog odgovora – tačne identifikatore dalekovoda. Zato je semantička sličnost veoma visoka."
+  },
+  {
+    "num": "31",
+    "question": "Преко којих 400 kV далековода су генератори у ТЕНТ-у А повезани на преносни систем?",
+    "answer": "424 и 425",
+    "llm_answer": "Generatori u TENT-u A su na prenosni sistem povezani preko dvaju 400 kV далековода: DV 424 (od G5) i DV 425 (od G6). Ovo je jasno navedeno u eksploatacionim uslovima za napajanje TS Obrenovac sa strane 400 kV iz TENT A.\n\n---\nIzvori:\n- Fajl: 8.22 Uputstvo za pogon TS 400/220 kV Obrenovac, Sekcija: 2.3, Item: 8.22",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor sadrži originalne brojeve (424 и 425) i pruža dodatni kontekst o njihovoj povezanosti sa generatorima u TENT-u A i dalekovodima, što potvrđuje da je odgovor semantički vrlo sličan originalu."
+  },
+  {
+    "num": "32",
+    "question": "Да ли је ТС Ниш 2 повезана са ТС Косово Б? Ако јесте, навести назив далековода преко кога је остварена та веза.",
+    "answer": "Да. ДВ 400 kV бр. 407 ТС Ниш 2 – ТЕ Косово Б",
+    "llm_answer": "Da, TS Niš 2 je povezana sa TS Kosovo B preko далековода DV 407. Ovo je izričito navedeno u eksploatacionim uslovima TS Niš 2, gde se navodi da je povezana sa 400 kV sistemom preko DV 407 sa TS Kosovo B.\n\n---\nIzvori:\n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 2.2, Item: 8.20",
+    "score": 0.9,
+    "llm_thinking": "LLM одговор је дужи и детаљнији, али садржи све кључне информације из оригиналног одговора и поткрепљује их релевантним изворима. Оба одговора потврђују повезаност трафо станице Ниш 2 са трафо станицом Косово Б преко далековода ДВ 407."
+  },
+  {
+    "num": "36",
+    "question": "Преко колико трансформатора се енергија произведена у ВЕ Чибук 1 пласира у ЕЕС?",
+    "answer": "Преко два трансформатора.",
+    "llm_answer": "Energija proizvedena u VE Čibuk 1 se plasira u EES preko dva transformatora. Prema dokumentu \"8.32 Uputstvo za pogon PRP 400 kV Čibuk 1\", sekcija 2.1, item 8.32, PRP Čibuk 1 predstavlja napojno čvorište za prenos električne energije proizvedene u VE Čibuk 1 preko dva energetska transformatora: TR 1 (T 01) i TR 2 (T 02), oba 400/35 kV, 90 MVA.\n\n---\nIzvori:\n- Fajl: 8.32 Uputstvo za pogon PRP 400 kV Čibuk 1, Sekcija: 2.1, Item: 8.32",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor je mnogo duži i detaljniji, ali sadrži istu osnovnu informaciju kao i original – energija se prenosi preko dva transformatora. LLM daje dodatne detalje o transformatorima i izvoru informacija, ali ne menja osnovno značenje."
+  },
+  {
+    "num": "37",
+    "question": "Колика је укупна номинална снага трансформатора преко којих се енергија произведена у ВЕ Чибук 1 пласира у ЕЕС?",
+    "answer": "180 MVA (2*90 МVA)",
+    "llm_answer": "Ukupna nominalna snaga transformatora preko kojih se energija iz VE Čibuk 1 plasira u EES iznosi 180 MVA. Ovo je zbir nominalnih snaga dva transformatora (TR 1 i TR 2), svaki od 90 MVA, kako je navedeno u dokumentu. \n\n---\nIzvori:\n- Fajl: 8.32 Uputstvo za pogon PRP 400 kV Čibuk 1, Sekcija: 2.1, Item: 8.32",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor je detaljniji i pruža kontekst u vezi sa transformatorima i njihovom ulogom u prenosu energije, ali zadržava ključnu informaciju o ukupnoj snazi od 180 MVA i snazi pojedinačnih transformatora od 90 MVA. Zato je ocena visoka, jer su značenja veoma slična."
+  },
+  {
+    "num": "47",
+    "question": "У ком опсегу фреквенције објекат који је прикључен на преносни систем остаје у погону без испада најмање 90 минута?",
+    "answer": "48,5 Hz ≤ f ≤ 49,0 Hz.",
+    "llm_answer": "Objekat koji je priključen na prenosni sistem ostaje u pogonu bez ispada na najmanje 90 minuta u frekvencijskom intervalu **48,5 Hz ≤ f < 49,0 Hz**, što je definisano u dokumentu o tehničkim zahtevima za priključenje na prenosni sistem. \n\n---\nIzvori:\n- Fajl: 3.00 Pravila za priključenje objekata na prenosni sistem, Sekcija: 4.4.1, Item: 3.00",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor sadrži istu frekvencijsku granicu kao originalni odgovor, ali je proširen sa dodatnim informacijama o kontekstu i definiciji iz relevantnog dokumenta. Iako je duži, LLM odgovor u potpunosti obuhvata ključne informacije iz originala."
+  },
+  {
+    "num": "51",
+    "question": "ТС А представља радијалну трафостаницу коју напаја далековод који спаја постројења А и Б и до чијег је испада дошло. Диспечер има податке о реаговању заштите само из постројења Б. Да ли се ово може сматрати довољним за процену врсте квара?",
+    "answer": "Да",
+    "llm_answer": "Da, informacije o reagovanju zaštite iz samo jednog kraja (postrojenje B) mogu se smatrati dovoljnim za procenu vrste kvara u slučaju radijalnog dalekovoda. Prema dokumentu \"2.00 TUEKS-03 TU-EKS-03\", sekcija 5.1.2, u slučaju radijalnih dalekovoda, vrsta i mesto kvara se procenjuje na osnovu podataka o delovanju zaštita sa jednog kraja (a ne sa oba kraja). Ovo je izričito navedeno u tekstu: \"Na osnovu dobijenih podataka o delovanju zaštita sa oba kraja dalekovoda (ili sa jednog kraja, za slučaj radijalnih dalekovoda), procenjuje se vrsta kvara\".\n\n---\n\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.1.2, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "LLM daje potpun odgovor koji potvrđuje originalni odgovor \"Da\" i objašnjava zašto je to tačno, pozivajući se na relevantan dokument i sekciju. Iako je LLM odgovor duži, on sadrži sve ključne informacije iz originala i pruža dodatni kontekst."
+  },
+  {
+    "num": "54",
+    "question": "Дошло је до испада далековода са успешним циклусом АПУ, да ли је квар на далеководу трајног или пролазног карактера?",
+    "answer": "Пролазног",
+    "llm_answer": "Na osnovu dostupnih dokumenta, kada je APU (Automatski Povrat Napajanja) uspešno aktiviran (bar sa jednog kraja dalekovoda), priroda kvara se preliminarno utvrđuje kao prolaznog karaktera. Ovo je izričito navedeno u dokumentu koji navodi da se na osnovu podataka o radu uređaja za APU (da li je APU uspešan bar sa jednog kraja dalekovoda) preliminarno utvrđuje da li je kvar prolaznog ili trajnog karaktera.\n\n---\n\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.1.3, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor je duži i detaljniji, ali u potpunosti pokriva značenje originalnog teksta, potvrđujući da se kvar preliminarno utvrđuje kao prolaznog karaktera nakon uspešne aktivacije APU-a. LLM daje kontekst iz dokumenta, ali suština ostaje ista."
+  },
+  {
+    "num": "58",
+    "question": "Дошло је до испада далековода који спаја постројења А и Б. У постројењу А је реаговала дистантна заштита у првом степену а у постројењу Б дистантна заштита у другом степену. Из ког постројења диспечер треба да стави далековод под напон?",
+    "answer": "Из постројења Б",
+    "llm_answer": "Na osnovu dostupnih dokumenata, u slučaju kvara na dalekovodu koji spaja postrojenja A i B, gde je u postrojenju A reagovala distanta zaštita u prvom stepenu, a u postrojenju B distanta zaštita u drugom stepenu, procedura je sledeća: nakon detaljnog pregleda dalekovodnog polja u postrojenju A, dalekovod AB se pušta u prazan hod u postrojenju B ukoliko se ne uoči uzrok kvara. Ovo je izričito navedeno u dokumentu sekcije 7.1.5, gde se objašnjava da se u slučaju delovanja diferencijalne zaštite sabirnica u postrojenju A i distantne zaštite u drugom stepenu u postrojenju B, kvar nalazi u postrojenju A. Prema tome, dalekovod se uključuje u postrojenju B u prazan hod.\n\n---\n\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 7.1.5, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "LLM одговор је дужи и детаљнији, али садржи све кључне информације из оригиналног текста и правилно објашњава процедуру у случају квара, позивајући се и на изворни документ. Сем што је проширен, LLM одговор не мења суштину оригиналног текста."
+  },
+  {
+    "num": "62",
+    "question": "Дошло је до испада мешовитог вода. Да ли је дозвољена једна проба укључења мешовитог вода?",
+    "answer": "Не",
+    "llm_answer": "Ne, nije dozvoljeno jedno probno uključenje mešovitog voda bez prethodnog bezbednog fizičkog odvajanja nadzemnog i kablovskog dela voda. Prema dokumentu, nakon aktivacije podužne diferencijalne ili distantne zaštite na mešovitom vodu (nadzemni i kablovski vod u nizu), nije dozvoljen ni jedan pokušaj probnog uključenja dok se ne izvrši bezbedno fizičko odvajanje. Probno uključenje je dozvoljeno samo za nadzemnu deonicu, dok za kablovsku deonicu zahteva se prethodno ispitivanje i izjava stručnih službi.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.3.5, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor u potpunosti pokriva značenje originalnog \"Ne\" i detaljno objašnjava razloge zašto nije dozvoljeno probno uključenje mešovitog voda, pozivajući se na relevantan dokument i sekciju. Iako je duži, LLM daje sve ključne informacije iz originala."
+  },
+  {
+    "num": "63",
+    "question": "Када диспечер сме да да други налог за укључење елемента након прве неуспешне пробе?",
+    "answer": "Надлежни диспечер може да изда други налог за укључење далековода, ако је код првог покушаја укључења дошло до поновног испада, у случајевима: ако није успело укључење радијалног правца који напаја више ТС, далековода везаних у “звезду”, далековода на које су прикључене трафостанице „пролазног“ типа са два далеководна поља без уграђених прекидача, далековода који су уведени у објекат без далеководног прекидача. Пре укључења мора се развезати “звезда” или „пролазна“ трафостаница.",
+    "llm_answer": "Dispečer može da izda drugi nalog za uključenje dalekovoda nakon prve neuspešne probe u sledećim slučajevima:  \n- Neuspelo uključenje radijalnog pravca (5.2.10),  \n- Dalekovodi vezani u ' zvezdu ',  \n- Dalekovodi na koje su priključene trafostanice ' prolaznog ' tipa sa dva dalekovodna polja bez ugrađenih prekidača,  \n- Dalekovodi koji su uvedeni u objekat bez dalekovodnog prekidača.  \n\nPre uključenja je potrebno razvezati ' zvezda ' ili ' prolazna ' trafostanica, a moraju se poštovati odredbe iz člana 5.2.5.  \n\n---  \nIzvori:  \n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.4.1, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "Одговор ЛЛМ-а је веома сличан оригиналном тексту, са основном разликом у формату (листа) и додатим референцима на изворе. Садржај је у суштини идентичан и преноси исте информације."
+  },
+  {
+    "num": "67",
+    "question": "Појављује се аларм „Заштита од преоптерећења – први степен НАСТАНАК“. Колико времена има диспечер да изврши растерећење далековода пре него што он испадне из погона?",
+    "answer": "20 минута",
+    "llm_answer": "Dispečer ima 20 minuta da izvrši rasterećenje dalekovoda od trenutka javljanja alarma „Zaštita od preopterećenja – prvi stepen NASTANAK“, pre nego što dalekovod ispadne iz pogođa. Prema dokumentu, nakon 20 sekundi od dostizanja prve stepena zaštite od preopterećenja javlja se alarm, a ukoliko ne dođe do smanjenja struje, isključenje dalekovoda sledi nakon 20 minuta.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.5.1, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor je detaljniji i objašnjava proces koji vodi do 20 minuta, ali sadrži ključnu informaciju iz originala – da je vremenski rok 20 minuta. Zato je ocena visoka, iako je odgovor duži."
+  },
+  {
+    "num": "68",
+    "question": "Дошло је до квара уређаја дистантне заштите на дугом 110 kV далеководу. Шта су поступци диспечера?",
+    "answer": "Надлежни дежурни диспечер треба да: искључи „штићени далековод“ уколико се овим искључењем не ремете услови нормалног рада ЕЕС у изузетним случајевима, након консултација са Сектором за релејну заштиту и локално управљање, остави у погону „штићени далековод“ с тим да се у случају квара рачуна на деловање удаљених резервних заштита у суседним пољима и објектима. У том случају постоји могућност неселективног испада из погона више елемената ЕЕС.",
+    "llm_answer": "Ukoliko dođe do kvara u uređaju dalekovodne zaštite na dugom 110 kV dalekovodu (koji poseduje samo jednu distantnu zaštitu), dispečer je dužan da:\n\n1. **Isključi \"štićeni dalekovod\"** ukoliko se ovim isključenjem ne remete uslovi normalnog rada Električne Energije Sistem (EES).\n2. U izuzetnim slučajevima, nakon konsultacija sa Sektorom za relejnu zaštitu i lokalnim upravljanjem, može ostaviti dalekovod u pogonu, ali u tom slučaju se računa na delovanje udaljenih rezervnih zaštita u susednim poljima i objektima. Pri tome postoji mogućnost neselektivnog ispada iz pogona više elemenata EES.\n\nVažno je napomenuti da se kvar prenosnog puta (npr. optička vlakna u sastavu OPGW) ne smatra kvarom samog uređaja zaštite, ali ovo nije relevantno za ovu situaciju jer je pitanje vezano za kvar uređaja dalekovodne zaštite, a ne prenosnog puta.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.6.1, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "Одговор ЛЛМ-а је веома сличан оригиналном тексту, преформулисан је у мало читљивијем облику са нумерисаним тачкама, али садржи све кључне информације и у суштини преноси исту поруку. Додатак о оптичким влакнима је релевантан за контекст, али не утиче на главну сличност."
+  },
+  {
+    "num": "69",
+    "question": "Да ли се прекид оптичких влакана у ОПГW ужету сматра кваром уређаја подужне диференцијалне заштите? Да ли диспечер треба да искључи далековод уколико дође до прекида оптичких влакана на ОПГW ужету уколико далековод има резервну дистантну заштиту у истом уређају у којем се налази и подужна диференцијална заштита?",
+    "answer": "Не сматра се кваром подужне диференцијалне заштите. Не треба да искључи далековод.",
+    "llm_answer": "Ne, прекид оптичких влакана у ОПГW ужету **се не сматра кваром уређаја подужне диференцијалне заштите**. Според Напомене у документу (Sekcija 5.6.2, item 2.00), квар преносног пута (најчешће оптички влакна у саставу ОПГW) за потребе подужне диференцијалне заштите **није квар самог уређаја**. У том случају, диференцијална заштита се аутоматски блокира (не ради), али остаје у функцији дистантна заштита. \n\nДиспечер **не треба да искључи далековод** уколико дође до прекида оптичких влакана, већ се, уз сагласност Сектора за релејну заштиту и локално упраљање, далековод **остаје у погону са дистантном заштитом**. Дистантна заштита у функцији се користи, иако преносни пут (оптичка влакна) није функционалан, што значи да се не подржава комуникациона шема за истовремено искључење прекидача на оба краја далековода. Повреда преносног пута захтева хитну испитивања и поправку.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 5.6.2, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "LLM одговор је дужи и детаљнији, али у потпуности садржи кључне информације из оригиналног текста и пружа додатни контекст и објашњење у вези са прекидом оптичких влакана и функционисањем заштите. Он у суштини потврђује да се прекид оптичких влакана не сматра кваром уређаја и да се далековод не треба искључивати."
+  },
+  {
+    "num": "71",
+    "question": "Које су основне заштите на трансформаторима?",
+    "answer": "диференцијална, бухолц, бухолц регулационе склопке, реле надпритиска, ограничена земљоспојнa (RЕF) и кућишна заштита",
+    "llm_answer": "Osnovne zaštite na transformatorima su: diferencijalna zaštita, buholc zaštita, zaštita regulacionih sklopki, rele nadpritiska, ograničena zemljospojna (REF) i kućišna zaštita.\n\n---\n\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 6.1.1, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "LLM је проширио оригинални одговор у читљивији текст, али је задржао све кључне информације и термине из оригиналног одговора. Разлика је само у граматичкој структури и додатим речима за повезивање."
+  },
+  {
+    "num": "72",
+    "question": "Да ли је дозвољено укључење трансформатора након реаговања основних заштита?",
+    "answer": "Не",
+    "llm_answer": "Uključenje transformatora nakon reagovanja osnovnih zaštita je dozvoljeno **samo u slučaju** da je izazvao slučajna greška ili prolazni kvar u sekundarnim kolima prilikom radova u transformatorskoj stanici, prema postupku iz tačke 6.5.4. U svim ostalim slučajevima, uključivanje transformatora je zabranjeno, kao što je navedeno u tački 6.2.1, gde se navodi da se nakon delovanja osnovnih zaštita zabranjuje stavljanje transformatora pod napon bez izvršenja potrebnih provera i ispitivanja.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 6.5.4, Item: 2.00\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 6.2.1, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor je detaljniji i objašnjava uslove za ponovno uključenje transformatora nakon isključenja zaštite, pozivajući se na relevantne tačke iz dokumenta. Iako duži, sadrži sve ključne informacije iz originalnog odgovora i pruža kontekst."
+  },
+  {
+    "num": "74",
+    "question": "Који прекидач искључује заштита од преоптерећења на трансформатору?",
+    "answer": "Заштита од преоптерећења трансформатора по правилу искључује само ниженапонску страну.",
+    "llm_answer": "Zaštita od preopterećenja transformatora po pravilu isključuje samo niženaponsku stranu. Ovo znači da se prekidac na niženaponskoj strani aktivira u slučaju delovanja zaštite od preopterećenja.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 6.6.2, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "LLM одговор је у суштини исти као и оригинални, али додаје објашњење шта то значи у пракси. Иако је дужи, не мења основно значење и садржи све кључне информације."
+  },
+  {
+    "num": "75",
+    "question": "Уколико трансформатор има само једну диференцијалну заштиту и установи се њен квар, да ли трансформатор може да остане у погону?",
+    "answer": "Не",
+    "llm_answer": "Ne, transformator ne može da ostane u pogonu ukoliko ima samo jednu diferencijalnu zaštitu i dođe do njenog kvara. Prema dokumentu TUEKS-03 TU-EKS-03, sekcija 6.7.2, item 2.00, \"Rad transformatora bez diferencijalne zaštite nije dozvoljen, tako da, ako transformator ima samo jednu diferencijalnu zaštitu, nadležni dispečer hitno vrši potrebnu preraspodelu opterećenja i pristupa isključenju transformatora iz pogona\".\n\n---\n\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 6.7.2, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor u potpunosti potvrđuje originalni odgovor \"Ne\" i detaljno objašnjava zašto je to slučaj, pozivajući se na relevantan dokument i sekciju. LLM daje kontekst i objašnjenje, ali zadržava istu osnovnu poruku."
+  },
+  {
+    "num": "79",
+    "question": "Дошло је до потпуног нестанка командног напона у постројењу. Који су поступци диспечера након добијања ове информације?",
+    "answer": "Надлежни диспечер даје налог за искључење трансформаторских поља, и са стручним службама разматра потребу за искључењем прикључних далековода.",
+    "llm_answer": "Nakon dobijanja informacije o potpunom nestanku komandnog napona u postrojenju, dispečer izvodi sledeće postupke:  \n1. Daje nalog za isključenje transformatorskih polja.  \n2. Sa stručnim službama razmatra potrebu za isključenjem priključnih dalekovoda.  \n\n---\n\nIzvori:  \n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 10.5.2, Item: 2.00",
+    "score": 0.9,
+    "llm_thinking": "LLM одговор је дужи и додаје уводну реченицу, али у суштини преноси исту информацију као и оригинални текст, наводећи поступак диспечера у вези са искључењем трансформаторских поља и прикључних далековода."
+  },
+  {
+    "num": "82",
+    "question": "Дошло је до заглаве прекидача у ТС Обреновац на 400 kV далеководу број 412. Пребаци далековод на помоћни систем сабирница без манипулација прекидачем који је заглављен.",
+    "answer": "1. Укључити растављаче помоћног спојног поља 400 kV и то растављач ГС1А и растављач помоћног СС 400 kV. 2.\tУкључити прекидач помоћног спојног поља 400 kV. 3.\tУтврдити присуство напона на помоћном СС 400 kV. 4.\tУкључити растављач помоћног СС 400 kV у пољу далековода 412. 5.\tПребацити заштиту далековода 412 са сопственог прекидача у ДВП у ТС Обреновац на прекидач помоћног спојног поља 400 kV. 6.\tИскључити прекидач далековода 412 у ДВП 400 kV у ТС Обреновац. 7.\tИскључити излазни и сабирнички растављач ГС1Б на који је био прикључен далековод 412.",
+    "llm_answer": "Da bi se prebacio далековод 412 na помоћни систем сабирница без манипулација прекидачем који је заглављен, неопходно је извршити следеће манипулације:\n\n1. Укључити растављаче помоћног спојног поља (растављач СС на који је прикључен далековод и растављач помоћног СС).  \n2. Укључити прекидач помоћног спојног поља и проверити присуство напона на помоћном систему сабирница.  \n3. Укључити растављач помоћног СС у пољу далековода.  \n4. Пребацити заштиту далековода са собственог прекидача на прекидач помоћног спојног поља.  \n5. Исказити прекидач далековода (заглављени прекидач не мора бити манипулисан, јер се заштита већ пребаци на помоћни прекидач).  \n6. Исказити излазни и сабирнички растављач СС на који је био прикључен далековод.  \n\n---\n\nIzvori:  \n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.5.6, Item: 2.01",
+    "score": 0.9,
+    "llm_thinking": "LLM одговор је дужи и мало преформулисан, али садржи све кључне информације из оригиналног текста и прати исти редослед корака. Разлика је у стилу и неким синонимима, али су значења идентична."
+  },
+  {
+    "num": "83",
+    "question": "Да ли руковалац сме без налога надлежног диспечера да врши манипулације у постројењу?",
+    "answer": "Не",
+    "llm_answer": "Rukovalac ne sme da vrši manipulacije u postrojenju bez naloga nadležnog dispečera, osim u slučaju očiglednog havarijskog stanja (požar, ugroženost ljudi ili opreme) ili kada je u skladu sa Planom uspostavljanja EES. U svim ostalim slučajevima, manipulacije se izvršavaju isključivo po nalogu dispečera. U slučaju havarijskog stanja, rukovalac može samostalno izvršiti manipulacije bez prethodnog obaveštenja dispečera, ali mora ga naknadno obavestiti.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 4.2, Item: 2.01\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.3.10, Item: 2.01",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor je duži i detaljniji, ali u potpunosti pokriva ključne informacije iz originalnog teksta o manipulacijama u postrojenju i obavezi obaveštavanja dispečera, uključujući i izuzetke u hitnim slučajevima."
+  },
+  {
+    "num": "84",
+    "question": "Са које стране се прво искључује прекидач приликом искључења трансформатора?",
+    "answer": "Са ниженапонске стране",
+    "llm_answer": "Prvo se isključuje prekidač sa niženaponske strane transformatora. Prema dokumentu \"2.01 TUEKS-01 TU-EKS-01\", sekcija 6.5.3, item 2.01, redosled manipulacija prilikom isključenja transformatora je sledeći:  \n- Isključiti prekidač sa niženaponske strane transformatora i utvrditi da transformator nije opterećen.  \n- Isključiti prekidač sa višenaponske strane transformatora i utvrditi da je transformator bez napona.  \n\nOvo je standardni postupak za isključenje transformatora, što se potvrđuje u dokumentu.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.5.3, Item: 2.01",
+    "score": 0.9,
+    "llm_thinking": "LLM daje detaljan odgovor koji objašnjava postupak isključenja transformatora sa niženaponske strane, uz pozivanje na relevantan dokument. Iako je duži od originala, sadrži sve ključne informacije i pruža kontekst, čineći ga vrlo sličnim po značenju."
+  },
+  {
+    "num": "85",
+    "question": "У постројењу А је искључен прекидач на далеководу који иде од постројења А до постројења Б, у постројењу Б је укључен прекидач. Да ли је дозвољено искључити сабирнички и излазни растављач у постројењу Б?",
+    "answer": "Не",
+    "llm_answer": "Na osnovu dostupnih dokumenata, nije dozvoljeno isključiti sabirnički i izlazni rastavljač u postranju B ako je prekidač na tom kraju (B) još uključen. Prema pravilima iz dokumenta \"2.01 TUEKS-01 TU-EKS-01\", sekcija 6.5.1, item 2.01, postupak isključivanja dalekovoda uključuje sledeće korake na drugom kraju (postranju B):\n\n1. Utvrditi da dalekovod nije opterećen.\n2. Isključiti prekidač dalekovoda.\n3. Utvrditi da dalekovod nije pod naponom.\n4. Isključiti izlazni i sabirnički rastavljač dalekovoda.\n\nU pitanju je dat slučaj gde je prekidač na postranju B uključen (neisključen), što znači da se korak 2 (isključivanje prekidača) nije izvršio. Prema dokumentu, isključivanje sabirničkog i izlaznog rastavljača (korak 4) je moguće tek nakon što je prekidač isključen i potvrđeno da dalekovod nije pod naponom. Stoga, isključivanje sabirničkog i izlaznog rastavljača na postranju B bez prethodnog isključivanja prekidača nije dozvoljeno.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.5.1, Item: 2.01",
+    "score": 0.9,
+    "llm_thinking": "Odgovor LLM-a detaljno objašnjava zašto isključivanje sabirničkog i izlaznog rastavljača nije dozvoljeno ako je prekidač uključen, pozivajući se na relevantni dokument i korake procedure. Odgovor je duži od originalnog, ali sadrži sve ključne informacije i pruža potpunu analizu."
+  },
+  {
+    "num": "86",
+    "question": "У постројењу А је искључен прекидач на далеководу који иде од постројења А до постројења Б, у постројењу Б је укључен прекидач. Да ли је дозвољено искључити сабирнички и излазни растављач у постројењу А?",
+    "answer": "Не",
+    "llm_answer": "Na osnovu dokumenta \"2.01 TUEKS-01 TU-EKS-01\", sekcija 6.5.1, izvršavanje manipulacija na dalekovodu zahteva da se pre isključivanja izlaznog i sabirničkog rastavljača potvrdi da dalekovod nije pod naponom. U datom scenariju, prekidač na dalekovodu u postronjenju B je uključen, što znači da je dalekovod pod naponom (energizovan sa strane B). Prema dokumentu, isključivanje izlaznog i sabirničkog rastavljača u postronjenju A nije dozvoljeno dok se ne potvrdi da dalekovod nije pod naponom. Ovo zahteva da se u postronjenju B isključi prekidač, potvrdi da dalekovod nije pod naponom, i tek nakon toga izvrši isključivanje rastavljača. Pošto je prekidač u postronjenju B uključen, dalekovod je pod naponom, pa isključivanje rastavljača u postronjenju A nije dozvoljeno.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.5.1, Item: 2.01",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor je detaljniji i objašnjava postupak isključivanja rastavljača u skladu sa dokumentom, ali u suštini prenosi istu informaciju kao i original – da se rastavljač ne sme isključiti dok je dalekovod pod naponom. Odgovor je logičan i potkrepljen izvorom."
+  },
+  {
+    "num": "87",
+    "question": "Руковалац је грешком искључио прекидач погрешног далековода приликом манипулација. Да ли руковалац сме сам да поново укључи прекидач без налога надлежног диспечера?",
+    "answer": "Не",
+    "llm_answer": "Ne, руковалац ne sme sam da ponovo укључи прекидач bez налога надлежног диспечера. Сагласно документу \"2.01 TUEKS-01 TU-EKS-01\", секција 4.2, став 2 (Item 2.01), руковалац је одговоран да изврши манипулације **исключиво по налогу диспечера** из надлежног центра управљања EMS AD. Изузетак важи само у случају оčигледног хаваријског стања (нпр. пожар), што није примењиво на случај грешке при манипулацијама. \n\nДокументи нису навели да грешка при манипулацијама представља хаваријско стање које би оправдало самостално укључење прекидача без налога диспечера. Стога, руковалац мора да обавести надлежног диспечера и чека налог пре укључења.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 4.2, Item: 2.01",
+    "score": 0.9,
+    "llm_thinking": "LLM одговор је дужи и детаљнији, али у потпуности садржи кључне информације из оригиналног текста и правилно објашњава зашто руковалац не сме самостално укључити прекидач. Он се ослања на наведен документ и правилник, што потврђује његову релевантност и тачност."
+  },
+  {
+    "num": "89",
+    "question": "Које врсте манипулација постоје?",
+    "answer": "Манипулације за потребе извођења радова Манипулације за мењање топологије мреже Манипулације приликом поремећаја у систему",
+    "llm_answer": "Na osnovu dostupnih dokumenata, postoje tri vrste manipulacija u prenosnom sistemu električne energije:\n\n1. **Manipulacije za potrebe izvođenja radova** – izvode se prilikom planiranih radova i uključuju isključivanje elemenata EES za osnovne mere obezbeđivanja mesta rada, isključivanje bez osnovnih mera, radove u blizini elemenata EES i uključivanje nakon završetka radova.\n\n2. **Manipulacije za menjanje topologije mreže** – izvode se radi upravljanja tokovima aktivnih i reaktivnih snaga, usaglašavanja sa uklopnim stanjima i postizanja uslova normalnog/sigurnog rada prenosne mreže.\n\n3. **Manipulacije prilikom poremećaja u sistemu** – izvode se prilikom uključivanja elemenata nakon ispada, saniranja poremećaja i sprovođenja Planova odbrane EES (Plan uspostavljanja EES, Plan ograničenja isporuke, Plan podfrekventne zaštite).\n\n---\n\nIzvori:  \n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.1.1, Item: 2.01  \n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.1.2, Item: 2.01  \n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.1.3, Item: 2.01",
+    "score": 0.9,
+    "llm_thinking": "ЛЛМ одговор је значајно дужи и детаљнији, али у потпуности покрива информације садржане у оригиналном тексту и пружа додатне информације о свакој манипулацији, што га чини веома сличном по значењу."
+  },
+  {
+    "num": "90",
+    "question": "Да ли диспечер на обуци може да издаје налоге за манипулације?",
+    "answer": "Може”",
+    "llm_answer": "Ne, dispečer na obuci ne može izdati naloge za manipulacije. Prema dokumentu \"2.01 TUEKS-01 TU-EKS-01\", sekcija 4.1, item 2.01, dispečer je odgovoran za \"postupke lica na obuci za dispečera\", što znači da dispečer (osoba sa odgovarajućom kvalifikacijom) nadzire i odgovara za rad osoba na obuci, ali nije dopušteno da osobe na obuci same izdaju naloge. Izravni izdavanje naloga je isključiva dužnost kvalifikovanog dispečera, kao što je navedeno u odgovornostima: \"da precizno izda odgovarajuće naloge\".\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 4.1, Item: 2.01",
+    "score": 0.9,
+    "llm_thinking": "LLM odgovor je detaljniji i objašnjava zašto dispečer na obuci ne može izdavati naloge, pozivajući se na konkretan dokument i sekciju. Ipak, prenosi istu osnovnu informaciju kao i originalni odgovor – da nije dozvoljeno."
+  },
+  {
+    "num": "97",
+    "question": "За случај спровођења манипулација у трансформаторском пољу, које информације за назив елемента ЕЕС-а манипулација мора да садржи?",
+    "answer": "Број трансформатора и напонски ниво на коме се врши манипулација.",
+    "llm_answer": "Za slučaj sprowadnja mанипулација у трансформаторском пољу, назив елемента ЕЕС-а манипулација мора да садржи **број трансформатора и напонски ниво на коме се врши манипулација**. Ово је наведено у документима који детаљно описују захтеве за називе елемената у зависности од врсте поља (трансформаторско, дaleководно, спојно).\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.3.3, Item: 2.01\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.4.2, Item: 2.01",
+    "score": 0.9,
+    "llm_thinking": "ЛЛМ одговор је дужи, али у потпуности садржи информације из оригиналног текста и пружа додатни контекст у виду референци на документе. Основни смисао је идентичан."
+  },
+  {
+    "num": "99",
+    "question": "Диспечер је добио информацију да је сабирнички растављач у квару и да уколико се буде манипулисало тим растављачем постоји могућност да ће он изазвати хаварију у постројењу. Диспечер издаје руковаоцу налог да искључи растављач који је у квару. Да ли руковалац сме да одбије извршење овог налога?",
+    "answer": "Сме",
+    "llm_answer": "Da, руковалац може да одбије извршење налога, ако сматра да ће тиме бити угрожена опрема или личност, при чему мора да образложи одлуку. Ово је у складу са чланом 6.3.11 у документу који дозвољава руковалацу да одбије извршење налога за манипулацију у случају када постоји ризик за опрему или личност, са обавезном објашњењем.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.3.11, Item: 2.01",
+    "score": 0.9,
+    "llm_thinking": "Одговор ЛЛМ-а је дужи, али у потпуности садржи кључне информације из оригиналног текста и детаљно објашњава право руковалца да одбије налог у случају опасности, уз позивање на релевантни члан документа."
+  },
+  {
+    "num": "7",
+    "question": "Написати нормално уклопно стање на 400 kV напону за ТС Јагодина 4.",
+    "answer": "(или 2.) систем сабирница: ДВ 423/1 и ТР1 (или ТР2); (или 1.) систем сабирница: ДВ 423/2 и ТР2 (или ТР1); спојно поље укључено; активна је диференцијална заштита сабирница.",
+    "llm_answer": "NORMALNO UKLOPNO STANjE TS JAGODINA 4  \nPostrojenje 400 kV:  \n- 1. (ili 2.) sistem sabirnica: DV 423/1 i TR1 (ili TR2);  \n- 2. (ili 1.) sistem sabirnica: DV 423/2 i TR2 (ili TR1);  \n- spojno polje uključeno;  \n- aktivna je diferencijalna zaštita sabirnica.  \n\n---  \nIzvori:  \n- Fajl: 8.14 Uputstvo za pogon TS 400/110 kV Jagodina 4, Sekcija: 5.1, Item: 8.14",
+    "score": 0.95,
+    "llm_thinking": "ЉМЛ одговор је веома сличан оригиналном тексту, садржи све кључне информације и само је додао уводни део са информацијама о трансформаторској станици. Сем тога, формат је идентичан."
+  },
+  {
+    "num": "9",
+    "question": "Написати нормално уклопно стање на 110 kV напону за ТС Београд 20.",
+    "answer": "(или 2.) систем сабирница: ДВ 129А/1, ДВ 129А/2, МВ 1250, ДВ 1240А, МВ 1288 и ТР1 (или ТР2); (или 1.)  систем сабирница:  ДВ 129Б/1, ДВ 129Б/2, МВ 1251, ДВ 1240Б, и ТР2 (или ТР1); спојно поље укључено; активна је диференцијална заштита сабирница.",
+    "llm_answer": "Normalno uklopno stanje TS Beograd 20 na 110 kV je definisano kao sledi:\n\n- 1. (ili 2.) sistem sabirnica: DV 129A/1, DV 129A/2, MV 1250, DV 1240A, MV 1288 i TR1 (ili TR2);\n- 2. (ili 1.) sistem sabirnica: DV 129B/1, DV 129B/2, MV 1251, DV 1240B, i TR2 (ili TR1);\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica.\n\n---\n\nIzvori:\n- Fajl: 8.03 Uputstvo za pogon TS 400/110 kV Beograd 20, Sekcija: 5.2, Item: 8.03",
+    "score": 0.95,
+    "llm_thinking": "ЛЛМ је практично идентичан оригиналном тексту, са додатком уводне фразе која указује на контекст (нормално укључно стање ТС Београд 20). Сва кључна информација је пренета тачно и у потпуности."
+  },
+  {
+    "num": "15",
+    "question": "Навести све трансформаторе који се налазе у ТС Краљево 3, као и њихове номиналне снаге. Који од ових трансформатора има могућност регулације напона под оптерећењем?",
+    "answer": "ТР1 - 220/110 kV од 150 MVA (могућа регулација напона под оптерећењем); ТР2 - 220/110 kV од 150 MVA (могућа регулација напона под оптерећењем); ТР4 - 400/220 kV од 400 MVA (могућа регулација напона под оптерећењем).",
+    "llm_answer": "U TS Kraljevo 3 se nalaze sledeći transformatori sa njihovim nominalnim snagama:\n\n- **TR1**: 220/110 kV, 150 MVA (moguća regulacija napona pod opterećenjem)  \n- **TR2**: 220/110 kV, 150 MVA (moguća regulacija napona pod opterećenjem)  \n- **TR4**: 400/220 kV, 400 MVA (moguća regulacija napona pod opterećenjem)  \n\nSvi navedeni transformatori (TR1, TR2 i TR4) imaju mogućnost regulacije napona pod opterećenjem.\n\n---\nIzvori:\n- Fajl: 8.17 Uputstvo za pogon TS 220/110 kV Kraljevo 3, Sekcija: 2.1, Item: 8.17",
+    "score": 0.95,
+    "llm_thinking": "Одговор ЛЛМ-а је веома сличан оригиналном тексту, пружајући исте информације о трансформаторима и њиховим карактеристикама, уз додату референцу на извор документа. ЛЛМ је додао уводну реченицу и поновио информацију о регулацији напона, али то не смањује семантичку сличност."
+  },
+  {
+    "num": "29",
+    "question": "Због чега су сабирнице 110 kV у ТС Ниш 13 раздвојене преко подужног растављача?",
+    "answer": "Сабирнице 110 kV у ТС Ниш 13 су раздвојене подужним растављачем због непостојања дистантне заштите у ДВП 1187А и ДВП 1187Б у ТС Ниш 13. У случају уградње подужне диференцијалне или дистантне заштите на ДВ 1187А и ДВ 1187Б у ТС Ниш 13, укључити подужни растављач у сабирницама.",
+    "llm_answer": "Sabirnice 110 kV u TS Niš 13 su razdvojene podužnim rastavljačem zbog nepostojanja distantne zaštite u DVP 1187A i DVP 1187B u TS Niš 13. Ovo je izričito navedeno u eksploatacionim uslovima dokumenta, a u slučaju ugradnje podužne diferencijalne ili distantne zaštite na DV 1187A i DV 1187B, podužni rastavljač bi trebalo uključiti u sabirnicama.\n\n---\nIzvori:\n- Fajl: 8.20 Uputstvo za pogon TS 400/220/110 kV Niš 2, Sekcija: 2.13, Item: 8.20",
+    "score": 0.95,
+    "llm_thinking": "LLM одговор је веома сличан оригиналном, са додатним информацијама о томе где се налазе релевантни подаци у документу. Садржај је у суштини идентичан, што оправдава високу оцену."
+  },
+  {
+    "num": "49",
+    "question": "Навести планове одбране преносног система.",
+    "answer": "План подфреквентне заштите; План надфреквентне заштите; Планове ограничења испоруке електричне енергије; План заштите преносног система од напонског слома.",
+    "llm_answer": "Planovi odbrane prenosnog sistema obuhvataju:\n- Plan podfrekventne zaštite;\n- Plan nadfrekventne zaštite;\n- Planove ograničenja isporuke električne energije;\n- Plan zaštite prenosnog sistema od naponskog sloma.\n\n---\n\nIzvori:\n- Fajl: 3.01 Pravila o radu prenosnog sistema, Sekcija: 6.3.1.3, Item: 3.01",
+    "score": 0.95,
+    "llm_thinking": "LLM је проширио оригинални текст у читљивији формат листе, али је у потпуности задржао све кључне информације и значење оригиналног текста. Разлика је само у структури, а не у садржају."
+  },
+  {
+    "num": "76",
+    "question": "Да ли диспечер сме да блокира заштиту од преоптерећења на трансформаторима?",
+    "answer": "Надлежни диспечер може дати налог за блокаду првог степена заштите од преоптерећења трансформатора (двостепена прекострујна заштита) ако мерења струје и температуре уља указују на лажно деловање. Блокада другог степена заштите од преоптерећења трансформатора није дозвољена.",
+    "llm_answer": "Dispečer može da blokira prvi stepen zaštite od preopterećenja transformatora, ali samo u slučaju da merenja struje i temperature ulja ukazuju na lažno delovanje. Blokiranje drugog stepena zaštite od preopterećenja transformatora nije dozvoljeno.\n\n---\nIzvori:\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 6.8.1, Item: 2.00\n- Fajl: 2.00 TUEKS-03 TU-EKS-03, Sekcija: 6.8.2, Item: 2.00",
+    "score": 0.95,
+    "llm_thinking": "LLM одговор је веома сличан оригиналном тексту, са минималним променама у формулацији. Садржај и значење су идентични, што указује на високу семантичку сличност."
+  },
+  {
+    "num": "93",
+    "question": "Са којих места се може командовати расклопном опремом у постројењу?",
+    "answer": "• SCADA систем, • командна табла на ТС/РП/ПРП, • управљачка јединица поља у релејним кућицама, • РУП – резервни управљачки панел у релејним кућицама, • командни орман у пољу, • из погонског механизма.",
+    "llm_answer": "Rasklopnom opremom se može komandovati sa sledećih mesta:  \n- SCADA sistem,  \n- komandna tabla na TS/RP/PRP,  \n- upravljačka jedinica polja u relejnim kućicama,  \n- RUP - rezervni upravljački panel u relejnim kućicama,  \n- komandni orman u polju,  \n- iz pogonskog mehanizma.  \n\nIzvori:  \n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 6.7.1, Item: 2.01",
+    "score": 0.95,
+    "llm_thinking": "LLM је додао уводну реченицу која објашњава о чему се ради, али је суштински садржај идентичан оригиналном тексту – наведене су исте локације за управљање опремом. Додатак извора не утиче на семантичку сличност."
+  },
+  {
+    "num": "22",
+    "question": "Како се врши напајање сопствене потрошње ТС Зрењанин 2?",
+    "answer": "Напајање сопствене потрошње ТС Зрењанин 2 врши се са терцијера трансформатора ТР1 или ТР2.",
+    "llm_answer": "Napajanje sopstvene potrošnje TS Zrenjanin 2 vrši se sa tercijera transformatora TR1 ili TR2. \n\n---\nIzvori:\n- Fajl: 8.13 Uputstvo za pogon TS 220/110 kV Zrenjanin 2, Sekcija: 2.7, Item: 8.13",
+    "score": 1.0,
+    "llm_thinking": "Одговор ЛЛМ-а је идентичан оригиналном тексту, што значи да су семантички идентични и преносе исту информацију. Нема разлике у значењу или садржају."
+  },
+  {
+    "num": "38",
+    "question": "Да ли је могуће да се са електране ВЕ Чибук 1 даљински командује 400 kV прекидачима од TR1 и TR2?",
+    "answer": "Не",
+    "llm_answer": "Ne, nije moguće da se sa elektrane VE Čibuk 1 dalekovodno upravljaju 400 kV prekidaci od TR1 i TR2. Ovo je izričito navedeno u dokumentu u odjeljku \"EKSPLOATACIONI USLOVI\" koji navodi da manipulacije prekidačima 400 kV od TR1 i TR2 iz VE Čibuk 1 nisu dozvoljene.\n\n---\nIzvori:\n- Fajl: 8.32 Uputstvo za pogon PRP 400 kV Čibuk 1, Sekcija: 2.4, Item: 8.32",
+    "score": 1.0,
+    "llm_thinking": "Odgovor LLM-a u potpunosti potvrđuje originalni odgovor \"Ne\" i daje detaljno objašnjenje zašto je to slučaj, pozivajući se na relevantan dokument i sekciju. LLM daje kontekst i dokaz za originalni odgovor."
+  },
+  {
+    "num": "45",
+    "question": "Колико времена најмање мора да остане објекат који је прикључен на преносни систем у случају пада напона на вредност једнаку 0 V услед појаве симетричних и несимеричних кварова?",
+    "answer": "\"0.15 секунди.\"",
+    "llm_answer": "Na osnovu dostupnih dokumenata, u slučaju padanja napona na vrednost 0 V usled pojave simetričnih i nesimetričnih kvarova, objekat koji je priključen na prenosni sistem mora ostati u pogonu najmanje **0,15 sekunde**. Ovo je izričito navedeno u tački 4.3.2 dokumenta \"3.00 Pravila za priključenje objekata na prenosni sistem\".\n\n---\nIzvori:\n- Fajl: 3.00 Pravila za priključenje objekata na prenosni sistem, Sekcija: 4.3.2, Item: 3.00",
+    "score": 1.0,
+    "llm_thinking": "LLM odgovor potvrđuje originalnu vrednost od 0.15 sekundi i pruža kontekst iz relevantnog dokumenta, čime se u potpunosti slaže sa originalnom informacijom. Odgovor je detaljniji, ali sadrži istu ključnu informaciju."
+  },
+  {
+    "num": "88",
+    "question": "Који елемент служи да видно одвоји неки елемент од другог који је под напоном?",
+    "answer": "Растављач",
+    "llm_answer": "Element koji služi da vidno odvoji jedan element od drugog koji je pod naponom je **rastavljač**. Ovaj element se koristi za osiguranje vidljivog prekida u električnom krugu, što omogućava sigurno odvajanje elemenata pod naponom. Prema definicijama u dokumentu, \"dalekovod/kabl rastavljen\" označava slučaj kada su rastavljači na oba kraja isključeni (u pripadajućim poljima), što ukazuje da rastavljač predstavlja element koji omogućava vidljivo odvajanje.\n\n---\nIzvori:\n- Fajl: 2.01 TUEKS-01 TU-EKS-01, Sekcija: 3.2, Item: 2.01",
+    "score": 1.0,
+    "llm_thinking": "LLM одговор у потпуности одговара оригиналном термину и даје детаљну дефиницију и објашњење шта је растављач, уз позивање на изворни документ. Садржај је идентичан и прецизно објашњава значење термина."
+  }
+]

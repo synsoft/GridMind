@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Large model files (these are huge and should be excluded)
+chunks/finetune_rerank/
+
+# Index files (can be regenerated)
+chunks/index/*.bin
+chunks/index/*.json
+
+# Temporary files
+*.tmp
+*.temp
+.cache/

@@ -1,0 +1,372 @@
+{
+  "objects": [
+    {
+      "code": "BB",
+      "name": "TS Bajina Bašta",
+      "name_cyrillic": "ТС Бајина Башта",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "35kV"],
+      "region": "RDC Valjevo",
+      "connected_to": ["SM2", "VA3", "OBR", "BG3", "PO", "BI", "PLJE2"],
+      "generators": ["HE Bajina Basta", "RHE Bajina Basta"]
+    },
+    {
+      "code": "BG3",
+      "name": "TS Beograd 3",
+      "name_cyrillic": "ТС Београд 3",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "BG5",
+      "name": "TS Beograd 5",
+      "name_cyrillic": "ТС Београд 5",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV", "35kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "BG8",
+      "name": "TS Beograd 8",
+      "name_cyrillic": "ТС Београд 8",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "220kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "BG20",
+      "name": "TS Beograd 20",
+      "name_cyrillic": "ТС Београд 20",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "110kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "VA3",
+      "name": "TS Valjevo 3",
+      "name_cyrillic": "ТС Ваљево 3",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV"],
+      "region": "RDC Valjevo"
+    },
+    {
+      "code": "VR4",
+      "name": "TS Vranje 4",
+      "name_cyrillic": "ТС Врање 4",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "110kV"],
+      "region": "RDC Nis"
+    },
+    {
+      "code": "DRM",
+      "name": "RP Drmno",
+      "name_cyrillic": "РП Дрмно",
+      "type": "razvodno_postrojenje",
+      "voltage_levels": ["400kV", "110kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "DJE1",
+      "name": "RP Đerdap 1",
+      "name_cyrillic": "РП Ђердап 1",
+      "type": "razvodno_postrojenje",
+      "voltage_levels": ["400kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "DJE2",
+      "name": "RP Đerdap 2",
+      "name_cyrillic": "РП Ђердап 2",
+      "type": "razvodno_postrojenje",
+      "voltage_levels": ["110kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "ZR2",
+      "name": "TS Zrenjanin 2",
+      "name_cyrillic": "ТС Зрењанин 2",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV"],
+      "region": "RDC Novi Sad"
+    },
+    {
+      "code": "JA4",
+      "name": "TS Jagodina 4",
+      "name_cyrillic": "ТС Јагодина 4",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "110kV"],
+      "region": "RDC Nis"
+    },
+    {
+      "code": "KG2",
+      "name": "TS Kragujevac 2",
+      "name_cyrillic": "ТС Крагујевац 2",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "110kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "KR1",
+      "name": "TS Kruševac 1",
+      "name_cyrillic": "ТС Крушевац 1",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV", "35kV"],
+      "region": "RDC Nis"
+    },
+    {
+      "code": "KR3",
+      "name": "TS Kraljevo 3",
+      "name_cyrillic": "ТС Краљево 3",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV"],
+      "region": "RDC Nis"
+    },
+    {
+      "code": "LE2",
+      "name": "TS Leskovac 2",
+      "name_cyrillic": "ТС Лесковац 2",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "220kV", "110kV"],
+      "region": "RDC Nis"
+    },
+    {
+      "code": "ML",
+      "name": "RP Mladost",
+      "name_cyrillic": "РП Младост",
+      "type": "razvodno_postrojenje",
+      "voltage_levels": ["400kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "NI2",
+      "name": "TS Niš 2",
+      "name_cyrillic": "ТС Ниш 2",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "220kV", "110kV"],
+      "region": "RDC Nis",
+      "connected_to": ["BO2", "KOSB", "JA4", "LE2", "KR1"]
+    },
+    {
+      "code": "NS3",
+      "name": "TS Novi Sad 3",
+      "name_cyrillic": "ТС Нови Сад 3",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "220kV", "110kV"],
+      "region": "RDC Novi Sad"
+    },
+    {
+      "code": "OBR",
+      "name": "TS Obrenovac",
+      "name_cyrillic": "ТС Обреновац",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "220kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "PA2",
+      "name": "TS Pančevo 2",
+      "name_cyrillic": "ТС Панчево 2",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "220kV", "110kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "PO",
+      "name": "TS Požega",
+      "name_cyrillic": "ТС Пожега",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV", "35kV"],
+      "region": "RDC Valjevo"
+    },
+    {
+      "code": "SD3",
+      "name": "TS Smederevo 3",
+      "name_cyrillic": "ТС Смедерево 3",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "SM2",
+      "name": "TS Sremska Mitrovica 2",
+      "name_cyrillic": "ТС Сремска Митровица 2",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "220kV", "110kV"],
+      "region": "RDC Novi Sad"
+    },
+    {
+      "code": "SO3",
+      "name": "TS Sombor 3",
+      "name_cyrillic": "ТС Сомбор 3",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "110kV"],
+      "region": "RDC Novi Sad"
+    },
+    {
+      "code": "SRB",
+      "name": "TS Srbobran",
+      "name_cyrillic": "ТС Србобран",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV", "35kV"],
+      "region": "RDC Novi Sad"
+    },
+    {
+      "code": "SU3",
+      "name": "TS Subotica 3",
+      "name_cyrillic": "ТС Суботица 3",
+      "type": "trafostanica",
+      "voltage_levels": ["400kV", "110kV"],
+      "region": "RDC Novi Sad"
+    },
+    {
+      "code": "CA3",
+      "name": "TS Čačak 3",
+      "name_cyrillic": "ТС Чачак 3",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV"],
+      "region": "RDC Valjevo"
+    },
+    {
+      "code": "SA3",
+      "name": "TS Šabac 3",
+      "name_cyrillic": "ТС Шабац 3",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "BI",
+      "name": "TS Bistrica",
+      "name_cyrillic": "ТС Бистрица",
+      "type": "trafostanica",
+      "voltage_levels": ["220kV", "110kV"],
+      "region": "RDC Valjevo"
+    },
+    {
+      "code": "TENT-A",
+      "name": "TE Nikola Tesla A",
+      "name_cyrillic": "ТЕНТ А",
+      "aliases": ["TENT A", "TENT-A", "ТЕНТ А", "Nikola Tesla A", "termoelektrana Nikola Tesla A"],
+      "type": "termoelektrana",
+      "voltage_levels": ["400kV", "220kV"],
+      "region": "RDC Beograd",
+      "generators": ["G1", "G2", "G3", "G4", "G5", "G6"],
+      "connected_to": ["OBR", "ML"]
+    },
+    {
+      "code": "TENT-B",
+      "name": "TE Nikola Tesla B",
+      "name_cyrillic": "ТЕНТ Б",
+      "aliases": ["TENT B", "TENT-B", "ТЕНТ Б", "Nikola Tesla B", "termoelektrana Nikola Tesla B"],
+      "type": "termoelektrana",
+      "voltage_levels": ["400kV"],
+      "region": "RDC Beograd",
+      "generators": ["B1", "B2"],
+      "connected_to": ["ML"]
+    },
+    {
+      "code": "KOST-A",
+      "name": "TE Kostolac A",
+      "name_cyrillic": "ТЕ Костолац А",
+      "aliases": ["Kostolac A", "TE Kostolac A"],
+      "type": "termoelektrana",
+      "voltage_levels": ["110kV"],
+      "region": "RDC Beograd"
+    },
+    {
+      "code": "KOST-B",
+      "name": "TE Kostolac B",
+      "name_cyrillic": "ТЕ Костолац Б",
+      "aliases": ["Kostolac B", "TE Kostolac B"],
+      "type": "termoelektrana",
+      "voltage_levels": ["400kV"],
+      "region": "RDC Beograd",
+      "connected_to": ["DRM"]
+    },
+    {
+      "code": "HE-DJE1",
+      "name": "HE Đerdap 1",
+      "name_cyrillic": "ХЕ Ђердап 1",
+      "aliases": ["Djerdap 1", "HE Djerdap 1"],
+      "type": "hidroelektrana",
+      "voltage_levels": ["400kV"],
+      "region": "RDC Beograd",
+      "connected_to": ["DJE1"]
+    },
+    {
+      "code": "HE-DJE2",
+      "name": "HE Đerdap 2",
+      "name_cyrillic": "ХЕ Ђердап 2",
+      "aliases": ["Djerdap 2", "HE Djerdap 2"],
+      "type": "hidroelektrana",
+      "voltage_levels": ["110kV"],
+      "region": "RDC Beograd",
+      "connected_to": ["DJE2"]
+    },
+    {
+      "code": "HE-BB",
+      "name": "HE Bajina Bašta",
+      "name_cyrillic": "ХЕ Бајина Башта",
+      "aliases": ["HE Bajina Basta"],
+      "type": "hidroelektrana",
+      "voltage_levels": ["220kV"],
+      "region": "RDC Valjevo",
+      "generators": ["G1", "G2", "G3", "G4"],
+      "connected_to": ["BB"]
+    },
+    {
+      "code": "RHE-BB",
+      "name": "RHE Bajina Bašta",
+      "name_cyrillic": "РХЕ Бајина Башта",
+      "aliases": ["RHE Bajina Basta"],
+      "type": "reverzibilna_hidroelektrana",
+      "voltage_levels": ["220kV"],
+      "region": "RDC Valjevo",
+      "generators": ["MG1", "MG2"],
+      "connected_to": ["BB"]
+    }
+  ],
+  
+  "object_types": {
+    "TS": "Trafostanica",
+    "RP": "Razvodno postrojenje",
+    "PRP": "Prikljucno-razvodno postrojenje",
+    "HE": "Hidroelektrana",
+    "TE": "Termoelektrana",
+    "RHE": "Reverzibilna hidroelektrana"
+  },
+  
+  "regions": [
+    {
+      "code": "RDC_BG",
+      "name": "RDC Beograd",
+      "name_cyrillic": "РДЦ Београд"
+    },
+    {
+      "code": "RDC_NS",
+      "name": "RDC Novi Sad",
+      "name_cyrillic": "РДЦ Нови Сад"
+    },
+    {
+      "code": "RDC_NI",
+      "name": "RDC Niš",
+      "name_cyrillic": "РДЦ Ниш"
+    },
+    {
+      "code": "RDC_VA",
+      "name": "RDC Valjevo",
+      "name_cyrillic": "РДЦ Ваљево"
+    }
+  ],
+  
+  "element_abbreviations": {
+    "ДВ": "Dalekovod",
+    "ТР": "Transformator",
+    "СП": "Spojno polje",
+    "ГС": "Glavni sistem sabirnica",
+    "ДЗС": "Diferencijalna zaštita sabirnica",
+    "АПУ": "Automatsko ponovno uključenje",
+    "МГ": "Motor-generator"
+  }
+}

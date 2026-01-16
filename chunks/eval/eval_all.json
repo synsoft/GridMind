@@ -1,0 +1,4302 @@
+{
+    "files": {
+        "evaluation_set_basic": {
+            "file_path": "/home/absynsoft/RAG/data/evaluation/evaluation_set_basic.json"
+        },
+        "evaluation_set_extended": {
+            "file_path": "/home/absynsoft/RAG/data/evaluation/evaluation_set_extended.json"
+        }
+    },
+    "types": {
+        "section_text": {
+            "id": 0
+        }
+    },
+    "data": [
+        {
+            "id": 0,
+            "file_id": [
+                "8.05"
+            ],
+            "type": "section_text",
+            "text": "Koje je normalno uklopno stanje TS Beograd 5?",
+            "text_variants": [
+                "koje je normalno uklopno stanje ts beograd 5?",
+                "Koje je normalno uklopno stanje TS beograd 5?",
+                "Koje je normalno uklopno stanje ts Beograd 5?",
+                "Daj mi normalno uklopno stanje TS Beograd 5",
+                "Normalno uklopno stanje TS Beograd 5",
+                "Normalno uklopno stanje beograd 5",
+                "Normalno stanje Beograd 5"
+            ],
+            "info": {
+                "source": "devs-input",
+                "ref": "1"
+            },
+            "chunk_refs": [
+                "5.1",
+                "5.2"
+            ],
+            "response_type": "text",
+            "expected": "Normalno uklopno stanje TS Beograd 5\n\nPostrojenje 110 kV\n- 1A sistem sabirnica: DV 146A, DV 197A/1, KB 1233/1, TR3 (ili TR4) i TR1\n- 1B sistem sabirnica: DV 104A/3, DV 1178A, DV Ž05A i TR5\n- 2A sistem sabirnica: DV 146B, 197B, DV 104/2 i TR4 (ili TR3)\n- 2B sistem sabirnica: DV 104B/3, DV 1178B, DV Ž05B, TR6 i TR7\n- Oba poprečna spojna polja uključena\n- Oba podužna spojna polja uključena\n- Aktivna je diferencijalna zaštita sabirnica\n\nPostrojenje 220 kV\n- 1. (ili 2.) sistem sabirnica: DV 228, DV 294A, TR1 i TR7\n- 2. (ili 1.) sistem sabirnica: DV 250, DV 294B, TR5 i TR6\n- Spojno polje uključeno\n- Aktivna je diferencijalna zaštita sabirnica"
+        },
+        {
+            "id": 1,
+            "file_id": [
+                "8.05"
+            ],
+            "type": "section_text",
+            "text": "Kako je povezan TS Beograd 5 sa prenosnim sistemom od 110kV sa TS Novi Sad?",
+            "text_variants": [
+                "kako je povezan ts beograd 5 sa prenosnim sistemom od 110kv sa ts novi sad?",
+                "Povezanost TS Beograd 5 sa prenosnim sistemom od 110kV sa TS Novi Sad",
+                "Kako je TS Beograd 5 povezan sa prenosnim sistemom od 110kV sa TS Novi Sad?",
+                "Daj mi povezanost TS Beograd 5 sa prenosnim sistemom od 110kV sa TS Novi Sad",
+                "Beograd 5 110kV - Novi Sad",
+                "Beograd 5 veza sa Novi Sad za 110kV"
+            ],
+            "info": {
+                "source": "devs-input",
+                "ref": "2"
+            },
+            "chunk_refs": [
+                "2.4"
+            ],
+            "response_type": "text",
+            "expected": "Povezanost TS Beograd 5 sa TS Novi Sad (110 kV)\n\n- Glavna ruta: preko 110 kV mreže koja ide kroz TS Stara Pazova (preko TS Beograd 9 i TS Nova Pazova – DV 1178A/B, DV 104A/3‑5) i TS Krnješevci (DV 104B/3‑2).\n\n- Direktne veze:\n  - DV 104/7 – TS Novi Sad 1\n  - DV 104/6 – TS Novi Sad 6\n  - DV 104/8 – TS Inđija 2 (koji dalje vodi do TS Novi Sad 3)\n  - DV 104/9 – TS Inđija (duži put do TS Novi Sad 3)\n  - **Povezivanje sa TS Novi Sad 3:** paralelni rad je dozvoljen kroz DV 110 kV br. 127/1 (povezuje TS Novi Sad 3 – TS Novi Sad 1).\n\nDakle, TS Beograd 5 je povezan sa TS Novi Sad kroz više 110 kV predušnih i izlaznih veza, sa glavnim putevima kroz Stara Pazova i Inđija, i dodatno može raditi paralelno sa TS Novi Sad 3 koristeći DV 127/1."
+        },
+        {
+            "id": 2,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Da li je spojno polje 110 kV u TS Jagodina 4 u normalnom uklopnom stanju uključeno?",
+            "text_variants": [
+                "da li je spojno polje 110 kv u ts jagodina 4 u normalnom uklopnom stanju uključeno?"
+            ],
+            "info": {
+                "source": "devs-input",
+                "ref": "3"
+            },
+            "chunk_refs": [
+                "5.2"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 3,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Da li je spojno polje 400 kV u TS Jagodina 4 u normalnom uklopnom stanju uključeno?",
+            "text_variants": [
+                "da li je spojno polje 400 kv u ts jagodina 4 u normalnom uklopnom stanju uključeno?"
+            ],
+            "info": {
+                "source": "chat-01",
+                "ref": "1"
+            },
+            "chunk_refs": [
+                "5.1"
+            ],
+            "response_type": "text",
+            "expected": "Da"
+        },
+        {
+            "id": 4,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Kog naponskog nivoa su transformatori u TS Jagodina 4?",
+            "text_variants": [
+                "kog naponskog nivoa su transformatori u ts jagodina 4?",
+                "Kog su napinskog nivoa transformatori u TS Jagodina 4?",
+                "Koji je naponski nivo transformatora u TS Jagodina 4?",
+                "Koji su naponi transformatora TS Jagodina 4?"
+            ],
+            "info": {
+                "source": "chat-01",
+                "ref": "2"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "400 kV i 110 kV"
+        },
+        {
+            "id": 5,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Da li nakon uključenja spojnog polja 110 kV u TS Jagodina 4 dispečer mora da odradi još neku dodatnu manipulaciju?",
+            "text_variants": [
+                "da li nakon uključenja spojnog polja 110 kv u ts jagodina 4 dispečer mora da odradi još neku dodatnu manipulaciju?",
+                "Da li nakon uključenja spojnog polja 110 kV u TS Jagodina 4 dispečer mora da odradi još neku dodatnu manipulaciju?"
+            ],
+            "info": {
+                "source": "chat-01",
+                "ref": "3"
+            },
+            "chunk_refs": [
+                "3.7"
+            ],
+            "response_type": "text",
+            "expected": "Ne, ako kratkotrajno paralelisanje ne traje duže od sat vremena."
+        },
+        {
+            "id": 6,
+            "file_id": [
+                "3.01"
+            ],
+            "type": "section_text",
+            "text": "Koji je dozvoljeni opseg frekvencije u EES?",
+            "text_variants": [
+                "koji je dozvoljeni opseg frekvencije u ees?",
+                "Daj mi dozvoljeni opseg frekvencije u EES",
+                "Dozvoljene frekvencije u EES-u Srbije",
+                "Koje su dozvoljene frekvencije u EES-u Srbije?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "1"
+            },
+            "chunk_refs": [
+                [
+                    "3.4.1",
+                    "3.4.2"
+                ]
+            ],
+            "response_type": "text",
+            "expected": "Називна вредност фреквенције износи 50 Hz. Када преносни систем Републике Србије ради у оквиру интерконекције, на дозвољена одступања од називне вредности фреквенције у преносној мрежи примењују се вредности из правила о раду интерконекције. Тренутна правила су:\n\n  - ± 200 mHz;\n  - ± 100 mHz трајању не дужем од 5 минута;\n  - ± 50 mHz у трајању не дужем од 15 минута;\n\nУ случају да преносни систем Републике Србије ради изоловано од суседних преносних система, дозвољена фреквенција у преносној мрежи у квазистационарном стањује 50 Hz ± 0,5 Hz."
+        },
+        {
+            "id": 7,
+            "file_id": [
+                "3.01"
+            ],
+            "type": "section_text",
+            "text": "Koje su granice dozvoljenih napona u EES-u Srbije?",
+            "text_variants": [
+                "koje su granice dozvoljenih napona u ees-u srbije?",
+                "Daj mi granice dozvoljenih napona u EES-u Srbije",
+                "Dozvoljeni naponi u EES-u Srbije",
+                "Koji su dozvoljeni naponi u EES-u Srbije?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "2"
+            },
+            "chunk_refs": [
+                "3.3.1",
+                "3.3.2"
+            ],
+            "response_type": "text",
+            "expected": "Вредност напона у нормалним условима рада у било којој тачки мреже 400 kV, 220 kV и 110 \n\nkV налази се у опсегу:\n\n  - 400 kV мрежа: између 360 kV и 420 kV; \n  - 220 kV мрежа: између 198 kV и 245 kV; \n  - 110 kV мрежа: између 99 kV и 123 kV. "
+        },
+        {
+            "id": 8,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Kolika je instalisana snaga TS Jagodina 4?",
+            "text_variants": [
+                "kolika je instalisana snaga ts jagodina 4?",
+                "Koja je instalisana snaga TS Jagodina 4?",
+                "Daj mi instalisanu snagu TS Jagodina 4",
+                "Kolika je snaga TS Jagodina 4?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "4"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "600 MVA"
+        },
+        {
+            "id": 9,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Da li postoji transformator u TS Jagodina 4 koji ima mogućnost regulacije napona pod opterećenjem?",
+            "text_variants": [
+                "da li postoji transformator u ts jagodina 4 koji ima mogućnost regulacije napona pod opterećenjem?",
+                "Da li transformator u TS Jagodina 4 može da se reguliše pod opterećenjem?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "5"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "Da, TR1."
+        },
+        {
+            "id": 10,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Zbog čega je spojno polje 110 kV u TS Jagodina 4 isključeno u normalnom uklopnom stanju?",
+            "text_variants": [
+                "zbog čega je spojno polje 110 kv u ts jagodina 4 isključeno u normalnom uklopnom stanju?",
+                "Zašto je spojno polje 110 kV u TS Jagodina 4 isključeno u normalnom uklopnom stanju?",
+                "Obrazloži zašto je spojno polje 110 kV u TS Jagodina 4 isključeno u normalnom uklopnom stanju?",
+                "Koji je razlog što je spojno polje 110 kV u TS Jagodina 4 isključeno u normalnom uklopnom stanju?",
+                "Objasni mi zašto je spojno polje 110 kV u TS Jagodina 4 isključeno u normalnom uklopnom stanju"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "6"
+            },
+            "chunk_refs": [
+                "3.4"
+            ],
+            "response_type": "text",
+            "expected": "Прекидачи 110 kV у ТС Јагодина 1 и ЕВП Јагодина не задовољавају са аспкета за све струје кратког споја за укључено СП 110 kV у ТС Јагодина 4 када су у погону два трансформатора 400/110 kV, а што представља нормално уклопно стање. Због тога је СП 110 kV у ТС Јагодина 4 искључено за нормално уклопно стање. 8.14 UP-JA4_2024 Uputstvo za pogon TS 400_110 kV Jagodina 4"
+        },
+        {
+            "id": 11,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Koji su postupci dispečera za slučaj da je potrebno uključiti spojno polje 110 kV u TS Jagodina 4 u periodu ne dužem od sat vremena?",
+            "text_variants": [
+                "koji su postupci dispečera za slučaj da je potrebno uključiti spojno polje 110 kv u ts jagodina 4 u periodu ne dužem od sat vremena?",
+                "Šta radi dispečer kada treba da uključi spojno polje 110 kV u TS Jagodina 4 kratkotrajno?",
+                "Postupak dispečera za kratkotrajno uključenje spojnog polja 110 kV u TS Jagodina 4",
+                "Kako dispečer uključuje spojno polje 110 kV u TS Jagodina 4 na kratko?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "7"
+            },
+            "chunk_refs": [
+                "3.6"
+            ],
+            "response_type": "text",
+            "expected": "Када је укључење спојног поља 110 kV потребно ради краткотрајног паралелисања нема потребе за искључењем једног трансформатора. Диспечер у овој ситуацији не ради никакве додатне манипулације."
+        },
+        {
+            "id": 12,
+            "file_id": [
+                "8.14",
+                "8.16"
+            ],
+            "type": "section_text",
+            "text": "Koji su postupci dispečera za slučaj da jedan od dva sistema sabirnica 110 kV u TS Jagodina 4 nije raspoloživ u trajanju od nekoliko dana?",
+            "text_variants": [
+                "koji su postupci dispečera za slučaj da jedan od dva sistema sabirnica 110 kv u ts jagodina 4 nije raspoloživ u trajanju od nekoliko dana?",
+                "Šta radi dispečer kada jedan sistem sabirnica 110 kV u TS Jagodina 4 nije raspoloživ duže vreme?",
+                "Postupak dispečera kada jedan SS 110 kV u TS Jagodina 4 nije raspoloživ",
+                "Kako dispečer postupa pri neraspoloživosti jednog SS 110 kV u TS Jagodina 4?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "8"
+            },
+            "chunk_refs": [
+                [
+                    "3.6",
+                    "7.2.2"
+                ],
+                [
+                    "3.4"
+                ]
+            ],
+            "response_type": "text",
+            "expected": "Диспечер искључује један од трансформатора. Пожељно је да у погону остане трансформатор који има могућност регулације напона под оптерећењем. Додатно, диспечер искључује далековод бр. 108."
+        },
+        {
+            "id": 13,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Napisati normalno uklopno stanje na 400 kV naponu za TS Jagodina 4.",
+            "text_variants": [
+                "napisati normalno uklopno stanje na 400 kv naponu za ts jagodina 4.",
+                "Normalno uklopno stanje 400 kV TS Jagodina 4",
+                "Koje je normalno uklopno stanje na 400 kV za TS Jagodina 4?",
+                "Daj mi normalno uklopno stanje 400 kV TS Jagodina 4"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "9"
+            },
+            "chunk_refs": [
+                "5.1"
+            ],
+            "response_type": "text",
+            "expected": "(или 2.) систем сабирница: ДВ 423/1 и ТР1 (или ТР2); (или 1.) систем сабирница: ДВ 423/2 и ТР2 (или ТР1); спојно поље укључено; активна је диференцијална заштита сабирница."
+        },
+        {
+            "id": 14,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Koji RDC je nadležan za daljinsko upravljanje TS Jagodina 4?",
+            "text_variants": [
+                "koji rdc je nadležan za daljinsko upravljanje ts jagodina 4?",
+                "Koji RDC upravlja sa TS Jagodina 4?",
+                "Koji je RDC nadležan za TS Jagodina 4?",
+                "RDC za TS Jagodina 4"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "10"
+            },
+            "chunk_refs": [
+                "2.5"
+            ],
+            "response_type": "text",
+            "expected": "РДЦ Југ – Крушевац"
+        },
+        {
+            "id": 15,
+            "file_id": [
+                "8.03"
+            ],
+            "type": "section_text",
+            "text": "Napisati normalno uklopno stanje na 110 kV naponu za TS Beograd 20.",
+            "text_variants": [
+                "napisati normalno uklopno stanje na 110 kv naponu za ts beograd 20.",
+                "Normalno uklopno stanje 110 kV TS Beograd 20",
+                "Koje je normalno uklopno stanje na 110 kV za TS Beograd 20?",
+                "Daj mi normalno uklopno stanje 110 kV TS Beograd 20"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "11"
+            },
+            "chunk_refs": [
+                "5.2"
+            ],
+            "response_type": "text",
+            "expected": "(или 2.) систем сабирница: ДВ 129А/1, ДВ 129А/2, МВ 1250, ДВ 1240А, МВ 1288 и ТР1 (или ТР2); (или 1.) систем сабирница: ДВ 129Б/1, ДВ 129Б/2, МВ 1251, ДВ 1240Б, и ТР2 (или ТР1); спојно поље укључено; активна је диференцијална заштита сабирница."
+        },
+        {
+            "id": 16,
+            "file_id": [
+                "8.03",
+                "8.05"
+            ],
+            "type": "section_text",
+            "text": "Da li TS Beograd 5 i TS Beograd 20 rade u paralelnom radu? Obrazložiti",
+            "text_variants": [
+                "da li ts beograd 5 i ts beograd 20 rade u paralelnom radu? obrazložiti",
+                "Da li TS Beograd 5 i TS Beograd 20 rade u paralelnom radu?",
+                "Rade li TS Beograd 5 i TS Beograd 20 u paralelnom radu?",
+                "Imaju li TS Beograd 5 i TS Beograd 20 paralelni rad?",
+                "Obrazložiti da li TS Beograd 5 i TS Beograd 20 rade u paralelnom radu",
+                "Obrazložiti da li TS Beograd 5 i TS Beograd 20 imaju paralelni rad"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "12"
+            },
+            "chunk_refs": [
+                [
+                    "2.3",
+                    "2.4",
+                    "2.5",
+                    "2.6"
+                ],
+                [
+                    "2.3",
+                    "2.4",
+                    "2.5",
+                    "2.6",
+                    "2.11"
+                ]
+            ],
+            "response_type": "text",
+            "expected": "Нису. У нормалном погону ТС Београд 20 je раздвојена од ТС Београд 5 (тачка секционисања је прекидач KБП 110 kV бр. 172/1 у ТС Београд 6) и ТС Београд 17 (тачке секционисања су прекидач КБП 110 kV бр.1203/2 у ТС Београд 28, прекидач КБП 110 kV бр.1216   ТС Београд 14 као и прекидач KБП 110 kV бр. 172/1 у ТС Београд 6 и прекидач СП 110 kV у ТС Београд 45)."
+        },
+        {
+            "id": 17,
+            "file_id": [
+                "8.03"
+            ],
+            "type": "section_text",
+            "text": "Objasniti postupak dispečera za slučaj da je potrebno kratkotrajno uspostaviti paralelan rad između TS Beograd 20 i TS Beograd 5.",
+            "text_variants": [
+                "objasniti postupak dispečera za slučaj da je potrebno kratkotrajno uspostaviti paralelan rad između ts beograd 20 i ts beograd 5.",
+                "Kako dispečer uspostavlja kratkotrajni paralelni rad između TS Beograd 20 i TS Beograd 5?",
+                "Postupak za kratkotrajno paralelisanje TS Beograd 20 i TS Beograd 5"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "13"
+            },
+            "chunk_refs": [
+                "2.6",
+                "2.7"
+            ],
+            "response_type": "text",
+            "expected": "У случају потребе за укључењем прекидача у KБП 110 kV бр. 172/1 у ТС Београд 6 ради краткотрајног паралелисања ТС Београд 5 и ТС Београд 20, да не би дошло до преоптерећења каблова КБ 171, КБ 172/1 и КБ 1265 диспечер прво мора да одради анализу сигурности."
+        },
+        {
+            "id": 18,
+            "file_id": [
+                "8.03"
+            ],
+            "type": "section_text",
+            "text": "Da li je TS Beograd 20 u sistemu daljinskog upravljanja?",
+            "text_variants": [
+                "da li je ts beograd 20 u sistemu daljinskog upravljanja?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "14"
+            },
+            "chunk_refs": [
+                "2.9"
+            ],
+            "response_type": "text",
+            "expected": "Да"
+        },
+        {
+            "id": 19,
+            "file_id": [
+                "8.03"
+            ],
+            "type": "section_text",
+            "text": "Da li OPGW užadi kod DV 129A/1 i DV 129B/1 zadovoljavaju proračun na termičko naprezanje u slučaju pojave struja kratkih spojeva?",
+            "text_variants": [
+                "da li opgw užadi kod dv 129a/1 i dv 129b/1 zadovoljavaju proračun na termičko naprezanje u slučaju pojave struja kratkih spojeva?",
+                "Da li uže na DV 129A/1 i DV 129B/1 zadovoljava termičko naprezanje kod struja kratkih spojeva?",
+                "Da li kod kratkih spojeva užadi zadovoljavaju proračune na termička naprezanja kod DV 129A/1 i 129B/1?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "15"
+            },
+            "chunk_refs": [
+                "3.5"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 20,
+            "file_id": [
+                "8.03"
+            ],
+            "type": "section_text",
+            "text": "Napisati uklopno stanje u TS Beograd 20 na svim naponskim nivoima u slučaju neraspoloživosti diferencijalne zaštite sabirnica na 400 kV. Koje su promene u odnosu na normalno uklopno stanje na 110 kV strani?",
+            "text_variants": [
+                "napisati uklopno stanje u ts beograd 20 na svim naponskim nivoima u slučaju neraspoloživosti diferencijalne zaštite sabirnica na 400 kv. koje su promene u odnosu na normalno uklopno stanje na 110 kv strani?",
+                "Uklopno stanje TS Beograd 20 pri neraspoloživosti diferencijalne zaštite 400 kV",
+                "Šta se menja u uklopnom stanju TS Beograd 20 kada nije raspoloživa diferencijalna zaštita 400 kV?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "16"
+            },
+            "chunk_refs": [
+                "5.1",
+                "5.2",
+                "7.1.1",
+                "7.1.2",
+                "7.2.1",
+                "7.2.2"
+            ],
+            "response_type": "text",
+            "expected": "Нема промена уклопног стања на 110 kV напону при нерасположивости диференцијалне заштите сабирница на 400 kV у односу на нормално уклопно стање на 110 kV напону."
+        },
+        {
+            "id": 21,
+            "file_id": [
+                "8.17"
+            ],
+            "type": "section_text",
+            "text": "Navesti sve transformatore koji se nalaze u TS Kraljevo 3, kao i njihove nominalne snage. Koji od ovih transformatora ima mogućnost regulacije napona pod opterećenjem?",
+            "text_variants": [
+                "navesti sve transformatore koji se nalaze u ts kraljevo 3, kao i njihove nominalne snage. koji od ovih transformatora ima mogućnost regulacije napona pod opterećenjem?",
+                "Transformatori u TS Kraljevo 3 i njihove snage",
+                "Koji transformatori u TS Kraljevo 3 imaju regulaciju pod opterećenjem?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "17"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "ТР1 - 220/110 kV од 150 MVA (могућа регулација напона под оптерећењем); ТР2 - 220/110 kV од 150 MVA (могућа регулација напона под оптерећењем); ТР4 - 400/220 kV од 400 MVA (могућа регулација напона под оптерећењем)."
+        },
+        {
+            "id": 22,
+            "file_id": [
+                "8.17"
+            ],
+            "type": "section_text",
+            "text": "Da li je u svim slučajevima zadovoljen kriterijum N-1 u TS Kraljevo 3?",
+            "text_variants": [
+                "da li je u svim slučajevima zadovoljen kriterijum n-1 u ts kraljevo 3?",
+                "Da li je zadovoljen N-1 kriterijum u TS Kraljevo 3 u svim slučajevima?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "18"
+            },
+            "chunk_refs": [
+                "3.3"
+            ],
+            "response_type": "text",
+            "expected": "Није у случају радијално напајаних трансформаторских станица."
+        },
+        {
+            "id": 23,
+            "file_id": [
+                "8.17"
+            ],
+            "type": "section_text",
+            "text": "Da li postoji diferencijalna zaštita 400 kV, 220 kV i 110 kV sabirnica u TS Kraljevo 3?",
+            "text_variants": [
+                "da li postoji diferencijalna zaštita 400 kv, 220 kv i 110 kv sabirnica u ts kraljevo 3?",
+                "Na kojim naponskim nivoima postoji diferencijalna zaštita sabirnica u TS Kraljevo 3?",
+                "Diferencijalna zaštita sabirnica u TS Kraljevo 3"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "19"
+            },
+            "chunk_refs": [
+                "5.1"
+            ],
+            "response_type": "text",
+            "expected": "Постоји само на 400 kV сабирницама."
+        },
+        {
+            "id": 24,
+            "file_id": [
+                "8.14",
+                "8.16"
+            ],
+            "type": "section_text",
+            "text": "Da li je TS Kruševac 1 u paralelnom radu preko 110 kV mreže sa TS Jagodina 4? Ukoliko jeste, obrazložiti odgovor.",
+            "text_variants": [
+                "da li je ts kruševac 1 u paralelnom radu preko 110 kv mreže sa ts jagodina 4? ukoliko jeste, obrazložiti odgovor.",
+                "Da li je TS Kruševac 1 u paralelnom radu preko 110 kV mreže sa TS Jagodina 4?",
+                "Na osnovu povezanosti, da li možeš da mi kažeš da li je TS Kruševac 1 u paralelnom radu preko 110 kV mreže sa TS Jagodina 4?",
+                "Da li je TS Kruševac 1 u paralelnom radu sa TS Jagodina 4 preko 110 kV mreže?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "20"
+            },
+            "chunk_refs": [
+                [
+                    "2.3"
+                ],
+                [
+                    "2.7"
+                ]
+            ],
+            "response_type": "text",
+            "expected": "Јесте у паралелном раду преко 110 kV мреже са ТС Крушевац 1 преко ТС Јагодина 1 (по ДВ 1141/1 и ДВ 105/3) и преко ДВ 108, као и преко ТС Параћин 1 (по ДВ 152/4), ТС Параћин 3 (по ДВ 152/3), ТС Ћићевац (по ДВ 152/2) и преко ДВ 152/1."
+        },
+        {
+            "id": 25,
+            "file_id": [
+                "8.16"
+            ],
+            "type": "section_text",
+            "text": "Napisati uklopno stanje na 220 kV i 110 kV naponu u TS Kruševac 1 za slučaj neraspoloživosti diferencijalne zaštite sabirnica 220 kV.",
+            "text_variants": [
+                "napisati uklopno stanje na 220 kv i 110 kv naponu u ts kruševac 1 za slučaj neraspoloživosti diferencijalne zaštite sabirnica 220 kv.",
+                "Uklopno stanje TS Kruševac 1 pri neraspoloživosti diferencijalne zaštite 220 kV"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "21"
+            },
+            "chunk_refs": [
+                "7.1.1",
+                "7.1.2",
+                "7.2.1",
+                "7.2.2"
+            ],
+            "response_type": "text",
+            "expected": "Постројење 220 kV: ГС 1(или ГС 11) систем сабирница: ДВ 226, ДВ 205/2, ДВ 214/1, ТР1 и ТР2; спојно поље искључено, растављачи искључени. Постројење 110 kV: ГС 1(или ГС 11) систем сабирница: ДВ 114/1, ДВ 191 /1, ДВ 152/1, ДВ 1158 А, ДВ 1161 /1, ТР1 (или ТР2), ТРЗ (или ТР4) и МТК1 (или МТК2); ГС 11 (или ГС 1) систем сабирница: ДВ 108, ДВ 109/4, ДВ 191/2, ДВ 1158Б, КБ 1232, ТР2 (или ТР1) и ТР4 (или ТРЗ); спојно поље укључено; активна диференцијална заштита сабирница"
+        },
+        {
+            "id": 26,
+            "file_id": [
+                "8.28"
+            ],
+            "type": "section_text",
+            "text": "Na kojim dalekovodima 110 kV u TS Srbobran je aktivna zaštita od preopterećenja?",
+            "text_variants": [
+                "na kojim dalekovodima 110 kv u ts srbobran je aktivna zaštita od preopterećenja?",
+                "Zaštita od preopterećenja na 110 kV dalekovodima u TS Srbobran",
+                "Koji dalekovodi u TS Srbobran imaju zaštitu od preopterećenja?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "23"
+            },
+            "chunk_refs": [
+                "2.5",
+                "2.6",
+                "2.7"
+            ],
+            "response_type": "text",
+            "expected": "142/1, 127/2 и 1267"
+        },
+        {
+            "id": 27,
+            "file_id": [
+                "8.13"
+            ],
+            "type": "section_text",
+            "text": "Kako se vrši napajanje sopstvene potrošnje TS Zrenjanin 2?",
+            "text_variants": [
+                "kako se vrši napajanje sopstvene potrošnje ts zrenjanin 2?",
+                "Napajanje sopstvene potrošnje TS Zrenjanin 2",
+                "Odakle se napaja sopstvena potrošnja TS Zrenjanin 2?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "24"
+            },
+            "chunk_refs": [
+                "2.7"
+            ],
+            "response_type": "text",
+            "expected": "Напајање сопствене потрошње ТС Зрењанин 2 врши се са терцијера трансформатора ТР1 или ТР2."
+        },
+        {
+            "id": 28,
+            "file_id": [
+                "8.13"
+            ],
+            "type": "section_text",
+            "text": "Da li je zadovoljen kriterijum N-1 za TS Zrenjanin 2?",
+            "text_variants": [
+                "da li je zadovoljen kriterijum n-1 za ts zrenjanin 2?",
+                "Kriterijum N-1 za TS Zrenjanin 2",
+                "Da li TS Zrenjanin 2 zadovoljava N-1 kriterijum?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "25"
+            },
+            "chunk_refs": [
+                "3.3"
+            ],
+            "response_type": "text",
+            "expected": "N-1 критеријум сигурности задовољен, осим за летње вршно оптерећење у случају испада ДВ 220 kV бр. 254/2 ПРП Ковачица - ТС Зрењанин 2 када се преоптерећује ДВ 110 kV бр. 142/1 ТС Србобран - ТС Бечеј (за 23%)."
+        },
+        {
+            "id": 29,
+            "file_id": [
+                "8.12"
+            ],
+            "type": "section_text",
+            "text": "Preko kojih dalekovoda se energija proizvedena u HE Đerdap 2 plasira u prenosni sistem?",
+            "text_variants": [
+                "preko kojih dalekovoda se energija proizvedena u he đerdap 2 plasira u prenosni sistem?",
+                "Dalekovodi kojima HE Đerdap 2 plasira energiju",
+                "Preko kojih DV se HE Đerdap 2 priključuje na prenosni sistem?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "26"
+            },
+            "chunk_refs": [
+                "2.2"
+            ],
+            "response_type": "text",
+            "expected": "1228А, 1228Б, 1229А, 1229Б, 1230"
+        },
+        {
+            "id": 30,
+            "file_id": [
+                "8.12"
+            ],
+            "type": "section_text",
+            "text": "Pri kojoj proizvodnji HE Đerdap 2 leti i za koje dalekovode koji polaze iz RP Đerdap 2 nije zadovoljen kriterijum N-1 za dalekovode?",
+            "text_variants": [
+                "pri kojoj proizvodnji he đerdap 2 leti i za koje dalekovode koji polaze iz rp đerdap 2 nije zadovoljen kriterijum n-1 za dalekovode?",
+                "N-1 kriterijum za dalekovode iz RP Đerdap 2",
+                "Kada nije zadovoljen N-1 za dalekovode RP Đerdap 2?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "27"
+            },
+            "chunk_refs": [
+                "3.3"
+            ],
+            "response_type": "text",
+            "expected": "N-1 критеријум сигурности није задовољен у случају испада ДВ бр. 1204 (ХЕ Ђердап 2 - ТС Зајечар 2) или ДВ бр.1166/1 (ХЕ Ђердап 2 - ПРП Велики Кривељ 2) при летњем вршном конзуму када је производња ХЕ Ђердап 2 изнад 190 MW."
+        },
+        {
+            "id": 31,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Da li je TS Niš 2 u trajnom paralelnom radu sa TS Bor 2? Ukoliko je odgovor ne, napisati tačku sekcionisanja i razlog zbog čega trajni paralelan rad nije ostvaren.",
+            "text_variants": [
+                "da li je ts niš 2 u trajnom paralelnom radu sa ts bor 2? ukoliko je odgovor ne, napisati tačku sekcionisanja i razlog zbog čega trajni paralelan rad nije ostvaren.",
+                "Da li su TS Niš 2 i TS Bor 2 u paralelnom radu?",
+                "Paralelni rad TS Niš 2 i TS Bor 2"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "28"
+            },
+            "chunk_refs": [
+                "2.7"
+            ],
+            "response_type": "text",
+            "expected": "ТС Ниш 2 и ТС Бор 2 нису у трајном паралелном раду преко 110 kV мреже (у ТС Књажевац искључен је прекидач у подужном спојном пољу 110 kV и у трансформаторском пољу 110 kV од ТР1) зато што паралелан рад доводи до повећања губитака у ЕЕС-у Србије."
+        },
+        {
+            "id": 32,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Navesti sve 110 kV dalekovode koji u TS Niš 2 imaju aktivnu zaštitu od preopterećenja.",
+            "text_variants": [
+                "navesti sve 110 kv dalekovode koji u ts niš 2 imaju aktivnu zaštitu od preopterećenja.",
+                "Zaštita od preopterećenja na 110 kV dalekovodima u TS Niš 2",
+                "Koji dalekovodi u TS Niš 2 imaju zaštitu od preopterećenja?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "29"
+            },
+            "chunk_refs": [
+                "2.5",
+                "2.8"
+            ],
+            "response_type": "text",
+            "expected": "113/1, 1245, 113/6, 1278"
+        },
+        {
+            "id": 33,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Pod kojim uslovima je dozvoljeno paralelisanje TR1 i TR2 u TS Niš 3 na niženaponskoj strani, tj. strani 35 kV?",
+            "text_variants": [
+                "pod kojim uslovima je dozvoljeno paralelisanje tr1 i tr2 u ts niš 3 na niženaponskoj strani, tj. strani 35 kv?",
+                "Uslovi za paralelisanje TR1 i TR2 u TS Niš 3 na 35 kV"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "30"
+            },
+            "chunk_refs": [
+                "2.11"
+            ],
+            "response_type": "text",
+            "expected": "Под условом да је у ТС Ниш 2 укључено СП 110 kV или да су ДВ 187 и ДВ 188 на истом систему сабирница."
+        },
+        {
+            "id": 34,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Zbog čega su sabirnice 110 kV u TS Niš 13 razdvojene preko podužnog rastavljača?",
+            "text_variants": [
+                "zbog čega su sabirnice 110 kv u ts niš 13 razdvojene preko podužnog rastavljača?",
+                "Razlog razdvajanja sabirnica 110 kV u TS Niš 13",
+                "Zašto su sabirnice 110 kV u TS Niš 13 razdvojene?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "31"
+            },
+            "chunk_refs": [
+                "2.13"
+            ],
+            "response_type": "text",
+            "expected": "Сабирнице 110 kV у ТС Ниш 13 су раздвојене подужним растављачем због непостојања дистантне заштите у ДВП 1187А и ДВП 1187Б у ТС Ниш 13."
+        },
+        {
+            "id": 35,
+            "file_id": [
+                "8.22"
+            ],
+            "type": "section_text",
+            "text": "Preko kojih 220 kV dalekovoda su generatori u TENT-u A povezani na prenosni sistem?",
+            "text_variants": [
+                "preko kojih 220 kv dalekovoda su generatori u tent-u a povezani na prenosni sistem?",
+                "220 kV dalekovodi TENT-a A",
+                "Veze TENT A na 220 kV"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "32"
+            },
+            "chunk_refs": [
+                "2.3"
+            ],
+            "response_type": "text",
+            "expected": "256А, 256Б, 263А и 263Б"
+        },
+        {
+            "id": 36,
+            "file_id": [
+                "8.22"
+            ],
+            "type": "section_text",
+            "text": "Preko kojih 400 kV dalekovoda su generatori u TENT-u A povezani na prenosni sistem?",
+            "text_variants": [
+                "preko kojih 400 kv dalekovoda su generatori u tent-u a povezani na prenosni sistem?",
+                "400 kV dalekovodi TENT-a A",
+                "Veze TENT A na 400 kV"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "33"
+            },
+            "chunk_refs": [
+                "2.3"
+            ],
+            "response_type": "text",
+            "expected": "424 и 425"
+        },
+        {
+            "id": 37,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Da li je TS Niš 2 povezana sa TS Kosovo B? Ako jeste, navesti naziv dalekovoda preko koga je ostvarena ta veza.",
+            "text_variants": [
+                "da li je ts niš 2 povezana sa ts kosovo b? ako jeste, navesti naziv dalekovoda preko koga je ostvarena ta veza.",
+                "Veza između TS Niš 2 i TS Kosovo B",
+                "Kojim dalekovodom su povezane TS Niš 2 i TS Kosovo B?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "34"
+            },
+            "chunk_refs": [
+                "4.2"
+            ],
+            "response_type": "text",
+            "expected": "Да. ДВ 400 kV бр. 407 ТС Ниш 2 – ТЕ Косово Б"
+        },
+        {
+            "id": 38,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Da li za slučaj neraspoloživosti diferencijalne zaštite 400 kV sabirnica u TS Niš 2 dolazi do promene normalnog uklopnog stanja na 400 kV strani?",
+            "text_variants": [
+                "da li za slučaj neraspoloživosti diferencijalne zaštite 400 kv sabirnica u ts niš 2 dolazi do promene normalnog uklopnog stanja na 400 kv strani?",
+                "Promena uklopnog stanja 400 kV u TS Niš 2 pri neraspoloživosti diferencijalne zaštite"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "35"
+            },
+            "chunk_refs": [
+                "7.1.1",
+                "5.1"
+            ],
+            "response_type": "text",
+            "expected": "Да. Сви изводи се пребацују на једнан систем сабирница, ГС 1 или ГС 2, док је спојно поље искључено и растављено."
+        },
+        {
+            "id": 39,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Da li za slučaj neraspoloživosti diferencijalne zaštite 400 kV sabirnica u TS Niš 2 dolazi do promene normalnog uklopnog stanja na 220 kV strani?",
+            "text_variants": [
+                "da li za slučaj neraspoloživosti diferencijalne zaštite 400 kv sabirnica u ts niš 2 dolazi do promene normalnog uklopnog stanja na 220 kv strani?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "36"
+            },
+            "chunk_refs": [
+                "7.2.2",
+                "5.2"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 40,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Da li je TS Niš 2 povezana sa nekom TS koja ne pripada elektroenergetskom sistemu Republike Srbije? Ukoliko je odgovor da, navesti naziv dalekovoda preko koga je ostvarena ta veza.",
+            "text_variants": [
+                "da li je ts niš 2 povezana sa nekom ts koja ne pripada elektroenergetskom sistemu republike srbije? ukoliko je odgovor da, navesti naziv dalekovoda preko koga je ostvarena ta veza.",
+                "Interkonektivne veze TS Niš 2",
+                "Veze TS Niš 2 sa inostranstvom"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "37"
+            },
+            "chunk_refs": [
+                "2.2"
+            ],
+            "response_type": "text",
+            "expected": "Да. Са ТЕ Косово Б преко ДВ 400 kV бр. 407 ТС Ниш 2 – ТЕ Косово Б и ТС Софија Запад преко ДВ 400 kV бр. 404 ТС Ниш 2 – ТС Софија Запад."
+        },
+        {
+            "id": 41,
+            "file_id": [
+                "8.32"
+            ],
+            "type": "section_text",
+            "text": "Preko koliko transformatora se energija proizvedena u VE Čibuk 1 plasira u EES?",
+            "text_variants": [
+                "preko koliko transformatora se energija proizvedena u ve čibuk 1 plasira u ees?",
+                "Broj transformatora u VE Čibuk 1",
+                "Koliko transformatora ima VE Čibuk 1?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "38"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "Преко два трансформатора."
+        },
+        {
+            "id": 42,
+            "file_id": [
+                "8.32"
+            ],
+            "type": "section_text",
+            "text": "Kolika je ukupna nominalna snaga transformatora preko kojih se energija proizvedena u VE Čibuk 1 plasira u EES?",
+            "text_variants": [
+                "kolika je ukupna nominalna snaga transformatora preko kojih se energija proizvedena u ve čibuk 1 plasira u ees?",
+                "Ukupna snaga transformatora VE Čibuk 1",
+                "Nominalna snaga transformatora u VE Čibuk 1"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "39"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "180 MVA (2*90 МVA)"
+        },
+        {
+            "id": 43,
+            "file_id": [
+                "8.32"
+            ],
+            "type": "section_text",
+            "text": "Da li je moguće da se sa elektrane VE Čibuk 1 daljinski komanduje 400 kV prekidačima od TR1 i TR2?",
+            "text_variants": [
+                "da li je moguće da se sa elektrane ve čibuk 1 daljinski komanduje 400 kv prekidačima od tr1 i tr2?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "40"
+            },
+            "chunk_refs": [
+                "2.4"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 44,
+            "file_id": [
+                "8.32"
+            ],
+            "type": "section_text",
+            "text": "Kako se zove PRP na koji je povezana VE Čibuk 1?",
+            "text_variants": [
+                "kako se zove prp na koji je povezana ve čibuk 1?",
+                "Naziv PRP za VE Čibuk 1",
+                "Na koji PRP je priključena VE Čibuk 1?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "41"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "ПРП Чибук 1"
+        },
+        {
+            "id": 45,
+            "file_id": [
+                "8.32"
+            ],
+            "type": "section_text",
+            "text": "Da li iz RP Čibuk 1 polazi neki od interkonektivnih dalekovoda?",
+            "text_variants": [
+                "da li iz rp čibuk 1 polazi neki od interkonektivnih dalekovoda?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "42"
+            },
+            "chunk_refs": [
+                "2.4"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 46,
+            "file_id": [
+                "8.32"
+            ],
+            "type": "section_text",
+            "text": "Koliko vetroagregata postoji u VE Čibuk 1?",
+            "text_variants": [
+                "koliko vetroagregata postoji u ve čibuk 1?",
+                "Broj vetroagregata u VE Čibuk 1",
+                "Koliko ima vetroagregata u VE Čibuk 1?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "43"
+            },
+            "chunk_refs": [
+                "2.6"
+            ],
+            "response_type": "text",
+            "expected": "57"
+        },
+        {
+            "id": 47,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "TS A predstavlja radijalnu trafostanicu koju napaja dalekovod koji spaja postrojenja A i B i do čijeg je ispada došlo. Dispečer ima podatke o reagovanju zaštite samo iz postrojenja B. Da li se ovo može smatrati dovoljnim za procenu vrste kvara?",
+            "text_variants": [
+                "ts a predstavlja radijalnu trafostanicu koju napaja dalekovod koji spaja postrojenja a i b i do čijeg je ispada došlo. dispečer ima podatke o reagovanju zaštite samo iz postrojenja b. da li se ovo može smatrati dovoljnim za procenu vrste kvara?",
+                "TS A je radijalna trafostanica koju napaja dalekovod koji spaja postrojenja A i B i do čijeg je ispada došlo. Dispečer ima podatke o reagovanju zaštite samo iz postrojenja B. Da li se ovo može smatrati dovoljnim za procenu vrste kvara?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "52"
+            },
+            "chunk_refs": [
+                "5.1.2"
+            ],
+            "response_type": "text",
+            "expected": "Da"
+        },
+        {
+            "id": 48,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Dolazi do ispada dalekovoda koji spaja trafostanice A i B od kojih ni jedna nije radijalna TS. Dispečer ima podatke o reagovanju zaštite samo iz postrojenja B. Da li se ovo može smatrati dovoljnim za procenu vrste kvara?",
+            "text_variants": [
+                "dolazi do ispada dalekovoda koji spaja trafostanice a i b od kojih ni jedna nije radijalna ts. dispečer ima podatke o reagovanju zaštite samo iz postrojenja b. da li se ovo može smatrati dovoljnim za procenu vrste kvara?",
+                "Trafostanice A i B nisu radijalne. Dolazi do ispada dalekovoda koji ih spaja. Dispečer ima podatke o reagovanju zaštite samo iz postrojenja B. Da li se ovo može smatrati dovoljnim za procenu vrste kvara?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "53"
+            },
+            "chunk_refs": [
+                "5.1.2"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 49,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Došlo je do ispada dalekovoda sa uspešnim ciklusom APU, da li je dalekovod u pogonu?",
+            "text_variants": [
+                "došlo je do ispada dalekovoda sa uspešnim ciklusom apu, da li je dalekovod u pogonu?",
+                "Dalekovod je doživeo ispad sa uspešnim ciklusom APU. Da li je sada u pogonu?",
+                "Uspešan APU ciklus nakon ispada dalekovoda. Je li dalekovod trenutno aktivan?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "54"
+            },
+            "chunk_refs": [
+                "5.1.3",
+                "5.2.2"
+            ],
+            "response_type": "text",
+            "expected": "Da"
+        },
+        {
+            "id": 50,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Došlo je do ispada dalekovoda sa uspešnim ciklusom APU, da li je kvar na dalekovodu trajnog ili prolaznog karaktera?",
+            "text_variants": [
+                "došlo je do ispada dalekovoda sa uspešnim ciklusom apu, da li je kvar na dalekovodu trajnog ili prolaznog karaktera?",
+                "Dalekovod je doživeo ispad sa uspešnim ciklusom APU. Da li je kvar na dalekovodu trajnog ili prolaznog karaktera?",
+                "Nakon uspešnog APU ciklusa, kakav je kvar bio - trajan ili prolazan?",
+                "APU je uspešno izvršio reciklažu DV. Tip kvara - trajni ili prolazni?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "55"
+            },
+            "chunk_refs": [
+                "5.1.3"
+            ],
+            "response_type": "text",
+            "expected": "Пролазног"
+        },
+        {
+            "id": 51,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "U postrojenju A na dalekovodu koji spaja trafostanice A i B delovala je distantna zaštita u prvom stepenu, u postrojenju B delovala je distantna zaštita u drugom stepenu. Na kojoj deonici od postrojenja A je potencijalan kvar?",
+            "text_variants": [
+                "u postrojenju a na dalekovodu koji spaja trafostanice a i b delovala je distantna zaštita u prvom stepenu, u postrojenju b delovala je distantna zaštita u drugom stepenu. na kojoj deonici od postrojenja a je potencijalan kvar?",
+                "Na dalekovodu između TS A i TS B reagovala je distantna zaštita - u TS A prvi stepen, u TS B drugi stepen. Gde se nalazi kvar u odnosu na TS A?",
+                "Distantna I stepen u postrojenju A, distantna II stepen u postrojenju B. Lokacija kvara od A?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "56"
+            },
+            "chunk_refs": [
+                "5.1.4"
+            ],
+            "response_type": "text",
+            "expected": "На првих 15%"
+        },
+        {
+            "id": 52,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "U postrojenju A na dalekovodu koji spaja trafostanice A i B delovala je distantna zaštita u prvom stepenu, u postrojenju B delovala je distantna zaštita u prvom stepenu. Na kojoj deonici od postrojenja B je potencijalan kvar?",
+            "text_variants": [
+                "u postrojenju a na dalekovodu koji spaja trafostanice a i b delovala je distantna zaštita u prvom stepenu, u postrojenju b delovala je distantna zaštita u prvom stepenu. na kojoj deonici od postrojenja b je potencijalan kvar?",
+                "Distantna zaštita prvog stepena je reagovala i u postrojenju A i u postrojenju B na dalekovodu koji povezuje ove dve TS. U kom segmentu dalekovoda od postrojenja B se potencijalno nalazi kvar?",
+                "Oba postrojenja A i B imaju reagovanje distantne zaštite I stepena. Gde je kvar od strane B?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "57"
+            },
+            "chunk_refs": [
+                "5.1.4"
+            ],
+            "response_type": "text",
+            "expected": "На 15 – 85%"
+        },
+        {
+            "id": 53,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li dispečer sme da uključi dalekovod ukoliko nema poznate signale delovanja zaštite, a postoji povratni napon na dalekovodu?",
+            "text_variants": [
+                "da li dispečer sme da uključi dalekovod ukoliko nema poznate signale delovanja zaštite, a postoji povratni napon na dalekovodu?",
+                "Ako nema poznatih signala delovanja zaštite, ali postoji povratni napon na dalekovodu, da li dispečer može da uključi taj dalekovod?",
+                "Povratni napon prisutan, nema signala zaštite. Može li dispečer energisati DV?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "58"
+            },
+            "chunk_refs": [
+                "5.2.1"
+            ],
+            "response_type": "text",
+            "expected": "Да"
+        },
+        {
+            "id": 54,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Došlo je do ispada dalekovoda koji spaja postrojenja A i B. U postrojenju A je reagovala distantna zaštita u prvom stepenu a u postrojenju B distantna zaštita u drugom stepenu. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?",
+            "text_variants": [
+                "došlo je do ispada dalekovoda koji spaja postrojenja a i b. u postrojenju a je reagovala distantna zaštita u prvom stepenu a u postrojenju b distantna zaštita u drugom stepenu. iz kog postrojenja dispečer treba da stavi dalekovod pod napon?",
+                "Ispad dalekovoda između postrojenja A i B - distantna zaštita prvi stepen u A, drugi stepen u B. Odakle dispečer treba da energiše dalekovod?",
+                "DV A-B ispao. Zaštita: A ima I stepen, B ima II stepen reagovanje. Ko treba da uključi?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "59"
+            },
+            "chunk_refs": [
+                "5.2.9"
+            ],
+            "response_type": "text",
+            "expected": "Из постројења Б"
+        },
+        {
+            "id": 55,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Došlo je do ispada dalekovoda koji spaja postrojenja A i B. U postrojenju A lokator kvara pokazuje da je kvar na 40 km od postrojenja A a u postrojenju B lokator kvara pokazuje da je kvar na 20 km od postrojenja B. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?",
+            "text_variants": [
+                "došlo je do ispada dalekovoda koji spaja postrojenja a i b. u postrojenju a lokator kvara pokazuje da je kvar na 40 km od postrojenja a a u postrojenju b lokator kvara pokazuje da je kvar na 20 km od postrojenja b. iz kog postrojenja dispečer treba da stavi dalekovod pod napon?",
+                "Lokator kvara u postrojenju A pokazuje 40 km, u postrojenju B pokazuje 20 km. Sa koje strane dispečer treba da uključi dalekovod?",
+                "Lokatori: A vidi kvar 40 km od sebe, B vidi 20 km. Iz kog postrojenja naponiti liniju?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "60"
+            },
+            "chunk_refs": [
+                "5.2.9"
+            ],
+            "response_type": "text",
+            "expected": "Из постројења А"
+        },
+        {
+            "id": 56,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Došlo je do ispada dalekovoda koji spaja postrojenja A i B. U postrojenju A je priključena elektrana i lokator kvara pokazuje da je kvar na 40 km od postrojenja A a u postrojenju B lokator kvara pokazuje da je kvar na 20 km od postrojenja B. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?",
+            "text_variants": [
+                "došlo je do ispada dalekovoda koji spaja postrojenja a i b. u postrojenju a je priključena elektrana i lokator kvara pokazuje da je kvar na 40 km od postrojenja a a u postrojenju b lokator kvara pokazuje da je kvar na 20 km od postrojenja b. iz kog postrojenja dispečer treba da stavi dalekovod pod napon?",
+                "Postrojenje A ima priključenu elektranu. Lokatori kvara: A - 40 km, B - 20 km. Gde dispečer treba da naponuje dalekovod?",
+                "Elektrana u A. Lokator A: 40 km, lokator B: 20 km. Sa koje strane energisati DV?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "61"
+            },
+            "chunk_refs": [
+                "5.2.9"
+            ],
+            "response_type": "text",
+            "expected": "Из постројења Б"
+        },
+        {
+            "id": 57,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Došlo je do ispada 400 kV dalekovoda broj 401/2 koji spaja RP Drmno na koje je priključena TE Kostolac B i RP Đerdap 1 na koje je priključena HE Đerdap 1. Lokator kvara u RP Drmno pokazuje 100 km a u HE Đerdap 1 lokator pokazuje 55 km. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?",
+            "text_variants": [
+                "došlo je do ispada 400 kv dalekovoda broj 401/2 koji spaja rp drmno na koje je priključena te kostolac b i rp đerdap 1 na koje je priključena he đerdap 1. lokator kvara u rp drmno pokazuje 100 km a u he đerdap 1 lokator pokazuje 55 km. iz kog postrojenja dispečer treba da stavi dalekovod pod napon?",
+                "Ispad DV 401/2 između RP Drmno (TE Kostolac B) i RP Đerdap 1 (HE Đerdap 1). Lokator u Drmnu: 100 km, lokator u Đerdapu: 55 km. Odakle energisati?",
+                "DV 401/2 Drmno-Đerdap isključen. Pokazivanja: Drmno 100 km, Đerdap 55 km. Koja strana uključuje?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "62"
+            },
+            "chunk_refs": [
+                "5.2.9"
+            ],
+            "response_type": "text",
+            "expected": "Из постројења РП Ђердап 1"
+        },
+        {
+            "id": 58,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Došlo je do ispada mešovitog voda. Da li je dozvoljena jedna proba uključenja mešovitog voda?",
+            "text_variants": [
+                "došlo je do ispada mešovitog voda. da li je dozvoljena jedna proba uključenja mešovitog voda?",
+                "Da li je dozvoljena proba uključenja mešovitog voda nakon ispada?",
+                "Mešoviti vod ispao. Sme li se probati jedno uključenje?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "63"
+            },
+            "chunk_refs": [
+                "5.3.5"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 59,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Kada dispečer sme da da drugi nalog za uključenje elementa nakon prve neuspešne probe?",
+            "text_variants": [
+                "kada dispečer sme da da drugi nalog za uključenje elementa nakon prve neuspešne probe?",
+                "U kojim slučajevima dispečer može izdati drugi nalog za uključenje nakon neuspešnog prvog pokušaja?",
+                "Prvi pokušaj uključenja neuspešan. Kada je dozvoljen drugi pokušaj?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "64"
+            },
+            "chunk_refs": [
+                "5.4.1"
+            ],
+            "response_type": "text",
+            "expected": "Надлежни диспечер може да изда други налог за укључење далековода, ако је код првог покушаја укључења дошло до поновног испада, у случајевима: ако није успело укључење радијалног правца који напаја више ТС, далековода везаних у \"звезду\", далековода на које су прикључене трафостанице \"пролазног\" типа са два далеководна поља без уграђених прекидача, далековода који су уведени у објекат без далеководног прекидача. Пре укључења мора се развезати \"звезда\" или \"пролазна\" трафостаница."
+        },
+        {
+            "id": 60,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Na kojim naponskim nivoima se kod dalekova ugrađuju zaštite od preopterećenja u prenosnoj mreži?",
+            "text_variants": [
+                "na kojim naponskim nivoima se kod dalekova ugrađuju zaštite od preopterećenja u prenosnoj mreži?",
+                "Na kojima naponskim nivoima se primenjuje zaštita od preopterećenja dalekovoda u prenosnoj mreži?",
+                "Koji naponski nivoi imaju ugrađenu zaštitu od preopterećenja DV?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "65"
+            },
+            "chunk_refs": [
+                "5.5.1"
+            ],
+            "response_type": "text",
+            "expected": "Заштита од преоптерећења се примењује на свим далеководима 400 и 220 kV и неким ДВ 110 kV"
+        },
+        {
+            "id": 61,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Dispečer je isključio jedan od dvostrukih dalekovoda i otvorio dozvolu za radove u blizini dalekovoda. Drugi dvostruki dalekovod koji je sve vreme bio u pogonu ispada delovanjem distantne zaštite na oba kraja u prvom stepenu. Da li dispečer sme nakon 3 minuta da proba uključenje ispalog dalekovoda?",
+            "text_variants": [
+                "dispečer je isključio jedan od dvostrukih dalekovoda i otvorio dozvolu za radove u blizini dalekovoda. drugi dvostruki dalekovod koji je sve vreme bio u pogonu ispada delovanjem distantne zaštite na oba kraja u prvom stepenu. da li dispečer sme nakon 3 minuta da proba uključenje ispalog dalekovoda?",
+                "Jedan dvostruki DV isključen za radove. Drugi dvostruki DV ispada - distantna zaštita prvi stepen oba kraja. Da li nakon 3 minuta dispečer može probati uključenje?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "66"
+            },
+            "chunk_refs": [
+                "5.2.5"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 62,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li dispečer sme da blokira zaštite od preopterećenja na dalekovodima?",
+            "text_variants": [
+                "da li dispečer sme da blokira zaštite od preopterećenja na dalekovodima?",
+                "Da li je dispečeru dozvoljeno da blokira zaštitu od preopterećenja na dalekovodima?",
+                "Može li dispečer blokirati zaštitu preopterećenja DV?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "67"
+            },
+            "chunk_refs": [
+                "5.7.1",
+                "5.7.2"
+            ],
+            "response_type": "text",
+            "expected": "Надлежни диспечер може да изда налог за блокаду искључења од стране првог степена заштите од преоптерећења далековода, ако процени да за то постоји оправдан разлог. Блокада искључења од стране другог степена заштите од преоптерећења далековода није дозвољена. Изузетно, у претхаваријским ситуацијама са поремећајем у преносној мрежи, ради санирања ситуације или спречавања ширења поремећаја, као и у конкретним случајевима који су обрађени у Прилогу 5, диспечер НДЦ-а може дати налог за блокирање искључења од стране другог степена заштите од преоптерећења далековода"
+        },
+        {
+            "id": 63,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Pojavljuje se alarm \"Zaštita od preopterećenja – prvi stepen NASTANAK\". Koliko vremena ima dispečer da izvrši rasterećenje dalekovoda pre nego što on ispadne iz pogona?",
+            "text_variants": [
+                "pojavljuje se alarm \"zaštita od preopterećenja – prvi stepen nastanak\". koliko vremena ima dispečer da izvrši rasterećenje dalekovoda pre nego što on ispadne iz pogona?",
+                "Alarm preopterećenja prvi stepen. Koliko vremena ima dispečer za rasterećenje pre ispada DV?",
+                "Aktiviran alarm preopterećenja I stepen. Vreme do automatskog isklj učenja?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "68"
+            },
+            "chunk_refs": [
+                "5.5.1"
+            ],
+            "response_type": "text",
+            "expected": "20 минута"
+        },
+        {
+            "id": 64,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Došlo je do kvara uređaja distantne zaštite na dugom 110 kV dalekovodu. Šta su postupci dispečera?",
+            "text_variants": [
+                "došlo je do kvara uređaja distantne zaštite na dugom 110 kv dalekovodu. šta su postupci dispečera?",
+                "Kvar uređaja distantne zaštite na dugom 110 kV dalekovodu. Koje mere preduzima dispečer?",
+                "Uređaj distantne zaštite DV 110 kV neispravan. Postupak dispečera?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "69"
+            },
+            "chunk_refs": [
+                "5.6.1"
+            ],
+            "response_type": "text",
+            "expected": "Надлежни дежурни диспечер треба да искључи \"штићени далековод\" уколико се овим искључењем не ремете услови нормалног рада ЕЕС. У изузетним случајевима, након консултација са Сектором за релејну заштиту и локално управљање, остави у погону \"штићени далековод\" с тим да се у случају квара рачуна на деловање удаљених резервних заштита у суседним пољима и објектима. У том случају постоји могућност неселективног испада из погона више елемената ЕЕС"
+        },
+        {
+            "id": 65,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li se prekid optičkih vlakana u OPGW užetu smatra kvarom uređaja podužne diferencijalne zaštite? Da li dispečer treba da isključi dalekovod ukoliko dođe do prekida optičkih vlakana na OPGW užetu ukoliko dalekovod ima rezervnu distantnu zaštitu u istom uređaju u kojem se nalazi i podužna diferencijalna zaštita?",
+            "text_variants": [
+                "da li se prekid optičkih vlakana u opgw užetu smatra kvarom uređaja podužne diferencijalne zaštite? da li dispečer treba da isključi dalekovod ukoliko dođe do prekida optičkih vlakana na opgw užetu ukoliko dalekovod ima rezervnu distantnu zaštitu u istom uređaju u kojem se nalazi i podužna diferencijalna zaštita?",
+                "Prekid optičkih vlakana u OPGW užetu - da li je to kvar podužne diferencijalne zaštite? Da li dispečer treba da isključi DV ako postoji rezervna distantna zaštita?",
+                "OPGW optička vlakna prekinuta. Je li to kvar podužne diferencijalne? Treba li isključiti DV?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "70"
+            },
+            "chunk_refs": [
+                "5.6.2"
+            ],
+            "response_type": "text",
+            "expected": "Не сматра се кваром подужне диференцијалне заштите. Не треба да искључи далековод"
+        },
+        {
+            "id": 66,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Ukoliko se u toku izvođenja radova na jednom od dvostrukih dalekovoda javi kvar glavne zaštite na drugom dalekovodu, da li je neophodno prekinuti započete radove?",
+            "text_variants": [
+                "ukoliko se u toku izvođenja radova na jednom od dvostrukih dalekovoda javi kvar glavne zaštite na drugom dalekovodu, da li je neophodno prekinuti započete radove?",
+                "Radovi na jednom dvostrukom DV u toku. Kvar glavne zaštite na drugom DV. Da li prekinuti radove?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "71"
+            },
+            "chunk_refs": [
+                "5.6.5"
+            ],
+            "response_type": "text",
+            "expected": "Јесте, радови се прекидају"
+        },
+        {
+            "id": 67,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Koje su osnovne zaštite na transformatorima?",
+            "text_variants": [
+                "koje su osnovne zaštite na transformatorima?",
+                "Nabrojte osnovne zaštite na transformatorima",
+                "Koje zaštite spadaju u osnovne zaštite transformatora?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "72"
+            },
+            "chunk_refs": [
+                "6.1.1"
+            ],
+            "response_type": "text",
+            "expected": "Диференцијална, бухолц, бухолц регулационе склопке, реле надпритиска, ограничена земљоспојна (REF) и кућишна заштита"
+        },
+        {
+            "id": 68,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li je dozvoljeno uključenje transformatora nakon reagovanja osnovnih zaštita?",
+            "text_variants": [
+                "da li je dozvoljeno uključenje transformatora nakon reagovanja osnovnih zaštita?",
+                "Da li dispečer sme da uključi transformator nakon što je reagovala osnovna zaštita?",
+                "Sme li se uključiti TR posle delovanja osnovnih zaštita?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "73"
+            },
+            "chunk_refs": [
+                "6.2.1"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 69,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Dolazi do ispada transformatora delovanjem Buholc zaštite, dispečer ima informaciju o zemljotresu u regionu u kojem se nalazi instaliran transformator. Da li dispečer sme da uključi ispali transformator i šta je potrebno proveriti pre uključenja transformatora?",
+            "text_variants": [
+                "dolazi do ispada transformatora delovanjem buholc zaštite, dispečer ima informaciju o zemljotresu u regionu u kojem se nalazi instaliran transformator. da li dispečer sme da uključi ispali transformator i šta je potrebno proveriti pre uključenja transformatora?",
+                "Ispad transformatora - Buholc zaštita. U regionu bio zemljotres. Da li dispečer može da uključi transformator i šta proveriti?",
+                "TR ispadao zbog Buholc zaštite. Bio je zemljotres. Može li se uključiti i šta se proverava?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "74"
+            },
+            "chunk_refs": [
+                "6.5.2"
+            ],
+            "response_type": "text",
+            "expected": "Сме да га укључи, али је потребно да провери да није било побуде ни искључења од електричних заштита и да сигнал искључења бухолц заштите може да се квитира"
+        },
+        {
+            "id": 70,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Koji prekidač isključuje zaštita od preopterećenja na transformatoru?",
+            "text_variants": [
+                "koji prekidač isključuje zaštita od preopterećenja na transformatoru?",
+                "Koju stranu transformatora isključuje zaštita od preopterećenja?",
+                "Preopterećenje transformatora - koji prekidač isključuje zaštita?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "75"
+            },
+            "chunk_refs": [
+                "6.6.2"
+            ],
+            "response_type": "text",
+            "expected": "Заштита од преоптерећења трансформатора по правилу искључује само ниженапонску страну"
+        },
+        {
+            "id": 71,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Ukoliko transformator ima samo jednu diferencijalnu zaštitu i ustanovi se njen kvar, da li transformator može da ostane u pogonu?",
+            "text_variants": [
+                "ukoliko transformator ima samo jednu diferencijalnu zaštitu i ustanovi se njen kvar, da li transformator može da ostane u pogonu?",
+                "Transformator sa jednom diferencijalnom zaštitom - kvar zaštite. Da li TR može ostati u pogonu?",
+                "TR ima samo jednu diferencijalnu. Ona je u kvaru. Može li TR raditi?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "76"
+            },
+            "chunk_refs": [
+                "6.7.2"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 72,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li dispečer sme da blokira zaštitu od preopterećenja na transformatorima?",
+            "text_variants": [
+                "da li dispečer sme da blokira zaštitu od preopterećenja na transformatorima?",
+                "Da li je dispečeru dozvoljeno blokiranje zaštite od preopterećenja transformatora?",
+                "Sme li dispečer da blokira zaštitu od preopterećenja TR-a?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "77"
+            },
+            "chunk_refs": [
+                "6.8.1"
+            ],
+            "response_type": "text",
+            "expected": "Надлежни диспечер може дати налог за блокаду првог степена заштите од преоптерећења трансформатора (двостепена прекострујна заштита) ако мерења струје и температуре уља указују на лажно деловање. Блокада другог степена заштите од преоптерећења трансформатора није дозвољена"
+        },
+        {
+            "id": 73,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Kada je moguće trajno blokirati kućišnu zaštitu na transformatoru? Da li dispečer donosi odluku o blokadi kućišne zaštite?",
+            "text_variants": [
+                "kada je moguće trajno blokirati kućišnu zaštitu na transformatoru? da li dispečer donosi odluku o blokadi kućišne zaštite?",
+                "U kojim uslovima se može trajno blokirati kućišna zaštita? Ko donosi odluku o blokadi?",
+                "Kućišna zaštita TR - kada se blokira trajno? Ko odlučuje?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "78"
+            },
+            "chunk_refs": [
+                "6.8.4",
+                "6.8.5"
+            ],
+            "response_type": "text",
+            "expected": "Ако је у функцији ограничена земљоспојна заштита (REF), кућишна заштита се може блокирати трајно. Не, одлуку о блокади кућишне заштите доноси Сектор за релејну заштиту и локално управљање након консултација са надлежним службама РЦО"
+        },
+        {
+            "id": 74,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Ukoliko dolazi do ispada prekidača svih dalekovoda, koji polaze sa istog sistema sabirnica iz jednog postrojenja, u susednim postrojenjima reagovanjem distantne zaštite u drugom stepenu kao i ispada svih transformatora vezanih na iste sabirnice delovanjem distantne zaštite u drugom stepenu, gde se nalazi potencijalan kvar?",
+            "text_variants": [
+                "ukoliko dolazi do ispada prekidača svih dalekovoda, koji polaze sa istog sistema sabirnica iz jednog postrojenja, u susednim postrojenjima reagovanjem distantne zaštite u drugom stepenu kao i ispada svih transformatora vezanih na iste sabirnice delovanjem distantne zaštite u drugom stepenu, gde se nalazi potencijalan kvar?",
+                "Ispad svih DV sa istog sistema sabirnica - distantna drugi stepen u susednim TS. Ispad svih TR na tim sabirnicama. Gde je kvar?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "79"
+            },
+            "chunk_refs": [
+                "7.1.1"
+            ],
+            "response_type": "text",
+            "expected": "Потенцијални квар се налази на систему сабирница одакле полазе далеководи ка суседним постројењима где су реаговањем дистантне заштите у другом степену"
+        },
+        {
+            "id": 75,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Došlo je do potpunog nestanka komandnog napona u postrojenju. Koji su postupci dispečera nakon dobijanja ove informacije?",
+            "text_variants": [
+                "došlo je do potpunog nestanka komandnog napona u postrojenju. koji su postupci dispečera nakon dobijanja ove informacije?",
+                "Potpun nestanak komandnog napona u postrojenju. Šta dispečer preduzima?",
+                "Nestao komandni napon u TS. Kakve radnje preduzima dispečer?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "80"
+            },
+            "chunk_refs": [
+                "10.5.2"
+            ],
+            "response_type": "text",
+            "expected": "Надлежни диспечер даје налог за искључење трансформаторских поља, и са стручним службама разматра потребу за искључењем прикључних далековода"
+        },
+        {
+            "id": 76,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Transformator je ispao iz pogona zbog greške ispitivača relejne zaštite. Da li dispečer sme da uključi transformator nakon ispada?",
+            "text_variants": [
+                "transformator je ispao iz pogona zbog greške ispitivača relejne zaštite. da li dispečer sme da uključi transformator nakon ispada?",
+                "TR ispao zbog greške ispitivača RZ. Da li dispečer može da uključi transformator?",
+                "Greška ispitivača releja - TR ispadao. Sme li dispečer da ga uključi?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "81"
+            },
+            "chunk_refs": [
+                "6.5.4"
+            ],
+            "response_type": "text",
+            "expected": "Да, али је неопходно да се изврше следеће активности: извршилац радова писаном изјавом у Дневнику радова на трафостаници наводи разлоге испада трансформатора због радова у секундарним колима, и да се трансформатор може укључити без испитивања; руковалац на основу изјаве извршиоца радова обавештава надлежног диспечера; на основу добијеног обавештења од стране руковаоца, надлежни диспечер даје налог за укључење испалог трансформатора"
+        },
+        {
+            "id": 77,
+            "file_id": [
+                "2.01",
+                "8.15"
+            ],
+            "type": "section_text",
+            "text": "Napiši redosled manipulacija za prelazak sa prvog na drugi sistem sabirnica u TS Kragujevac 2 na 400 kV strani.",
+            "text_variants": [
+                "napiši redosled manipulacija za prelazak sa prvog na drugi sistem sabirnica u ts kragujevac 2 na 400 kv strani.",
+                "Kako izvršiti prebacivanje sa prvog na drugi sistem sabirnica u TS Kragujevac 2 na 400 kV strani? Navedi redosled koraka.",
+                "Prebacivanje 400 kV sabirnica u TS Kragujevac 2: SS1 na SS2. Redosled?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "82"
+            },
+            "chunk_refs": [
+                [
+                    "6.5.5"
+                ],
+                [
+                    "5.1",
+                    "6.1",
+                    "6.2"
+                ]
+            ],
+            "response_type": "text",
+            "expected": "1. Укључити растављаче спојног поља 400 kV; 2. Укључити прекидач спојног поља 400 kV; 3. Утврдити да је други систем сабирница 400 kV под напоном; 4. У пољу 400 kV од ДВ 436 укључити сабирнички растављач другог СС, а потом искључити сабирнички растављач првог СС; 5. У пољу 400 kV од ДВ 423/1 укључити сабирнички растављач другог СС, а потом искључити сабирнички растављач првог СС; 6. У пољу 400 kV од ТР 1 укључити сабирнички растављач другог СС, а потом искључити сабирнички растављач првог СС; 7. У пољу 400 kV од ТР 2 укључити сабирнички растављач другог СС, а потом искључити сабирнички растављач првог СС; 8. Искључити прекидач спојног поља 400 kV; 9. Утврдити да први систем сабирница 400 kV није под напоном; 10. Искључити растављаче спојног поља 400 kV. Напомена: Кораци од 4 до 7 могу да буду у било ком редоследу"
+        },
+        {
+            "id": 78,
+            "file_id": [
+                "2.01",
+                "8.22"
+            ],
+            "type": "section_text",
+            "text": "Došlo je do zaglave prekidača u TS Obrenovac na 400 kV dalekovodu broj 412. Prebaci dalekovod na pomoćni sistem sabirnica bez manipulacija prekidačem koji je zaglavljen.",
+            "text_variants": [
+                "došlo je do zaglave prekidača u ts obrenovac na 400 kv dalekovodu broj 412. prebaci dalekovod na pomoćni sistem sabirnica bez manipulacija prekidačem koji je zaglavljen.",
+                "Prekidač DV 412 u TS Obrenovac 400 kV je zaglavljen. Kako prebaciti dalekovod na pomoćni sistem sabirnica bez korišćenja zaglavljenog prekidača?",
+                "Zaglavljen prekidač DV 412 (TS Obrenovac 400kV). Prebaciti na pomoćni SS bez tog prekidača - koraci?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "83"
+            },
+            "chunk_refs": [
+                [
+                    "6.5.6"
+                ],
+                [
+                    "5.1"
+                ]
+            ],
+            "response_type": "text",
+            "expected": "1. Укључити растављаче помоћног спојног поља 400 kV и то растављач ГС1А и растављач помоћног СС 400 kV; 2. Укључити прекидач помоћног спојног поља 400 kV; 3. Утврдити присуство напона на помоћном СС 400 kV; 4. Укључити растављач помоћног СС 400 kV у пољу далековода 412; 5. Пребацити заштиту далековода 412 са сопственог прекидача у ДВП у ТС Обреновац на прекидач помоћног спојног поља 400 kV; 6. Искључити прекидач далековода 412 у ДВП 400 kV у ТС Обреновац; 7. Искључити излазни и сабирнички растављач ГС1Б на који је био прикључен далековод 412"
+        },
+        {
+            "id": 79,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Da li rukovalac sme bez naloga nadležnog dispečera da vrši manipulacije u postrojenju?",
+            "text_variants": [
+                "da li rukovalac sme bez naloga nadležnog dispečera da vrši manipulacije u postrojenju?",
+                "Da li je rukovalac ovlašćen da izvršava manipulacije bez naloga dispečera?",
+                "Može li rukovalac da manipuliše u postrojenju samostalno bez dispečera?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "84"
+            },
+            "chunk_refs": [
+                "6.3.1"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 80,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Sa koje strane se prvo isključuje prekidač prilikom isključenja transformatora?",
+            "text_variants": [
+                "sa koje strane se prvo isključuje prekidač prilikom isključenja transformatora?",
+                "Koja strana transformatora se prva isključuje?",
+                "Isključivanje TR - koja strana prva?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "85"
+            },
+            "chunk_refs": [
+                "6.5.3"
+            ],
+            "response_type": "text",
+            "expected": "Са ниженапонске стране"
+        },
+        {
+            "id": 81,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "U postrojenju A je isključen prekidač na dalekovodu koji ide od postrojenja A do postrojenja B, u postrojenju B je uključen prekidač. Da li je dozvoljeno isključiti sabirnički i izlazni rastavljač u postrojenju B?",
+            "text_variants": [
+                "u postrojenju a je isključen prekidač na dalekovodu koji ide od postrojenja a do postrojenja b, u postrojenju b je uključen prekidač. da li je dozvoljeno isključiti sabirnički i izlazni rastavljač u postrojenju b?",
+                "Prekidač DV u postrojenju A isključen, u postrojenju B uključen. Da li smemo isključiti rastavljače u postrojenju B?",
+                "Prekidač A isključen, B uključen. Mogu li se iskl. rastavljači u B?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "86"
+            },
+            "chunk_refs": [
+                "6.5.1"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 82,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "U postrojenju A je isključen prekidač na dalekovodu koji ide od postrojenja A do postrojenja B, u postrojenju B je uključen prekidač. Da li je dozvoljeno isključiti sabirnički i izlazni rastavljač u postrojenju A?",
+            "text_variants": [
+                "u postrojenju a je isključen prekidač na dalekovodu koji ide od postrojenja a do postrojenja b, u postrojenju b je uključen prekidač. da li je dozvoljeno isključiti sabirnički i izlazni rastavljač u postrojenju a?",
+                "Prekidač u A isključen, u B uključen. Mogu li se isključiti rastavljači u postrojenju A?",
+                "DV A-B: prekidač A OFF, B ON. Rastavljači u A mogu da se isključe?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "87"
+            },
+            "chunk_refs": [
+                "6.5.1"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 83,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Rukovalac je greškom isključio prekidač pogrešnog dalekovoda prilikom manipulacija. Da li rukovalac sme sam da ponovo uključi prekidač bez naloga nadležnog dispečera?",
+            "text_variants": [
+                "rukovalac je greškom isključio prekidač pogrešnog dalekovoda prilikom manipulacija. da li rukovalac sme sam da ponovo uključi prekidač bez naloga nadležnog dispečera?",
+                "Rukovalac greškom isključio pogrešan DV prekidač. Može li sam da ga uključi bez dispečera?",
+                "Greška rukovaoca - iskl. pogrešan prekidač. Sme li da ga ponovo ukl. samostalno?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "88"
+            },
+            "chunk_refs": [
+                "6.3.1"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 84,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Koji element služi da vidno odvoji neki element od drugog koji je pod naponom?",
+            "text_variants": [
+                "koji element služi da vidno odvoji neki element od drugog koji je pod naponom?",
+                "Koji uređaj služi za vidno odvajanje elementa od onog pod naponom?",
+                "Šta vidno odvaja element od dela koji je naponit?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "89"
+            },
+            "chunk_refs": [
+                "3.1.19"
+            ],
+            "response_type": "text",
+            "expected": "Растављач"
+        },
+        {
+            "id": 85,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Koje vrste manipulacija postoje?",
+            "text_variants": [
+                "koje vrste manipulacija postoje?",
+                "Nabrojte vrste manipulacija u postrojenju",
+                "Koje kategorije manipulacija razlikujemo?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "90"
+            },
+            "chunk_refs": [
+                "6.1.1",
+                "6.1.2",
+                "6.1.3"
+            ],
+            "response_type": "text",
+            "expected": "Манипулације за потребе извођења радова, манипулације за мењање топологије мреже, манипулације приликом поремећаја у систему"
+        },
+        {
+            "id": 86,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Da li dispečer na obuci može da izdaje naloge za manipulacije?",
+            "text_variants": [
+                "da li dispečer na obuci može da izdaje naloge za manipulacije?",
+                "Da li dispečer u obuci ima pravo da izdaje naloge za manipulacije?",
+                "Dispečer na obuci - sme li da izdaje naloge?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "91"
+            },
+            "chunk_refs": [
+                "6.2.5"
+            ],
+            "response_type": "text",
+            "expected": "Може"
+        },
+        {
+            "id": 87,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Šta je neophodno da dispečer na obuci naznači rukovaocu pre početka manipulacija?",
+            "text_variants": [
+                "šta je neophodno da dispečer na obuci naznači rukovaocu pre početka manipulacija?",
+                "Šta dispečer na obuci mora da napomene rukovalcu pre manipulacija?",
+                "Šta dispečer u obuci mora da kaže rukovalcu pre početka radova?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "92"
+            },
+            "chunk_refs": [
+                "6.2.5"
+            ],
+            "response_type": "text",
+            "expected": "У случају да је саговорник на обуци то се посебно наглашава, комуникацију обавезно прати одговорна особа чије се име и презиме такође наводи у комуникацији"
+        },
+        {
+            "id": 88,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Objasniti postpuka dispečera ukoliko ima informaciju da nema mogućnost snimanja razgovora prilikom davanja naloga za manipulaciju rukovaocu.",
+            "text_variants": [
+                "objasniti postpuka dispečera ukoliko ima informaciju da nema mogućnost snimanja razgovora prilikom davanja naloga za manipulaciju rukovaocu.",
+                "Kako dispečer postupa ako nema mogućnost snimanja razgovora pri davanju naloga?",
+                "Nema snimanja razgovora. Kako dispečer izdaje nalog rukovalcu?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "93"
+            },
+            "chunk_refs": [
+                "6.2.2"
+            ],
+            "response_type": "text",
+            "expected": "Налог се даје факсом или скенираним дописом на коме је написан налог за манипулације преко електронске поште"
+        },
+        {
+            "id": 89,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Sa kojih mesta se može komandovati rasklopnom opremom u postrojenju?",
+            "text_variants": [
+                "sa kojih mesta se može komandovati rasklopnom opremom u postrojenju?",
+                "Odakle je moguće upravljati rasklopnom opremom u TS?",
+                "Sa kojih lokacija se upravlja rasklopnom opremom?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "94"
+            },
+            "chunk_refs": [
+                "6.7.1"
+            ],
+            "response_type": "text",
+            "expected": "SCADA систем, командна табла на ТС/РП/ПРП, управљачка јединица поља у релејним кућицама, РУП – резервни управљачки панел у релејним кућицама, командни орман у пољу, из погонског механизма"
+        },
+        {
+            "id": 90,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Da li rukovalac sme da manipuliše iz pogonskog mehanizma rastavljača ukoliko je dalekovod bez napona?",
+            "text_variants": [
+                "da li rukovalac sme da manipuliše iz pogonskog mehanizma rastavljača ukoliko je dalekovod bez napona?",
+                "Može li rukovalac upravljati iz pogonskog mehanizma rastavljača ako je DV bez napona?",
+                "DV bez napona - sme li se manipulisati sa pogonskim mehanizmom rastavljača?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "95"
+            },
+            "chunk_refs": [
+                "6.7.2"
+            ],
+            "response_type": "text",
+            "expected": "Сме, уколико сматра да је наставак манипулације из погонског механизма безбедан"
+        },
+        {
+            "id": 91,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Da li rukovalac sme da manipuliše iz pogonskog mehanizma prekidača ako je dalekovod pod naponom i opterećen?",
+            "text_variants": [
+                "da li rukovalac sme da manipuliše iz pogonskog mehanizma prekidača ako je dalekovod pod naponom i opterećen?",
+                "Može li rukovalac koristiti pogonski mehanizam prekidača kada je DV pod naponom i opterećen?",
+                "DV naponit i opterećen - dopušteno iz pogonskog mehanizma prekidača?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "96"
+            },
+            "chunk_refs": [
+                "6.7.2"
+            ],
+            "response_type": "text",
+            "expected": "Сме, уколико сматра да је наставак манипулације из погонског механизма безбедан"
+        },
+        {
+            "id": 92,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Dispečer na SCADA sistemu vidi da je prekidač 400 kV dalekovod broj 436 u TS Obrenovac uključen. Nakon provere rukovalac na TS Obrenovac obaveštava dispečera da je prekidač isključen. Koju informaciju dispečer smatra za validnu u navedenoj situaciji?",
+            "text_variants": [
+                "dispečer na scada sistemu vidi da je prekidač 400 kv dalekovod broj 436 u ts obrenovac uključen. nakon provere rukovalac na ts obrenovac obaveštava dispečera da je prekidač isključen. koju informaciju dispečer smatra za validnu u navedenoj situaciji?",
+                "Na SCADA-i prekidač DV 436 u TS Obrenovac uključen. Rukovalac kaže da je isključen. Koja informacija je validna?",
+                "SCADA pokazuje ON, rukovalac kaže OFF (DV 436 Obrenovac). Šta je validno?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "97"
+            },
+            "chunk_refs": [
+                "6.7.7"
+            ],
+            "response_type": "text",
+            "expected": "Да је прекидач искључен"
+        },
+        {
+            "id": 93,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Za slučaj sprovođenja manipulacija u transformatorskom polju, koje informacije za naziv elementa EES-a manipulacija mora da sadrži?",
+            "text_variants": [
+                "za slučaj sprovođenja manipulacija u transformatorskom polju, koje informacije za naziv elementa ees-a manipulacija mora da sadrži?",
+                "Koje informacije mora sadržati nalog za manipulacije u transformatorskom polju?",
+                "Nalog za manipulacije u TR polju - koje informacije o nazivu elementa?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "98"
+            },
+            "chunk_refs": [
+                "6.3.3"
+            ],
+            "response_type": "text",
+            "expected": "Број трансформатора и напонски ниво на коме се врши манипулација"
+        },
+        {
+            "id": 94,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Dispečer vrši isključenje dalekovoda koji ide od postrojenja A do postrojenja B. U postrojenju A je isključen prekidač, a u postrojenju B je isključen prekidač i rukovalac ima nalog za isključenje sabirničkog i izlaznog rastavljača. Dispečer je na SCADA sistemu primio signalizaciju da su sabirnički i izlazni rastavljač isključeni u postrojenju B, ali još uvek od rukovaoca nije dobio informaciju o izvršenju naloga. Da li dispečer sme da da nalog za isključenje sabirničkog i izlaznog rastavljača u postrojenju A da bi skratio vreme manipulacija?",
+            "text_variants": [
+                "dispečer vrši isključenje dalekovoda koji ide od postrojenja a do postrojenja b. u postrojenju a je isključen prekidač, a u postrojenju b je isključen prekidač i rukovalac ima nalog za isključenje sabirničkog i izlaznog rastavljača. dispečer je na scada sistemu primio signalizaciju da su sabirnički i izlazni rastavljač isključeni u postrojenju b, ali još uvek od rukovaoca nije dobio informaciju o izvršenju naloga. da li dispečer sme da da nalog za isključenje sabirničkog i izlaznog rastavljača u postrojenju a da bi skratio vreme manipulacija?",
+                "SCADA pokazuje da su rastavljači u B isključeni, ali rukovalac još nije javio. Može li dispečer dati nalog za isključenje rastavljača u A?",
+                "Rastavljači B isključeni (po SCADA-i), rukovalac nije javio. Dati nalog za A odmah?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "99"
+            },
+            "chunk_refs": [
+                "6.3.7"
+            ],
+            "response_type": "text",
+            "expected": "Не"
+        },
+        {
+            "id": 95,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Dispečer je dobio informaciju da je sabirnički rastavljač u kvaru i da ukoliko se bude manipulisalo tim rastavljačem postoji mogućnost da će on izazvati havariju u postrojenju. Dispečer izdaje rukovaocu nalog da isključi rastavljač koji je u kvaru. Da li rukovalac sme da odbije izvršenje ovog naloga?",
+            "text_variants": [
+                "dispečer je dobio informaciju da je sabirnički rastavljač u kvaru i da ukoliko se bude manipulisalo tim rastavljačem postoji mogućnost da će on izazvati havariju u postrojenju. dispečer izdaje rukovaocu nalog da isključi rastavljač koji je u kvaru. da li rukovalac sme da odbije izvršenje ovog naloga?",
+                "Rastavljač u kvaru može izazvati havariju. Dispečer naređuje isključenje. Može li rukovalac odbiti nalog?",
+                "Kvar rastavljača - može doći do havarije. Dispečer nalaže isključenje. Ima li rukovalac pravo odbiti?"
+            ],
+            "info": {
+                "source": "phase1-questions",
+                "ref": "100"
+            },
+            "chunk_refs": [
+                "6.3.11"
+            ],
+            "response_type": "text",
+            "expected": "Сме"
+        },
+        {
+            "id": 100,
+            "file_id": [
+                "8.05"
+            ],
+            "type": "section_text",
+            "text": "Koliko sistema sabirnica ima postrojenje 110 kV u TS Beograd 5?",
+            "text_variants": [
+                "koliko sistema sabirnica ima postrojenje 110 kv u ts beograd 5?",
+                "Broj sistema sabirnica na 110 kV u TS Beograd 5",
+                "Koliko SS ima 110 kV postrojenje u TS Beograd 5?"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "1"
+            },
+            "chunk_refs": [
+                "5.1",
+                "5.2"
+            ],
+            "response_type": "text",
+            "expected": "Četiri sistema sabirnica: 1A, 1B, 2A i 2B"
+        },
+        {
+            "id": 101,
+            "file_id": [
+                "8.05"
+            ],
+            "type": "section_text",
+            "text": "Da li su oba poprečna spojna polja na 110 kV u TS Beograd 5 uključena u normalnom uklopnom stanju?",
+            "text_variants": [
+                "da li su oba poprečna spojna polja na 110 kv u ts beograd 5 uključena u normalnom uklopnom stanju?",
+                "Stanje poprečnih spojnih polja 110 kV u TS Beograd 5"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "2"
+            },
+            "chunk_refs": [
+                "5.2"
+            ],
+            "response_type": "text",
+            "expected": "Da, oba poprečna spojna polja su uključena"
+        },
+        {
+            "id": 102,
+            "file_id": [
+                "8.05"
+            ],
+            "type": "section_text",
+            "text": "Na kojem sistemu sabirnica 220 kV u TS Beograd 5 je priključen DV 228?",
+            "text_variants": [
+                "na kojem sistemu sabirnica 220 kv u ts beograd 5 je priključen dv 228?",
+                "Gde je priključen DV 228 u TS Beograd 5 na 220 kV?"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "3"
+            },
+            "chunk_refs": [
+                "5.1"
+            ],
+            "response_type": "text",
+            "expected": "Na 1. (ili 2.) sistemu sabirnica 220 kV"
+        },
+        {
+            "id": 103,
+            "file_id": [
+                "8.05"
+            ],
+            "type": "section_text",
+            "text": "Koji transformatori su priključeni na 1A sistem sabirnica 110 kV u TS Beograd 5?",
+            "text_variants": [
+                "koji transformatori su priključeni na 1a sistem sabirnica 110 kv u ts beograd 5?",
+                "Transformatori na 1A SS 110 kV u TS Beograd 5"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "4"
+            },
+            "chunk_refs": [
+                "5.2"
+            ],
+            "response_type": "text",
+            "expected": "TR3 (ili TR4) i TR1"
+        },
+        {
+            "id": 104,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Koliko transformatora 400/110 kV ima TS Jagodina 4?",
+            "text_variants": [
+                "koliko transformatora 400/110 kv ima ts jagodina 4?",
+                "Broj transformatora 400/110 kV u TS Jagodina 4"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "5"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "Dva transformatora (TR1 i TR2)"
+        },
+        {
+            "id": 105,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Koja je nominalna snaga jednog transformatora u TS Jagodina 4?",
+            "text_variants": [
+                "koja je nominalna snaga jednog transformatora u ts jagodina 4?",
+                "Snaga pojedinačnog TR u TS Jagodina 4"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "6"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "300 MVA"
+        },
+        {
+            "id": 106,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Preko kojih dalekovoda 400 kV je TS Jagodina 4 povezana sa prenosnim sistemom?",
+            "text_variants": [
+                "preko kojih dalekovoda 400 kv je ts jagodina 4 povezana sa prenosnim sistemom?",
+                "400 kV dalekovodi iz TS Jagodina 4"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "7"
+            },
+            "chunk_refs": [
+                "2.3"
+            ],
+            "response_type": "text",
+            "expected": "DV 423/1 i DV 423/2"
+        },
+        {
+            "id": 107,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Da li je aktivna diferencijalna zaštita sabirnica na 400 kV u TS Jagodina 4?",
+            "text_variants": [
+                "da li je aktivna diferencijalna zaštita sabirnica na 400 kv u ts jagodina 4?",
+                "Stanje diferencijalne zaštite 400 kV SS u TS Jagodina 4"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "8"
+            },
+            "chunk_refs": [
+                "5.1"
+            ],
+            "response_type": "text",
+            "expected": "Da, aktivna je diferencijalna zaštita sabirnica"
+        },
+        {
+            "id": 108,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Zašto prekidači 110 kV u TS Jagodina 1 ne zadovoljavaju kada je uključeno spojno polje 110 kV u TS Jagodina 4?",
+            "text_variants": [
+                "zašto prekidači 110 kv u ts jagodina 1 ne zadovoljavaju kada je uključeno spojno polje 110 kv u ts jagodina 4?",
+                "Problem sa prekidačima 110 kV u TS Jagodina 1"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "9"
+            },
+            "chunk_refs": [
+                "3.4"
+            ],
+            "response_type": "text",
+            "expected": "Ne zadovoljavaju sa aspekta struja kratkog spoja kada su u pogonu dva transformatora 400/110 kV"
+        },
+        {
+            "id": 109,
+            "file_id": [
+                "8.14"
+            ],
+            "type": "section_text",
+            "text": "Koji dalekovod treba da isključi dispečer kada jedan sistem sabirnica 110 kV u TS Jagodina 4 nije raspoloživ?",
+            "text_variants": [
+                "koji dalekovod treba da isključi dispečer kada jedan sistem sabirnica 110 kv u ts jagodina 4 nije raspoloživ?",
+                "DV za isključenje pri neraspoloživosti SS 110 kV u TS Jagodina 4"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "10"
+            },
+            "chunk_refs": [
+                "7.2.2"
+            ],
+            "response_type": "text",
+            "expected": "Dalekovod br. 108"
+        },
+        {
+            "id": 110,
+            "file_id": [
+                "3.01"
+            ],
+            "type": "section_text",
+            "text": "Kolika je nazivna vrednost frekvencije u EES?",
+            "text_variants": [
+                "kolika je nazivna vrednost frekvencije u ees?",
+                "Nazivna frekvencija elektroenergetskog sistema",
+                "Koja je nominalna frekvencija u EES-u?"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "11"
+            },
+            "chunk_refs": [
+                "3.4.1"
+            ],
+            "response_type": "text",
+            "expected": "50 Hz"
+        },
+        {
+            "id": 111,
+            "file_id": [
+                "3.01"
+            ],
+            "type": "section_text",
+            "text": "Koliko iznosi dozvoljena frekvencija kada prenosni sistem Srbije radi izolovano?",
+            "text_variants": [
+                "koliko iznosi dozvoljena frekvencija kada prenosni sistem srbije radi izolovano?",
+                "Dozvoljeni opseg frekvencije u izolovanom radu"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "12"
+            },
+            "chunk_refs": [
+                "3.4.2"
+            ],
+            "response_type": "text",
+            "expected": "50 Hz ± 0,5 Hz"
+        },
+        {
+            "id": 112,
+            "file_id": [
+                "3.01"
+            ],
+            "type": "section_text",
+            "text": "Koji je minimalni dozvoljeni napon u mreži 400 kV?",
+            "text_variants": [
+                "koji je minimalni dozvoljeni napon u mreži 400 kv?",
+                "Donja granica napona u 400 kV mreži"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "13"
+            },
+            "chunk_refs": [
+                "3.3.1"
+            ],
+            "response_type": "text",
+            "expected": "360 kV"
+        },
+        {
+            "id": 113,
+            "file_id": [
+                "3.01"
+            ],
+            "type": "section_text",
+            "text": "Koji je maksimalni dozvoljeni napon u mreži 220 kV?",
+            "text_variants": [
+                "koji je maksimalni dozvoljeni napon u mreži 220 kv?",
+                "Gornja granica napona u 220 kV mreži"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "14"
+            },
+            "chunk_refs": [
+                "3.3.1"
+            ],
+            "response_type": "text",
+            "expected": "245 kV"
+        },
+        {
+            "id": 114,
+            "file_id": [
+                "3.01"
+            ],
+            "type": "section_text",
+            "text": "U kom opsegu se mora nalaziti napon u mreži 110 kV?",
+            "text_variants": [
+                "u kom opsegu se mora nalaziti napon u mreži 110 kv?",
+                "Dozvoljeni opseg napona 110 kV mreže"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "15"
+            },
+            "chunk_refs": [
+                "3.3.1"
+            ],
+            "response_type": "text",
+            "expected": "Između 99 kV i 123 kV"
+        },
+        {
+            "id": 115,
+            "file_id": [
+                "8.03"
+            ],
+            "type": "section_text",
+            "text": "Koliko sistema sabirnica ima 110 kV postrojenje u TS Beograd 20?",
+            "text_variants": [
+                "koliko sistema sabirnica ima 110 kv postrojenje u ts beograd 20?",
+                "Broj SS na 110 kV u TS Beograd 20"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "16"
+            },
+            "chunk_refs": [
+                "5.2"
+            ],
+            "response_type": "text",
+            "expected": "Dva sistema sabirnica"
+        },
+        {
+            "id": 116,
+            "file_id": [
+                "8.03"
+            ],
+            "type": "section_text",
+            "text": "Koji dalekovodi polaze sa prvog sistema sabirnica 110 kV u TS Beograd 20?",
+            "text_variants": [
+                "koji dalekovodi polaze sa prvog sistema sabirnica 110 kv u ts beograd 20?",
+                "DV na prvom SS 110 kV u TS Beograd 20"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "17"
+            },
+            "chunk_refs": [
+                "5.2"
+            ],
+            "response_type": "text",
+            "expected": "DV 129A/1, DV 129A/2, MV 1250, DV 1240A, MV 1288"
+        },
+        {
+            "id": 117,
+            "file_id": [
+                "8.03"
+            ],
+            "type": "section_text",
+            "text": "Gde je tačka sekcionisanja između TS Beograd 20 i TS Beograd 5?",
+            "text_variants": [
+                "gde je tačka sekcionisanja između ts beograd 20 i ts beograd 5?",
+                "Tačka sekcionisanja BG20 - BG5"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "18"
+            },
+            "chunk_refs": [
+                "2.6"
+            ],
+            "response_type": "text",
+            "expected": "Prekidač KBP 110 kV br. 172/1 u TS Beograd 6"
+        },
+        {
+            "id": 118,
+            "file_id": [
+                "8.03"
+            ],
+            "type": "section_text",
+            "text": "Koji kablovi mogu biti preopterećeni pri paralelisanju TS Beograd 5 i TS Beograd 20?",
+            "text_variants": [
+                "koji kablovi mogu biti preopterećeni pri paralelisanju ts beograd 5 i ts beograd 20?",
+                "Kablovi u opasnosti od preopterećenja BG5-BG20"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "19"
+            },
+            "chunk_refs": [
+                "2.7"
+            ],
+            "response_type": "text",
+            "expected": "KB 171, KB 172/1 i KB 1265"
+        },
+        {
+            "id": 119,
+            "file_id": [
+                "8.03"
+            ],
+            "type": "section_text",
+            "text": "Šta mora dispečer da uradi pre uključenja prekidača KBP 110 kV br. 172/1 za paralelisanje TS Beograd 5 i TS Beograd 20?",
+            "text_variants": [
+                "šta mora dispečer da uradi pre uključenja prekidača kbp 110 kv br. 172/1 za paralelisanje ts beograd 5 i ts beograd 20?",
+                "Preduslov za paralelisanje BG5 i BG20"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "20"
+            },
+            "chunk_refs": [
+                "2.7"
+            ],
+            "response_type": "text",
+            "expected": "Mora da odradi analizu sigurnosti"
+        },
+        {
+            "id": 120,
+            "file_id": [
+                "8.17"
+            ],
+            "type": "section_text",
+            "text": "Kolika je nominalna snaga transformatora TR4 u TS Kraljevo 3?",
+            "text_variants": [
+                "kolika je nominalna snaga transformatora tr4 u ts kraljevo 3?",
+                "Snaga TR4 u TS Kraljevo 3"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "21"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "400 MVA"
+        },
+        {
+            "id": 121,
+            "file_id": [
+                "8.17"
+            ],
+            "type": "section_text",
+            "text": "Koji je naponski odnos transformatora TR4 u TS Kraljevo 3?",
+            "text_variants": [
+                "koji je naponski odnos transformatora tr4 u ts kraljevo 3?",
+                "Naponi TR4 u TS Kraljevo 3"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "22"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "400/220 kV"
+        },
+        {
+            "id": 122,
+            "file_id": [
+                "8.17"
+            ],
+            "type": "section_text",
+            "text": "Kolika je nominalna snaga transformatora TR1 i TR2 u TS Kraljevo 3?",
+            "text_variants": [
+                "kolika je nominalna snaga transformatora tr1 i tr2 u ts kraljevo 3?",
+                "Snaga TR1 i TR2 u TS Kraljevo 3"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "23"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "150 MVA"
+        },
+        {
+            "id": 123,
+            "file_id": [
+                "8.17"
+            ],
+            "type": "section_text",
+            "text": "Koji je naponski odnos transformatora TR1 i TR2 u TS Kraljevo 3?",
+            "text_variants": [
+                "koji je naponski odnos transformatora tr1 i tr2 u ts kraljevo 3?",
+                "Naponi TR1 i TR2 u TS Kraljevo 3"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "24"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "220/110 kV"
+        },
+        {
+            "id": 124,
+            "file_id": [
+                "8.17"
+            ],
+            "type": "section_text",
+            "text": "Na kojim naponskim nivoima ne postoji diferencijalna zaštita sabirnica u TS Kraljevo 3?",
+            "text_variants": [
+                "na kojim naponskim nivoima ne postoji diferencijalna zaštita sabirnica u ts kraljevo 3?",
+                "Naponi bez diferencijalne zaštite SS u TS Kraljevo 3"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "25"
+            },
+            "chunk_refs": [
+                "5.1"
+            ],
+            "response_type": "text",
+            "expected": "Na 220 kV i 110 kV"
+        },
+        {
+            "id": 125,
+            "file_id": [
+                "8.16"
+            ],
+            "type": "section_text",
+            "text": "Preko kojih dalekovoda je TS Kruševac 1 povezana sa TS Jagodina 1?",
+            "text_variants": [
+                "preko kojih dalekovoda je ts kruševac 1 povezana sa ts jagodina 1?",
+                "DV veza Kruševac 1 - Jagodina 1"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "26"
+            },
+            "chunk_refs": [
+                "2.7"
+            ],
+            "response_type": "text",
+            "expected": "DV 1141/1 i DV 105/3"
+        },
+        {
+            "id": 126,
+            "file_id": [
+                "8.16"
+            ],
+            "type": "section_text",
+            "text": "Da li je spojno polje 220 kV u TS Kruševac 1 uključeno u normalnom uklopnom stanju?",
+            "text_variants": [
+                "da li je spojno polje 220 kv u ts kruševac 1 uključeno u normalnom uklopnom stanju?",
+                "Stanje SP 220 kV u TS Kruševac 1"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "27"
+            },
+            "chunk_refs": [
+                "7.1.1"
+            ],
+            "response_type": "text",
+            "expected": "Da, spojno polje je uključeno"
+        },
+        {
+            "id": 127,
+            "file_id": [
+                "8.16"
+            ],
+            "type": "section_text",
+            "text": "Šta se dešava sa spojnim poljem 220 kV u TS Kruševac 1 pri neraspoloživosti diferencijalne zaštite 220 kV?",
+            "text_variants": [
+                "šta se dešava sa spojnim poljem 220 kv u ts kruševac 1 pri neraspoloživosti diferencijalne zaštite 220 kv?",
+                "SP 220 kV pri neraspoloživosti DZ u TS Kruševac 1"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "28"
+            },
+            "chunk_refs": [
+                "7.1.1"
+            ],
+            "response_type": "text",
+            "expected": "Spojno polje se isključuje i rastavljači se isključuju"
+        },
+        {
+            "id": 128,
+            "file_id": [
+                "8.28"
+            ],
+            "type": "section_text",
+            "text": "Koji dalekovodi u TS Srbobran imaju aktivnu zaštitu od preopterećenja?",
+            "text_variants": [
+                "koji dalekovodi u ts srbobran imaju aktivnu zaštitu od preopterećenja?",
+                "DV sa zaštitom od preopterećenja u TS Srbobran"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "29"
+            },
+            "chunk_refs": [
+                "2.5",
+                "2.6",
+                "2.7"
+            ],
+            "response_type": "text",
+            "expected": "DV 142/1, DV 127/2 i DV 1267"
+        },
+        {
+            "id": 129,
+            "file_id": [
+                "8.13"
+            ],
+            "type": "section_text",
+            "text": "Odakle se napaja sopstvena potrošnja TS Zrenjanin 2?",
+            "text_variants": [
+                "odakle se napaja sopstvena potrošnja ts zrenjanin 2?",
+                "Izvor napajanja SP u TS Zrenjanin 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "30"
+            },
+            "chunk_refs": [
+                "2.7"
+            ],
+            "response_type": "text",
+            "expected": "Sa tercijera transformatora TR1 ili TR2"
+        },
+        {
+            "id": 130,
+            "file_id": [
+                "8.13"
+            ],
+            "type": "section_text",
+            "text": "Koji dalekovod se preopterećuje u slučaju ispada DV 254/2 pri letnjoj špici u TS Zrenjanin 2?",
+            "text_variants": [
+                "koji dalekovod se preopterećuje u slučaju ispada dv 254/2 pri letnjoj špici u ts zrenjanin 2?",
+                "Preopterećenje DV pri ispadu 254/2 u TS Zrenjanin 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "31"
+            },
+            "chunk_refs": [
+                "3.3"
+            ],
+            "response_type": "text",
+            "expected": "DV 110 kV br. 142/1 TS Srbobran - TS Bečej"
+        },
+        {
+            "id": 131,
+            "file_id": [
+                "8.13"
+            ],
+            "type": "section_text",
+            "text": "Za koliko procenata se preopterećuje DV 142/1 pri ispadu DV 254/2 u letnjoj špici?",
+            "text_variants": [
+                "za koliko procenata se preopterećuje dv 142/1 pri ispadu dv 254/2 u letnjoj špici?",
+                "Procenat preopterećenja DV 142/1"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "32"
+            },
+            "chunk_refs": [
+                "3.3"
+            ],
+            "response_type": "text",
+            "expected": "Za 23%"
+        },
+        {
+            "id": 132,
+            "file_id": [
+                "8.12"
+            ],
+            "type": "section_text",
+            "text": "Nabrojati sve dalekovode kojima HE Đerdap 2 plasira energiju u prenosni sistem.",
+            "text_variants": [
+                "nabrojati sve dalekovode kojima he đerdap 2 plasira energiju u prenosni sistem.",
+                "Lista DV iz HE Đerdap 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "33"
+            },
+            "chunk_refs": [
+                "2.2"
+            ],
+            "response_type": "text",
+            "expected": "DV 1228A, DV 1228B, DV 1229A, DV 1229B, DV 1230"
+        },
+        {
+            "id": 133,
+            "file_id": [
+                "8.12"
+            ],
+            "type": "section_text",
+            "text": "Pri kojoj proizvodnji HE Đerdap 2 leti nije zadovoljen N-1 kriterijum?",
+            "text_variants": [
+                "pri kojoj proizvodnji he đerdap 2 leti nije zadovoljen n-1 kriterijum?",
+                "Granica proizvodnje za N-1 u HE Đerdap 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "34"
+            },
+            "chunk_refs": [
+                "3.3"
+            ],
+            "response_type": "text",
+            "expected": "Kada je proizvodnja iznad 190 MW"
+        },
+        {
+            "id": 134,
+            "file_id": [
+                "8.12"
+            ],
+            "type": "section_text",
+            "text": "Koji dalekovodi mogu izazvati kršenje N-1 kriterijuma kod HE Đerdap 2?",
+            "text_variants": [
+                "koji dalekovodi mogu izazvati kršenje n-1 kriterijuma kod he đerdap 2?",
+                "Kritični DV za N-1 kod HE Đerdap 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "35"
+            },
+            "chunk_refs": [
+                "3.3"
+            ],
+            "response_type": "text",
+            "expected": "DV br. 1204 (HE Đerdap 2 - TS Zaječar 2) i DV br.1166/1 (HE Đerdap 2 - PRP Veliki Krivelj 2)"
+        },
+        {
+            "id": 135,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Zašto TS Niš 2 i TS Bor 2 nisu u trajnom paralelnom radu?",
+            "text_variants": [
+                "zašto ts niš 2 i ts bor 2 nisu u trajnom paralelnom radu?",
+                "Razlog za odsustvo paralelnog rada Niš 2 - Bor 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "36"
+            },
+            "chunk_refs": [
+                "2.7"
+            ],
+            "response_type": "text",
+            "expected": "Zato što paralelni rad dovodi do povećanja gubitaka u EES-u Srbije"
+        },
+        {
+            "id": 136,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Koji prekidači su isključeni u TS Knjažević radi razdvajanja TS Niš 2 i TS Bor 2?",
+            "text_variants": [
+                "koji prekidači su isključeni u ts knjažević radi razdvajanja ts niš 2 i ts bor 2?",
+                "Tačka sekcionisanja Niš 2 - Bor 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "37"
+            },
+            "chunk_refs": [
+                "2.7"
+            ],
+            "response_type": "text",
+            "expected": "Prekidač u podužnom spojnom polju 110 kV i u transformatorskom polju 110 kV od TR1"
+        },
+        {
+            "id": 137,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Pod kojim uslovom je dozvoljeno paralelisanje TR1 i TR2 u TS Niš 3 na strani 35 kV?",
+            "text_variants": [
+                "pod kojim uslovom je dozvoljeno paralelisanje tr1 i tr2 u ts niš 3 na strani 35 kv?",
+                "Uslov za paralelni rad TR u TS Niš 3"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "38"
+            },
+            "chunk_refs": [
+                "2.11"
+            ],
+            "response_type": "text",
+            "expected": "Pod uslovom da je u TS Niš 2 uključeno SP 110 kV ili da su DV 187 i DV 188 na istom sistemu sabirnica"
+        },
+        {
+            "id": 138,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Zbog čega u TS Niš 13 nisu povezane sabirnice 110 kV?",
+            "text_variants": [
+                "zbog čega u ts niš 13 nisu povezane sabirnice 110 kv?",
+                "Razlog za razdvojenost SS 110 kV u TS Niš 13"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "39"
+            },
+            "chunk_refs": [
+                "2.13"
+            ],
+            "response_type": "text",
+            "expected": "Zbog nepostojanja distantne zaštite u DV polju 1187A i DV polju 1187B"
+        },
+        {
+            "id": 139,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Preko kog dalekovoda je TS Niš 2 povezana sa TE Kosovo B?",
+            "text_variants": [
+                "preko kog dalekovoda je ts niš 2 povezana sa te kosovo b?",
+                "DV veza Niš 2 - Kosovo B"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "40"
+            },
+            "chunk_refs": [
+                "4.2"
+            ],
+            "response_type": "text",
+            "expected": "DV 400 kV br. 407 TS Niš 2 – TE Kosovo B"
+        },
+        {
+            "id": 140,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Preko kog dalekovoda je TS Niš 2 povezana sa TS Sofija Zapad?",
+            "text_variants": [
+                "preko kog dalekovoda je ts niš 2 povezana sa ts sofija zapad?",
+                "DV veza Niš 2 - Sofija Zapad"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "41"
+            },
+            "chunk_refs": [
+                "2.2"
+            ],
+            "response_type": "text",
+            "expected": "DV 400 kV br. 404 TS Niš 2 – TS Sofija Zapad"
+        },
+        {
+            "id": 141,
+            "file_id": [
+                "8.20"
+            ],
+            "type": "section_text",
+            "text": "Šta se menja u uklopnom stanju 400 kV u TS Niš 2 pri neraspoloživosti diferencijalne zaštite 400 kV?",
+            "text_variants": [
+                "šta se menja u uklopnom stanju 400 kv u ts niš 2 pri neraspoloživosti diferencijalne zaštite 400 kv?",
+                "Promene na 400 kV pri neraspoloživosti DZ u TS Niš 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "42"
+            },
+            "chunk_refs": [
+                "7.1.1"
+            ],
+            "response_type": "text",
+            "expected": "Svi izvodi se prebacuju na jedan sistem sabirnica (GS 1 ili GS 2), dok je spojno polje isključeno i rastavljeno"
+        },
+        {
+            "id": 142,
+            "file_id": [
+                "8.22"
+            ],
+            "type": "section_text",
+            "text": "Nabrojati sve 220 kV dalekovode kojima su generatori TENT-a A povezani na prenosni sistem.",
+            "text_variants": [
+                "nabrojati sve 220 kv dalekovode kojima su generatori tent-a a povezani na prenosni sistem.",
+                "220 kV DV iz TENT A"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "43"
+            },
+            "chunk_refs": [
+                "2.3"
+            ],
+            "response_type": "text",
+            "expected": "DV 256A, DV 256B, DV 263A i DV 263B"
+        },
+        {
+            "id": 143,
+            "file_id": [
+                "8.22"
+            ],
+            "type": "section_text",
+            "text": "Nabrojati sve 400 kV dalekovode kojima su generatori TENT-a A povezani na prenosni sistem.",
+            "text_variants": [
+                "nabrojati sve 400 kv dalekovode kojima su generatori tent-a a povezani na prenosni sistem.",
+                "400 kV DV iz TENT A"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "44"
+            },
+            "chunk_refs": [
+                "2.3"
+            ],
+            "response_type": "text",
+            "expected": "DV 424 i DV 425"
+        },
+        {
+            "id": 144,
+            "file_id": [
+                "8.32"
+            ],
+            "type": "section_text",
+            "text": "Kolika je nominalna snaga pojedinačnog transformatora u VE Čibuk 1?",
+            "text_variants": [
+                "kolika je nominalna snaga pojedinačnog transformatora u ve čibuk 1?",
+                "Snaga jednog TR u VE Čibuk 1"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "45"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "90 MVA"
+        },
+        {
+            "id": 145,
+            "file_id": [
+                "8.32"
+            ],
+            "type": "section_text",
+            "text": "Da li iz elektrane VE Čibuk 1 može daljinski da se komanduje 400 kV prekidačima?",
+            "text_variants": [
+                "da li iz elektrane ve čibuk 1 može daljinski da se komanduje 400 kv prekidačima?",
+                "Daljinsko upravljanje 400 kV prekidačima iz VE Čibuk 1"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "46"
+            },
+            "chunk_refs": [
+                "2.4"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 146,
+            "file_id": [
+                "8.32"
+            ],
+            "type": "section_text",
+            "text": "Da li iz RP Čibuk 1 polaze interkonektivni dalekovodi?",
+            "text_variants": [
+                "da li iz rp čibuk 1 polaze interkonektivni dalekovodi?",
+                "Interkonektivne veze iz RP Čibuk 1"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "47"
+            },
+            "chunk_refs": [
+                "2.4"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 147,
+            "file_id": [
+                "8.32"
+            ],
+            "type": "section_text",
+            "text": "Koliko vetroagregata ima vetroelektrana VE Čibuk 1?",
+            "text_variants": [
+                "koliko vetroagregata ima vetroelektrana ve čibuk 1?",
+                "Broj vetrogeneratora u VE Čibuk 1"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "48"
+            },
+            "chunk_refs": [
+                "2.6"
+            ],
+            "response_type": "text",
+            "expected": "57 vetroagregata"
+        },
+        {
+            "id": 148,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Šta znači uspešan ciklus APU na dalekovodu?",
+            "text_variants": [
+                "šta znači uspešan ciklus apu na dalekovodu?",
+                "Značenje uspešnog APU ciklusa"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "49"
+            },
+            "chunk_refs": [
+                "5.1.3"
+            ],
+            "response_type": "text",
+            "expected": "Dalekovod je ponovo u pogonu, kvar je bio prolaznog karaktera"
+        },
+        {
+            "id": 149,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Ako distantna zaštita u postrojenju A reaguje u prvom stepenu, a u postrojenju B u drugom stepenu, gde se nalazi kvar na dalekovodu?",
+            "text_variants": [
+                "ako distantna zaštita u postrojenju a reaguje u prvom stepenu, a u postrojenju b u drugom stepenu, gde se nalazi kvar na dalekovodu?",
+                "Lokacija kvara po distantnoj zaštiti I/II stepen"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "50"
+            },
+            "chunk_refs": [
+                "5.1.4"
+            ],
+            "response_type": "text",
+            "expected": "Na prvih 15% od postrojenja A"
+        },
+        {
+            "id": 150,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Ako distantna zaštita na oba kraja reaguje u prvom stepenu, gde se nalazi kvar?",
+            "text_variants": [
+                "ako distantna zaštita na oba kraja reaguje u prvom stepenu, gde se nalazi kvar?",
+                "Lokacija kvara pri oba I stepena distantne"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "51"
+            },
+            "chunk_refs": [
+                "5.1.4"
+            ],
+            "response_type": "text",
+            "expected": "Na 15 – 85% od bilo kog kraja"
+        },
+        {
+            "id": 151,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li sme dispečer da uključi dalekovod ako postoji povratni napon ali nema signala zaštite?",
+            "text_variants": [
+                "da li sme dispečer da uključi dalekovod ako postoji povratni napon ali nema signala zaštite?",
+                "Uključenje DV sa povratnim naponom bez signala zaštite"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "52"
+            },
+            "chunk_refs": [
+                "5.2.1"
+            ],
+            "response_type": "text",
+            "expected": "Da"
+        },
+        {
+            "id": 152,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Iz kog postrojenja se stavlja dalekovod pod napon ako je kvar bliži postrojenju A?",
+            "text_variants": [
+                "iz kog postrojenja se stavlja dalekovod pod napon ako je kvar bliži postrojenju a?",
+                "Strana za uključenje DV - kvar bliži A"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "53"
+            },
+            "chunk_refs": [
+                "5.2.9"
+            ],
+            "response_type": "text",
+            "expected": "Iz postrojenja B (udaljenijeg od kvara)"
+        },
+        {
+            "id": 153,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li je dozvoljena proba uključenja mešovitog voda nakon ispada?",
+            "text_variants": [
+                "da li je dozvoljena proba uključenja mešovitog voda nakon ispada?",
+                "Proba uključenja mešovitog voda"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "54"
+            },
+            "chunk_refs": [
+                "5.3.5"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 154,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Na kojim naponskim nivoima se primenjuje zaštita od preopterećenja dalekovoda?",
+            "text_variants": [
+                "na kojim naponskim nivoima se primenjuje zaštita od preopterećenja dalekovoda?",
+                "Naponi sa zaštitom od preopterećenja DV"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "55"
+            },
+            "chunk_refs": [
+                "5.5.1"
+            ],
+            "response_type": "text",
+            "expected": "Na svim dalekovodima 400 i 220 kV i nekim DV 110 kV"
+        },
+        {
+            "id": 155,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Koliko vremena ima dispečer za rasterećenje dalekovoda nakon alarma prvog stepena preopterećenja?",
+            "text_variants": [
+                "koliko vremena ima dispečer za rasterećenje dalekovoda nakon alarma prvog stepena preopterećenja?",
+                "Vreme za reakciju pri preopterećenju I stepena"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "56"
+            },
+            "chunk_refs": [
+                "5.5.1"
+            ],
+            "response_type": "text",
+            "expected": "20 minuta"
+        },
+        {
+            "id": 156,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li je dozvoljena blokada drugog stepena zaštite od preopterećenja dalekovoda?",
+            "text_variants": [
+                "da li je dozvoljena blokada drugog stepena zaštite od preopterećenja dalekovoda?",
+                "Blokiranje II stepena zaštite preopterećenja DV"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "57"
+            },
+            "chunk_refs": [
+                "5.7.2"
+            ],
+            "response_type": "text",
+            "expected": "Nije dozvoljena, osim u izuzetnim pret-havarijskim situacijama"
+        },
+        {
+            "id": 157,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Šta treba da uradi dispečer ako dođe do kvara distantne zaštite na dugom 110 kV dalekovodu?",
+            "text_variants": [
+                "šta treba da uradi dispečer ako dođe do kvara distantne zaštite na dugom 110 kv dalekovodu?",
+                "Postupak pri kvaru distantne zaštite DV 110 kV"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "58"
+            },
+            "chunk_refs": [
+                "5.6.1"
+            ],
+            "response_type": "text",
+            "expected": "Treba da isključi štićeni dalekovod ako se time ne remete uslovi normalnog rada EES"
+        },
+        {
+            "id": 158,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li se prekid optičkih vlakana u OPGW užetu smatra kvarom podužne diferencijalne zaštite?",
+            "text_variants": [
+                "da li se prekid optičkih vlakana u opgw užetu smatra kvarom podužne diferencijalne zaštite?",
+                "Prekid optike u OPGW - kvar zaštite?"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "59"
+            },
+            "chunk_refs": [
+                "5.6.2"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 159,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li treba prekinuti radove na jednom dvostrukom dalekovodu ako se javi kvar glavne zaštite na drugom?",
+            "text_variants": [
+                "da li treba prekinuti radove na jednom dvostrukom dalekovodu ako se javi kvar glavne zaštite na drugom?",
+                "Radovi na dvostrukom DV pri kvaru zaštite"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "60"
+            },
+            "chunk_refs": [
+                "5.6.5"
+            ],
+            "response_type": "text",
+            "expected": "Da, radovi se prekidaju"
+        },
+        {
+            "id": 160,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Koje su osnovne zaštite transformatora?",
+            "text_variants": [
+                "koje su osnovne zaštite transformatora?",
+                "Nabrojati osnovne zaštite TR"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "61"
+            },
+            "chunk_refs": [
+                "6.1.1"
+            ],
+            "response_type": "text",
+            "expected": "Diferencijalna, buholc, buholc regulacione sklopke, rele nadpritiska, ograničena zemljospojna (REF) i kućišna zaštita"
+        },
+        {
+            "id": 161,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li je dozvoljeno ponovo uključiti transformator nakon reagovanja osnovnih zaštita?",
+            "text_variants": [
+                "da li je dozvoljeno ponovo uključiti transformator nakon reagovanja osnovnih zaštita?",
+                "Uključenje TR posle osnovne zaštite"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "62"
+            },
+            "chunk_refs": [
+                "6.2.1"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 162,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Pod kojim uslovima sme dispečer da uključi transformator nakon reagovanja Buholc zaštite usled zemljotresa?",
+            "text_variants": [
+                "pod kojim uslovima sme dispečer da uključi transformator nakon reagovanja buholc zaštite usled zemljotresa?",
+                "Uključenje TR posle Buholc zaštite - zemljotres"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "63"
+            },
+            "chunk_refs": [
+                "6.5.2"
+            ],
+            "response_type": "text",
+            "expected": "Ako nije bilo pobude ni isključenja od električnih zaštita i ako se signal isključenja buholc zaštite može kvitirati"
+        },
+        {
+            "id": 163,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Koju stranu transformatora isključuje zaštita od preopterećenja?",
+            "text_variants": [
+                "koju stranu transformatora isključuje zaštita od preopterećenja?",
+                "Koja strana TR se isključuje pri preopterećenju?"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "64"
+            },
+            "chunk_refs": [
+                "6.6.2"
+            ],
+            "response_type": "text",
+            "expected": "Samo niženaponsku stranu"
+        },
+        {
+            "id": 164,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li transformator sa samo jednom diferencijalnom zaštitom može ostati u pogonu ako ta zaštita otkaže?",
+            "text_variants": [
+                "da li transformator sa samo jednom diferencijalnom zaštitom može ostati u pogonu ako ta zaštita otkaže?",
+                "TR sa jednom DZ - kvar zaštite"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "65"
+            },
+            "chunk_refs": [
+                "6.7.2"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 165,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li je dozvoljena blokada drugog stepena zaštite od preopterećenja transformatora?",
+            "text_variants": [
+                "da li je dozvoljena blokada drugog stepena zaštite od preopterećenja transformatora?",
+                "Blokiranje II stepena zaštite preopterećenja TR"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "66"
+            },
+            "chunk_refs": [
+                "6.8.1"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 166,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Kada se može trajno blokirati kućišna zaštita transformatora?",
+            "text_variants": [
+                "kada se može trajno blokirati kućišna zaštita transformatora?",
+                "Uslovi za trajnu blokadu kućišne zaštite TR"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "67"
+            },
+            "chunk_refs": [
+                "6.8.4"
+            ],
+            "response_type": "text",
+            "expected": "Ako je u funkciji ograničena zemljospojna zaštita (REF)"
+        },
+        {
+            "id": 167,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Ko donosi odluku o trajnoj blokadi kućišne zaštite transformatora?",
+            "text_variants": [
+                "ko donosi odluku o trajnoj blokadi kućišne zaštite transformatora?",
+                "Nadležnost za blokadu kućišne zaštite TR"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "68"
+            },
+            "chunk_refs": [
+                "6.8.5"
+            ],
+            "response_type": "text",
+            "expected": "Sektor za relejnu zaštitu i lokalno upravljanje nakon konsultacija sa nadležnim službama RCO"
+        },
+        {
+            "id": 168,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Gde je potencijalan kvar ako svi dalekovodi sa istog sistema sabirnica ispadnu distantnom zaštitom u drugom stepenu?",
+            "text_variants": [
+                "gde je potencijalan kvar ako svi dalekovodi sa istog sistema sabirnica ispadnu distantnom zaštitom u drugom stepenu?",
+                "Lokacija kvara - ispad svih DV sa jednog SS"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "69"
+            },
+            "chunk_refs": [
+                "7.1.1"
+            ],
+            "response_type": "text",
+            "expected": "Na sistemu sabirnica odakle polaze dalekovodi"
+        },
+        {
+            "id": 169,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Šta radi dispečer nakon potpunog nestanka komandnog napona u postrojenju?",
+            "text_variants": [
+                "šta radi dispečer nakon potpunog nestanka komandnog napona u postrojenju?",
+                "Postupak pri nestanku komandnog napona"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "70"
+            },
+            "chunk_refs": [
+                "10.5.2"
+            ],
+            "response_type": "text",
+            "expected": "Daje nalog za isključenje transformatorskih polja i razmatra sa stručnim službama potrebu za isključenjem priključnih dalekovoda"
+        },
+        {
+            "id": 170,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Šta je potrebno da izvršilac radova napiše u Dnevnik radova ako je transformator ispao zbog greške ispitivača?",
+            "text_variants": [
+                "šta je potrebno da izvršilac radova napiše u dnevnik radova ako je transformator ispao zbog greške ispitivača?",
+                "Dokumentovanje ispada TR zbog greške ispitivača"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "71"
+            },
+            "chunk_refs": [
+                "6.5.4"
+            ],
+            "response_type": "text",
+            "expected": "Pisanu izjavu koja navodi razloge ispada transformatora zbog radova u sekundarnim kolima i da se transformator može uključiti bez ispitivanja"
+        },
+        {
+            "id": 171,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Sa koje strane se prvo isključuje transformator?",
+            "text_variants": [
+                "sa koje strane se prvo isključuje transformator?",
+                "Redosled isključenja TR"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "72"
+            },
+            "chunk_refs": [
+                "6.5.3"
+            ],
+            "response_type": "text",
+            "expected": "Sa niženaponske strane"
+        },
+        {
+            "id": 172,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Da li rukovalac sme samostalno da vrši manipulacije bez naloga dispečera?",
+            "text_variants": [
+                "da li rukovalac sme samostalno da vrši manipulacije bez naloga dispečera?",
+                "Ovlašćenja rukovaoca za manipulacije"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "73"
+            },
+            "chunk_refs": [
+                "6.3.1"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 173,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Da li rukovalac sme ponovo da uključi prekidač koji je greškom isključio bez naloga dispečera?",
+            "text_variants": [
+                "da li rukovalac sme ponovo da uključi prekidač koji je greškom isključio bez naloga dispečera?",
+                "Greška rukovaoca - uključenje bez dispečera"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "74"
+            },
+            "chunk_refs": [
+                "6.3.1"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 174,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Koja je funkcija rastavljača u postrojenju?",
+            "text_variants": [
+                "koja je funkcija rastavljača u postrojenju?",
+                "Čemu služi rastavljač?"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "75"
+            },
+            "chunk_refs": [
+                "3.1.19"
+            ],
+            "response_type": "text",
+            "expected": "Da vidno odvoji element od drugog elementa koji je pod naponom"
+        },
+        {
+            "id": 175,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Nabrojati vrste manipulacija u postrojenju.",
+            "text_variants": [
+                "nabrojati vrste manipulacija u postrojenju.",
+                "Tipovi manipulacija u EES"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "76"
+            },
+            "chunk_refs": [
+                "6.1.1",
+                "6.1.2",
+                "6.1.3"
+            ],
+            "response_type": "text",
+            "expected": "Manipulacije za potrebe izvođenja radova, manipulacije za menjanje topologije mreže, manipulacije prilikom poremećaja u sistemu"
+        },
+        {
+            "id": 176,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Da li dispečer na obuci ima ovlašćenja da izdaje naloge za manipulacije?",
+            "text_variants": [
+                "da li dispečer na obuci ima ovlašćenja da izdaje naloge za manipulacije?",
+                "Ovlašćenja dispečera na obuci"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "77"
+            },
+            "chunk_refs": [
+                "6.2.5"
+            ],
+            "response_type": "text",
+            "expected": "Da, može"
+        },
+        {
+            "id": 177,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Šta dispečer na obuci mora da naglasi u komunikaciji sa rukovalcem?",
+            "text_variants": [
+                "šta dispečer na obuci mora da naglasi u komunikaciji sa rukovalcem?",
+                "Obaveze dispečera na obuci pri komunikaciji"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "78"
+            },
+            "chunk_refs": [
+                "6.2.5"
+            ],
+            "response_type": "text",
+            "expected": "Da je na obuci i ime i prezime odgovorne osobe koja prati komunikaciju"
+        },
+        {
+            "id": 178,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Kako se daje nalog za manipulacije ako nema mogućnosti snimanja razgovora?",
+            "text_variants": [
+                "kako se daje nalog za manipulacije ako nema mogućnosti snimanja razgovora?",
+                "Nalog bez snimanja razgovora"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "79"
+            },
+            "chunk_refs": [
+                "6.2.2"
+            ],
+            "response_type": "text",
+            "expected": "Faksom ili skeniranim dopisom na kojem je napisan nalog za manipulacije preko elektronske pošte"
+        },
+        {
+            "id": 179,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Sa kojih mesta se može komandovati rasklopnom opremom?",
+            "text_variants": [
+                "sa kojih mesta se može komandovati rasklopnom opremom?",
+                "Lokacije za komandovanje rasklopnom opremom"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "80"
+            },
+            "chunk_refs": [
+                "6.7.1"
+            ],
+            "response_type": "text",
+            "expected": "SCADA sistem, komandna tabla na TS/RP/PRP, upravljačka jedinica polja u relejnim kućicama, RUP – rezervni upravljački panel u relejnim kućicama, komandni orman u polju, iz pogonskog mehanizma"
+        },
+        {
+            "id": 180,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Da li rukovalac sme da manipuliše iz pogonskog mehanizma rastavljača kada je dalekovod bez napona?",
+            "text_variants": [
+                "da li rukovalac sme da manipuliše iz pogonskog mehanizma rastavljača kada je dalekovod bez napona?",
+                "Manipulacija pogonskim mehanizmom - DV bez napona"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "81"
+            },
+            "chunk_refs": [
+                "6.7.2"
+            ],
+            "response_type": "text",
+            "expected": "Da, ako smatra da je nastavak manipulacije iz pogonskog mehanizma bezbedan"
+        },
+        {
+            "id": 181,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Koja informacija je validna kada SCADA pokazuje drugačije stanje od onog što prijavljuje rukovalac?",
+            "text_variants": [
+                "koja informacija je validna kada scada pokazuje drugačije stanje od onog što prijavljuje rukovalac?",
+                "SCADA vs rukovalac - validna informacija"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "82"
+            },
+            "chunk_refs": [
+                "6.7.7"
+            ],
+            "response_type": "text",
+            "expected": "Informacija rukovaoca"
+        },
+        {
+            "id": 182,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Koje informacije mora da sadrži naziv elementa kod manipulacija u transformatorskom polju?",
+            "text_variants": [
+                "koje informacije mora da sadrži naziv elementa kod manipulacija u transformatorskom polju?",
+                "Naziv elementa za TR manipulacije"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "83"
+            },
+            "chunk_refs": [
+                "6.3.3"
+            ],
+            "response_type": "text",
+            "expected": "Broj transformatora i naponski nivo na kojem se vrši manipulacija"
+        },
+        {
+            "id": 183,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Da li dispečer sme da da nalog za isključenje rastavljača u postrojenju A pre nego što rukovalac u postrojenju B potvrdi izvršenje prethodnog naloga?",
+            "text_variants": [
+                "da li dispečer sme da da nalog za isključenje rastavljača u postrojenju a pre nego što rukovalac u postrojenju b potvrdi izvršenje prethodnog naloga?",
+                "Izdavanje naloga pre potvrde izvršenja"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "84"
+            },
+            "chunk_refs": [
+                "6.3.7"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 184,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Da li rukovalac ima pravo da odbije izvršenje naloga dispečera ako smatra da je opasan?",
+            "text_variants": [
+                "da li rukovalac ima pravo da odbije izvršenje naloga dispečera ako smatra da je opasan?",
+                "Pravo rukovaoca na odbijanje naloga"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "85"
+            },
+            "chunk_refs": [
+                "6.3.11"
+            ],
+            "response_type": "text",
+            "expected": "Da"
+        },
+        {
+            "id": 185,
+            "file_id": [
+                "8.15"
+            ],
+            "type": "section_text",
+            "text": "Koliki je broj koraka za prebacivanje sa prvog na drugi sistem sabirnica 400 kV u TS Kragujevac 2?",
+            "text_variants": [
+                "koliki je broj koraka za prebacivanje sa prvog na drugi sistem sabirnica 400 kv u ts kragujevac 2?",
+                "Broj koraka za prebacivanje SS 400 kV u TS Kragujevac 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "86"
+            },
+            "chunk_refs": [
+                "5.1",
+                "6.1",
+                "6.2"
+            ],
+            "response_type": "text",
+            "expected": "10 koraka"
+        },
+        {
+            "id": 186,
+            "file_id": [
+                "8.22"
+            ],
+            "type": "section_text",
+            "text": "Koliko koraka je potrebno za prebacivanje DV 412 na pomoćni sistem sabirnica pri zaglavljenom prekidaču u TS Obrenovac?",
+            "text_variants": [
+                "koliko koraka je potrebno za prebacivanje dv 412 na pomoćni sistem sabirnica pri zaglavljenom prekidaču u ts obrenovac?",
+                "Broj koraka za prebacivanje DV 412 na pomoćni SS"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "87"
+            },
+            "chunk_refs": [
+                "5.1"
+            ],
+            "response_type": "text",
+            "expected": "7 koraka"
+        },
+        {
+            "id": 187,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "U kojim slučajevima dispečer može izdati drugi nalog za uključenje dalekovoda nakon neuspešne prve probe?",
+            "text_variants": [
+                "u kojim slučajevima dispečer može izdati drugi nalog za uključenje dalekovoda nakon neuspešne prve probe?",
+                "Uslovi za drugi pokušaj uključenja DV"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "88"
+            },
+            "chunk_refs": [
+                "5.4.1"
+            ],
+            "response_type": "text",
+            "expected": "Kod radijalnog pravca koji napaja više TS, dalekovoda vezanih u zvezdu, dalekovoda na koje su priključene trafostanice prolaznog tipa, dalekovoda bez dalekovodnog prekidača"
+        },
+        {
+            "id": 188,
+            "file_id": [
+                "2.00"
+            ],
+            "type": "section_text",
+            "text": "Da li dispečer sme da proba uključenje ispalog dvostrukog dalekovoda dok su u toku radovi na drugom dvostrukom dalekovodu na istoj trasi?",
+            "text_variants": [
+                "da li dispečer sme da proba uključenje ispalog dvostrukog dalekovoda dok su u toku radovi na drugom dvostrukom dalekovodu na istoj trasi?",
+                "Uključenje DV dok traju radovi na susednom"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "89"
+            },
+            "chunk_refs": [
+                "5.2.5"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        },
+        {
+            "id": 189,
+            "file_id": [
+                "8.21"
+            ],
+            "type": "section_text",
+            "text": "Koji su naponski nivoi u TS Novi Sad 3?",
+            "text_variants": [
+                "koji su naponski nivoi u ts novi sad 3?",
+                "Naponi u TS Novi Sad 3"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "90"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "400 kV, 220 kV i 110 kV"
+        },
+        {
+            "id": 190,
+            "file_id": [
+                "8.26"
+            ],
+            "type": "section_text",
+            "text": "Koji naponski nivoi postoje u TS Sremska Mitrovica 2?",
+            "text_variants": [
+                "koji naponski nivoi postoje u ts sremska mitrovica 2?",
+                "Naponi u TS Sremska Mitrovica 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "91"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "400 kV, 220 kV i 110 kV"
+        },
+        {
+            "id": 191,
+            "file_id": [
+                "8.18"
+            ],
+            "type": "section_text",
+            "text": "Koji naponski nivoi postoje u TS Leskovac 2?",
+            "text_variants": [
+                "koji naponski nivoi postoje u ts leskovac 2?",
+                "Naponi u TS Leskovac 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "92"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "400 kV, 220 kV i 110 kV"
+        },
+        {
+            "id": 192,
+            "file_id": [
+                "8.23"
+            ],
+            "type": "section_text",
+            "text": "Koji naponski nivoi postoje u TS Pančevo 2?",
+            "text_variants": [
+                "koji naponski nivoi postoje u ts pančevo 2?",
+                "Naponi u TS Pančevo 2"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "93"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "400 kV, 220 kV i 110 kV"
+        },
+        {
+            "id": 193,
+            "file_id": [
+                "8.06"
+            ],
+            "type": "section_text",
+            "text": "Koji naponski nivoi postoje u TS Beograd 8?",
+            "text_variants": [
+                "koji naponski nivoi postoje u ts beograd 8?",
+                "Naponi u TS Beograd 8"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "94"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "400 kV i 220 kV"
+        },
+        {
+            "id": 194,
+            "file_id": [
+                "8.10"
+            ],
+            "type": "section_text",
+            "text": "Koji su naponski nivoi u RP Drmno?",
+            "text_variants": [
+                "koji su naponski nivoi u rp drmno?",
+                "Naponi u RP Drmno"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "95"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "400 kV i 110 kV"
+        },
+        {
+            "id": 195,
+            "file_id": [
+                "8.11"
+            ],
+            "type": "section_text",
+            "text": "Koji je naponski nivo u RP Đerdap 1?",
+            "text_variants": [
+                "koji je naponski nivo u rp đerdap 1?",
+                "Napon u RP Đerdap 1"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "96"
+            },
+            "chunk_refs": [
+                "2.1"
+            ],
+            "response_type": "text",
+            "expected": "400 kV"
+        },
+        {
+            "id": 196,
+            "file_id": [
+                "1.00"
+            ],
+            "type": "section_text",
+            "text": "Koliko iznosi maksimalno dozvoljeno odstupanje frekvencije u trajanju ne dužem od 5 minuta?",
+            "text_variants": [
+                "koliko iznosi maksimalno dozvoljeno odstupanje frekvencije u trajanju ne dužem od 5 minuta?",
+                "Dozvoljeno odstupanje frekvencije do 5 minuta"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "97"
+            },
+            "chunk_refs": [
+                "93"
+            ],
+            "response_type": "text",
+            "expected": "± 100 mHz"
+        },
+        {
+            "id": 197,
+            "file_id": [
+                "1.00"
+            ],
+            "type": "section_text",
+            "text": "Koliko iznosi maksimalno dozvoljeno odstupanje frekvencije u trajanju ne dužem od 15 minuta?",
+            "text_variants": [
+                "koliko iznosi maksimalno dozvoljeno odstupanje frekvencije u trajanju ne dužem od 15 minuta?",
+                "Dozvoljeno odstupanje frekvencije do 15 minuta"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "98"
+            },
+            "chunk_refs": [
+                "93"
+            ],
+            "response_type": "text",
+            "expected": "± 50 mHz"
+        },
+        {
+            "id": 198,
+            "file_id": [
+                "3.01"
+            ],
+            "type": "section_text",
+            "text": "Koliko iznosi maksimalno dozvoljeno ukupno odstupanje frekvencije u interkonekciji?",
+            "text_variants": [
+                "koliko iznosi maksimalno dozvoljeno ukupno odstupanje frekvencije u interkonekciji?",
+                "Maksimalno odstupanje frekvencije u interkonekciji"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "99"
+            },
+            "chunk_refs": [
+                "3.4.1"
+            ],
+            "response_type": "text",
+            "expected": "± 200 mHz"
+        },
+        {
+            "id": 199,
+            "file_id": [
+                "2.01"
+            ],
+            "type": "section_text",
+            "text": "Da li je dozvoljeno isključiti rastavljače u postrojenju B ako je u postrojenju A prekidač isključen ali u postrojenju B uključen?",
+            "text_variants": [
+                "da li je dozvoljeno isključiti rastavljače u postrojenju b ako je u postrojenju a prekidač isključen ali u postrojenju b uključen?",
+                "Isključenje rastavljača sa uključenim prekidačem"
+            ],
+            "info": {
+                "source": "eval2-gen",
+                "ref": "100"
+            },
+            "chunk_refs": [
+                "6.5.1"
+            ],
+            "response_type": "text",
+            "expected": "Ne"
+        }
+    ]
+}

@@ -1,0 +1,182 @@
+======================================================================
+EVALUACIJA RAG SISTEMA - SVE VARIJANTE
+======================================================================
+
+Ažurirano: 2026-01-15 12:36:50
+Top K: 12
+
+PO PITANJIMA:
+  Ukupno: 96
+  Sve OK: 87
+  Neke OK: 8
+  Sve FAIL: 1
+
+PO VARIJANTAMA:
+  Ukupno: 384
+  Pass: 368
+  Fail: 16
+  Uspešnost: 95.8%
+
+======================================================================
+
+PITANJA SA PROBLEMIMA (9):
+----------------------------------------------------------------------
+
+[ 54] SOME_PASS (2/4)
+  Main: Došlo je do ispada dalekovoda koji spaja postrojenja A i B. U postrojenju A je reagovala distantna zaštita u prvom stepenu a u postrojenju B distantna zaštita u drugom stepenu. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?
+  Expected: ['5.2.9']
+    VAR2 FAIL: Ispad dalekovoda između postrojenja A i B - distantna zaštita prvi stepen u A, drugi stepen u B. Odakle dispečer treba da energiše dalekovod?
+      Retrieved: ['2.00:7.1.5', '2.00:5.6.2', '2.00:5.6.1', '2.01:6.3.7', '2.00:6.3.3', '2.00:5.2.4', '2.00:5.2.7', '2.00:5.2.2', '2.00:5.6.3', '2.00:5.4.1', '2.00:5.2.3', '2.00:5.7.2']
+    VAR3 FAIL: DV A-B ispao. Zaštita: A ima I stepen, B ima II stepen reagovanje. Ko treba da uključi?
+      Retrieved: ['2.00:6.5.4', '2.00:5.2.6', '2.00:8.1.2', '2.00:5.2.4', '2.00:10.1.3', '2.00:10.6.1', '2.00:10.2.5', '2.00:6.3.3', '8.25:9.2.3', '2.00:7.1.5', '2.00:5.2.2', '2.00:5.4.1']
+
+[ 57] SOME_PASS (2/4)
+  Main: Došlo je do ispada 400 kV dalekovoda broj 401/2 koji spaja RP Drmno na koje je priključena TE Kostolac B i RP Đerdap 1 na koje je priključena HE Đerdap 1. Lokator kvara u RP Drmno pokazuje 100 km a u HE Đerdap 1 lokator pokazuje 55 km. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?
+  Expected: ['5.2.9']
+    VAR2 FAIL: Ispad DV 401/2 između RP Drmno (TE Kostolac B) i RP Đerdap 1 (HE Đerdap 1). Lokator u Drmnu: 100 km, lokator u Đerdapu: 55 km. Odakle energisati?
+      Retrieved: ['8.11:2.3', '8.11:6', '8.11:7', '8.11:2.1', '8.11:8.1', '8.11:5.1', '8.11:2.2', '8.11:2.8', '8.11:2.5', '8.11:2.4', '8.10:7.2', '8.10:2.2']
+    VAR3 FAIL: DV 401/2 Drmno-Đerdap isključen. Pokazivanja: Drmno 100 km, Đerdap 55 km. Koja strana uključuje?
+      Retrieved: ['8.10:8.1', '8.10:7.2', '8.10:2.2', '8.10:5.1', '8.10:6.2', '8.10:7.1', '8.10:6.1', '8.10:10.1', '8.11:2.3', '8.10:9.1', '8.10:9.7', '8.10:9.8']
+
+[ 61] SOME_PASS (2/3)
+  Main: Dispečer je isključio jedan od dvostrukih dalekovoda i otvorio dozvolu za radove u blizini dalekovoda. Drugi dvostruki dalekovod koji je sve vreme bio u pogonu ispada delovanjem distantne zaštite na oba kraja u prvom stepenu. Da li dispečer sme nakon 3 minuta da proba uključenje ispalog dalekovoda?
+  Expected: ['5.2.5']
+    VAR2 FAIL: Jedan dvostruki DV isključen za radove. Drugi dvostruki DV ispada - distantna zaštita prvi stepen oba kraja. Da li nakon 3 minuta dispečer može probati uključenje?
+      Retrieved: ['2.00:5.2.7', '2.00:5.2.2', '2.00:5.2.3', '2.00:6.3.3', '2.00:5.4.1', '2.00:5.3.5', '2.00:6.5.4', '2.00:5.2.8', '2.00:5.2.12', '2.00:6.5.2', '2.00:7.1.3', '2.00:9.2.1']
+
+[ 81] SOME_PASS (2/4)
+  Main: U postrojenju A je isključen prekidač na dalekovodu koji ide od postrojenja A do postrojenja B, u postrojenju B je uključen prekidač. Da li je dozvoljeno isključiti sabirnički i izlazni rastavljač u postrojenju B?
+  Expected: ['6.5.1']
+    VAR2 FAIL: Prekidač DV u postrojenju A isključen, u postrojenju B uključen. Da li smemo isključiti rastavljače u postrojenju B?
+      Retrieved: ['2.00:7.1.5', '8.05:9.2.2', '8.03:4.3', '8.03:7.2.2', '8.41:4.3', '8.25:9.2.3', '8.15:5.2', '8.09:7.2.2', '8.15:6.2', '8.22:5.1', '8.26:7.2', '8.25:4.7']
+    VAR3 FAIL: Prekidač A isključen, B uključen. Mogu li se iskl. rastavljači u B?
+      Retrieved: ['8.41:4.3', '8.25:4.11', '2.01:6.5.3', '8.11:2.5', '8.20:4.7', '8.03:4.3', '2.01:6.5.5', '8.15:5.2', '2.01:6.5.7', '8.05:4.23', '8.31:4.9', '8.05:4.7']
+
+[ 82] SOME_PASS (3/4)
+  Main: U postrojenju A je isključen prekidač na dalekovodu koji ide od postrojenja A do postrojenja B, u postrojenju B je uključen prekidač. Da li je dozvoljeno isključiti sabirnički i izlazni rastavljač u postrojenju A?
+  Expected: ['6.5.1']
+    VAR2 FAIL: Prekidač u A isključen, u B uključen. Mogu li se isključiti rastavljači u postrojenju A?
+      Retrieved: ['2.01:6.5.3', '8.41:4.3', '2.01:6.5.5', '8.25:4.7', '8.11:2.5', '8.20:4.7', '8.03:4.3', '8.15:5.2', '2.00:10.2.3', '8.15:6.2', '8.22:6.2', '8.25:9.2.3']
+
+[ 83] SOME_PASS (2/4)
+  Main: Rukovalac je greškom isključio prekidač pogrešnog dalekovoda prilikom manipulacija. Da li rukovalac sme sam da ponovo uključi prekidač bez naloga nadležnog dispečera?
+  Expected: ['6.3.1']
+    VAR2 FAIL: Rukovalac greškom isključio pogrešan DV prekidač. Može li sam da ga uključi bez dispečera?
+      Retrieved: ['2.00:10.2.3', '2.01:6.3.10', '2.00:6.5.4', '2.01:4.2', '2.00:10.2.2', '2.00:10.2.5', '2.00:10.2.4', '2.00:10.2.1', '2.00:4.1.8', '2.00:10.6.1', '2.00:10.5.2', '2.00:5.6.2']
+    VAR3 FAIL: Greška rukovaoca - iskl. pogrešan prekidač. Sme li da ga ponovo ukl. samostalno?
+      Retrieved: ['2.00:10.2.3', '2.00:10.2.4', '2.00:10.2.2', '2.01:4.2', '2.00:10.2.5', '2.00:10.2.1', '2.00:5.2.6', '2.00:6.5.3', '2.00:5.2.12', '3.01:6.6.6.2', '2.00:5.4.1', '2.00:10.5.4']
+
+[ 84] ALL_FAIL (0/4)
+  Main: Koji element služi da vidno odvoji neki element od drugog koji je pod naponom?
+  Expected: ['3.1.19']
+    MAIN FAIL: Koji element služi da vidno odvoji neki element od drugog koji je pod naponom?
+      Retrieved: ['1.00:149', '2.01:6.5.2', '2.01:6.5.1', '2.01:6.5.5', '2.01:6.5.4', '3.01:4.2.4', '2.01:6.5.9', '2.01:6.5.7', '8.19:6.1', '8.19:5.1', '2.01:6.5.8', '1.00:162']
+    VAR1 FAIL: koji element služi da vidno odvoji neki element od drugog koji je pod naponom?
+      Retrieved: ['1.00:149', '2.01:6.5.2', '2.01:6.5.5', '2.01:6.5.1', '2.01:6.5.4', '3.01:4.2.4', '2.01:6.5.9', '2.01:6.5.7', '8.19:5.1', '1.00:145', '2.01:6.5.8', '1.00:162']
+    VAR2 FAIL: Koji uređaj služi za vidno odvajanje elementa od onog pod naponom?
+      Retrieved: ['2.01:6.5.1', '2.01:6.5.2', '2.00:5.7.9', '2.01:6.5.4', '2.01:6.5.5', '2.01:6.5.7', '2.01:6.5.8', '1.00:116', '2.00:5.7.10', '1.00:162', '2.01:6.4.2', '2.01:6.3.3']
+    VAR3 FAIL: Šta vidno odvaja element od dela koji je naponit?
+      Retrieved: ['1.00:100', '1.00:149', '1.00:145', '2.01:3.1', '3.00:8.3.1.7', '1.00:116', '3.01:1.2.2', '2.01:6.5.2', '2.01:6.5.1', '2.01:6.8.3', '1.00:162', '2.01:6.4.2']
+
+[ 91] SOME_PASS (3/4)
+  Main: Da li rukovalac sme da manipuliše iz pogonskog mehanizma prekidača ako je dalekovod pod naponom i opterećen?
+  Expected: ['6.7.2']
+    VAR3 FAIL: DV naponit i opterećen - dopušteno iz pogonskog mehanizma prekidača?
+      Retrieved: ['2.00:10.2.2', '2.00:10.2.3', '2.00:10.5.2', '8.03:2.7', '2.01:6.5.3', '8.05:2.7', '2.01:6.3.6', '8.22:5.1', '8.20:2.10', '8.41:4.3', '8.31:7.2', '8.20:4.10']
+
+[ 94] SOME_PASS (3/4)
+  Main: Dispečer vrši isključenje dalekovoda koji ide od postrojenja A do postrojenja B. U postrojenju A je isključen prekidač, a u postrojenju B je isključen prekidač i rukovalac ima nalog za isključenje sabirničkog i izlaznog rastavljača. Dispečer je na SCADA sistemu primio signalizaciju da su sabirnički i izlazni rastavljač isključeni u postrojenju B, ali još uvek od rukovaoca nije dobio informaciju o izvršenju naloga. Da li dispečer sme da da nalog za isključenje sabirničkog i izlaznog rastavljača u postrojenju A da bi skratio vreme manipulacija?
+  Expected: ['6.3.7']
+    VAR2 FAIL: SCADA pokazuje da su rastavljači u B isključeni, ali rukovalac još nije javio. Može li dispečer dati nalog za isključenje rastavljača u A?
+      Retrieved: ['2.01:6.7.7', '2.01:6.3.6', '2.00:5.7.2', '2.01:6.7.2', '2.01:4.1', '2.00:6.3.3', '2.01:6.3.10', '2.00:5.7.1', '2.01:6.3.3', '2.01:6.7.6', '2.00:5.7.8', '2.01:6.4.8']
+
+
+PITANJA SVE OK (87):
+----------------------------------------------------------------------
+[  0] (8 var) Koje je normalno uklopno stanje TS Beograd 5?
+[  1] (7 var) Kako je povezan TS Beograd 5 sa prenosnim sistemom od 110kV sa TS Novi Sad?
+[  2] (2 var) Da li je spojno polje 110 kV u TS Jagodina 4 u normalnom uklopnom stanju uključeno?
+[  3] (2 var) Da li je spojno polje 400 kV u TS Jagodina 4 u normalnom uklopnom stanju uključeno?
+[  4] (5 var) Kog naponskog nivoa su transformatori u TS Jagodina 4?
+[  5] (3 var) Da li nakon uključenja spojnog polja 110 kV u TS Jagodina 4 dispečer mora da odradi još neku dodatnu manipulaciju?
+[  6] (5 var) Koji je dozvoljeni opseg frekvencije u EES?
+[  7] (5 var) Koje su granice dozvoljenih napona u EES-u Srbije?
+[  8] (5 var) Kolika je instalisana snaga TS Jagodina 4?
+[  9] (3 var) Da li postoji transformator u TS Jagodina 4 koji ima mogućnost regulacije napona pod opterećenjem?
+[ 10] (6 var) Zbog čega je spojno polje 110 kV u TS Jagodina 4 isključeno u normalnom uklopnom stanju?
+[ 11] (5 var) Koji su postupci dispečera za slučaj da je potrebno uključiti spojno polje 110 kV u TS Jagodina 4 u periodu ne dužem od sat vremena?
+[ 12] (5 var) Koji su postupci dispečera za slučaj da jedan od dva sistema sabirnica 110 kV u TS Jagodina 4 nije raspoloživ u trajanju od nekoliko dana?
+[ 13] (5 var) Napisati normalno uklopno stanje na 400 kV naponu za TS Jagodina 4.
+[ 14] (5 var) Koji RDC je nadležan za daljinsko upravljanje TS Jagodina 4?
+[ 15] (5 var) Napisati normalno uklopno stanje na 110 kV naponu za TS Beograd 20.
+[ 16] (7 var) Da li TS Beograd 5 i TS Beograd 20 rade u paralelnom radu? Obrazložiti
+[ 17] (4 var) Objasniti postupak dispečera za slučaj da je potrebno kratkotrajno uspostaviti paralelan rad između TS Beograd 20 i TS Beograd 5.
+[ 18] (2 var) Da li je TS Beograd 20 u sistemu daljinskog upravljanja?
+[ 19] (4 var) Da li OPGW užadi kod DV 129A/1 i DV 129B/1 zadovoljavaju proračun na termičko naprezanje u slučaju pojave struja kratkih spojeva?
+[ 20] (4 var) Napisati uklopno stanje u TS Beograd 20 na svim naponskim nivoima u slučaju neraspoloživosti diferencijalne zaštite sabirnica na 400 kV. Koje su promene u odnosu na normalno uklopno stanje na 110 kV strani?
+[ 21] (4 var) Navesti sve transformatore koji se nalaze u TS Kraljevo 3, kao i njihove nominalne snage. Koji od ovih transformatora ima mogućnost regulacije napona pod opterećenjem?
+[ 22] (3 var) Da li je u svim slučajevima zadovoljen kriterijum N-1 u TS Kraljevo 3?
+[ 23] (4 var) Da li postoji diferencijalna zaštita 400 kV, 220 kV i 110 kV sabirnica u TS Kraljevo 3?
+[ 24] (5 var) Da li je TS Kruševac 1 u paralelnom radu preko 110 kV mreže sa TS Jagodina 4? Ukoliko jeste, obrazložiti odgovor.
+[ 25] (3 var) Napisati uklopno stanje na 220 kV i 110 kV naponu u TS Kruševac 1 za slučaj neraspoloživosti diferencijalne zaštite sabirnica 220 kV.
+[ 26] (4 var) Na kojim dalekovodima 110 kV u TS Srbobran je aktivna zaštita od preopterećenja?
+[ 27] (4 var) Kako se vrši napajanje sopstvene potrošnje TS Zrenjanin 2?
+[ 28] (4 var) Da li je zadovoljen kriterijum N-1 za TS Zrenjanin 2?
+[ 29] (4 var) Preko kojih dalekovoda se energija proizvedena u HE Đerdap 2 plasira u prenosni sistem?
+[ 30] (4 var) Pri kojoj proizvodnji HE Đerdap 2 leti i za koje dalekovode koji polaze iz RP Đerdap 2 nije zadovoljen kriterijum N-1 za dalekovode?
+[ 31] (4 var) Da li je TS Niš 2 u trajnom paralelnom radu sa TS Bor 2? Ukoliko je odgovor ne, napisati tačku sekcionisanja i razlog zbog čega trajni paralelan rad nije ostvaren.
+[ 32] (4 var) Navesti sve 110 kV dalekovode koji u TS Niš 2 imaju aktivnu zaštitu od preopterećenja.
+[ 33] (3 var) Pod kojim uslovima je dozvoljeno paralelisanje TR1 i TR2 u TS Niš 3 na niženaponskoj strani, tj. strani 35 kV?
+[ 34] (4 var) Zbog čega su sabirnice 110 kV u TS Niš 13 razdvojene preko podužnog rastavljača?
+[ 35] (4 var) Preko kojih 220 kV dalekovoda su generatori u TENT-u A povezani na prenosni sistem?
+[ 36] (4 var) Preko kojih 400 kV dalekovoda su generatori u TENT-u A povezani na prenosni sistem?
+[ 37] (4 var) Da li je TS Niš 2 povezana sa TS Kosovo B? Ako jeste, navesti naziv dalekovoda preko koga je ostvarena ta veza.
+[ 38] (3 var) Da li za slučaj neraspoloživosti diferencijalne zaštite 400 kV sabirnica u TS Niš 2 dolazi do promene normalnog uklopnog stanja na 400 kV strani?
+[ 39] (2 var) Da li za slučaj neraspoloživosti diferencijalne zaštite 400 kV sabirnica u TS Niš 2 dolazi do promene normalnog uklopnog stanja na 220 kV strani?
+[ 40] (4 var) Da li je TS Niš 2 povezana sa nekom TS koja ne pripada elektroenergetskom sistemu Republike Srbije? Ukoliko je odgovor da, navesti naziv dalekovoda preko koga je ostvarena ta veza.
+[ 41] (4 var) Preko koliko transformatora se energija proizvedena u VE Čibuk 1 plasira u EES?
+[ 42] (4 var) Kolika je ukupna nominalna snaga transformatora preko kojih se energija proizvedena u VE Čibuk 1 plasira u EES?
+[ 43] (2 var) Da li je moguće da se sa elektrane VE Čibuk 1 daljinski komanduje 400 kV prekidačima od TR1 i TR2?
+[ 44] (4 var) Kako se zove PRP na koji je povezana VE Čibuk 1?
+[ 45] (2 var) Da li iz RP Čibuk 1 polazi neki od interkonektivnih dalekovoda?
+[ 46] (4 var) Koliko vetroagregata postoji u VE Čibuk 1?
+[ 47] (3 var) TS A predstavlja radijalnu trafostanicu koju napaja dalekovod koji spaja postrojenja A i B i do čijeg je ispada došlo. Dispečer ima podatke o reagovanju zaštite samo iz postrojenja B. Da li se ovo može smatrati dovoljnim za procenu vrste kvara?
+[ 48] (3 var) Dolazi do ispada dalekovoda koji spaja trafostanice A i B od kojih ni jedna nije radijalna TS. Dispečer ima podatke o reagovanju zaštite samo iz postrojenja B. Da li se ovo može smatrati dovoljnim za procenu vrste kvara?
+[ 49] (4 var) Došlo je do ispada dalekovoda sa uspešnim ciklusom APU, da li je dalekovod u pogonu?
+[ 50] (5 var) Došlo je do ispada dalekovoda sa uspešnim ciklusom APU, da li je kvar na dalekovodu trajnog ili prolaznog karaktera?
+[ 51] (4 var) U postrojenju A na dalekovodu koji spaja trafostanice A i B delovala je distantna zaštita u prvom stepenu, u postrojenju B delovala je distantna zaštita u drugom stepenu. Na kojoj deonici od postrojenja A je potencijalan kvar?
+[ 52] (4 var) U postrojenju A na dalekovodu koji spaja trafostanice A i B delovala je distantna zaštita u prvom stepenu, u postrojenju B delovala je distantna zaštita u prvom stepenu. Na kojoj deonici od postrojenja B je potencijalan kvar?
+[ 53] (4 var) Da li dispečer sme da uključi dalekovod ukoliko nema poznate signale delovanja zaštite, a postoji povratni napon na dalekovodu?
+[ 55] (4 var) Došlo je do ispada dalekovoda koji spaja postrojenja A i B. U postrojenju A lokator kvara pokazuje da je kvar na 40 km od postrojenja A a u postrojenju B lokator kvara pokazuje da je kvar na 20 km od postrojenja B. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?
+[ 56] (4 var) Došlo je do ispada dalekovoda koji spaja postrojenja A i B. U postrojenju A je priključena elektrana i lokator kvara pokazuje da je kvar na 40 km od postrojenja A a u postrojenju B lokator kvara pokazuje da je kvar na 20 km od postrojenja B. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?
+[ 58] (4 var) Došlo je do ispada mešovitog voda. Da li je dozvoljena jedna proba uključenja mešovitog voda?
+[ 59] (4 var) Kada dispečer sme da da drugi nalog za uključenje elementa nakon prve neuspešne probe?
+[ 60] (4 var) Na kojim naponskim nivoima se kod dalekova ugrađuju zaštite od preopterećenja u prenosnoj mreži?
+[ 62] (4 var) Da li dispečer sme da blokira zaštite od preopterećenja na dalekovodima?
+[ 63] (4 var) Pojavljuje se alarm "Zaštita od preopterećenja – prvi stepen NASTANAK". Koliko vremena ima dispečer da izvrši rasterećenje dalekovoda pre nego što on ispadne iz pogona?
+[ 64] (4 var) Došlo je do kvara uređaja distantne zaštite na dugom 110 kV dalekovodu. Šta su postupci dispečera?
+[ 65] (4 var) Da li se prekid optičkih vlakana u OPGW užetu smatra kvarom uređaja podužne diferencijalne zaštite? Da li dispečer treba da isključi dalekovod ukoliko dođe do prekida optičkih vlakana na OPGW užetu ukoliko dalekovod ima rezervnu distantnu zaštitu u istom uređaju u kojem se nalazi i podužna diferencijalna zaštita?
+[ 66] (3 var) Ukoliko se u toku izvođenja radova na jednom od dvostrukih dalekovoda javi kvar glavne zaštite na drugom dalekovodu, da li je neophodno prekinuti započete radove?
+[ 67] (4 var) Koje su osnovne zaštite na transformatorima?
+[ 68] (4 var) Da li je dozvoljeno uključenje transformatora nakon reagovanja osnovnih zaštita?
+[ 69] (4 var) Dolazi do ispada transformatora delovanjem Buholc zaštite, dispečer ima informaciju o zemljotresu u regionu u kojem se nalazi instaliran transformator. Da li dispečer sme da uključi ispali transformator i šta je potrebno proveriti pre uključenja transformatora?
+[ 70] (4 var) Koji prekidač isključuje zaštita od preopterećenja na transformatoru?
+[ 71] (4 var) Ukoliko transformator ima samo jednu diferencijalnu zaštitu i ustanovi se njen kvar, da li transformator može da ostane u pogonu?
+[ 72] (4 var) Da li dispečer sme da blokira zaštitu od preopterećenja na transformatorima?
+[ 73] (4 var) Kada je moguće trajno blokirati kućišnu zaštitu na transformatoru? Da li dispečer donosi odluku o blokadi kućišne zaštite?
+[ 74] (3 var) Ukoliko dolazi do ispada prekidača svih dalekovoda, koji polaze sa istog sistema sabirnica iz jednog postrojenja, u susednim postrojenjima reagovanjem distantne zaštite u drugom stepenu kao i ispada svih transformatora vezanih na iste sabirnice delovanjem distantne zaštite u drugom stepenu, gde se nalazi potencijalan kvar?
+[ 75] (4 var) Došlo je do potpunog nestanka komandnog napona u postrojenju. Koji su postupci dispečera nakon dobijanja ove informacije?
+[ 76] (4 var) Transformator je ispao iz pogona zbog greške ispitivača relejne zaštite. Da li dispečer sme da uključi transformator nakon ispada?
+[ 77] (4 var) Napiši redosled manipulacija za prelazak sa prvog na drugi sistem sabirnica u TS Kragujevac 2 na 400 kV strani.
+[ 78] (4 var) Došlo je do zaglave prekidača u TS Obrenovac na 400 kV dalekovodu broj 412. Prebaci dalekovod na pomoćni sistem sabirnica bez manipulacija prekidačem koji je zaglavljen.
+[ 79] (4 var) Da li rukovalac sme bez naloga nadležnog dispečera da vrši manipulacije u postrojenju?
+[ 80] (4 var) Sa koje strane se prvo isključuje prekidač prilikom isključenja transformatora?
+[ 85] (4 var) Koje vrste manipulacija postoje?
+[ 86] (4 var) Da li dispečer na obuci može da izdaje naloge za manipulacije?
+[ 87] (4 var) Šta je neophodno da dispečer na obuci naznači rukovaocu pre početka manipulacija?
+[ 88] (4 var) Objasniti postpuka dispečera ukoliko ima informaciju da nema mogućnost snimanja razgovora prilikom davanja naloga za manipulaciju rukovaocu.
+[ 89] (4 var) Sa kojih mesta se može komandovati rasklopnom opremom u postrojenju?
+[ 90] (4 var) Da li rukovalac sme da manipuliše iz pogonskog mehanizma rastavljača ukoliko je dalekovod bez napona?
+[ 92] (4 var) Dispečer na SCADA sistemu vidi da je prekidač 400 kV dalekovod broj 436 u TS Obrenovac uključen. Nakon provere rukovalac na TS Obrenovac obaveštava dispečera da je prekidač isključen. Koju informaciju dispečer smatra za validnu u navedenoj situaciji?
+[ 93] (4 var) Za slučaj sprovođenja manipulacija u transformatorskom polju, koje informacije za naziv elementa EES-a manipulacija mora da sadrži?
+[ 95] (4 var) Dispečer je dobio informaciju da je sabirnički rastavljač u kvaru i da ukoliko se bude manipulisalo tim rastavljačem postoji mogućnost da će on izazvati havariju u postrojenju. Dispečer izdaje rukovaocu nalog da isključi rastavljač koji je u kvaru. Da li rukovalac sme da odbije izvršenje ovog naloga?

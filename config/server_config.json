@@ -1,0 +1,14 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8888,
+    "debug": false,
+    "reload": false
+  },
+  "retrieval": {
+    "top_k": 8,
+    "embedding_top_k": 80,
+    "score_threshold": 0.9
+  },
+  "rag_config_path": "/home/synsoft/gridmind_v0.9/chunks/config/rag_config.json"
+}

@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "description": "Konfiguracija za RAG chunking EES dokumentacije",
+  
+  "document_types": {
+    "recnik": {
+      "pattern": "^1\\.",
+      "chunk_strategy": "per_term",
+      "min_size": 100,
+      "max_size": 500,
+      "overlap": 0
+    },
+    "tehnicko_uputstvo": {
+      "pattern": "^2\\.",
+      "chunk_strategy": "per_section",
+      "min_size": 200,
+      "max_size": 1500,
+      "overlap": 0.1
+    },
+    "pravila": {
+      "pattern": "^3\\.",
+      "chunk_strategy": "per_clause",
+      "min_size": 200,
+      "max_size": 2000,
+      "overlap": 0.1
+    },
+    "uputstvo_pogon": {
+      "pattern": "^8\\.",
+      "chunk_strategy": "semantic_sections",
+      "min_size": 200,
+      "max_size": 1500,
+      "overlap": 0.1
+    }
+  },
+  
+  "section_types": {
+    "eksploatacioni_uslovi": {
+      "keywords": ["ЕКСПЛОАТАЦИОНИ УСЛОВИ", "EKSPLOATACIONI USLOVI"],
+      "chunk_by": "numbered_item",
+      "include_header": true
+    },
+    "analiza_sigurnosti": {
+      "keywords": ["АНАЛИЗ", "СТРУЈА КРАТК", "SIGURNOSTI"],
+      "chunk_by": "numbered_item",
+      "include_header": true
+    },
+    "paralelan_rad": {
+      "keywords": ["ПАРАЛЕЛАН РАД", "PARALELAN RAD"],
+      "chunk_by": "subsection",
+      "include_header": true
+    },
+    "normalno_uklopno_stanje": {
+      "keywords": ["НОРМАЛНО УКЛОПНО", "NORMALNO UKLOPNO"],
+      "chunk_by": "voltage_level",
+      "include_header": true
+    },
+    "posebno_uklopno_stanje": {
+      "keywords": ["ПОГОН", "БЕЗ", "НЕРАСПОЛОЖИВОСТ", "POGON", "BEZ"],
+      "chunk_by": "scenario",
+      "include_header": true
+    }
+  },
+  
+  "voltage_levels": [
+    "400 kV",
+    "220 kV",
+    "110 kV",
+    "35 kV",
+    "10 kV",
+    "6,3 kV",
+    "0,4 kV"
+  ],
+  
+  "element_patterns": {
+    "dalekovod": "ДВ\\s*\\d+",
+    "transformator": "Т[РP]\\d+",
+    "spojno_polje": "СП|спојно поље|spojno polje",
+    "sabirnice": "систем сабирница|ГС\\s*\\d*",
+    "generator": "[МГ]Г?\\d+",
+    "zastita": "ДЗС|диференцијална заштита"
+  },
+  
+  "metadata_extraction": {
+    "extract_objects": true,
+    "extract_voltages": true,
+    "extract_elements": true,
+    "generate_keywords": true,
+    "cross_reference": true
+  },
+  
+  "output_format": {
+    "format": "jsonl",
+    "include_raw_text": true,
+    "include_clean_text": true,
+    "include_metadata": true,
+    "encoding": "utf-8"
+  }
+}

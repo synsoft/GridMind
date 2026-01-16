@@ -1,0 +1,57 @@
+{
+  "search": {
+    "faiss": {
+      "initial_top_k": 30,
+      "rerank_top_k": 10,
+      "default_top_k": 10
+    },
+    "api": {
+      "default_top_k": 11,
+      "timeout_seconds": 30,
+      "base_url": "http://192.168.30.61:8888"
+    },
+    "followup": {
+      "search_with_both_questions": false,
+      "combine_questions_separator": " | "
+    }
+  },
+  "llm": {
+    "provider": "openai",
+    "model": "gemma3:27b",
+    "ollama_host": "192.168.30.61",
+    "ollama_port": 11434,
+    "openai_host": "192.168.30.62",
+    "openai_port": 8080,
+    "openai_api_key": "",
+    "small_model": "gemma3:12b",
+    "small_temperature": 0.1,
+    "temperature": 0.3,
+    "timeout": 120,
+    "max_retries": 2,
+    "stream_tokens": true,
+    "use_markdown": true
+  },
+  "ollama": {
+    "host": "192.168.30.61",
+    "port": 11434,
+    "model": "gemma3:27b",
+    "small_model": "gemma3:4b",
+    "small_temperature": 0.1
+  },
+  "models": {
+    "bge_m3_model": "BAAI/bge-m3",
+    "bge_reranker_model": "BAAI/bge-reranker-v2-m3",
+    "use_fp16": true
+  },
+  "validation": {
+    "max_question_length": 4000,
+    "min_question_length": 2,
+    "max_session_id_length": 128,
+    "max_stored_knowledge_length": 10000
+  },
+  "stored_knowledge": {
+    "enabled": true,
+    "min_score_threshold": -1.0,
+    "comment": "Set to false to disable stored knowledge search and avoid loading BGE-M3 model. min_score_threshold uses BGE reranker logit scores (can be negative; higher is better; typical range: -5 to +5; good matches are usually > -1)"
+  }
+}

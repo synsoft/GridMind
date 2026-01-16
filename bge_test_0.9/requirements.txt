@@ -1,0 +1,11 @@
+faiss-cpu
+numpy
+FlagEmbedding
+torch
+langchain
+langchain-community
+flask
+flask-cors
+requests
+cyrtranslit
+rapidfuzz
