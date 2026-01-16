@@ -1,5 +1,0 @@
-{
-  "num_documents": 2426,
-  "embedding_dimension": 1024,
-  "model": "BAAI/bge-m3"
-}
