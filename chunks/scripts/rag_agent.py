@@ -392,6 +392,7 @@ class RAGAgent:
         self.use_rerank = self.config.get('retrieval', {}).get('rerank', False)
         self.top_k = self.config.get('retrieval', {}).get('top_k', 3)
         self.embedding_top_k = self.config.get('retrieval', {}).get('embedding_top_k', 100)
+        self.score_threshold = self.config.get('retrieval', {}).get('score_threshold', 0.0)
         
         # Hibridna pretraga opcije
         self.use_hybrid_search = self.config.get('retrieval', {}).get('use_hybrid_search', True)
@@ -804,6 +805,14 @@ class RAGAgent:
         final_results = final_results[:final_k]
         for i, result in enumerate(final_results, 1):
             result['final_rank'] = i
+        
+        # Filtriraj po score_threshold (ako je postavljen)
+        if self.score_threshold > 0:
+            before_count = len(final_results)
+            final_results = [r for r in final_results if r.get('rerank_score', 0) >= self.score_threshold]
+            filtered_count = before_count - len(final_results)
+            if filtered_count > 0:
+                print(f"{Colors.YELLOW}🔻 Score threshold {self.score_threshold}: {before_count} -> {len(final_results)} chunks (filtered {filtered_count}){Colors.ENDC}")
         
         return final_results
     

@@ -1,649 +1,586 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-GridMind RAG Server
-====================
+GridMind RAG Server - Unified
+=============================
 
-REST API server za RAG retrieval, kompatibilan sa OpenAI API standardom.
+Unified server that uses:
+- OllamaRAGChat with internal RAGAgent (no REST API calls)
+- StoredKnowledgeManager for expert knowledge
+- SessionMemoryManager for conversation memory
+- OpenAI-compatible API endpoints
 
 Endpoints:
-- POST /retrieve - Retrieval endpoint za pretragu dokumenata
-- GET /health - Health check endpoint
-- GET /models - Lista dostupnih modela
-
-Pokretanje:
-    python server.py
-    
-Ili sa uvicorn:
-    uvicorn server:app --host 0.0.0.0 --port 8888 --reload
+- POST /v1/chat/completions - OpenAI-compatible chat endpoint
+- POST /retrieve - Retrieval endpoint
+- GET /health - Health check
+- GET /v1/models - Lista modela
+- GET /admin/stored-knowledge - List stored knowledge
+- GET /admin/sessions - List active sessions
 """
 
 import json
 import os
 import sys
 import time
+import uuid
+import logging
+import argparse
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Optional
-from contextlib import asynccontextmanager
-
-# Dodaj scripts folder u path za import rag_agent-a
-sys.path.insert(0, str(Path(__file__).parent / "chunks" / "scripts"))
-
-from fastapi import FastAPI, HTTPException, Request
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
+from logging.handlers import TimedRotatingFileHandler
 
 # ============================================================================
-# Konfiguracija
+# Setup paths
 # ============================================================================
 
-CONFIG_PATH = Path(__file__).parent / "config" / "server_config.json"
+ROOT_DIR = Path(__file__).parent
 
-def load_server_config() -> dict:
-    """Učitava server konfiguraciju."""
-    if CONFIG_PATH.exists():
-        with open(CONFIG_PATH, 'r', encoding='utf-8') as f:
+# Add rest/src to path for imports
+sys.path.insert(0, str(ROOT_DIR / "rest"))
+sys.path.insert(0, str(ROOT_DIR / "chunks" / "scripts"))
+
+# ============================================================================
+# Logging setup
+# ============================================================================
+
+log_dir = ROOT_DIR / "logs"
+log_dir.mkdir(exist_ok=True)
+log_file = log_dir / "server.log"
+
+# Console handler
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(logging.Formatter('%(message)s'))
+
+# File handler sa rotacijom
+file_handler = TimedRotatingFileHandler(
+    filename=log_file,
+    when='midnight',
+    interval=1,
+    backupCount=30,
+    encoding='utf-8'
+)
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(message)s'))
+
+# Root logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
+
+# ============================================================================
+# Flask imports
+# ============================================================================
+
+from flask import Flask, request, jsonify, Response
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+# ============================================================================
+# Configuration
+# ============================================================================
+
+def load_config() -> dict:
+    """Load configuration from config.json in root."""
+    config_path = ROOT_DIR / "config.json"
+    if config_path.exists():
+        with open(config_path, 'r', encoding='utf-8') as f:
             return json.load(f)
-    else:
-        # Default konfiguracija
-        return {
-            "server": {
-                "host": "0.0.0.0",
-                "port": 8888,
-                "debug": False,
-                "reload": False
-            },
-            "retrieval": {
-                "top_k": 8,
-                "embedding_top_k": 80,
-                "score_threshold": 0.5
-            },
-            "rag_config_path": str(Path(__file__).parent / "chunks" / "config" / "rag_config.json")
-        }
+    
+    # Fallback to rest/config.json
+    rest_config = ROOT_DIR / "rest" / "config.json"
+    if rest_config.exists():
+        with open(rest_config, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    
+    return {}
 
-SERVER_CONFIG = load_server_config()
+CONFIG = load_config()
 
 # ============================================================================
-# Pydantic Modeli (OpenAI-style)
+# RAG Chat Instance
 # ============================================================================
 
-class MessageItem(BaseModel):
-    """Message item for OpenAI-style requests."""
-    role: str
-    content: str
+# Import after path setup
+from src.core.chat_rag_api import OllamaRAGChat
+from src.core.model_manager import get_model_manager, ModelConfig
+
+# Global RAG chat instance
+rag_chat: Optional[OllamaRAGChat] = None
 
 
-class RetrieveRequest(BaseModel):
-    """Request model za /retrieve endpoint. Podržava i query i messages format."""
-    query: Optional[str] = Field(None, description="Tekst upita za pretragu")
-    messages: Optional[List[MessageItem]] = Field(None, description="OpenAI-style messages format")
-    top_k: Optional[int] = Field(None, description="Broj rezultata za vraćanje (override server config)")
-    score_threshold: Optional[float] = Field(None, description="Minimalni score za filtriranje rezultata")
-    include_metadata: Optional[bool] = Field(True, description="Da li uključiti metapodatke u odgovor")
-    model: Optional[str] = Field(None, description="Model ID (ignorisano, za kompatibilnost)")
+def initialize_rag():
+    """Initialize RAG chat with all features."""
+    global rag_chat
     
-    model_config = {
-        "json_schema_extra": {
-            "examples": [
-                {
-                    "query": "Da li TS Beograd 5 i TS Beograd 20 rade u paralelnom radu?",
-                    "top_k": 8,
-                    "score_threshold": 0.5,
-                    "include_metadata": True
-                }
-            ]
-        }
-    }
-
-
-class RetrievedDocument(BaseModel):
-    """Model za jedan pronađeni dokument."""
-    chunk_id: str = Field(..., description="Jedinstveni ID chunk-a")
-    content: str = Field(..., description="Sadržaj chunk-a")
-    score: float = Field(..., description="Relevance score (0-1)")
-    rank: int = Field(..., description="Rang u rezultatima")
+    if rag_chat is not None:
+        return
     
-    # Metapodaci (opcioni)
-    doc_id: Optional[str] = Field(None, description="ID dokumenta")
-    doc_title: Optional[str] = Field(None, description="Naslov dokumenta")
-    section_number: Optional[str] = Field(None, description="Broj sekcije")
-    section_title: Optional[str] = Field(None, description="Naslov sekcije")
-    parent_title: Optional[str] = Field(None, description="Naslov parent sekcije")
-    object_code: Optional[str] = Field(None, description="Kod objekta (npr. BG5)")
-    object_name: Optional[str] = Field(None, description="Ime objekta")
-    voltage_levels: Optional[List[str]] = Field(None, description="Naponski nivoi")
-    keywords: Optional[List[str]] = Field(None, description="Ključne reči")
-
-
-class RetrieveUsage(BaseModel):
-    """Usage statistike za retrieve request."""
-    query_tokens: int = Field(..., description="Procenjeni broj tokena u upitu")
-    total_chunks_searched: int = Field(..., description="Ukupan broj chunk-ova u bazi")
-    candidates_evaluated: int = Field(..., description="Broj kandidata evaluiranih rerankerom")
-
-
-class RetrieveResponse(BaseModel):
-    """Response model za /retrieve endpoint (OpenAI-style)."""
-    id: str = Field(..., description="Jedinstveni ID zahteva")
-    object: str = Field("retrieve.response", description="Tip objekta")
-    created: int = Field(..., description="Unix timestamp kreiranja")
-    model: str = Field(..., description="Korišćeni model za retrieval")
+    logger.info("\n" + "=" * 60)
+    logger.info("GRIDMIND UNIFIED SERVER - Initializing")
+    logger.info("=" * 60)
     
-    results: List[RetrievedDocument] = Field(..., description="Lista pronađenih dokumenata")
+    # Use config.json from rest folder (where OllamaRAGChat expects it)
+    config_path = str(ROOT_DIR / "rest" / "config.json")
     
-    usage: RetrieveUsage = Field(..., description="Usage statistike")
+    # Initialize OllamaRAGChat with internal RAG (no REST API calls)
+    logger.info(f"\n📦 Loading OllamaRAGChat with internal RAG...")
+    rag_chat = OllamaRAGChat(config_path=config_path, silent=True, use_internal_rag=True)
+    rag_chat.log_chunks = True
     
-    # Dodatne informacije
-    query: str = Field(..., description="Originalni upit")
-    top_k: int = Field(..., description="Broj traženih rezultata")
-    score_threshold: float = Field(..., description="Korišćeni score threshold")
-
-
-class ModelInfo(BaseModel):
-    """Informacije o modelu."""
-    id: str
-    object: str = "model"
-    created: int
-    owned_by: str
-
-
-class ModelsResponse(BaseModel):
-    """Response za /models endpoint."""
-    object: str = "list"
-    data: List[ModelInfo]
-
-
-class HealthResponse(BaseModel):
-    """Response za /health endpoint."""
-    status: str
-    timestamp: str
-    version: str
-    models_loaded: bool
-    total_chunks: int
-
-
-class ErrorResponse(BaseModel):
-    """Error response model."""
-    error: Dict[str, Any]
+    logger.info(f"✅ RAG Chat initialized with internal RAGAgent")
+    
+    # Initialize stored knowledge with BGE reranker
+    if rag_chat.use_stored_knowledge:
+        try:
+            logger.info("📚 Loading stored knowledge with BGE reranker...")
+            model_manager = get_model_manager(ModelConfig())
+            reranker = model_manager.bge_reranker
+            rag_chat.initialize_stored_knowledge(reranker)
+            logger.info(f"✅ Stored knowledge ready ({rag_chat.stored_knowledge.count()} entries)")
+        except Exception as e:
+            logger.warning(f"⚠️ Could not initialize stored knowledge: {e}")
+            rag_chat.use_stored_knowledge = False
+    
+    logger.info("\n✅ RAG system fully initialized!")
 
 
 # ============================================================================
-# OpenAI Chat Completions Modeli
+# Utility Functions
 # ============================================================================
 
-class ChatMessage(BaseModel):
-    """OpenAI Chat Message format."""
-    role: str = Field(..., description="Role: system, user, assistant")
-    content: str = Field(..., description="Sadržaj poruke")
+def extract_user_question(messages: List[Dict]) -> str:
+    """Extract the last user message from messages list."""
+    for msg in reversed(messages):
+        if msg.get('role') == 'user':
+            return msg.get('content', '')
+    return ''
 
 
-class ChatCompletionRequest(BaseModel):
-    """OpenAI Chat Completion Request format."""
-    model: str = Field("GridMind_0.9", description="ID modela")
-    messages: List[ChatMessage] = Field(..., description="Lista poruka")
-    temperature: Optional[float] = Field(0.7, description="Temperature za sampling")
-    max_tokens: Optional[int] = Field(None, description="Max tokens u odgovoru")
-    top_p: Optional[float] = Field(1.0, description="Top-p sampling")
-    stream: Optional[bool] = Field(False, description="Da li streamovati odgovor")
+def get_session_id(request_data: dict) -> str:
+    """Get or generate session ID from request.
     
-    # GridMind specifični parametri
-    top_k: Optional[int] = Field(None, description="Broj rezultata za retrieval")
-    include_sources: Optional[bool] = Field(True, description="Da li uključiti izvore u odgovor")
-
-
-class ChatCompletionChoice(BaseModel):
-    """OpenAI Chat Completion Choice."""
-    index: int
-    message: ChatMessage
-    finish_reason: str = "stop"
-
-
-class ChatCompletionUsage(BaseModel):
-    """OpenAI Chat Completion Usage."""
-    prompt_tokens: int
-    completion_tokens: int
-    total_tokens: int
-
-
-class ChatCompletionResponse(BaseModel):
-    """OpenAI Chat Completion Response format."""
-    id: str
-    object: str = "chat.completion"
-    created: int
-    model: str
-    choices: List[ChatCompletionChoice]
-    usage: ChatCompletionUsage
-
-
-# ============================================================================
-# RAG Agent Singleton
-# ============================================================================
-
-class RAGAgentSingleton:
-    """Singleton wrapper za RAG Agent."""
+    OpenWebUI sends chat_id in header 'X-OpenWebUI-Chat-Id' when forwarding requests.
+    This is the most reliable way to identify a conversation.
+    """
+    import hashlib
     
-    _instance = None
-    _agent = None
+    # Try OpenWebUI specific header first (most reliable)
+    session_id = request.headers.get('X-OpenWebUI-Chat-Id')
     
-    @classmethod
-    def get_instance(cls):
-        if cls._instance is None:
-            cls._instance = cls()
-        return cls._instance
+    # Try other common headers
+    if not session_id:
+        session_id = request.headers.get('X-Session-ID') or \
+                     request.headers.get('X-Conversation-ID')
     
-    def __init__(self):
-        self._agent = None
-        self._loaded = False
-        self._total_chunks = 0
+    # Try request data (including metadata)
+    if not session_id:
+        metadata = request_data.get('metadata', {}) or {}
+        session_id = metadata.get('chat_id') or \
+                     metadata.get('conversation_id') or \
+                     metadata.get('session_id') or \
+                     request_data.get('session_id') or \
+                     request_data.get('conversation_id') or \
+                     request_data.get('chat_id')
     
-    def load(self, config_path: str):
-        """Učitava RAG Agent."""
-        if self._loaded:
-            return
+    # Fallback: Generate stable ID from FIRST user message
+    if not session_id:
+        messages = request_data.get('messages', [])
         
-        from rag_agent import RAGAgent
-        self._agent = RAGAgent(config_path)
-        self._total_chunks = len(self._agent.chunks)
-        self._loaded = True
+        # Get first user message
+        first_user_msg = ""
+        for msg in messages:
+            if msg.get('role') == 'user':
+                # Normalize: strip, lowercase for consistency
+                first_user_msg = msg.get('content', '').strip().lower()[:200]
+                break
+        
+        if first_user_msg:
+            session_hash = hashlib.sha256(first_user_msg.encode()).hexdigest()[:16]
+            session_id = f"chat_{session_hash}"
+        else:
+            session_id = f"temp_{uuid.uuid4().hex[:8]}"
     
-    @property
-    def agent(self):
-        return self._agent
-    
-    @property
-    def loaded(self) -> bool:
-        return self._loaded
-    
-    @property
-    def total_chunks(self) -> int:
-        return self._total_chunks
-
-
-rag_singleton = RAGAgentSingleton.get_instance()
-
-# ============================================================================
-# FastAPI App
-# ============================================================================
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Lifecycle manager za učitavanje modela pri startu."""
-    # Startup
-    print("\n" + "=" * 60)
-    print("GRIDMIND RAG SERVER")
-    print("=" * 60)
-    
-    rag_config_path = SERVER_CONFIG.get("rag_config_path", 
-                                         str(Path(__file__).parent / "chunks" / "config" / "rag_config.json"))
-    
-    print(f"\nUčitavanje RAG Agent-a iz: {rag_config_path}")
-    rag_singleton.load(rag_config_path)
-    
-    server_cfg = SERVER_CONFIG.get("server", {})
-    print(f"\nServer pokrenut na http://{server_cfg.get('host', '0.0.0.0')}:{server_cfg.get('port', 8888)}")
-    print("=" * 60 + "\n")
-    
-    yield
-    
-    # Shutdown
-    print("\nGašenje servera...")
-
-
-app = FastAPI(
-    title="GridMind RAG API",
-    description="REST API za RAG retrieval, kompatibilan sa OpenAI API standardom",
-    version="1.0.0",
-    lifespan=lifespan
-)
-
-# CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+    return session_id
 
 
 # ============================================================================
-# Endpoints
+# API Endpoints
 # ============================================================================
 
-@app.get("/health", response_model=HealthResponse, tags=["System"])
-@app.get("/v1/health", response_model=HealthResponse, tags=["System"], include_in_schema=False)
-async def health_check():
+@app.route('/health', methods=['GET'])
+def health():
     """Health check endpoint."""
-    return HealthResponse(
-        status="healthy" if rag_singleton.loaded else "loading",
-        timestamp=datetime.utcnow().isoformat(),
-        version="1.0.0",
-        models_loaded=rag_singleton.loaded,
-        total_chunks=rag_singleton.total_chunks
-    )
+    return jsonify({
+        "status": "healthy",
+        "rag_loaded": rag_chat is not None and rag_chat.rag_agent is not None,
+        "timestamp": datetime.utcnow().isoformat()
+    })
 
 
-@app.get("/models", response_model=ModelsResponse, tags=["System"])
-@app.get("/v1/models", response_model=ModelsResponse, tags=["System"], include_in_schema=False)
-async def list_models():
-    """Lista dostupnih modela."""
+@app.route('/v1/models', methods=['GET'])
+@app.route('/models', methods=['GET'])
+def list_models():
+    """List available models."""
+    model_name = CONFIG.get('llm', {}).get('model', 'gemma3:27b')
+    # Return multiple model variants to be compatible with different clients
     models = [
-        ModelInfo(
-            id="GridMind_0.9",
-            created=int(time.time()),
-            owned_by="gridmind"
-        )
+        "rag-model",
+        "gridmind",
+        "gridmind-rag",
+        model_name,
+        "gpt-3.5-turbo",
+        "gpt-4",
     ]
-    
-    return ModelsResponse(data=models)
+    return jsonify({
+        "object": "list",
+        "data": [
+            {
+                "id": m,
+                "object": "model",
+                "created": int(time.time()),
+                "owned_by": "gridmind"
+            } for m in models
+        ]
+    })
 
 
-@app.post("/retrieve", tags=["Retrieval"])
-@app.post("/v1/retrieve", tags=["Retrieval"], include_in_schema=False)
-async def retrieve(request: Request):
-    """
-    Retrieve relevantne dokumente za dati upit.
+@app.route('/retrieve', methods=['POST'])
+def retrieve():
+    """Retrieval endpoint for document search."""
+    if rag_chat is None or rag_chat.rag_agent is None:
+        return jsonify({"error": "RAG not initialized"}), 503
     
-    Koristi hibridnu pretragu (FAISS + BM25) sa BGE-M3 rerankerom.
+    data = request.get_json()
+    question = data.get('question', '')
+    top_k = data.get('top_k', 8)
     
-    **Request Body:**
-    - `query` ili `question`: Tekst upita za pretragu
-    - `messages`: OpenAI-style messages format (alternativa za query)
-    - `top_k`: Broj rezultata za vraćanje (opciono, default iz config-a)
-    - `score_threshold`: Minimalni score za filtriranje (opciono)
-    - `include_metadata`: Da li uključiti metapodatke (opciono, default True)
+    if not question:
+        return jsonify({"error": "question is required"}), 400
     
-    **Response:**
-    - OpenAI-style response sa listom pronađenih dokumenata
-    """
-    if not rag_singleton.loaded:
-        raise HTTPException(
-            status_code=503,
-            detail={"error": {"message": "RAG Agent nije učitan", "type": "service_unavailable"}}
-        )
-    
-    # Parse raw JSON body za maksimalnu fleksibilnost
     try:
-        body = await request.json()
-    except Exception:
-        body = {}
-    
-    # Izvuci query - podržava razne formate
-    query = None
-    
-    # Format 1: direktno query polje
-    if "query" in body:
-        query = body["query"]
-    
-    # Format 2: question polje (bge_test klijent koristi ovo)
-    if not query and "question" in body:
-        query = body["question"]
-    
-    # Format 3: OpenAI messages format
-    if not query and "messages" in body:
-        messages = body.get("messages", [])
-        user_messages = [m for m in messages if isinstance(m, dict) and m.get("role") == "user"]
-        if user_messages:
-            query = user_messages[-1].get("content", "")
-    
-    # Format 4: input polje (neki klijenti koriste ovo)
-    if not query and "input" in body:
-        query = body["input"]
-    
-    # Format 5: prompt polje
-    if not query and "prompt" in body:
-        query = body["prompt"]
-    
-    # Format 6: text polje
-    if not query and "text" in body:
-        query = body["text"]
-    
-    if not query:
-        raise HTTPException(
-            status_code=400,
-            detail={"error": {"message": "Morate proslediti 'query', 'messages', 'input', 'prompt' ili 'text'", "type": "invalid_request"}}
-        )
-    
-    # Odredi parametre
-    retrieval_cfg = SERVER_CONFIG.get("retrieval", {})
-    top_k = body.get("top_k") or retrieval_cfg.get("top_k", 8)
-    score_threshold = body.get("score_threshold") or retrieval_cfg.get("score_threshold", 0.5)
-    embedding_top_k = retrieval_cfg.get("embedding_top_k", 80)
-    include_metadata = body.get("include_metadata", True)
-    
-    # Izvršti retrieval
-    try:
-        results = rag_singleton.agent.retrieve(
-            query=query,
-            initial_k=embedding_top_k,
-            final_k=top_k
-        )
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail={"error": {"message": str(e), "type": "retrieval_error"}}
-        )
-    
-    # Filtriraj po score_threshold
-    filtered_results = [r for r in results if r.get('rerank_score', 0) >= score_threshold]
-    
-    # Konvertuj u format koji očekuje bge_test klijent
-    # Klijent očekuje: result.metadata.{filename, section, item_number}, result.text, result.score
-    formatted_results = []
-    for rank, r in enumerate(filtered_results, 1):
-        # Formatiraj section string
-        section_num = str(r.get('section_number', '')) if r.get('section_number') else ''
-        section_title = r.get('section_title', '')
-        section_str = f"{section_num}: {section_title}" if section_num and section_title else section_num or section_title or ''
+        # Use internal RAGAgent
+        results = rag_chat.rag_agent.retrieve(question, final_k=top_k)
         
-        result_item = {
-            "text": r.get('content', ''),
-            "score": round(r.get('rerank_score', 0), 4),
-            "rank": rank,
-            "chunk_id": r.get('chunk_id', ''),
-            "metadata": {
-                "filename": r.get('doc_title', ''),
-                "section": section_str,
-                "item_number": r.get('chunk_id', '').split(':')[-1] if r.get('chunk_id') else '',
-                "doc_id": r.get('doc_id', ''),
-                "object_code": r.get('object_code', ''),
-                "object_name": r.get('object_name', ''),
-                "parent_title": r.get('parent_title', ''),
-                "voltage_levels": r.get('voltage_levels', []),
-                "keywords": r.get('keywords', [])
-            }
-        }
-        formatted_results.append(result_item)
-    
-    # Vrati jednostavan JSON response koji klijent očekuje
-    return {
-        "results": formatted_results,
-        "query": query,
-        "top_k": top_k,
-        "total_results": len(formatted_results)
-    }
-
-
-@app.get("/", tags=["System"])
-async def root():
-    """Root endpoint - vraća osnovne informacije o API-ju."""
-    return {
-        "name": "GridMind RAG API",
-        "version": "1.0.0",
-        "description": "REST API za RAG retrieval, kompatibilan sa OpenAI API standardom",
-        "endpoints": {
-            "/health": "Health check",
-            "/models": "Lista modela",
-            "/retrieve": "Retrieval endpoint (POST)",
-            "/v1/chat/completions": "OpenAI-compatible chat completions (POST)"
-        },
-        "docs": "/docs",
-        "openapi": "/openapi.json"
-    }
-
-
-@app.post("/v1/chat/completions", response_model=ChatCompletionResponse, tags=["Chat"])
-@app.post("/chat/completions", response_model=ChatCompletionResponse, tags=["Chat"], include_in_schema=False)
-async def chat_completions(request: ChatCompletionRequest):
-    """
-    OpenAI-compatible Chat Completions endpoint.
-    
-    Koristi RAG za pronalaženje relevantnih dokumenata i vraća odgovor
-    u OpenAI Chat Completions formatu.
-    
-    **Request Body:**
-    - `model`: ID modela (default: GridMind_0.9)
-    - `messages`: Lista poruka sa role i content
-    - `top_k`: Broj rezultata za retrieval (opciono)
-    - `include_sources`: Da li uključiti izvore (opciono, default True)
-    
-    **Response:**
-    - OpenAI Chat Completions format sa retrieved dokumentima
-    """
-    if not rag_singleton.loaded:
-        raise HTTPException(
-            status_code=503,
-            detail={"error": {"message": "RAG Agent nije učitan", "type": "service_unavailable"}}
-        )
-    
-    # Izvuci poslednju user poruku kao query
-    user_messages = [m for m in request.messages if m.role == "user"]
-    if not user_messages:
-        raise HTTPException(
-            status_code=400,
-            detail={"error": {"message": "Nema user poruke u messages", "type": "invalid_request"}}
-        )
-    
-    query = user_messages[-1].content
-    
-    # Odredi parametre
-    retrieval_cfg = SERVER_CONFIG.get("retrieval", {})
-    top_k = request.top_k or retrieval_cfg.get("top_k", 8)
-    embedding_top_k = retrieval_cfg.get("embedding_top_k", 80)
-    score_threshold = retrieval_cfg.get("score_threshold", 0.5)
-    
-    # Izvršti retrieval
-    try:
-        results = rag_singleton.agent.retrieve(
-            query=query,
-            initial_k=embedding_top_k,
-            final_k=top_k
-        )
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail={"error": {"message": str(e), "type": "retrieval_error"}}
-        )
-    
-    # Filtriraj po score_threshold
-    filtered_results = [r for r in results if r.get('rerank_score', 0) >= score_threshold]
-    
-    # Formatiraj odgovor sa izvorima
-    if filtered_results:
-        # Kreiraj kontekst sa retrieved dokumentima
-        context_parts = []
-        sources = []
-        
-        for i, r in enumerate(filtered_results, 1):
-            doc_title = r.get('doc_title', 'Nepoznat dokument')
-            section = r.get('section_number', '')
-            section_title = r.get('section_title', '')
-            content = r.get('content', '')
-            score = r.get('rerank_score', 0)
-            
-            # Dodaj u kontekst
-            header = f"[{i}] {doc_title}"
-            if section:
-                header += f" - Sekcija {section}"
-            if section_title:
-                header += f": {section_title}"
-            
-            context_parts.append(f"{header}\n{content}")
-            
-            # Dodaj u sources
-            sources.append({
-                "rank": i,
-                "doc_title": doc_title,
-                "section": f"{section}: {section_title}" if section else section_title,
-                "score": round(score, 3)
+        # Format results
+        formatted = []
+        for r in results:
+            formatted.append({
+                "text": r.get('content', ''),
+                "score": r.get('rerank_score', r.get('faiss_score', 0)),
+                "metadata": {
+                    "filename": r.get('doc_title', ''),
+                    "section": f"{r.get('section_number', '')} {r.get('section_title', '')}".strip(),
+                    "item_number": r.get('object_code', '')
+                }
             })
         
-        # Formatiraj finalni odgovor
-        context_text = "\n\n---\n\n".join(context_parts)
+        return jsonify({
+            "results": formatted,
+            "total": len(formatted)
+        })
         
-        if request.include_sources:
-            sources_text = "\n\n**Izvori:**\n"
-            for s in sources:
-                sources_text += f"- [{s['rank']}] {s['doc_title']} ({s['section']}) - relevantnost: {s['score']}\n"
+    except Exception as e:
+        logger.error(f"Retrieve error: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/v1/chat/completions', methods=['POST'])
+def chat_completions():
+    """OpenAI-compatible chat completions endpoint."""
+    request_start = time.time()
+    
+    logger.info(f"\n{'='*60}")
+    logger.info(f"📨 Request received at {datetime.now().strftime('%H:%M:%S')}")
+    logger.info(f"{'='*60}")
+    
+    if rag_chat is None:
+        return jsonify({"error": "RAG not initialized"}), 503
+    
+    try:
+        data = request.get_json(force=True, silent=True)
+        
+        if data is None:
+            return jsonify({
+                "error": {
+                    "message": "Invalid JSON in request body",
+                    "type": "invalid_request_error"
+                }
+            }), 400
+        
+        if 'messages' not in data:
+            return jsonify({
+                "error": {
+                    "message": "messages field is required",
+                    "type": "invalid_request_error"
+                }
+            }), 400
+        
+        messages = data['messages']
+        stream = data.get('stream', False)
+        model = data.get('model', 'rag-model')
+        
+        # Get session ID for conversation memory
+        session_id = get_session_id(data)
+        logger.info(f"📋 Session: {session_id[:12]}...")
+        
+        # Extract user question
+        user_message = extract_user_question(messages)
+        logger.info(f"❓ Question: {user_message[:100]}{'...' if len(user_message) > 100 else ''}")
+        
+        if not user_message:
+            return jsonify({
+                "error": {
+                    "message": "No user message found",
+                    "type": "invalid_request_error"
+                }
+            }), 400
+        
+        # Check for special commands
+        if user_message.strip().lower().startswith('/store '):
+            # Handle /store command
+            content_to_store = user_message[7:].strip()
+            try:
+                rag_chat.ensure_stored_knowledge_lazy()
+                entry_id = rag_chat.stored_knowledge.add_entry(content_to_store)
+                response_text = f"✅ Knowledge stored successfully with ID: {entry_id}"
+            except Exception as e:
+                response_text = f"❌ Failed to store knowledge: {e}"
             
-            response_content = f"Na osnovu pronađenih dokumenata:\n\n{context_text}{sources_text}"
-        else:
-            response_content = context_text
-    else:
-        response_content = "Nisam pronašao relevantne informacije za vaše pitanje."
-    
-    # Proceni tokene
-    prompt_tokens = sum(len(m.content) // 4 for m in request.messages)
-    completion_tokens = len(response_content) // 4
-    
-    # Kreiraj OpenAI-style response
-    return ChatCompletionResponse(
-        id=f"chatcmpl-{int(time.time() * 1000)}",
-        created=int(time.time()),
-        model=request.model or "GridMind_0.9",
-        choices=[
-            ChatCompletionChoice(
-                index=0,
-                message=ChatMessage(
-                    role="assistant",
-                    content=response_content
-                ),
-                finish_reason="stop"
+            return _create_response(response_text, model, stream)
+        
+        if user_message.strip().lower().startswith('/recall '):
+            # Handle /recall command
+            query = user_message[8:].strip()
+            try:
+                rag_chat.ensure_stored_knowledge_lazy()
+                results = rag_chat.stored_knowledge.search(query, top_k=3)
+                if results:
+                    response_text = "📚 Found stored knowledge:\n\n"
+                    for i, r in enumerate(results, 1):
+                        response_text += f"**[{i}]** (score: {r['score']:.3f})\n{r['content']}\n\n"
+                else:
+                    response_text = "No matching stored knowledge found."
+            except Exception as e:
+                response_text = f"❌ Failed to recall: {e}"
+            
+            return _create_response(response_text, model, stream)
+        
+        # Regular RAG query
+        try:
+            # Use chat method which handles retrieval, stored knowledge, and LLM
+            response_text = rag_chat.chat(
+                user_message=user_message,
+                session_id=session_id
             )
+            
+            elapsed = time.time() - request_start
+            logger.info(f"⏱️ Response generated in {elapsed:.2f}s")
+            
+            return _create_response(response_text, model, stream)
+            
+        except Exception as e:
+            logger.error(f"Chat error: {e}")
+            return jsonify({
+                "error": {
+                    "message": str(e),
+                    "type": "internal_error"
+                }
+            }), 500
+            
+    except Exception as e:
+        logger.error(f"Request error: {e}")
+        return jsonify({
+            "error": {
+                "message": str(e),
+                "type": "invalid_request_error"
+            }
+        }), 400
+
+
+def _create_response(content: str, model: str, stream: bool) -> Response:
+    """Create OpenAI-compatible response."""
+    response_id = f"chatcmpl-{uuid.uuid4().hex[:8]}"
+    
+    if stream:
+        def generate():
+            # Send content in chunks for streaming
+            chunk_size = 20
+            for i in range(0, len(content), chunk_size):
+                chunk = content[i:i+chunk_size]
+                data = {
+                    "id": response_id,
+                    "object": "chat.completion.chunk",
+                    "created": int(time.time()),
+                    "model": model,
+                    "choices": [{
+                        "index": 0,
+                        "delta": {"content": chunk},
+                        "finish_reason": None
+                    }]
+                }
+                yield f"data: {json.dumps(data)}\n\n"
+            
+            # Final chunk
+            final = {
+                "id": response_id,
+                "object": "chat.completion.chunk",
+                "created": int(time.time()),
+                "model": model,
+                "choices": [{
+                    "index": 0,
+                    "delta": {},
+                    "finish_reason": "stop"
+                }]
+            }
+            yield f"data: {json.dumps(final)}\n\n"
+            yield "data: [DONE]\n\n"
+        
+        return Response(generate(), mimetype='text/event-stream')
+    else:
+        return jsonify({
+            "id": response_id,
+            "object": "chat.completion",
+            "created": int(time.time()),
+            "model": model,
+            "choices": [{
+                "index": 0,
+                "message": {
+                    "role": "assistant",
+                    "content": content
+                },
+                "finish_reason": "stop"
+            }],
+            "usage": {
+                "prompt_tokens": 0,
+                "completion_tokens": len(content.split()),
+                "total_tokens": len(content.split())
+            }
+        })
+
+
+@app.route('/admin/stored-knowledge', methods=['GET'])
+def list_stored_knowledge():
+    """List all stored knowledge entries."""
+    if rag_chat is None or rag_chat.stored_knowledge is None:
+        return jsonify({"entries": [], "count": 0})
+    
+    try:
+        entries = rag_chat.stored_knowledge.get_all_entries()
+        return jsonify({
+            "entries": entries,
+            "count": len(entries)
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/admin/sessions', methods=['GET'])
+def list_sessions():
+    """List active sessions."""
+    if rag_chat is None or rag_chat.session_manager is None:
+        return jsonify({"sessions": [], "count": 0})
+    
+    try:
+        sessions = rag_chat.session_manager.list_active_sessions()
+        return jsonify({
+            "sessions": sessions,
+            "count": len(sessions)
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/', methods=['GET'])
+def root():
+    """Root endpoint."""
+    return jsonify({
+        "name": "GridMind Unified RAG Server",
+        "version": "2.0.0",
+        "features": [
+            "Internal RAGAgent (no REST API calls)",
+            "Stored Knowledge with BGE reranker",
+            "Session Memory (LangChain)",
+            "OpenAI-compatible API"
         ],
-        usage=ChatCompletionUsage(
-            prompt_tokens=prompt_tokens,
-            completion_tokens=completion_tokens,
-            total_tokens=prompt_tokens + completion_tokens
-        )
-    )
+        "endpoints": {
+            "/health": "Health check (GET)",
+            "/v1/models": "List models (GET)",
+            "/retrieve": "Document retrieval (POST)",
+            "/v1/chat/completions": "Chat completions (POST)",
+            "/admin/stored-knowledge": "List stored knowledge (GET)",
+            "/admin/sessions": "List sessions (GET)"
+        }
+    })
 
 
 # ============================================================================
 # Error Handlers
 # ============================================================================
 
-@app.exception_handler(HTTPException)
-async def http_exception_handler(request: Request, exc: HTTPException):
-    return JSONResponse(
-        status_code=exc.status_code,
-        content={"error": exc.detail if isinstance(exc.detail, dict) else {"message": str(exc.detail)}}
-    )
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({"error": {"message": "Endpoint not found", "type": "not_found"}}), 404
 
-
-@app.exception_handler(Exception)
-async def general_exception_handler(request: Request, exc: Exception):
-    return JSONResponse(
-        status_code=500,
-        content={"error": {"message": str(exc), "type": "internal_error"}}
-    )
+@app.errorhandler(500)
+def internal_error(e):
+    return jsonify({"error": {"message": str(e), "type": "internal_error"}}), 500
 
 
 # ============================================================================
 # Main
 # ============================================================================
 
-if __name__ == "__main__":
-    import uvicorn
+if __name__ == '__main__':
+    # Get server config
+    server_cfg = CONFIG.get('server', {})
+    default_host = server_cfg.get('host', '0.0.0.0')
+    default_port = server_cfg.get('port', 8888)
     
-    server_cfg = SERVER_CONFIG.get("server", {})
+    parser = argparse.ArgumentParser(description='GridMind Unified RAG Server')
+    parser.add_argument('--host', type=str, default=default_host)
+    parser.add_argument('--port', type=int, default=default_port)
+    parser.add_argument('--debug', action='store_true', help='Enable debug mode with auto-reload')
+    parser.add_argument('--reload', action='store_true', help='Enable hot reload (for development)')
+    args = parser.parse_args()
     
-    uvicorn.run(
-        "server:app",
-        host=server_cfg.get("host", "0.0.0.0"),
-        port=server_cfg.get("port", 8888),
-        reload=server_cfg.get("reload", False),
-        log_level="info"
-    )
+    # Hot reload disabled by default for production, enable with --reload
+    use_reloader = args.reload if hasattr(args, 'reload') else False
+    
+    print(f"""
+╔═══════════════════════════════════════════════════════════════╗
+║           GridMind Unified RAG Server v2.0                   ║
+╠═══════════════════════════════════════════════════════════════╣
+║  Host: {args.host:52s} ║
+║  Port: {args.port:52d} ║
+╠═══════════════════════════════════════════════════════════════╣
+║  Features:                                                    ║
+║    ✓ Internal RAGAgent (FAISS + BM25 + BGE reranker)         ║
+║    ✓ Stored Knowledge with BGE-M3 semantic search            ║
+║    ✓ Session Memory (LangChain ConversationBuffer)           ║
+║    ✓ OpenAI-compatible API                                   ║
+╠═══════════════════════════════════════════════════════════════╣
+║  Commands:                                                    ║
+║    /store <content>  - Store expert knowledge                ║
+║    /recall <query>   - Search stored knowledge               ║
+╚═══════════════════════════════════════════════════════════════╝
+    """)
+    
+    # Initialize RAG
+    try:
+        initialize_rag()
+    except Exception as e:
+        logger.error(f"❌ Failed to initialize: {e}")
+        print(f"⚠️ Warning: RAG will be initialized on first request")
+    
+    logger.info(f"\n🚀 Server starting on http://{args.host}:{args.port}")
+    logger.info(f"📁 Logs: {log_file}")
+    if use_reloader:
+        logger.info(f"🔄 Hot reload: ENABLED")
+    
+    app.run(host=args.host, port=args.port, debug=args.debug, use_reloader=use_reloader)
