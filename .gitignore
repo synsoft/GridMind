@@ -27,6 +27,7 @@ Thumbs.db
 # Logs
 *.log
 logs/
+nohup.out
 
 # Large model files (these are huge and should be excluded)
 chunks/finetune_rerank/
