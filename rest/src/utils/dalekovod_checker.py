@@ -13,14 +13,26 @@ _DATA_DIR = _THIS_DIR.parent.parent / "data"
 
 class DalekvodChecker:
     def __init__(self, json_path=None):
-        self.json_path = json_path or str(_DATA_DIR / "dv_station_map.json")
+        # Koristi kompletnu mapu dalekovoda (sa svim vezama)
+        self.json_path = json_path or str(_DATA_DIR / "dv_station_map_complete.json")
         self._load_data()
         self._build_station_list()
+        self._init_graph_pathfinder()
     
     def _load_data(self):
         """Učitaj mapu dalekovoda"""
         with open(self.json_path, 'r', encoding='utf-8') as f:
             self.dv_map = json.load(f)
+    
+    def _init_graph_pathfinder(self):
+        """Inicijalizuj graf pretrage za indirektne putanje"""
+        try:
+            from rest.data.graph import PathFinder
+            self.path_finder = PathFinder()
+            logger.info(f"[DV-CHECKER] ✓ Graf inicijalizovan ({self.path_finder.graph.get_station_count()} stanica)")
+        except Exception as e:
+            logger.warning(f"[DV-CHECKER] ⚠ Nije moguće učitati graf: {e}")
+            self.path_finder = None
     
     def _build_station_list(self):
         """Napravi listu svih jedinstvenih stanica"""
@@ -62,10 +74,23 @@ class DalekvodChecker:
         # Normalizuj sve stanice za poređenje
         normalized_stations = {self._normalize_station_name(s): s for s in self.all_stations}
         
+        # Prvo pokušaj tačno podudaranje
+        if query_normalized in normalized_stations:
+            logger.info(f"[DV-CHECKER] ✓ Tačno podudaranje: '{normalized_stations[query_normalized]}'")
+            return normalized_stations[query_normalized]
+        
+        # Dodaj "ts " prefix ako nije prisutan (čest slučaj)
+        if not query_normalized.startswith('ts ') and not query_normalized.startswith('rp ') and not query_normalized.startswith('he '):
+            query_with_ts = 'ts ' + query_normalized
+            if query_with_ts in normalized_stations:
+                logger.info(f"[DV-CHECKER] ✓ Podudaranje sa TS: '{normalized_stations[query_with_ts]}'")
+                return normalized_stations[query_with_ts]
+        
+        # Koristi WRatio (weighted ratio) koji bolje barata različitim dužinama
         result = process.extractOne(
             query_normalized, 
             normalized_stations.keys(), 
-            scorer=fuzz.partial_ratio,  # partial_ratio je bolji za skraćenice
+            scorer=fuzz.WRatio,  # WRatio je bolji za različite dužine
             score_cutoff=threshold
         )
         if result:
@@ -129,7 +154,82 @@ class DalekvodChecker:
             logger.info(f"[DV-CHECKER] Vraćam odgovor:\n{final_response}")
             return final_response
         
+        # Nema direktne veze - pokušaj pronaći indirektnu putanju preko grafa
+        logger.info(f"[DV-CHECKER] Nema direktne veze, tražim indirektnu putanju...")
+        graph_result = self._find_path_via_graph(station1, station2)
+        if graph_result:
+            return graph_result
+        
         logger.warning(f"[DV-CHECKER] ✗ Nisu pronađeni dalekovodi između '{station1}' i '{station2}'")
+        return None
+    
+    def _find_path_via_graph(self, station1, station2, max_depth=4):
+        """Pronađi indirektnu putanju između stanica koristeći graf pretragu."""
+        if self.path_finder is None:
+            logger.warning("[DV-CHECKER] Graf nije dostupan za pretragu")
+            return None
+        
+        try:
+            conn = self.path_finder.find_connection(station1, station2, max_depth=max_depth)
+            
+            # Proveri da li stanice postoje u grafu
+            if not conn.get("start_exists") or not conn.get("end_exists"):
+                # Pokušaj naći slične stanice
+                suggestions = conn.get("suggestions", {})
+                if suggestions:
+                    logger.info(f"[DV-CHECKER] Sugestije za stanice: {suggestions}")
+                return None
+            
+            # Ako postoji putanja
+            if conn.get("shortest_path"):
+                path = conn["shortest_path"]
+                
+                # Formatiranje odgovora
+                if path["length"] == 0:
+                    return None  # Iste stanice
+                
+                # Ako ima direktnu vezu u grafu, vrati je grupisano po naponu
+                if conn.get("direct_lines_by_voltage"):
+                    response = f"**Direktne veze:**\n"
+                    for v in sorted(conn["direct_lines_by_voltage"].keys(), reverse=True):
+                        dv_list = conn["direct_lines_by_voltage"][v]
+                        dv_str = ", ".join([f"DV {dv}" for dv in dv_list])
+                        response += f"  • {v} kV: {dv_str}\n"
+                    return response.strip()
+                
+                # Indirektna putanja
+                voltage_info = f" ({path['voltage_kv']} kV)" if path.get("is_single_voltage") and path.get("voltage_kv") else " (mešoviti naponi)"
+                response = f"**Indirektna veza** ({path['length']} skokova){voltage_info}:\n"
+                response += f"{station1} i {station2} nisu direktno povezane, ali postoji veza preko međustanica:\n\n"
+                
+                segments = path["segments"]
+                response += f"  {segments[0]['from']}\n"
+                for seg in segments:
+                    response += f"    ──[DV {seg['line']} ({seg['voltage_kv']} kV)]──> {seg['to']}\n"
+                
+                # Formatiraj listu dalekovoda sa naponima
+                line_info = [f"DV {l} ({v} kV)" for l, v in zip(path['lines'], path['voltages'])]
+                response += f"\n**Korišćeni dalekovodi:** {', '.join(line_info)}"
+                
+                # Dodaj alternative grupisane po naponu
+                if conn.get("paths_by_voltage"):
+                    response += "\n\n**Alternativne putanje po naponskom nivou:**"
+                    for v in sorted(conn["paths_by_voltage"].keys(), reverse=True):
+                        paths = conn["paths_by_voltage"][v]
+                        response += f"\n\n  **{v} kV:**"
+                        for i, alt in enumerate(paths[:2], 1):
+                            response += f"\n    {i}. {' → '.join(alt['stations'])}"
+                            dv_list = ", ".join([f"DV {l}" for l in alt["lines"]])
+                            response += f"\n       ({dv_list})"
+                
+                logger.info(f"[DV-CHECKER] ✓ Pronađena indirektna putanja sa {path['length']} skokova")
+                return response
+            
+            return None
+            
+        except Exception as e:
+            logger.error(f"[DV-CHECKER] Greška pri pretrazi grafa: {e}")
+            return None
         return None
     
     def check_question(self, question):
@@ -139,12 +239,14 @@ class DalekvodChecker:
         
         # Tip 2: "Kojim dalekovodima je TS X povezana sa TS Y?" - PRIORITET!
         # Proveri prvo da li se traže dalekovodi između stanica
-        if any(word in question_lower for word in ['kojim', 'koje', 'povezan', 'spojen', 'između', 'spaja']):
+        if any(word in question_lower for word in ['kojim', 'koje', 'povezan', 'spojen', 'između', 'spaja', 'kako']):
             # Jednostavnija ekstrakcija - traži sve potencijalne nazive stanica
-            # Ukloni česte reči
+            # Ukloni česte reči - proširena lista
             noise_words = ['kojim', 'koje', 'dalekovod', 'dalekovodima', 'je', 'povezan', 
                           'povezana', 'sa', 'i', 'spojen', 'spojena', 'spaja', 'spajaju', 
-                          'između', 'sta', 'što', 'šta']
+                          'između', 'sta', 'što', 'šta', 'kako', 'da', 'li', 'su', 'na',
+                          'preko', 'od', 'do', 'ili', 'a', 'u', 'po', 'za', 'se', 'to',
+                          'ima', 'postoji', 'veza', 'vezu', 'put', 'putanja']
             
             # Split na reči i filtriraj
             words = question_lower.split()
@@ -155,11 +257,13 @@ class DalekvodChecker:
                 # Ukloni interpunkciju
                 word = word.strip(',.?!:;')
                 
-                # Ako je reč prefiks stanice
-                if word in ['ts', 'тс', 'rp', 'рп', 'prp', 'прп']:
+                # Ako je reč prefiks stanice, počni novu stanicu
+                if word in ['ts', 'тс', 'rp', 'рп', 'prp', 'прп', 'he', 'хе', 'te', 'те', 'evp', 'евп']:
                     if current_station:
                         potential_stations.append(' '.join(current_station))
                         current_station = []
+                    # Dodaj prefiks kao deo sledećeg naziva stanice
+                    current_station.append(word)
                     continue
                 
                 # Ako je šum reč, završi trenutnu stanicu
@@ -177,8 +281,10 @@ class DalekvodChecker:
             if current_station:
                 potential_stations.append(' '.join(current_station))
             
-            # Filtriraj prazne i kratke
+            # Filtriraj prazne i kratke, ali zadrži one koji počinju sa ts/rp/he itd
             potential_stations = [s for s in potential_stations if len(s) > 2]
+            
+            logger.info(f"[DV-CHECKER] Potencijalne stanice pre filtriranja: {potential_stations}")
             
             if len(potential_stations) >= 2:
                 logger.info(f"[DV-CHECKER] Detektovane stanice: {potential_stations[:2]}")

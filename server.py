@@ -471,7 +471,7 @@ def list_stored_knowledge():
         return jsonify({"entries": [], "count": 0})
     
     try:
-        entries = rag_chat.stored_knowledge.get_all_entries()
+        entries = rag_chat.stored_knowledge.list_all()
         return jsonify({
             "entries": entries,
             "count": len(entries)

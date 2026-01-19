@@ -195,8 +195,14 @@ FORMATIRANJE ODGOVORA:
                 'provider': self.provider
             }
             
+            # Use absolute path based on this module's location
+            import os
+            module_dir = os.path.dirname(os.path.abspath(__file__))
+            storage_path = os.path.join(module_dir, "..", "..", "data", "stored_knowledge_data", "stored_knowledge.json")
+            storage_path = os.path.normpath(storage_path)
+            
             self.stored_knowledge = StoredKnowledgeManager(
-                storage_file="data/stored_knowledge_data/stored_knowledge.json",
+                storage_file=storage_path,
                 reranker=reranker,
                 llm_config=llm_config
             )
