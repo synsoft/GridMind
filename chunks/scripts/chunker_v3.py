@@ -368,6 +368,17 @@ class EESChunkerV3:
             if any(w in text_lower for w in ['scada', 'signal']):
                 keywords.update(['SCADA', 'signalizacija'])
         
+        # Kontekstualno obogaćivanje za sekciju 6.5.5 (prelazak sa sistema na sistem)
+        if section_number == '6.5.5':
+            keywords.update(['prelazak sa sistema na sistem', 'prebacivanje sa sistema sabirnica',
+                           'redosled manipulacija', 'prelazak na drugi sistem sabirnica',
+                           'prvi sistem sabirnica', 'drugi sistem sabirnica',
+                           'prebaciti izvode', 'aktivni izvodi', 'spojno polje ukljuciti',
+                           'sabirnicki rastavljac', 'prelazak SS1 SS2', 'promena sistema sabirnica',
+                           'redosled koraka prelazak', 'postupak prelaska sistema',
+                           'manipulacije prelazak sabirnica', '400 kV prelazak', '220 kV prelazak',
+                           '110 kV prelazak', 'rezervni sistem sabirnica'])
+        
         # Kontekstualno obogaćivanje za sekciju 6.2 (identifikacija sagovornika)
         if section_number and section_number.startswith('6.2'):
             if any(w in text_lower for w in ['obuc', 'obuka']):
@@ -556,6 +567,25 @@ class EESChunkerV3:
                 "Tipična pitanja: SCADA pokazuje da su rastavljači isključeni ali rukovalac nije javio - može li dispečer dati nalog?",
                 "Čekanje potvrde rukovaoca pre nego dispečer da sledeći nalog.",
                 "SCADA signalizacija bez potvrde rukovaoca."
+            ])
+        
+        # 6.5.5 (2.01) - Prelazak sa sistema na sistem (sa jednog na drugi sistem sabirnica)
+        if section_number == '6.5.5':
+            augmentations.extend([
+                "Tipična pitanja: Kako se vrši prelazak sa jednog na drugi sistem sabirnica?",
+                "Redosled manipulacija za prelazak sa prvog na drugi sistem sabirnica.",
+                "Redosled manipulacija za prebacivanje sa sistema sabirnica 1 na sistem sabirnica 2.",
+                "Prelazak sa SS1 na SS2 - redosled koraka.",
+                "Koji je postupak za prebacivanje izvoda sa jednog sistema sabirnica na drugi?",
+                "Kako prebaciti dalekovode sa prvog na drugi sistem sabirnica?",
+                "Prelazak TS na drugi sistem sabirnica 400 kV - redosled.",
+                "Prelazak TS na drugi sistem sabirnica 220 kV - redosled.",
+                "Prelazak TS na drugi sistem sabirnica 110 kV - redosled.",
+                "Postupak za prelazak na rezervni sistem sabirnica.",
+                "Manipulacije za promenu sistema sabirnica u postrojenju.",
+                "Napiši redosled manipulacija za prelazak sa prvog na drugi sistem sabirnica.",
+                "Kako se prebacuju aktivni izvodi sa jednog na drugi sistem sabirnica?",
+                "Spojno polje - ukljucenje za prelazak na drugi sistem."
             ])
         
         if augmentations:

@@ -2,45 +2,51 @@
 EVALUACIJA RAG SISTEMA - REZULTATI
 ======================================================================
 
-Ažurirano: 2026-01-16 15:41:16
+Ažurirano: 2026-01-21 12:12:14
 Top K: 5
 
-UKUPNO: 96  |  PASS: 95  |  FAIL: 1  |  99.0%
+UKUPNO: 96  |  PASS: 94  |  FAIL: 2  |  97.9%
 ======================================================================
 
-FAILED (1):
+FAILED (2):
 ----------------------------------------------------------------------
 
+[ 11] Koji su postupci dispečera za slučaj da je potrebno uključiti spojno polje 110 kV u TS Jagodina 4 u periodu ne dužem od sat vremena?
+  Retrieved: ['8.16:3.4:1.000', '8.14:3.7:1.000']
+  Expected:  ['8.14:3.6']
+  Matches:   []
+  FAIL
+
 [ 84] Koji element služi da vidno odvoji neki element od drugog koji je pod naponom?
-  Retrieved: ['1.00:115:1.000']
+  Retrieved: ['1.00:115:1.000', '1.00:26:0.914']
   Expected:  ['2.01:3.1.19']
   Matches:   []
   FAIL
 
 
-PASSED (95):
+PASSED (94):
 ----------------------------------------------------------------------
 
 [  0] Koje je normalno uklopno stanje TS Beograd 5?
-  Retrieved: ['8.05:5.2:1.000', '8.05:5.1:1.000', '8.05:4.1:0.928']
+  Retrieved: ['8.05:5.2:1.000', '8.05:5.1:1.000']
   Expected:  ['8.05:5.1', '8.05:5.2']
   Matches:   ['8.05:5.2:1.000:1', '8.05:5.1:1.000:2']
   PASS
 
 [  1] Kako je povezan TS Beograd 5 sa prenosnim sistemom od 110kV sa TS Novi Sad?
-  Retrieved: ['8.05:2.4:1.000', '8.05:2.10:1.000', '8.05:2.9:0.949']
+  Retrieved: ['8.05:2.4:1.000', '8.05:2.10:1.000', '8.05:2.9:0.942']
   Expected:  ['8.05:2.4']
   Matches:   ['8.05:2.4:1.000:1']
   PASS
 
 [  2] Da li je spojno polje 110 kV u TS Jagodina 4 u normalnom uklopnom stanju uključeno?
-  Retrieved: ['8.14:3.4:1.000', '8.14:5.2:1.000', '8.14:7.2.2:1.000', '8.14:5.1:0.979', '8.14:6.2:0.954']
+  Retrieved: ['8.14:3.4:1.000', '8.14:5.2:1.000', '8.14:5.1:1.000', '8.14:7.2.2:1.000', '8.14:6.2:1.000']
   Expected:  ['8.14:5.2']
   Matches:   ['8.14:5.2:1.000:2']
   PASS
 
 [  3] Da li je spojno polje 400 kV u TS Jagodina 4 u normalnom uklopnom stanju uključeno?
-  Retrieved: ['8.14:5.1:1.000', '8.14:7.2.1:1.000', '8.14:5.2:1.000', '8.14:3.4:1.000', '8.14:7.1.2:1.000']
+  Retrieved: ['8.14:5.1:1.000', '8.14:5.2:1.000', '8.14:7.2.1:1.000', '8.14:3.4:1.000', '8.14:6.2:1.000']
   Expected:  ['8.14:5.1']
   Matches:   ['8.14:5.1:1.000:1']
   PASS
@@ -58,15 +64,15 @@ PASSED (95):
   PASS
 
 [  6] Koji je dozvoljeni opseg frekvencije u EES?
-  Retrieved: ['3.01:3.4.2:1.000', '3.01:3.4.1:1.000', '3.01:3.3.2:0.963']
+  Retrieved: ['3.01:3.4.2:1.000', '3.01:3.4.1:1.000', '3.01:3.3.2:0.981', '3.01:3.3.1:0.919']
   Expected:  ['3.01:3.4.1', '3.01:3.4.2']
   Matches:   ['3.01:3.4.2:1.000:1', '3.01:3.4.1:1.000:2']
   PASS
 
 [  7] Koje su granice dozvoljenih napona u EES-u Srbije?
-  Retrieved: ['3.01:3.3.1:1.000', '3.01:3.3.2:0.922']
+  Retrieved: ['3.01:3.3.1:1.000', '3.01:3.3.2:0.932']
   Expected:  ['3.01:3.3.1', '3.01:3.3.2']
-  Matches:   ['3.01:3.3.1:1.000:1', '3.01:3.3.2:0.922:2']
+  Matches:   ['3.01:3.3.1:1.000:1', '3.01:3.3.2:0.932:2']
   PASS
 
 [  8] Kolika je instalisana snaga TS Jagodina 4?
@@ -87,20 +93,14 @@ PASSED (95):
   Matches:   ['8.14:3.4:1.000:1']
   PASS
 
-[ 11] Koji su postupci dispečera za slučaj da je potrebno uključiti spojno polje 110 kV u TS Jagodina 4 u periodu ne dužem od sat vremena?
-  Retrieved: ['8.16:3.4:1.000', '8.14:3.7:1.000', '8.14:3.6:0.925']
-  Expected:  ['8.14:3.6']
-  Matches:   ['8.14:3.6:0.925:3']
-  PASS
-
 [ 12] Koji su postupci dispečera za slučaj da jedan od dva sistema sabirnica 110 kV u TS Jagodina 4 nije raspoloživ u trajanju od nekoliko dana?
-  Retrieved: ['8.14:3.6:1.000', '8.14:7.2.2:1.000', '8.14:7.1.2:0.988', '8.16:3.4:0.988', '8.14:5.2:0.901']
+  Retrieved: ['8.14:3.6:1.000', '8.14:7.2.2:1.000', '8.14:7.1.2:0.998', '8.16:3.4:0.988', '8.14:5.2:0.905']
   Expected:  ['8.14:3.6', '8.14:7.2.2', '8.16:3.4']
   Matches:   ['8.14:3.6:1.000:1', '8.14:7.2.2:1.000:2', '8.16:3.4:0.988:4']
   PASS
 
 [ 13] Napisati normalno uklopno stanje na 400 kV naponu za TS Jagodina 4.
-  Retrieved: ['8.14:5.1:1.000', '8.14:5.2:1.000', '8.14:7.1.1:1.000', '8.14:6.1:1.000', '8.14:7.2.1:0.960']
+  Retrieved: ['8.14:5.1:1.000', '8.14:5.2:1.000', '8.14:6.1:1.000', '8.14:7.2.1:0.976', '8.14:7.1.1:0.969']
   Expected:  ['8.14:5.1']
   Matches:   ['8.14:5.1:1.000:1']
   PASS
@@ -112,21 +112,21 @@ PASSED (95):
   PASS
 
 [ 15] Napisati normalno uklopno stanje na 110 kV naponu za TS Beograd 20.
-  Retrieved: ['8.03:5.2:1.000', '8.03:5.1:1.000', '8.03:4.3:1.000', '8.03:7.2.2:1.000', '8.03:6.1:0.963']
+  Retrieved: ['8.03:5.2:1.000', '8.03:5.1:1.000', '8.03:7.2.2:1.000', '8.03:6.1:0.965', '8.03:4.3:0.951']
   Expected:  ['8.03:5.2']
   Matches:   ['8.03:5.2:1.000:1']
   PASS
 
 [ 16] Da li TS Beograd 5 i TS Beograd 20 rade u paralelnom radu? Obrazložiti
-  Retrieved: ['8.05:2.6:1.000', '8.05:2.4:1.000', '8.03:2.6:1.000', '8.03:2.5:1.000', '8.03:2.4:1.000']
+  Retrieved: ['8.05:2.6:1.000', '8.05:2.4:1.000', '8.03:2.6:1.000', '8.03:2.4:1.000', '8.03:2.5:1.000']
   Expected:  ['8.03:2.3', '8.03:2.4', '8.03:2.5', '8.03:2.6', '8.05:2.3', '8.05:2.4', '8.05:2.5', '8.05:2.6', '8.05:2.11']
-  Matches:   ['8.05:2.6:1.000:1', '8.05:2.4:1.000:2', '8.03:2.6:1.000:3', '8.03:2.5:1.000:4', '8.03:2.4:1.000:5']
+  Matches:   ['8.05:2.6:1.000:1', '8.05:2.4:1.000:2', '8.03:2.6:1.000:3', '8.03:2.4:1.000:4', '8.03:2.5:1.000:5']
   PASS
 
 [ 17] Objasniti postupak dispečera za slučaj da je potrebno kratkotrajno uspostaviti paralelan rad između TS Beograd 20 i TS Beograd 5.
-  Retrieved: ['8.05:2.7:1.000', '8.03:2.7:1.000', '8.05:2.6:0.922', '8.03:2.6:0.902']
+  Retrieved: ['8.05:2.7:1.000', '8.03:2.7:1.000', '8.05:2.6:0.933']
   Expected:  ['8.03:2.6', '8.03:2.7']
-  Matches:   ['8.03:2.7:1.000:2', '8.03:2.6:0.902:4']
+  Matches:   ['8.03:2.7:1.000:2']
   PASS
 
 [ 18] Da li je TS Beograd 20 u sistemu daljinskog upravljanja?
@@ -160,13 +160,13 @@ PASSED (95):
   PASS
 
 [ 23] Da li postoji diferencijalna zaštita 400 kV, 220 kV i 110 kV sabirnica u TS Kraljevo 3?
-  Retrieved: ['8.17:5.1:1.000', '8.17:7.1:1.000', '8.17:8.1:1.000', '8.17:7.3:1.000', '8.17:7.2:0.977']
+  Retrieved: ['8.17:5.1:1.000', '8.17:8.1:1.000', '8.17:7.3:1.000', '8.17:7.1:1.000', '8.17:7.2:1.000']
   Expected:  ['8.17:5.1']
   Matches:   ['8.17:5.1:1.000:1']
   PASS
 
 [ 24] Da li je TS Kruševac 1 u paralelnom radu preko 110 kV mreže sa TS Jagodina 4? Ukoliko jeste, obrazložiti odgovor.
-  Retrieved: ['8.16:2.7:1.000', '8.14:2.3:1.000', '8.16:3.4:0.953', '8.14:4.12:0.924']
+  Retrieved: ['8.16:2.7:1.000', '8.14:2.3:1.000', '8.16:3.4:0.950', '8.14:4.12:0.938']
   Expected:  ['8.14:2.3', '8.16:2.7']
   Matches:   ['8.16:2.7:1.000:1', '8.14:2.3:1.000:2']
   PASS
@@ -196,9 +196,9 @@ PASSED (95):
   PASS
 
 [ 29] Preko kojih dalekovoda se energija proizvedena u HE Đerdap 2 plasira u prenosni sistem?
-  Retrieved: ['8.12:2.7:1.000', '8.12:2.2:1.000', '8.12:2.6:1.000', '8.12:2.1:1.000']
+  Retrieved: ['8.12:2.2:1.000', '8.12:2.7:1.000', '8.12:2.6:1.000', '8.12:2.1:0.988']
   Expected:  ['8.12:2.2']
-  Matches:   ['8.12:2.2:1.000:2']
+  Matches:   ['8.12:2.2:1.000:1']
   PASS
 
 [ 30] Pri kojoj proizvodnji HE Đerdap 2 leti i za koje dalekovode koji polaze iz RP Đerdap 2 nije zadovoljen kriterijum N-1 za dalekovode?
@@ -208,13 +208,13 @@ PASSED (95):
   PASS
 
 [ 31] Da li je TS Niš 2 u trajnom paralelnom radu sa TS Bor 2? Ukoliko je odgovor ne, napisati tačku sekcionisanja i razlog zbog čega trajni paralelan rad nije ostvaren.
-  Retrieved: ['8.20:2.7:1.000', '8.20:2.6:0.977']
+  Retrieved: ['8.20:2.7:1.000', '8.20:2.6:0.988']
   Expected:  ['8.20:2.7']
   Matches:   ['8.20:2.7:1.000:1']
   PASS
 
 [ 32] Navesti sve 110 kV dalekovode koji u TS Niš 2 imaju aktivnu zaštitu od preopterećenja.
-  Retrieved: ['8.20:2.5:1.000', '8.20:2.8:1.000', '8.20:2.10:1.000', '8.20:5.3:0.914']
+  Retrieved: ['8.20:2.5:1.000', '8.20:2.8:1.000', '8.20:2.10:1.000', '8.20:5.3:0.918']
   Expected:  ['8.20:2.5', '8.20:2.8']
   Matches:   ['8.20:2.5:1.000:1', '8.20:2.8:1.000:2']
   PASS
@@ -232,7 +232,7 @@ PASSED (95):
   PASS
 
 [ 35] Preko kojih 220 kV dalekovoda su generatori u TENT-u A povezani na prenosni sistem?
-  Retrieved: ['8.22:2.3:1.000']
+  Retrieved: ['8.22:2.3:1.000', '8.22:2.8:0.917']
   Expected:  ['8.22:2.3']
   Matches:   ['8.22:2.3:1.000:1']
   PASS
@@ -256,13 +256,13 @@ PASSED (95):
   PASS
 
 [ 39] Da li za slučaj neraspoloživosti diferencijalne zaštite 400 kV sabirnica u TS Niš 2 dolazi do promene normalnog uklopnog stanja na 220 kV strani?
-  Retrieved: ['8.20:7.2.3:1.000', '8.20:7.1.1:1.000', '8.20:7.1.3:1.000', '8.20:7.2.1:1.000', '8.20:7.2.2:1.000']
+  Retrieved: ['8.20:7.2.3:1.000', '8.20:7.1.1:1.000', '8.20:7.2.2:1.000', '8.20:7.1.3:1.000', '8.20:7.2.1:1.000']
   Expected:  ['8.20:7.2.2', '8.20:5.2']
-  Matches:   ['8.20:7.2.2:1.000:5']
+  Matches:   ['8.20:7.2.2:1.000:3']
   PASS
 
 [ 40] Da li je TS Niš 2 povezana sa nekom TS koja ne pripada elektroenergetskom sistemu Republike Srbije? Ukoliko je odgovor da, navesti naziv dalekovoda preko koga je ostvarena ta veza.
-  Retrieved: ['8.20:2.3:1.000', '8.20:2.2:1.000']
+  Retrieved: ['8.20:2.3:1.000', '8.20:2.2:1.000', '8.20:4.5:0.903']
   Expected:  ['8.20:2.2']
   Matches:   ['8.20:2.2:1.000:2']
   PASS
@@ -292,7 +292,7 @@ PASSED (95):
   PASS
 
 [ 45] Da li iz RP Čibuk 1 polazi neki od interkonektivnih dalekovoda?
-  Retrieved: ['8.32:2.4:1.000', '8.32:5.1:1.000', '8.32:2.7:1.000', '8.32:6.1:0.966', '8.32:2.2:0.905']
+  Retrieved: ['8.32:2.4:1.000', '8.32:5.1:1.000', '8.32:2.7:1.000', '8.32:6.1:0.923', '8.32:2.2:0.915']
   Expected:  ['8.32:2.4']
   Matches:   ['8.32:2.4:1.000:1']
   PASS
@@ -316,7 +316,7 @@ PASSED (95):
   PASS
 
 [ 49] Došlo je do ispada dalekovoda sa uspešnim ciklusom APU, da li je dalekovod u pogonu?
-  Retrieved: ['2.00:5.1.3:1.000', '2.00:5.2.1:0.929']
+  Retrieved: ['2.00:5.1.3:1.000', '2.00:5.2.1:0.942']
   Expected:  ['2.00:5.1.3', '2.00:5.2.2']
   Matches:   ['2.00:5.1.3:1.000:1']
   PASS
@@ -328,7 +328,7 @@ PASSED (95):
   PASS
 
 [ 51] U postrojenju A na dalekovodu koji spaja trafostanice A i B delovala je distantna zaštita u prvom stepenu, u postrojenju B delovala je distantna zaštita u drugom stepenu. Na kojoj deonici od postrojenja A je potencijalan kvar?
-  Retrieved: ['2.00:5.1.4:1.000', '2.00:7.1.5:0.904']
+  Retrieved: ['2.00:5.1.4:1.000']
   Expected:  ['2.00:5.1.4']
   Matches:   ['2.00:5.1.4:1.000:1']
   PASS
@@ -346,25 +346,25 @@ PASSED (95):
   PASS
 
 [ 54] Došlo je do ispada dalekovoda koji spaja postrojenja A i B. U postrojenju A je reagovala distantna zaštita u prvom stepenu a u postrojenju B distantna zaštita u drugom stepenu. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?
-  Retrieved: ['2.00:5.2.6:1.000', '2.00:5.2.9:1.000', '2.00:7.1.5:1.000']
+  Retrieved: ['2.00:5.2.9:1.000', '2.00:5.2.6:1.000', '2.00:7.1.5:0.916']
   Expected:  ['2.00:5.2.9']
-  Matches:   ['2.00:5.2.9:1.000:2']
+  Matches:   ['2.00:5.2.9:1.000:1']
   PASS
 
 [ 55] Došlo je do ispada dalekovoda koji spaja postrojenja A i B. U postrojenju A lokator kvara pokazuje da je kvar na 40 km od postrojenja A a u postrojenju B lokator kvara pokazuje da je kvar na 20 km od postrojenja B. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?
-  Retrieved: ['2.00:5.2.9:1.000', '2.00:5.1.3:0.981', '2.00:5.2.1:0.974', '2.00:5.2.6:0.930', '2.00:5.2.10:0.905']
+  Retrieved: ['2.00:5.2.9:1.000', '2.00:5.1.3:1.000', '2.00:5.2.1:0.983', '2.00:5.2.6:0.947']
   Expected:  ['2.00:5.2.9']
   Matches:   ['2.00:5.2.9:1.000:1']
   PASS
 
 [ 56] Došlo je do ispada dalekovoda koji spaja postrojenja A i B. U postrojenju A je priključena elektrana i lokator kvara pokazuje da je kvar na 40 km od postrojenja A a u postrojenju B lokator kvara pokazuje da je kvar na 20 km od postrojenja B. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?
-  Retrieved: ['2.00:5.2.9:1.000', '2.00:5.1.3:0.939']
+  Retrieved: ['2.00:5.2.9:1.000']
   Expected:  ['2.00:5.2.9']
   Matches:   ['2.00:5.2.9:1.000:1']
   PASS
 
 [ 57] Došlo je do ispada 400 kV dalekovoda broj 401/2 koji spaja RP Drmno na koje je priključena TE Kostolac B i RP Đerdap 1 na koje je priključena HE Đerdap 1. Lokator kvara u RP Drmno pokazuje 100 km a u HE Đerdap 1 lokator pokazuje 55 km. Iz kog postrojenja dispečer treba da stavi dalekovod pod napon?
-  Retrieved: ['2.00:5.2.9:1.000', '8.11:8.1:1.000', '8.10:5.1:1.000', '8.10:8.1:1.000', '8.11:6:1.000']
+  Retrieved: ['2.00:5.2.9:1.000', '8.11:8.1:1.000', '8.10:6.2:1.000', '8.11:6:1.000', '8.10:5.1:1.000']
   Expected:  ['2.00:5.2.9']
   Matches:   ['2.00:5.2.9:1.000:1']
   PASS
@@ -394,7 +394,7 @@ PASSED (95):
   PASS
 
 [ 62] Da li dispečer sme da blokira zaštite od preopterećenja na dalekovodima?
-  Retrieved: ['2.00:5.7.2:1.000', '2.00:5.7.1:1.000', '2.00:5.5.2:0.910']
+  Retrieved: ['2.00:5.7.2:1.000', '2.00:5.7.1:1.000', '2.00:5.5.2:0.911']
   Expected:  ['2.00:5.7.1', '2.00:5.7.2']
   Matches:   ['2.00:5.7.2:1.000:1', '2.00:5.7.1:1.000:2']
   PASS
@@ -424,13 +424,13 @@ PASSED (95):
   PASS
 
 [ 67] Koje su osnovne zaštite na transformatorima?
-  Retrieved: ['2.00:6.1.1:1.000', '3.01:6.6.5.4:0.979']
+  Retrieved: ['2.00:6.1.1:1.000', '3.01:6.6.5.4:0.965']
   Expected:  ['2.00:6.1.1']
   Matches:   ['2.00:6.1.1:1.000:1']
   PASS
 
 [ 68] Da li je dozvoljeno uključenje transformatora nakon reagovanja osnovnih zaštita?
-  Retrieved: ['2.00:6.2.1:1.000', '2.00:10.4.2:0.971', '2.00:6.5.4:0.917']
+  Retrieved: ['2.00:6.2.1:1.000', '2.00:10.4.2:0.965', '2.00:6.5.4:0.928']
   Expected:  ['2.00:6.2.1']
   Matches:   ['2.00:6.2.1:1.000:1']
   PASS
@@ -466,7 +466,7 @@ PASSED (95):
   PASS
 
 [ 74] Ukoliko dolazi do ispada prekidača svih dalekovoda, koji polaze sa istog sistema sabirnica iz jednog postrojenja, u susednim postrojenjima reagovanjem distantne zaštite u drugom stepenu kao i ispada svih transformatora vezanih na iste sabirnice delovanjem distantne zaštite u drugom stepenu, gde se nalazi potencijalan kvar?
-  Retrieved: ['2.00:7.1.1:1.000', '2.00:7.1.5:0.902']
+  Retrieved: ['2.00:7.1.1:1.000']
   Expected:  ['2.00:7.1.1']
   Matches:   ['2.00:7.1.1:1.000:1']
   PASS
@@ -478,21 +478,21 @@ PASSED (95):
   PASS
 
 [ 76] Transformator je ispao iz pogona zbog greške ispitivača relejne zaštite. Da li dispečer sme da uključi transformator nakon ispada?
-  Retrieved: ['2.00:6.5.4:1.000', '2.00:6.3.1:1.000', '2.00:7.2.4:0.968', '2.00:6.3.3:0.956']
+  Retrieved: ['2.00:6.5.4:1.000', '2.00:6.3.1:1.000', '2.00:7.2.4:0.971', '2.00:6.3.3:0.946']
   Expected:  ['2.00:6.5.4']
   Matches:   ['2.00:6.5.4:1.000:1']
   PASS
 
 [ 77] Napiši redosled manipulacija za prelazak sa prvog na drugi sistem sabirnica u TS Kragujevac 2 na 400 kV strani.
-  Retrieved: ['8.15:5.1:1.000', '8.15:6.1:1.000', '8.15:6.2:1.000', '8.15:5.2:0.978']
+  Retrieved: ['8.15:5.1:1.000', '8.15:6.1:1.000', '2.01:6.5.5:1.000', '8.15:6.2:1.000', '8.15:5.2:1.000']
   Expected:  ['2.01:6.5.5', '8.15:5.1', '8.15:6.1', '8.15:6.2']
-  Matches:   ['8.15:5.1:1.000:1', '8.15:6.1:1.000:2', '8.15:6.2:1.000:3']
+  Matches:   ['8.15:5.1:1.000:1', '8.15:6.1:1.000:2', '2.01:6.5.5:1.000:3', '8.15:6.2:1.000:4']
   PASS
 
 [ 78] Došlo je do zaglave prekidača u TS Obrenovac na 400 kV dalekovodu broj 412. Prebaci dalekovod na pomoćni sistem sabirnica bez manipulacija prekidačem koji je zaglavljen.
-  Retrieved: ['2.01:6.5.6:0.970', '8.22:5.1:0.922']
+  Retrieved: ['2.01:6.5.6:0.970', '8.22:5.1:0.932']
   Expected:  ['2.01:6.5.6', '8.22:5.1']
-  Matches:   ['2.01:6.5.6:0.970:1', '8.22:5.1:0.922:2']
+  Matches:   ['2.01:6.5.6:0.970:1', '8.22:5.1:0.932:2']
   PASS
 
 [ 79] Da li rukovalac sme bez naloga nadležnog dispečera da vrši manipulacije u postrojenju?
@@ -502,7 +502,7 @@ PASSED (95):
   PASS
 
 [ 80] Sa koje strane se prvo isključuje prekidač prilikom isključenja transformatora?
-  Retrieved: ['2.01:6.5.3:1.000', '2.01:6.5.4:0.974']
+  Retrieved: ['2.01:6.5.3:1.000', '2.01:6.5.4:0.978']
   Expected:  ['2.01:6.5.3']
   Matches:   ['2.01:6.5.3:1.000:1']
   PASS
@@ -532,7 +532,7 @@ PASSED (95):
   PASS
 
 [ 86] Da li dispečer na obuci može da izdaje naloge za manipulacije?
-  Retrieved: ['2.01:6.2.5:1.000', '2.01:4.1:1.000']
+  Retrieved: ['2.01:6.2.5:1.000', '2.01:4.1:0.978']
   Expected:  ['2.01:6.2.5']
   Matches:   ['2.01:6.2.5:1.000:1']
   PASS
@@ -556,7 +556,7 @@ PASSED (95):
   PASS
 
 [ 90] Da li rukovalac sme da manipuliše iz pogonskog mehanizma rastavljača ukoliko je dalekovod bez napona?
-  Retrieved: ['2.01:6.7.2:1.000', '2.00:10.8.2:0.927']
+  Retrieved: ['2.01:6.7.2:1.000', '2.00:10.8.2:0.918']
   Expected:  ['2.01:6.7.2']
   Matches:   ['2.01:6.7.2:1.000:1']
   PASS
@@ -580,7 +580,7 @@ PASSED (95):
   PASS
 
 [ 94] Dispečer vrši isključenje dalekovoda koji ide od postrojenja A do postrojenja B. U postrojenju A je isključen prekidač, a u postrojenju B je isključen prekidač i rukovalac ima nalog za isključenje sabirničkog i izlaznog rastavljača. Dispečer je na SCADA sistemu primio signalizaciju da su sabirnički i izlazni rastavljač isključeni u postrojenju B, ali još uvek od rukovaoca nije dobio informaciju o izvršenju naloga. Da li dispečer sme da da nalog za isključenje sabirničkog i izlaznog rastavljača u postrojenju A da bi skratio vreme manipulacija?
-  Retrieved: ['2.01:6.3.7:1.000', '2.01:6.5.1:0.946']
+  Retrieved: ['2.01:6.3.7:1.000', '2.01:6.5.1:0.938']
   Expected:  ['2.01:6.3.7']
   Matches:   ['2.01:6.3.7:1.000:1']
   PASS

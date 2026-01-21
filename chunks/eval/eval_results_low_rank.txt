@@ -2,20 +2,32 @@
 PITANJA GDE OČEKIVANI CHUNK NIJE U TOP 5 ILI NEDOSTAJE
 ======================================================================
 
-Ažurirano: 2026-01-16 15:41:16
+Ažurirano: 2026-01-21 12:12:14
 Top K: 5
-Ukupno pitanja za optimizaciju: 7
+Ukupno pitanja za optimizaciju: 8
 ======================================================================
 
 ======================================================================
-NEDOSTAJU OČEKIVANI CHUNK-OVI (7 pitanja)
+NEDOSTAJU OČEKIVANI CHUNK-OVI (8 pitanja)
 ======================================================================
+
+[ 11] Koji su postupci dispečera za slučaj da je potrebno uključiti spojno polje 110 kV u TS Jagodina 4 u periodu ne dužem od sat vremena?
+  Retrieved: ['8.16:3.4:1.000', '8.14:3.7:1.000']
+  Expected:  ['8.14:3.6']
+  Matches:   []
+  MISSING:   ['8.14:3.6']
 
 [ 16] Da li TS Beograd 5 i TS Beograd 20 rade u paralelnom radu? Obrazložiti
-  Retrieved: ['8.05:2.6:1.000', '8.05:2.4:1.000', '8.03:2.6:1.000', '8.03:2.5:1.000', '8.03:2.4:1.000']
+  Retrieved: ['8.05:2.6:1.000', '8.05:2.4:1.000', '8.03:2.6:1.000', '8.03:2.4:1.000', '8.03:2.5:1.000']
   Expected:  ['8.03:2.3', '8.03:2.4', '8.03:2.5', '8.03:2.6', '8.05:2.3', '8.05:2.4', '8.05:2.5', '8.05:2.6', '8.05:2.11']
-  Matches:   ['8.05:2.6:1.000:1', '8.05:2.4:1.000:2', '8.03:2.6:1.000:3', '8.03:2.5:1.000:4', '8.03:2.4:1.000:5']
+  Matches:   ['8.05:2.6:1.000:1', '8.05:2.4:1.000:2', '8.03:2.6:1.000:3', '8.03:2.4:1.000:4', '8.03:2.5:1.000:5']
   MISSING:   ['8.03:2.3', '8.05:2.3', '8.05:2.5', '8.05:2.11']
+
+[ 17] Objasniti postupak dispečera za slučaj da je potrebno kratkotrajno uspostaviti paralelan rad između TS Beograd 20 i TS Beograd 5.
+  Retrieved: ['8.05:2.7:1.000', '8.03:2.7:1.000', '8.05:2.6:0.933']
+  Expected:  ['8.03:2.6', '8.03:2.7']
+  Matches:   ['8.03:2.7:1.000:2']
+  MISSING:   ['8.03:2.6']
 
 [ 20] Napisati uklopno stanje u TS Beograd 20 na svim naponskim nivoima u slučaju neraspoloživosti diferencijalne zaštite sabirnica na 400 kV. Koje su promene u odnosu na normalno uklopno stanje na 110 kV strani?
   Retrieved: ['8.03:7.2.2:1.000', '8.03:7.1.1:1.000', '8.03:7.1.2:1.000', '8.03:7.2.1:1.000', '8.03:5.2:1.000']
@@ -30,25 +42,19 @@ NEDOSTAJU OČEKIVANI CHUNK-OVI (7 pitanja)
   MISSING:   ['8.20:5.1']
 
 [ 39] Da li za slučaj neraspoloživosti diferencijalne zaštite 400 kV sabirnica u TS Niš 2 dolazi do promene normalnog uklopnog stanja na 220 kV strani?
-  Retrieved: ['8.20:7.2.3:1.000', '8.20:7.1.1:1.000', '8.20:7.1.3:1.000', '8.20:7.2.1:1.000', '8.20:7.2.2:1.000']
+  Retrieved: ['8.20:7.2.3:1.000', '8.20:7.1.1:1.000', '8.20:7.2.2:1.000', '8.20:7.1.3:1.000', '8.20:7.2.1:1.000']
   Expected:  ['8.20:7.2.2', '8.20:5.2']
-  Matches:   ['8.20:7.2.2:1.000:5']
+  Matches:   ['8.20:7.2.2:1.000:3']
   MISSING:   ['8.20:5.2']
 
 [ 49] Došlo je do ispada dalekovoda sa uspešnim ciklusom APU, da li je dalekovod u pogonu?
-  Retrieved: ['2.00:5.1.3:1.000', '2.00:5.2.1:0.929']
+  Retrieved: ['2.00:5.1.3:1.000', '2.00:5.2.1:0.942']
   Expected:  ['2.00:5.1.3', '2.00:5.2.2']
   Matches:   ['2.00:5.1.3:1.000:1']
   MISSING:   ['2.00:5.2.2']
 
-[ 77] Napiši redosled manipulacija za prelazak sa prvog na drugi sistem sabirnica u TS Kragujevac 2 na 400 kV strani.
-  Retrieved: ['8.15:5.1:1.000', '8.15:6.1:1.000', '8.15:6.2:1.000', '8.15:5.2:0.978']
-  Expected:  ['2.01:6.5.5', '8.15:5.1', '8.15:6.1', '8.15:6.2']
-  Matches:   ['8.15:5.1:1.000:1', '8.15:6.1:1.000:2', '8.15:6.2:1.000:3']
-  MISSING:   ['2.01:6.5.5']
-
 [ 84] Koji element služi da vidno odvoji neki element od drugog koji je pod naponom?
-  Retrieved: ['1.00:115:1.000']
+  Retrieved: ['1.00:115:1.000', '1.00:26:0.914']
   Expected:  ['2.01:3.1.19']
   Matches:   []
   MISSING:   ['2.01:3.1.19']

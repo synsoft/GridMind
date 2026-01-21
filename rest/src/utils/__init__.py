@@ -17,6 +17,12 @@ def get_dalekovod_checker():
     from .dalekovod_checker import DalekvodChecker
     return DalekvodChecker
 
+# Lazy import for StationMatcher
+def get_station_matcher_lazy():
+    """Lazy import for StationMatcher."""
+    from .station_matcher import get_station_matcher
+    return get_station_matcher()
+
 __all__ = [
     'InputValidator',
     'ValidationConfig',
@@ -24,4 +30,5 @@ __all__ = [
     'validate_question',
     'validate_session_id',
     'get_dalekovod_checker',
+    'get_station_matcher_lazy',
 ]

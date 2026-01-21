@@ -8,6 +8,7 @@ from src.core.stored_knowledge import StoredKnowledgeManager
 from src.core.session_manager import SessionMemoryManager
 from src.core.llm_client import LLMClient, LLMConfig
 from src.utils.dalekovod_checker import DalekvodChecker
+from src.utils.station_matcher import get_station_matcher
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +59,15 @@ class OllamaRAGChat:
         
         # Initialize DalekvodChecker
         self.dv_checker = DalekvodChecker()
+        
+        # Initialize StationMatcher for TS/RP info (normalno uklopno stanje)
+        try:
+            self.station_matcher = get_station_matcher()
+            self._print(f"✅ StationMatcher loaded ({len(self.station_matcher.objects_by_code)} objekata)")
+        except Exception as e:
+            self._print(f"⚠️ StationMatcher failed: {e}")
+            self.station_matcher = None
+        
         self.default_top_k = api_cfg.get("default_top_k", 5)
         self.api_timeout = api_cfg.get("timeout_seconds", 30)
         
@@ -251,17 +261,18 @@ FORMATIRANJE ODGOVORA:
             
             # Log chunks header
             if self.log_chunks:
-                print(f"\n{'='*100}")
+                print(f"\n{'='*80}")
                 print(f"📦 CHUNKS FROM INTERNAL RAG (Top {len(results)}):")
-                print(f"{'='*100}\n")
+                print(f"{'='*80}")
             else:
-                self._print(f"\n{'='*100}")
-                self._print(f"📦 CHUNKS FROM INTERNAL RAG (Top {len(results)}):")
-                self._print(f"{'='*100}\n")
+                self._print(f"\n📦 CHUNKS FROM INTERNAL RAG (Top {len(results)}):")
             
             for i, result in enumerate(results, 1):
                 # Map RAGAgent result fields to expected format
                 doc_title = result.get('doc_title', 'N/A')
+                # Izvuci samo broj fajla (npr. "8.15" iz "8.15 UP-KG2_2022...")
+                file_short = doc_title.split()[0] if doc_title else 'N/A'
+                
                 section_number = result.get('section_number', '')
                 section_title = result.get('section_title', '')
                 section_label = f"{section_number} {section_title}".strip() if section_number or section_title else 'N/A'
@@ -276,26 +287,22 @@ FORMATIRANJE ODGOVORA:
                 }
                 formatted_results.append(chunk_data)
                 
-                # Log chunk details
+                # Log chunk details - skraćeni format
+                item = chunk_data['item_number']
+                score = chunk_data['score']
+                log_line = f"  #{i}: File: {file_short}, Section: {section_number} | Item: {item}, Score: {score:.4f}"
+                
                 if self.log_chunks:
-                    print(f"📄 Chunk #{i}:")
-                    print(f"   File: {chunk_data['filename']}")
-                    print(f"   Section: {chunk_data['section']} | Item: {chunk_data['item_number']}")
-                    print(f"   Score: {chunk_data['score']:.4f}")
-                    print(f"   Content: {chunk_data['content'][:150]}...")
-                    print(f"{'-'*100}\n")
+                    print(log_line)
+                    print(f"      Content: {chunk_data['content'][:100]}...")
                 else:
-                    self._print(f"📄 Chunk #{i}:")
-                    self._print(f"   File: {chunk_data['filename']}")
-                    self._print(f"   Section: {chunk_data['section']} | Item: {chunk_data['item_number']}")
-                    self._print(f"   Score: {chunk_data['score']:.4f}")
-                    self._print(f"   Content preview: {chunk_data['content'][:200]}...")
-                    self._print(f"{'-'*100}\n")
+                    self._print(log_line)
             
             if self.log_chunks:
+                print(f"{'='*80}")
                 print(f"✅ Total {len(formatted_results)} chunks from internal RAG\n")
             else:
-                self._print(f"✅ Total {len(formatted_results)} chunks from internal RAG\n")
+                self._print(f"✅ Total {len(formatted_results)} chunks\n")
             
             # Also search stored knowledge (if enabled)
             if self.use_stored_knowledge:
@@ -622,6 +629,111 @@ Tvoj odgovor:"""
             print(f"⚠️ Contextualization failed: {e}, using original question")
             return user_message
 
+    def _extract_stations_from_dv_info(self, dv_info: str) -> list:
+        """
+        Izvuci nazive TS/RP iz dalekovod info stringa.
+        
+        Args:
+            dv_info: String sa informacijama o dalekovodima
+            
+        Returns:
+            Lista pronađenih objekata (dict)
+        """
+        import re
+        from cyrtranslit import to_latin
+        
+        if not self.station_matcher or not dv_info:
+            return []
+        
+        # Konvertuj u latinicu za jednostavniji regex
+        dv_info_latin = to_latin(dv_info, 'sr')
+        
+        found_objects = []
+        
+        # Pattern za "TS/RP Ime - TS/RP Ime" format (samo latinica)
+        pattern = r'(TS|RP|PRP|HE|TE)\s+([A-Za-zčćžšđČĆŽŠĐ\s]+\d*)'
+        
+        matches = re.findall(pattern, dv_info_latin, re.IGNORECASE)
+        for prefix, name in matches:
+            name = name.strip()
+            if len(name) < 2:
+                continue
+            
+            # Probaj pronaći objekat
+            obj = self.station_matcher.find_object(name)
+            if obj and obj not in found_objects:
+                found_objects.append(obj)
+        
+        return found_objects
+
+    def _extract_ts_uklopno_stanje(self, question: str, dv_info: str = None) -> str:
+        """
+        Izvuci normalno uklopno stanje za TS/RP.
+        
+        Ako je dv_info prosleđen, izvlači stanice iz njega.
+        Inače, traži TS/RP u pitanju.
+        
+        Args:
+            question: Korisničko pitanje
+            dv_info: Opciono - string sa info o dalekovodima
+            
+        Returns:
+            Formatiran tekst sa uklopnim stanjima ili prazan string
+        """
+        import re
+        from cyrtranslit import to_latin
+        
+        if not self.station_matcher:
+            return ""
+        
+        found_objects = []
+        
+        # Ako imamo dv_info, izvuci stanice iz njega
+        if dv_info:
+            found_objects = self._extract_stations_from_dv_info(dv_info)
+        
+        # Ako nema dv_info ili nije našao ništa, traži u pitanju
+        if not found_objects:
+            # Konvertuj pitanje u latinicu za jednostavniji regex
+            question_latin = to_latin(question, 'sr')
+            
+            # Patterns za prepoznavanje TS/RP (samo latinica)
+            patterns = [
+                r'TS\s+([A-Za-zčćžšđČĆŽŠĐ\s]+\d*)',
+                r'RP\s+([A-Za-zčćžšđČĆŽŠĐ\s]+\d*)',
+                r'PRP\s+([A-Za-zčćžšđČĆŽŠĐ\s]+\d*)',
+            ]
+            
+            for pattern in patterns:
+                matches = re.findall(pattern, question_latin, re.IGNORECASE)
+                for match in matches:
+                    name = match.strip()
+                    if len(name) < 2:
+                        continue
+                    
+                    # Probaj pronaći objekat
+                    obj = self.station_matcher.find_object(name)
+                    if obj and obj not in found_objects:
+                        found_objects.append(obj)
+        
+        if not found_objects:
+            return ""
+        
+        # Formatiraj output
+        result = "\n**Normalno uklopno stanje:**\n"
+        has_any = False
+        for obj in found_objects:
+            obj_name = obj.get('name', 'Nepoznat objekat')
+            uklopno = obj.get('normalno_uklopno_stanje')
+            if uklopno:
+                result += f"\n### {obj_name}\n{uklopno}\n"
+                print(f"   📋 {obj_name}: {len(uklopno)} karaktera")
+                has_any = True
+            else:
+                print(f"   ⚠️ {obj_name}: nema uklopno stanje u registru")
+        
+        return result if has_any else ""
+
     def call_ollama_stream(self, messages):
         """Call Ollama/OpenAI with streaming enabled using LLMClient."""
         try:
@@ -731,7 +843,7 @@ Odgovori SAMO sa jednom rečju: DA ili NE"""
         print(f"{'='*80}")
         dv_info = self.dv_checker.check_question(search_query)
         
-        # Prepare additional context (dalekovod info)
+        # Prepare additional context (dalekovod info + TS/RP info)
         additional_context = ""
         enhanced_query = search_query
         
@@ -753,6 +865,23 @@ Odgovori SAMO sa jednom rečju: DA ili NE"""
         else:
             print(f"❌ Nisu pronađene informacije o dalekovodima")
             print(f"{'='*80}\n")
+        
+        # Check for TS/RP info (normalno uklopno stanje)
+        # Ako imamo dv_info, izvlačimo stanice iz njega; inače iz pitanja
+        if self.station_matcher:
+            print(f"{'='*80}")
+            print(f"🏭 CHECKING FOR TS/RP INFO (NORMALNO UKLOPNO STANJE)")
+            print(f"{'='*80}")
+            
+            # Prosleđujemo dv_info ako postoji - izvlači stanice iz njega
+            ts_info = self._extract_ts_uklopno_stanje(search_query, dv_info)
+            if ts_info:
+                additional_context += ts_info
+                print(f"✅ Pronađeno normalno uklopno stanje")
+                print(f"{'='*80}\n")
+            else:
+                print(f"❌ Nije pronađeno normalno uklopno stanje")
+                print(f"{'='*80}\n")
         
         # ALWAYS search documents (LangChain handles context automatically)
         # Use enhanced query if we found dalekovod info

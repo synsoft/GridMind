@@ -4,6 +4,8 @@ import logging
 from pathlib import Path
 from rapidfuzz import fuzz, process
 
+from .station_matcher import get_station_matcher
+
 logger = logging.getLogger(__name__)
 
 # Compute absolute path to data directory
@@ -16,13 +18,33 @@ class DalekvodChecker:
         # Koristi kompletnu mapu dalekovoda (sa svim vezama)
         self.json_path = json_path or str(_DATA_DIR / "dv_station_map_complete.json")
         self._load_data()
-        self._build_station_list()
+        self._init_station_matcher()
         self._init_graph_pathfinder()
     
     def _load_data(self):
         """Učitaj mapu dalekovoda"""
         with open(self.json_path, 'r', encoding='utf-8') as f:
             self.dv_map = json.load(f)
+    
+    def _init_station_matcher(self):
+        """Inicijalizuj zajednički station matcher"""
+        try:
+            self.station_matcher = get_station_matcher()
+            self.all_stations = self.station_matcher.all_stations
+            logger.info(f"[DV-CHECKER] ✓ StationMatcher inicijalizovan")
+        except Exception as e:
+            logger.warning(f"[DV-CHECKER] ⚠ StationMatcher greška: {e}, koristim lokalnu listu")
+            self._build_station_list_fallback()
+            self.station_matcher = None
+
+    def _build_station_list_fallback(self):
+        """Fallback: napravi lokalnu listu stanica ako StationMatcher nije dostupan"""
+        stations = set()
+        for connections in self.dv_map.values():
+            for pair in connections:
+                stations.add(pair[0])
+                stations.add(pair[1])
+        self.all_stations = list(stations)
     
     def _init_graph_pathfinder(self):
         """Inicijalizuj graf pretrage za indirektne putanje"""
@@ -34,22 +56,46 @@ class DalekvodChecker:
             logger.warning(f"[DV-CHECKER] ⚠ Nije moguće učitati graf: {e}")
             self.path_finder = None
     
-    def _build_station_list(self):
-        """Napravi listu svih jedinstvenih stanica"""
-        stations = set()
-        for connections in self.dv_map.values():
-            for pair in connections:
-                stations.add(pair[0])
-                stations.add(pair[1])
-        self.all_stations = list(stations)
+    def _find_best_match(self, query, threshold=50):
+        """Pronađi najbližu stanicu koristeći StationMatcher"""
+        # Koristi zajednički StationMatcher
+        if self.station_matcher:
+            result = self.station_matcher.find_station(query, threshold=threshold)
+            if result:
+                logger.info(f"[DV-CHECKER] ✓ StationMatcher match: '{result}'")
+                return result
+            logger.warning(f"[DV-CHECKER] ✗ StationMatcher nije pronašao: '{query}'")
+            return None
+        
+        # Fallback na staru logiku ako StationMatcher nije dostupan
+        return self._find_best_match_fallback(query, threshold)
     
+    def _find_best_match_fallback(self, query, threshold=50):
+        """Fallback fuzzy matching ako StationMatcher nije dostupan"""
+        query_normalized = self._normalize_station_name(query)
+        normalized_stations = {self._normalize_station_name(s): s for s in self.all_stations}
+        
+        if query_normalized in normalized_stations:
+            return normalized_stations[query_normalized]
+        
+        result = process.extractOne(
+            query_normalized, 
+            normalized_stations.keys(), 
+            scorer=fuzz.WRatio,
+            score_cutoff=threshold
+        )
+        if result:
+            return normalized_stations[result[0]]
+        return None
+
     def _normalize_station_name(self, name):
         """Normalizuj naziv stanice za lakše poređenje"""
-        # Ukloni dijakritike i pretvori u latinicu
-        from cyrtranslit import to_latin
-        name = to_latin(name, 'sr')
+        try:
+            from cyrtranslit import to_latin
+            name = to_latin(name, 'sr')
+        except ImportError:
+            pass
         
-        # Mapiranje skraćenica
         replacements = {
             'bg': 'beograd',
             'ns': 'novi sad',
@@ -65,43 +111,6 @@ class DalekvodChecker:
                 name_lower = name_lower.replace(abbr + ' ', full + ' ', 1)
         
         return name_lower
-    
-    def _find_best_match(self, query, threshold=50):
-        """Pronađi najbližu stanicu koristeći fuzzy matching"""
-        query_normalized = self._normalize_station_name(query)
-        logger.info(f"[DV-CHECKER] Tražim stanicu: '{query}' (normalizovano: '{query_normalized}')")
-        
-        # Normalizuj sve stanice za poređenje
-        normalized_stations = {self._normalize_station_name(s): s for s in self.all_stations}
-        
-        # Prvo pokušaj tačno podudaranje
-        if query_normalized in normalized_stations:
-            logger.info(f"[DV-CHECKER] ✓ Tačno podudaranje: '{normalized_stations[query_normalized]}'")
-            return normalized_stations[query_normalized]
-        
-        # Dodaj "ts " prefix ako nije prisutan (čest slučaj)
-        if not query_normalized.startswith('ts ') and not query_normalized.startswith('rp ') and not query_normalized.startswith('he '):
-            query_with_ts = 'ts ' + query_normalized
-            if query_with_ts in normalized_stations:
-                logger.info(f"[DV-CHECKER] ✓ Podudaranje sa TS: '{normalized_stations[query_with_ts]}'")
-                return normalized_stations[query_with_ts]
-        
-        # Koristi WRatio (weighted ratio) koji bolje barata različitim dužinama
-        result = process.extractOne(
-            query_normalized, 
-            normalized_stations.keys(), 
-            scorer=fuzz.WRatio,  # WRatio je bolji za različite dužine
-            score_cutoff=threshold
-        )
-        if result:
-            matched_normalized = result[0]
-            score = result[1]
-            original_name = normalized_stations[matched_normalized]
-            logger.info(f"[DV-CHECKER] ✓ Pronađen match: '{original_name}' (score: {score})")
-            return original_name  # Vrati original
-        
-        logger.warning(f"[DV-CHECKER] ✗ Nije pronađen match za '{query}' (threshold: {threshold})")
-        return None
     
     def get_dalekovod_info(self, dv_id):
         """Vrati info o jednom dalekovodu"""

@@ -5,329 +5,726 @@
       "name": "TS Bajina Bašta",
       "name_cyrillic": "ТС Бајина Башта",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "35kV"],
+      "voltage_levels": [
+        "220kV",
+        "35kV"
+      ],
       "region": "RDC Valjevo",
-      "connected_to": ["SM2", "VA3", "OBR", "BG3", "PO", "BI", "PLJE2"],
-      "generators": ["HE Bajina Basta", "RHE Bajina Basta"]
+      "connected_to": [
+        "SM2",
+        "VA3",
+        "OBR",
+        "BG3",
+        "PO",
+        "BI",
+        "PLJE2"
+      ],
+      "generators": [
+        "HE Bajina Basta",
+        "RHE Bajina Basta"
+      ],
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu broj 2:\n\n## 5.1 Postrojenje 220 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 210, DV 292A, DV 209/1, DV 213/1, DV 206/1 i DV 291;\n- 2. (ili 1.) sistem sabirnica: DV 211, DV 292B, DV 227/1, DV 204, DV 203/3 i TR1;\n- spojno polje 220 kV uključeno;\n- aktivna je diferencijalna zaštita sabirnica."
     },
     {
       "code": "BG3",
       "name": "TS Beograd 3",
       "name_cyrillic": "ТС Београд 3",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na  osnovu  rezultata  navedenih  analiza  definiše  se  sledeće  normalno  uklopno  stanje  koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postojenje 220 kV:\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 251, DV 204 i TR1;\n-  GS 2 (ili GS 1) sistem sabirnica: DV 252, DV 213/2 i TR2;\n-  spojno polje 220 kV uključeno;\n-  aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2 Postrojenje 110 kV:\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 101A/1, DV 131/1, DV 129A/2, DV 136A/1, DV 130/3 i TR1;\n-  GS 2 (ili GS 1) sistem sabirnica: DV 101B/1, DV 141, DV 129B/2, DV 136B/1  DV 137/1 i TR2\n-  spojno polje 110 kV uključeno;\n-  aktivna je diferencijalna zaštita sabirnica."
     },
     {
       "code": "BG5",
       "name": "TS Beograd 5",
       "name_cyrillic": "ТС Београд 5",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV", "35kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "220kV",
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje:\n\n## 5.1 Postrojenje 220 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 228, DV 294A, TR1 i TR7;\n- 2. (ili 1.) sistem sabirnica: DV 250, DV 294B, TR5 i TR6;\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2 Postrojenje 110 kV:\n\n- 1A sistem sabirnica: DV 146A, DV 197A/1, KB 1233/1, TR3 (ili TR4) i TR1;\n- 1B sistem sabirnica: DV 104A/3, DV 1178A, DV Ž05A i TR5;\n- 2A sistem sabirnica: DV 146B, 197B, DV 104/2, i TR4 (ili TR3);\n- 2B sistem sabirnica: DV 104B/3, DV 1178B, DV Ž05B, TR6 i TR7;\n- oba poprečna spojna polja uključena;\n- oba podužna spojna polja uključena;\n- aktivna je diferencijalna zaštita sabirnica."
     },
     {
       "code": "BG8",
       "name": "TS Beograd 8",
       "name_cyrillic": "ТС Београд 8",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "220kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "400kV",
+        "220kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 400 kV :\n\n-  1. (ili 2. ) sistem sabirnica: DV 401/ 3 i TR 1;\n-  2. (ili 1.) sistem sabirnica: DV 412, DV 451/1 i TR2;\n-  spojno polje 400 kV je uključeno ;\n-  aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2 Postrojenje 22  kV 0 :\n\n-  1. (ili 2. ) sistem sabirnica: DV 253/1, DV 251 , DV 276A i TR1;\n-  2. (ili 1. ) sistem sabirnica: DV 252 , DV 276B, DV 277 i TR2;\n-  spojno polje 220 kV je uključeno ;\n-  aktivna je diferencijalna zaštita sabirnica ."
     },
     {
       "code": "BG20",
       "name": "TS Beograd 20",
       "name_cyrillic": "ТС Београд 20",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "110kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "400kV",
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu broj 2:\n\n## 5.1 Postojenje 400 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 451/1 i TR1 (ili TR2);\n- 2. (ili 1.) sistem sabirnica: DV 451/2 i TR2 (ili TR1);\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2 Postrojenje 110 kV:\n\n- 1.  (ili 2.) sistem sabirnica: DV 129A/1, DV 129A/2, MV 1250, DV 1240A, MV 1288 i TR1 (ili TR2);\n- 2.  (ili  1.)  sistem  sabirnica:  DV 129B/1, DV 129B/2, MV 1251, DV 1240B, i TR2 (ili TR1);\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica."
     },
     {
       "code": "VA3",
       "name": "TS Valjevo 3",
       "name_cyrillic": "ТС Ваљево 3",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV"],
-      "region": "RDC Valjevo"
+      "voltage_levels": [
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Valjevo",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu broj 2:\n\n## 5.1 Postrojenje 220 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 227/1, DV 227/2, TR1 i TR2;\n- spojno polje isključeno i rastavljeno.\n\n## 5.2 Postrojenje 110 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 106A/4, DV 107/5, DV 107/3 i TR1 ili TR2;\n- 2. (ili 1.) sistem sabirnica: DV 106B/2, DV 120/3, DV 120/4 i TR2 ili TR1;\n- spojno polje isključeno, rastavljači uključeni."
     },
     {
       "code": "VR4",
       "name": "TS Vranje 4",
       "name_cyrillic": "ТС Врање 4",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "110kV"],
-      "region": "RDC Nis"
+      "voltage_levels": [
+        "400kV",
+        "110kV"
+      ],
+      "region": "RDC Nis",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu broj 2.\n\n## 5.1 Postrojenje 400 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 461, DV 462 i TR1;\n- spojno polje isključeno i rastavljeno;\n- aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2 Postrojenje 110 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 168A/1, DV 168B/1 i TR1;\n- 2. (ili 1.) sistem sabirnica: DV 168A/2, DV 168B/2, DV 1219/2;\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica."
     },
     {
       "code": "DRM",
       "name": "RP Drmno",
       "name_cyrillic": "РП Дрмно",
       "type": "razvodno_postrojenje",
-      "voltage_levels": ["400kV", "110kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "400kV",
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu broj 1:\n\n- 5.1 Postrojenje 400 kV:\n- GS 1 (ili GS 2) sistem sabirnica: DV 401/4, blok TR1 i blok TR3;\n- GS 2 (ili GS 1) sistem sabirnica: DV 401/2, DV 453/1 i blok TR2;\n- Spojno polje 400 kV je uključeno;\n- Diferencijalna zaštita sabirnica je aktivna."
     },
     {
       "code": "DJE1",
       "name": "RP Đerdap 1",
       "name_cyrillic": "РП Ђердап 1",
       "type": "razvodno_postrojenje",
-      "voltage_levels": ["400kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "400kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje se šematski daje u prilogu broj 3:\n\n- 5.1 Postrojenje 400 kV:\n-  GS 1 ( ili GS 2) sistem sabirnica : DV 459, DV 401/2 i DV 405;\n-  spojno polje 400 kV je uključeno ;\n-  GS 2 ( ili GS 1) sistem sabirnica : DV 457, DV 458 i DV 402;\n-  aktivna je diferencijalna zaštita sabirnica ."
     },
     {
       "code": "DJE2",
       "name": "RP Đerdap 2",
       "name_cyrillic": "РП Ђердап 2",
       "type": "razvodno_postrojenje",
-      "voltage_levels": ["110kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu broj 2:\n\n## 5.1 Postrojenje 110 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 1228A, DV 1228B, DV 1229A, DV 1229B, DV 1230, DV 1186, DV 1166/1, DV 1165, DV 1168, DV 1204, DV 1209 i transformator TR1 110/6,3 kV;\n- spojno polje isključeno i rastavljeno."
     },
     {
       "code": "ZR2",
       "name": "TS Zrenjanin 2",
       "name_cyrillic": "ТС Зрењанин 2",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV"],
-      "region": "RDC Novi Sad"
+      "voltage_levels": [
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Novi Sad",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2.\n\n## 5.1 Postrojenje 220 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 254/2, DV 275, TR1 i TR2;\n- spojno polje je isključeno i rastavljeno.\n\n## 5.2 Postrojenje 110 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 142/3, DV 143, DV 1007/1, DV 1131 i TR1;\n- 2. (ili 1.) sistem sabirnica: DV 142/4, DV 183, DV 192, DV 1006, DV 1132 i TR2;\n- spojno polje je isključeno, rastavljači su uključeni."
     },
     {
       "code": "JA4",
       "name": "TS Jagodina 4",
       "name_cyrillic": "ТС Јагодина 4",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "110kV"],
-      "region": "RDC Nis"
+      "voltage_levels": [
+        "400kV",
+        "110kV"
+      ],
+      "region": "RDC Nis",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu broj 2:\n\n## 5.1 Postrojenje 400 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 423/1 i TR1 (ili TR2);\n- 2. (ili 1.) sistem sabirnica: DV 423/2 i TR2 (ili TR1);\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2 Postrojenje 110 kV:\n\n- 1.  (ili  2.)  sistem  sabirnica:  DV  105/3,  DV  1141/1,  DV  1141/2,  DV  105/2  i  TR1  (ili TR2);\n- 2. (ili 1.) sistem sabirnica: DV 152/4, DV 123/6, DV 1227 i TR2 (ili TR1);\n- spojno polje isključeno, rastavljači uključeni;\n- aktivna je diferencijalna zaštita sabirnica."
     },
     {
       "code": "KG2",
       "name": "TS Kragujevac 2",
       "name_cyrillic": "ТС Крагујевац 2",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "110kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "400kV",
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje se šematski daje u prilogu broj 2:\n\n## 5.1 Postrojenje 400 kV:\n\n- GS 1 (ili GS 2)  sistem sabirnica: DV 423/1, DV 436, DV 464, TR1 i TR2;\n- spojno polje 400 kV isključeno, rastavljači isključeni.\n\n## 5.2 Postrojenje 110 kV:\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 123/3, DV 123/4, DV 186A, DV 1171, DV 1221, DV 1181 i TR1;\n- GS2 (ili GS1) sistem sabirnica: DV 186B, DV 1126/2, DV 123/5, DV 198,  DV 1125A, DV 1125B i TR2;\n- spojno polje 110 kV isključeno, rastavljači uključeni;\n- pomoćno spojno polje 110 kV isključeno, rastavljači isključeni;\n- podužni rastavljač sabirnica GS 1 uključen."
     },
     {
       "code": "KR1",
       "name": "TS Kruševac 1",
       "name_cyrillic": "ТС Крушевац 1",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV", "35kV"],
-      "region": "RDC Nis"
+      "voltage_levels": [
+        "220kV",
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Nis",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu 2:\n\n## 5.1 Postrojenje 220 kV\n\n-  GS 1(ili GS 11) sistem sabirnica: DV 226, DV 205/2 i TR2 (ili TR1)\n-  GS 11 (ili GS 1) sistem sabirnica: DV 214/1 i TR1 (ili TR2)\n-  spojno polje uključeno\n-  aktivna diferencijalna zaštita sabirnica\n\n## 5.2 Postrojenje 110 kV\n\n-  GS 1(ili GS 11) sistem sabirnica: DV 114/1. DV 191/1, DV 152/1, DV 1158 A, DV 1161/1.. TR1 (ili TR2), TR3 (ili TR4) i MTK1 (ili MTK2)\n-  GS 11 (ili GS 1) sistem sabirnica: DV 108, DV 109/4, DV 191/2, DV 1158B, KB 1232, TR2 (ili TR1) i TR4 (ili TRZ)\n-  spojno polje uključeno\n-  aktivna diferencijalna zaštita sabirnica"
     },
     {
       "code": "KR3",
       "name": "TS Kraljevo 3",
       "name_cyrillic": "ТС Краљево 3",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV"],
-      "region": "RDC Nis"
+      "voltage_levels": [
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Nis",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 400 kV:\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 464 i TR4;\n- spojno polje 400 kV isključeno i rastavljeno;\n- aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2 Postrojenje 220 kV:\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 214/1, DV 214/2, DV 297/1, TR1, TR2 i TR4;\n- spojno polje 220 kV isključeno i rastavljeno.\n\n## 5.3 Postrojenje 110 kV:\n- GS 1 (ili GS 2) sistem sabirnica: DV 1167A, DV 1167B/3, DV 109/1, DV 109/2, DV 161, TR1 i TR2;\n- spojno polje 110 kV isključeno i rastavljeno."
     },
     {
       "code": "LE2",
       "name": "TS Leskovac 2",
       "name_cyrillic": "ТС Лесковац 2",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "220kV", "110kV"],
-      "region": "RDC Nis"
+      "voltage_levels": [
+        "400kV",
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Nis",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu broj 2:\n\n## 5.1. Postrojenje 400 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 461 i TR1 (ili TR2);\n- 2. (ili 1.) sistem sabirnica: DV 460 i TR2 (ili TR1);\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2. Postojenje 110 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 113/3, DV 1113, DV 1174A, DV 1175A, DV 1179, DV 1278 i TR1 (ili TR2);\n- 2. (ili 1.) sistem  sabirnica:  DV  113/4,  DV  1174B,  DV  1175B,  DV  1198  i  TR2 (ili TR1);\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica."
     },
     {
       "code": "ML",
       "name": "RP Mladost",
       "name_cyrillic": "РП Младост",
       "type": "razvodno_postrojenje",
-      "voltage_levels": ["400kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "400kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 3:\n\n## 5.1 Postrojenje 400 kV:\n\n-  GS 1 sistem sabirnica: DV 449A, DV 406/1 i  DV 409/1;\n-  GS 2A sistem sabirnica: DV 409/2, DV 449B i DV 450;\n-  GS 2B sistem sabirnica: DV 406/2;\n-  podužno spojno polje GS 2A - GS 2B uključeno;\n-  poprečno spojno polje GS 1 - GS 2A uključeno;\n-  spojno  polje  pomoćnih  sabirnica  isključeno  i  rastavljeno  (pomoćni  SS  nije  pod naponom);\n-  aktivna je diferencijalna zaštita sabirnica."
     },
     {
       "code": "NI2",
       "name": "TS Niš 2",
       "name_cyrillic": "ТС Ниш 2",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "220kV", "110kV"],
+      "voltage_levels": [
+        "400kV",
+        "220kV",
+        "110kV"
+      ],
       "region": "RDC Nis",
-      "connected_to": ["BO2", "KOSB", "JA4", "LE2", "KR1"]
+      "connected_to": [
+        "BO2",
+        "KOSB",
+        "JA4",
+        "LE2",
+        "KR1"
+      ],
+      "normalno_uklopno_stanje": "## 5.1 Postrojenje 400 kV\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 403, DV 460, TR2 (ili TR4) i TR3;\n- GS 2 (ili GS 1) sistem sabirnica: DV 404, DV 407, DV 423/2 i TR4 (ili TR2);\n- spojno polje je uključeno;\n- aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2 Postrojenje 220 kV\n\n- GS sistem sabirnica: DV 226 i TR3.\n\n## 5.3 Postrojenje 110 kV\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 113/1, DV 113/6, DV 187, DV 1187A, DV 1249/1, DV 1278 i TR2 (ili TR4);\n- GS 2 (ili GS 1) sistem sabirnica: DV 154/2, DV 1245, DV 1246/1, DV 188, DV 193/2, DV 1187B i TR4 (ili TR2);\n- spojno polje je uključeno;\n- aktivna je diferencijalna zaštita sabirnica."
     },
     {
       "code": "NS3",
       "name": "TS Novi Sad 3",
       "name_cyrillic": "ТС Нови Сад 3",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "220kV", "110kV"],
-      "region": "RDC Novi Sad"
+      "voltage_levels": [
+        "400kV",
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Novi Sad",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 400 kV\n\n- GS I sistem sabirnica: DV 406/1, TR2 i TR4;\n- GS II sistem sabirnica: DV 444/1, DV 450 i TR3;\n- Spojno polje je uključeno;\n- Aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2 Postrojenje 220 kV\n\n- GS I (ili GS II) sistem sabirnica: DV 217/1, DV 275 i TR4;\n- Spojno polje je isključeno i rastavljeno;\n- Aktivna je diferencijalna zaštita sabirnica.\n\n## 5.3 Postojenje 110 kV\n\n- GS I sistem sabirnica: DV 175, DV 176/1, DV 190A/2, DV 1106, DV 1135, DV 1267 i TR3;\n- GS II sistem sabirnica: DV 127/1, DV 127/2, DV 1005, DV 190B, DV 1108, DV 1136 i TR2;\n- Spojno polje je uključeno;\n- Aktivna je diferencijalna zaštita sabirnica."
     },
     {
       "code": "OBR",
       "name": "TS Obrenovac",
       "name_cyrillic": "ТС Обреновац",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "220kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "400kV",
+        "220kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje se šematski daje u prilogu broj 3:\n\n## 5.1 Postrojenje 400 kV:\n\n-  GS 1A sistem sabirnica: DV 425 i TR2;\n-  GS 1B sistem sabirnica: DV 409/1 i DV 412;\n-  GS 2 sistem sabirnica: DV 424, DV 406/2, DV 436 i TR1;\n-  Podužno spojno polje GS 1A-GS 1B uključeno;\n-  Poprečno spojno polje GS 1B-GS 2 uključeno;\n-  Spojno  polje  pomoćnih  sabirnica  isključeno  i  rastavljeno  (pomoćni  sistem sabirnica nije pod naponom);\n-  Aktivna je diferencijalna zaštita sabirnica.\n- 5.2 Postrojenje 220 kV:\n-  GS 1 (ili GS 3) sistem sabirnica: DV 213/2, DV 228, DV 256A, DV 263A, DV 294B i TR1;\n-  GS 2 sistem sabirnica: DV 213/1, DV 216, DV 217/1, DV 295 i DV 256B\n-  GS 3 (ili GS 1) sistem sabirnica: DV 227/2, DV 250, DV 263B, DV 294A, DV 296 i TR2;\n-  Spojno polje br.1 uključeno;\n-  Spojno polje br.2 uključeno (rastavljači između GS 1 i GS 2 uključeni, rastavljač ka GS 3 isključen);\n-  Aktivna je diferencijalna zaštita sabirnica.\n\n## 5.3 NAPOMENA:\n\n-  U  slučaju  izlaska  iz  pogona  nekog  od  generatora  u  TENT  A,  generatorske  izvode rasporediti  tako  da  proizvodnja  TENT  A  bude  što  ravnomernije  raspoređena  po sabirnicama, uvažavajući tačke 2.5 i 2.6."
     },
     {
       "code": "PA2",
       "name": "TS Pančevo 2",
       "name_cyrillic": "ТС Панчево 2",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "220kV", "110kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "400kV",
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2.\n\n## 5.1 Postrojenje 400 kV:\n\n- GS1 (ili GS2) sistem sabirnica: DV 451/2, DV 453/2, DV 463A, DV 463B, TR1, TR2 i TR3;\n- spojno polje 400 kV je isključeno i rastavljeno.\n\n## 5.2 Postrojenje 220 kV:\n\n- GS sistem sabirnica: DV 253/3, DV 254/1 i TR3.\n\n## 5.3 Postrojenje 110 kV:\n\n- GS1 sistem sabirnica: DV 151/1, DV 151/4, DV 1009, DV 1104, DV 1109 i TR1;\n- GS2 sistem sabirnica: DV 185, DV 1129, DV 1010, DV 1105, DV 1153, DV 1145/2 i TR2;\n- spojno polje 110 kV je isključeno, rastavljači su uključeni."
     },
     {
       "code": "PO",
       "name": "TS Požega",
       "name_cyrillic": "ТС Пожега",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV", "35kV"],
-      "region": "RDC Valjevo"
+      "voltage_levels": [
+        "220kV",
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Valjevo",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 220 kV:\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 214/2, DV 214/5, DV 266/1, DV 291, DV 297/2, TR3 i TR4;\n- spojno polje isključeno i rastavljeno.\n\n## 5.2 Postrojenje 110 kV:\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 115/4, DV 115/5, DV 1115/1, DV 1137, DV 1208, TR1, TR2, TR3 i TR4;\n- spojno polje isključeno i rastavljeno.\n\n## 5.3 Postrojenje 35 kV:\n\n- Uklopno stanje, kao i manipulacije u postrojenju 35 kV definisani su Ugovorom o eksploataciji  EMS  AD  -  ODS  Elektrodistribucija  Srbije:  x  kV  postrojenja  TS Požega, TS Bajina Bašta i TS Kruševac 1."
     },
     {
       "code": "SD3",
       "name": "TS Smederevo 3",
       "name_cyrillic": "ТС Смедерево 3",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2.\n\n## 5.1 Postrojenje 400 kV:\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 401/3, DV 401/4 i TR3.\n\n## 5.2 Postrojenje 220 kV:\n\n- GS sistem sabirnica: DV 277 i TR1;\n- aktivna je diferencijalna zaštita sabirnica.\n\n## 5.3 Postrojenje 110 kV:\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 110A/1, DV 110A/2, DV 1144A, DV 1120 i TR1;\n- GS 2 (ili GS 1) sistem sabirnica: DV 110B/1, DV 110B/2, DV 1144B/1, DV 1223, DV 1119 i TR3;\n- spojno polje 110 kV je isključeno, rastavljači uključeni;\n- aktivna je diferencijalna zaštita sabirnica;\n- Napomena: TR2 je isključen i rastavljen obostrano."
     },
     {
       "code": "SM2",
       "name": "TS Sremska Mitrovica 2",
       "name_cyrillic": "ТС Сремска Митровица 2",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "220kV", "110kV"],
-      "region": "RDC Novi Sad"
+      "voltage_levels": [
+        "400kV",
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Novi Sad",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 400 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 409/2 i DV 409/3;\n- 2. (ili 1.) sistem sabirnica DV 455 i TR3;\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2 Postrojenje 220 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 209/1, TR3, TR1 i TR2;\n- spojno polje isključeno i rastavljeno.\n\n## 5.3 Postrojenje 110 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 166/2, DV 166/3, DV 170/1, DV 1133, DV 1226 i TR1;\n- 2. (ili 1.) sistem sabirnica: DV 170/2, DV 195/2, DV 1134, DV 1231, DV 1272 i TR2;\n- spojno polje isključeno, rastavljači uključeni."
     },
     {
       "code": "SO3",
       "name": "TS Sombor 3",
       "name_cyrillic": "ТС Сомбор 3",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "110kV"],
-      "region": "RDC Novi Sad"
+      "voltage_levels": [
+        "400kV",
+        "110kV"
+      ],
+      "region": "RDC Novi Sad",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 400 kV :\n\n-  GS  2 sistem  sabirnica  (samo  kratak  segment): izlazni  rastavljač  DVP 456  i transformatorsko polje TR1 .\n\n## 5.2 Postrojenje 110 kV :\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 1012/2 i TR1;\n-  GS 2 (ili GS 1)  sistem  sabirnica:  DV 1012/1,  DV  132/1,  DV  132/4 , DV 1107/3 i DV 1107/4;\n-  spojno polje 110 kV je uključeno ;\n-  aktivna je diferencijalna zaštita sabirnica ."
     },
     {
       "code": "SRB",
       "name": "TS Srbobran",
       "name_cyrillic": "ТС Србобран",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV", "35kV"],
-      "region": "RDC Novi Sad"
+      "voltage_levels": [
+        "220kV",
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Novi Sad",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 400 kV\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 444 1 / , DV 444 /2 i TR1 ;\n-  Spojno polje isključeno i rastavljeno ;\n-  Aktivna diferencijalna zaštita sabirnica .\n\n## 5.2 Postrojenje 110 kV\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 133/1, DV 142/1, DV 159/1, DV 174, DV 1124/1, DV 1272 i TR1 ;\n-  GS 2 (ili GS 1 ) sistem sabirnica: DV 127/2, DV 132/3, DV 160/1, DV 12 67 i TR3;\n-  Spojno polje je uključeno;\n-  Aktivna je diferencijalna zaštita sabirnica.\n\n## 5.3 Postrojenje 35 kV\n\n-  Uklopno stanje  kao  i  manipulacije  u  postrojenju  35 kV pokrivene  su  ugovorom  o eksploataciji EMS AD -ODS: 35 kV postrojenje TS Srbobran ."
     },
     {
       "code": "SU3",
       "name": "TS Subotica 3",
       "name_cyrillic": "ТС Суботица 3",
       "type": "trafostanica",
-      "voltage_levels": ["400kV", "110kV"],
-      "region": "RDC Novi Sad"
+      "voltage_levels": [
+        "400kV",
+        "110kV"
+      ],
+      "region": "RDC Novi Sad",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 400 kV:\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 444 /2, DV 454, DV 456, TR1 i TR2 ;\n-  Spojno polje 400 kV je isključeno i rastavljeno .\n\n## 5.2 Postrojenje 110 kV:\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 160/3, DV 135/2, DV 1101, DV 135/1, DV 1003, DV 133/3 i TR1;\n-  GS 2 (ili GS 1) sistem sabirnica: DV 1102, DV 160/4, DV 1004 , DV 1155 i TR2;\n-  Glavno spojno polje 110 kV je isključeno, rastavljači uključeni;\n-  Pomoćno spojno polje 110 kV je isključeno i rastavljeno;\n-  TS Subotica 1, TS Subotica 2 i TS Subotica 4 preko pripadajućih vodova 110 kV predstavljaju udaljena spojna polja između 1. i 2. sistema sabirnica u TS Subotica 3 ."
     },
     {
       "code": "CA3",
       "name": "TS Čačak 3",
       "name_cyrillic": "ТС Чачак 3",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV"],
-      "region": "RDC Valjevo"
+      "voltage_levels": [
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Valjevo",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n- 5.1 Postrojenje 220 kV:\n- GS1 (ili GS2) sistem sabirnica: DV 297/1, DV 297/2 i TR1;\n- spojno polje ne postoji.\n- 5.2 Postrojenje 110 kV:\n- GS1 (ili GS2) sistem sabirnica: DV 115/1, DV 115/2, DV 1183, TR1 i MTK;\n- spojno polje isključeno i rastavljeno."
     },
     {
       "code": "SA3",
       "name": "TS Šabac 3",
       "name_cyrillic": "ТС Шабац 3",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV"],
-      "region": "RDC Beograd"
+      "voltage_levels": [
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu 2:\n\n## 5.1 Postrojenje 220 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 295, TR1 i TR2;\n- spojno polje isključeno i rastavljeno.\n\n## 5.2 Postrojenje 110 kV:\n\n- 1. (ili 2.) sistem sabirnica: DV 1122, DV 1162, DV 1164A, DV 1100/1 i TR1 ili TR2;\n- 2. (ili 1.) sistem sabirnica: DV 119/3, DV 124/5, DV 1163, DV 1164B i TR2 ili TR1;\n- spojno polje isključeno, rastavljači uključeni ."
     },
     {
       "code": "BI",
       "name": "TS Bistrica",
       "name_cyrillic": "ТС Бистрица",
       "type": "trafostanica",
-      "voltage_levels": ["220kV", "110kV"],
-      "region": "RDC Valjevo"
+      "voltage_levels": [
+        "220kV",
+        "110kV"
+      ],
+      "region": "RDC Valjevo",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 220 kV:\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 266/1, DV 266/2;\n- GS 2 (ili GS 1) sistem sabirnica: DV 203/3, DV 299 i TR2;\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica.\n\n## 5.2 Postrojenje 110 kV:\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 134/6, DV 134/7 i TR2;\n- GS 2 (ili GS 1) sistem sabirnica: DV 134/8 i DV 1237;\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica."
     },
     {
       "code": "TENT-A",
       "name": "TE Nikola Tesla A",
       "name_cyrillic": "ТЕНТ А",
-      "aliases": ["TENT A", "TENT-A", "ТЕНТ А", "Nikola Tesla A", "termoelektrana Nikola Tesla A"],
+      "aliases": [
+        "TENT A",
+        "TENT-A",
+        "ТЕНТ А",
+        "Nikola Tesla A",
+        "termoelektrana Nikola Tesla A"
+      ],
       "type": "termoelektrana",
-      "voltage_levels": ["400kV", "220kV"],
+      "voltage_levels": [
+        "400kV",
+        "220kV"
+      ],
       "region": "RDC Beograd",
-      "generators": ["G1", "G2", "G3", "G4", "G5", "G6"],
-      "connected_to": ["OBR", "ML"]
+      "generators": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6"
+      ],
+      "connected_to": [
+        "OBR",
+        "ML"
+      ]
     },
     {
       "code": "TENT-B",
       "name": "TE Nikola Tesla B",
       "name_cyrillic": "ТЕНТ Б",
-      "aliases": ["TENT B", "TENT-B", "ТЕНТ Б", "Nikola Tesla B", "termoelektrana Nikola Tesla B"],
+      "aliases": [
+        "TENT B",
+        "TENT-B",
+        "ТЕНТ Б",
+        "Nikola Tesla B",
+        "termoelektrana Nikola Tesla B"
+      ],
       "type": "termoelektrana",
-      "voltage_levels": ["400kV"],
+      "voltage_levels": [
+        "400kV"
+      ],
       "region": "RDC Beograd",
-      "generators": ["B1", "B2"],
-      "connected_to": ["ML"]
+      "generators": [
+        "B1",
+        "B2"
+      ],
+      "connected_to": [
+        "ML"
+      ]
     },
     {
       "code": "KOST-A",
       "name": "TE Kostolac A",
       "name_cyrillic": "ТЕ Костолац А",
-      "aliases": ["Kostolac A", "TE Kostolac A"],
+      "aliases": [
+        "Kostolac A",
+        "TE Kostolac A"
+      ],
       "type": "termoelektrana",
-      "voltage_levels": ["110kV"],
+      "voltage_levels": [
+        "110kV"
+      ],
       "region": "RDC Beograd"
     },
     {
       "code": "KOST-B",
       "name": "TE Kostolac B",
       "name_cyrillic": "ТЕ Костолац Б",
-      "aliases": ["Kostolac B", "TE Kostolac B"],
+      "aliases": [
+        "Kostolac B",
+        "TE Kostolac B"
+      ],
       "type": "termoelektrana",
-      "voltage_levels": ["400kV"],
+      "voltage_levels": [
+        "400kV"
+      ],
       "region": "RDC Beograd",
-      "connected_to": ["DRM"]
+      "connected_to": [
+        "DRM"
+      ]
     },
     {
       "code": "HE-DJE1",
       "name": "HE Đerdap 1",
       "name_cyrillic": "ХЕ Ђердап 1",
-      "aliases": ["Djerdap 1", "HE Djerdap 1"],
+      "aliases": [
+        "Djerdap 1",
+        "HE Djerdap 1"
+      ],
       "type": "hidroelektrana",
-      "voltage_levels": ["400kV"],
+      "voltage_levels": [
+        "400kV"
+      ],
       "region": "RDC Beograd",
-      "connected_to": ["DJE1"]
+      "connected_to": [
+        "DJE1"
+      ]
     },
     {
       "code": "HE-DJE2",
       "name": "HE Đerdap 2",
       "name_cyrillic": "ХЕ Ђердап 2",
-      "aliases": ["Djerdap 2", "HE Djerdap 2"],
+      "aliases": [
+        "Djerdap 2",
+        "HE Djerdap 2"
+      ],
       "type": "hidroelektrana",
-      "voltage_levels": ["110kV"],
+      "voltage_levels": [
+        "110kV"
+      ],
       "region": "RDC Beograd",
-      "connected_to": ["DJE2"]
+      "connected_to": [
+        "DJE2"
+      ]
     },
     {
       "code": "HE-BB",
       "name": "HE Bajina Bašta",
       "name_cyrillic": "ХЕ Бајина Башта",
-      "aliases": ["HE Bajina Basta"],
+      "aliases": [
+        "HE Bajina Basta"
+      ],
       "type": "hidroelektrana",
-      "voltage_levels": ["220kV"],
+      "voltage_levels": [
+        "220kV"
+      ],
       "region": "RDC Valjevo",
-      "generators": ["G1", "G2", "G3", "G4"],
-      "connected_to": ["BB"]
+      "generators": [
+        "G1",
+        "G2",
+        "G3",
+        "G4"
+      ],
+      "connected_to": [
+        "BB"
+      ]
     },
     {
       "code": "RHE-BB",
       "name": "RHE Bajina Bašta",
       "name_cyrillic": "РХЕ Бајина Башта",
-      "aliases": ["RHE Bajina Basta"],
+      "aliases": [
+        "RHE Bajina Basta"
+      ],
       "type": "reverzibilna_hidroelektrana",
-      "voltage_levels": ["220kV"],
+      "voltage_levels": [
+        "220kV"
+      ],
       "region": "RDC Valjevo",
-      "generators": ["MG1", "MG2"],
-      "connected_to": ["BB"]
+      "generators": [
+        "MG1",
+        "MG2"
+      ],
+      "connected_to": [
+        "BB"
+      ]
+    },
+    {
+      "code": "CIB1",
+      "name": "TS Čibuk 1",
+      "name_cyrillic": "ТС Чибук 1",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "400kV",
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 400 kV\n\n-  GS 1 ( ili GS 2) sistem sabirnica : DV 453/1 i transformator TR 1;\n-  GS 2 ( ili GS 1) sistem sabirnica : DV 453/2 i transformator TR 2;\n-  spojno polje 400 kV je uključeno ;\n-  aktivna je diferencijalna zaštita sabirnica ."
+    },
+    {
+      "code": "KOV",
+      "name": "TS Kovin",
+      "name_cyrillic": "ТС Ковин",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 220 kV\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 254/1 i TR1;\n- GS 2 (ili GS 1) sistem sabirnica: DV 254/2, TR2 i TR3;\n- spojno polje je uključeno;\n- aktivna je diferencijalna zaštita sabirnica."
+    },
+    {
+      "code": "ALI",
+      "name": "TS Alibunar",
+      "name_cyrillic": "ТС Алибунар",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 11 0 kV\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 151/ 4 , DV 151/5 i transformator TR 1;\n-  spojno polje 11 0 kV je isključeno i rastavljeno ;\n-  aktivna je diferencijalna zaštita sabirnica."
+    },
+    {
+      "code": "BO4",
+      "name": "TS Bor 4",
+      "name_cyrillic": "ТС Бор 4",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Nis",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 11 0 kV\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 148/4 i TR1 ;\n-  GS 2 (ili GS 1 ) sistem sabirnica: DV 148/5 i TR2 ;\n-  spojno polje 110 kV je uključeno ;\n-  aktivna je diferencijalna zaštita sabirnica."
+    },
+    {
+      "code": "BO5",
+      "name": "TS Bor 5",
+      "name_cyrillic": "ТС Бор 5",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "110kV"
+      ],
+      "region": "RDC Nis",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu broj 2:\n\n## 5.1 Postrojenje 110 kV:\n\n- 1B. (ili 2B.)  sistem sabirnica: DV 169/1, KB 1292 i KB 1293;\n- 2B. (ili 1B.)  sistem sabirnica: DV 169/2 i KB 1294;\n- poprečno spojno polje br. 2 (SS1B - SS2B) uključeno;\n- poprečno spojno polje br. 1 (SS1A - SS2A) isključeno i rastavljeno;\n- podužno spojno polje br. 1 (SS1A - SS1B) isključeno i rastavljeno;\n- podužno spojno polje br. 2 (SS2A - SS2B) isključeno i rastavljeno;\n- aktivna je diferencijalna zaštita sabirnica."
+    },
+    {
+      "code": "PRPPA",
+      "name": "PRP Pančevo",
+      "name_cyrillic": "ПРП Панчево",
+      "type": "prikljucno_razvodno_postrojenje",
+      "voltage_levels": [
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 22  kV 0\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 253 4 / i transformator BT 1;\n-  GS 2 (ili GS 1) sistem sabirnica: DV 2 53 5 / i transformator BT 2;\n-  spojno polje 22  kV 0 je uključeno ;\n-  aktivna je diferencijalna zaštita sabirnica."
+    },
+    {
+      "code": "SEV",
+      "name": "TS Sevojno",
+      "name_cyrillic": "ТС Севојно",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "220kV",
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Valjevo",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 110 kV\n\n- GS 1 (ili GS 2) sistem sabirnica: DV 115/5, DV 116/1, DV 134/1, DV 196/1, TR3, TR4, TR5 i blok veza TR1+TR2;\n- spojno polje 110 kV je isključeno i rastavljeno.\n\n## 5.2 Postrojenje 35 kV\n\n- Uklopno  stanje  kao  i  manipulacije  u  postrojenju  35  kV  definisane  su  Ugovorom  o eksploataciji  EMS  -  ODS:  TS  Sevojno  -  postrojenje  35  kV,  odnosno  Ugovorom  o ekspoloataciji  EMS  -  Impol-Seval  Valjaonica  aluminijuma  a.d.  Sevojno  kao  i Valjaonica Bakra Sevojno a.d. Sevojno.\n- 5.3 Postrojenja 6,3 kV su u vlasništvu Valjaonica Bakra Sevojno a.d. Sevojno i ImpolSeval  Valjaonica  aluminijuma  a.d.  Sevojno  sa  kojima  su  zaključeni  Ugovori  o eksploataciji."
+    },
+    {
+      "code": "PA1",
+      "name": "TS Pančevo 1",
+      "name_cyrillic": "ТС Панчево 1",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 11 0 kV\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 141, DV 151/1 , DV HIP 1 i DV HIP 3 ;\n-  GS 2 (ili GS 1) sistem sabirnica: DV 131/2, DV 185 i DV HIP 2;\n-  spojno polje 110 kV isključeno, rastavljači uključeni."
+    },
+    {
+      "code": "KRI",
+      "name": "TS Krivelja",
+      "name_cyrillic": "ТС Кривеља",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "110kV"
+      ],
+      "region": "RDC Nis",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 110 kV:\n\n- GS 1A sistem sabirnica: DV 1282 i TR1;\n- GS 1B sistem sabirnica: DV 1283 i TR2;\n- oba podužna rastavljača su uključena;\n- aktivna je diferencijalna zaštita sabirnica."
+    },
+    {
+      "code": "VK2",
+      "name": "TS Veliko Gradište 2",
+      "name_cyrillic": "ТС Велико Градиште 2",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu broj 2:\n\n## 5.1 Postrojenje 110 kV:\n\n- 1. (ili 2.)  sistem sabirnica: DV 1150/1, DV 1166/1, DV 1166/2, KB 1289 i KB 1290;\n- 2. (ili 1.)  sistem sabirnica: DV 177/1, DV 177/2, DV 1150/2 i KB 1291;\n- spojno polje uključeno;\n- aktivna je diferencijalna zaštita sabirnica."
+    },
+    {
+      "code": "ZR",
+      "name": "TS Zaječar",
+      "name_cyrillic": "ТС Зајечар",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Nis",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n- 5.1 Postrojenje 110 kV:\n- GS 1 (ili GS 2) sistem sabirnica: DV 1007/1, KB 1299;\n- GS 2 (ili GS 1) sistem sabirnica: DV 1007/2, KB 1298;\n- spojno polje je uključeno;\n- aktivna je diferencijalna zaštita sabirnica."
+    },
+    {
+      "code": "KOS",
+      "name": "PRP Košava",
+      "name_cyrillic": "ПРП Кошава",
+      "type": "prikljucno_razvodno_postrojenje",
+      "voltage_levels": [
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 110 kV\n\n-  GS 1 (ili GS 2) sistem sabirnica: DV 151/6 i transformator TR 1;\n-  GS 2 (ili GS 1) sistem sabirnica: DV 151/7 i transformator TR 2;\n-  spojno polje 110 kV je uključeno ;\n-  aktivna je diferencijalna zaštita sabirnica."
+    },
+    {
+      "code": "TENT-B-RP",
+      "name": "RP TENT B",
+      "name_cyrillic": "РП ТЕНТ Б",
+      "type": "razvodno_postrojenje",
+      "voltage_levels": [
+        "400kV",
+        "220kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 3 :\n\n## 5.1 Postrojenje 400 kV\n\n-  veza blok transformatora TR1 (1AT) preko DVP sa DV 449A;\n-  veza blok transformatora TR 2 ( 2AT) preko DVP sa DV 449B .\n- 5.2 Postrojenje 22 0 kV\n-  glavni sistem sabirnica: DV 296 i 0BT."
+    },
+    {
+      "code": "TENT-A-SP",
+      "name": "TS TENT A SP",
+      "name_cyrillic": "ТС ТЕНТ А СП",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "110kV"
+      ],
+      "region": "RDC Beograd",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u prilogu broj 2:\n\n## 5.1 Postrojenje 11  kV 0\n\n-  glavni sistem sabirnica: DV 12 1/ 2 , DV 121/3 i transformator TR 1 (0BT2) ;"
+    },
+    {
+      "code": "KR1",
+      "name": "TS Kruševac 1",
+      "name_cyrillic": "ТС Крушевац 1",
+      "type": "trafostanica",
+      "voltage_levels": [
+        "220kV",
+        "110kV",
+        "35kV"
+      ],
+      "region": "RDC Nis",
+      "normalno_uklopno_stanje": "Na osnovu rezultata navedenih analiza definiše se sledeće normalno uklopno stanje koje je šematski dato u Prilogu 2:\n\n## 5.1 Postrojenje 220 kV\n\n-  GS 1(ili GS 11) sistem sabirnica: DV 226, DV 205/2 i TR2 (ili TR1)\n-  GS 11 (ili GS 1) sistem sabirnica: DV 214/1 i TR1 (ili TR2)\n-  spojno polje uključeno\n-  aktivna diferencijalna zaštita sabirnica\n\n## 5.2 Postrojenje 110 kV\n\n-  GS 1(ili GS 11) sistem sabirnica: DV 114/1. DV 191/1, DV 152/1, DV 1158 A, DV 1161/1.. TR1 (ili TR2), TR3 (ili TR4) i MTK1 (ili MTK2)\n-  GS 11 (ili GS 1) sistem sabirnica: DV 108, DV 109/4, DV 191/2, DV 1158B, KB 1232, TR2 (ili TR1) i TR4 (ili TRZ)\n-  spojno polje uključeno\n-  aktivna diferencijalna zaštita sabirnica"
     }
   ],
-  
   "object_types": {
     "TS": "Trafostanica",
     "RP": "Razvodno postrojenje",
@@ -336,7 +733,6 @@
     "TE": "Termoelektrana",
     "RHE": "Reverzibilna hidroelektrana"
   },
-  
   "regions": [
     {
       "code": "RDC_BG",
@@ -359,7 +755,6 @@
       "name_cyrillic": "РДЦ Ваљево"
     }
   ],
-  
   "element_abbreviations": {
     "ДВ": "Dalekovod",
     "ТР": "Transformator",
