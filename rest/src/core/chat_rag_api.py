@@ -131,8 +131,7 @@ class OllamaRAGChat:
             self._print(f"\nConnected to OpenAI-compatible server at {self.ollama_url}")
         else:
             self._print(f"\nConnected to Ollama at {self.ollama_url}")
-        self._print(f"Using model: {self.model}")
-        self._print(f"Small model for classification: {self.small_model}\n")
+        self._print(f"Using model: {self.model}\n")
         
         # System prompt
         if self.use_markdown:
@@ -141,10 +140,15 @@ class OllamaRAGChat:
 ## KRITIČNA PRAVILA (OBAVEZNA):
 1. Odgovaraj SAMO na osnovu informacija iz priloženih dokumenata - NIKADA ne koristi svoje opšte znanje
 2. ODGOVORI KONCIZNO - tipično 4-8 rečenica, osim ako pitanje zahteva kraći ili detaljniji odgovor
-3. NIKADA ne dodaj informacije koje NISU eksplicitno navedene u dokumentima - bolje je reći "Ne mogu pronaći tu informaciju" nego izmisliti
-4. Ako nisi 100% siguran u informaciju iz dokumenta, NAZNAČI to u odgovoru (npr. "Prema dokumentu...", "Nije potpuno jasno, ali...")
-5. Ako informacija nije u dokumentima, JASNO reci: "Ne mogu pronaći tu informaciju u dostupnim dokumentima"
+3. NIKADA ne dodaj informacije koje NISU eksplicitno navedene u dokumentima
+4. Ako nisi 100% siguran u informaciju iz dokumenta, NAZNAČI to u odgovoru (npr. "Prema dokumentu...")
+5. SAMO ako informacija UOPŠTE nije u dokumentima, reci: "Ne mogu pronaći tu informaciju u dostupnim dokumentima" - ali NIKADA ne dodaj ovu rečenicu na kraju odgovora koji već sadrži korisne informacije!
 6. NE navodi izvore/dokumente na kraju odgovora - oni se dodaju automatski
+
+## VAŽNO - KADA KORISTITI "Ne mogu pronaći...":
+- KORISTI tu frazu SAMO kada dokumenti zaista NE SADRŽE traženu informaciju
+- NIKADA ne dodaj tu frazu kao "dodatak" ili "disclaimer" na kraj odgovora koji već ima korisne podatke
+- Ako si pronašao relevantne informacije - završi odgovor sa tim informacijama, bez dodatnih upozorenja
 
 ## OBAVEZNO FORMATIRANJE U MARKDOWN:
 - **UVEK** koristi Markdown sintaksu u svom odgovoru
@@ -152,7 +156,6 @@ class OllamaRAGChat:
 - Koristi *italic* za naglašavanje
 - Koristi numerisane liste (`1. 2. 3.`) za sekvencijalne korake ili procedure
 - Koristi bullet liste (`- ` ili `* `) za nabrajanje stavki bez redosleda
-- Koristi `> ` za citate iz dokumenata
 - Strukturiraj odgovor logično sa jasnim sekcijama
 - Odgovore piši na srpskom jeziku ekavica latiničnog pisma
 """
@@ -162,9 +165,9 @@ class OllamaRAGChat:
 KRITIČNA PRAVILA (OBAVEZNA):
 1. Odgovaraj SAMO na osnovu informacija iz priloženih dokumenata - NIKADA ne koristi svoje opšte znanje
 2. ODGOVORI KONCIZNO - tipično 4-8 rečenica, osim ako pitanje zahteva kraći ili detaljniji odgovor
-3. NIKADA ne dodaj informacije koje NISU eksplicitno navedene u dokumentima - bolje je reći "Ne mogu pronaći tu informaciju" nego izmisliti
+3. NIKADA ne dodaj informacije koje NISU eksplicitno navedene u dokumentima
 4. Ako nisi 100% siguran u informaciju iz dokumenta, NAZNAČI to u odgovoru
-5. Ako informacija nije u dokumentima, JASNO reci: "Ne mogu pronaći tu informaciju u dostupnim dokumentima"
+5. SAMO ako informacija UOPŠTE nije u dokumentima, reci: "Ne mogu pronaći tu informaciju u dostupnim dokumentima" - ali NIKADA ne dodaj ovu rečenicu na kraj odgovora koji već sadrži korisne informacije!
 6. NE navodi izvore/dokumente na kraju odgovora - oni se dodaju automatski
 
 FORMATIRANJE ODGOVORA:
@@ -183,8 +186,18 @@ FORMATIRANJE ODGOVORA:
         # Stored knowledge manager (for /store command)
         self.stored_knowledge = None
         
-        # Session memory manager (LangChain)
-        self.session_manager = SessionMemoryManager(window_size=10, session_timeout_minutes=30)
+        # Session memory manager (LangChain with summarization)
+        # Uses max_token_limit=2000 (~5 messages before summarization kicks in)
+        def llm_summarize(prompt: str) -> str:
+            """LLM callback for conversation summarization."""
+            messages = [{"role": "user", "content": prompt}]
+            return self.llm_client.chat(messages) or "Summary not available"
+        
+        self.session_manager = SessionMemoryManager(
+            max_token_limit=2000,  # ~5 poruka pre sumarizacije
+            session_timeout_minutes=30,
+            llm_call=llm_summarize
+        )
     
     def _print(self, *args, **kwargs):
         """Print only if not in silent mode."""
@@ -471,163 +484,74 @@ FORMATIRANJE ODGOVORA:
         
         return '\n'.join(formatted_lines)
     
-    def _is_followup_question(self, current_question):
-        """Use a small LLM to detect if this is a follow-up question."""
-        
-        # Need at least one previous exchange to determine follow-up
-        if len(self.messages) <= 2:  # Only system prompt
-            return False
-        
-        # Get last user question and assistant answer
-        previous_question = ""
-        previous_answer = ""
-        
-        for msg in reversed(self.messages[-4:]):  # Last 2 exchanges
-            if msg["role"] == "user" and not previous_question:
-                # Extract just the question, not the whole context
-                content = msg["content"]
-                if "Korisničko pitanje:" in content:
-                    previous_question = content.split("Korisničko pitanje:")[1].split("\n")[0].strip()
-            elif msg["role"] == "assistant" and not previous_answer:
-                # Get short summary of answer
-                previous_answer = msg["content"][:400]
-        
-        # Prompt for classification with entity awareness
-        classification_prompt = f"""Tvoj zadatak je da odlučiš da li je novo pitanje NASTAVAK razgovora o ISTOM objektu/temi ili je NOVA tema.
-
-KLJUČNO: Ako se promenio naziv objekta (trafostanica, dalekovod, TS, postrojenje), to je NOVA tema!
-
-PRETHODNI RAZGOVOR:
-Pitanje: {previous_question}
-Odgovor: {previous_answer}
-
-NOVO PITANJE: {current_question}
-
-PRAVILA:
-1. FOLLOW-UP - ako se pitanje odnosi na IST objekat:
-   - "Zašto?" nakon odgovora o TS Pančevo
-   - "Objasni detaljnije" o istoj trafostanici
-   - "Kako to radi?" za isti sistem
-   - "Šta još?" o istom objektu
-
-2. NEW TOPIC - ako se promenio objekat ili tema:
-   - Prethodno: "TS Pančevo" → Sada: "TS Beograd" = NEW!
-   - Prethodno: "DV 400kV" → Sada: "DV 220kV" = NEW!
-   - Prethodno: "DV 123" → Sada: "DV 124" = NEW!
-   - Prethodno: "Trafo T1" → Sada: "Trafo T2" = NEW!
-   - Potpuno druga tema = NEW!
-
-ODGOVORI SAMO SA JEDNOM REČJU:
-- Ako je nastavak o ISTOM objektu → FOLLOWUP
-- Ako se promenio objekat ili je nova tema → NEW
-
-Tvoj odgovor:"""
-
-        # Use LLMClient for classification (cleaner, unified approach)
-        try:
-            result = self.llm_client.classify(
-                classification_prompt, 
-                options=["NEW", "FOLLOWUP"], 
-                default="NEW"
-            )
-            is_followup = result == "FOLLOWUP"
-            logger.info(f"Classification: {'FOLLOW-UP' if is_followup else 'NEW TOPIC'}")
-            print(f"🔍 Classification: {'FOLLOW-UP' if is_followup else 'NEW TOPIC'}")
-            return is_followup
-        except Exception as e:
-            logger.warning(f"Classification failed, assuming new topic: {e}")
-            self._print(f"⚠️ Classification failed, assuming new topic: {e}")
-        
-        return False  # Default to new search if classification fails
-    
     def _contextualize_question(self, user_message, conversation_history):
-        """Reformulate a follow-up question into a standalone question using LLM.
+        """Detect if question needs context from history and add it if appropriate.
         
-        If the question is short or seems to reference previous context,
-        use the main LLM to create a complete, standalone question for better retrieval.
+        IMPORTANT: Only add context if the question is a TRUE follow-up about the 
+        SAME topic. If the question mentions a NEW object (TS, RP, DV, etc.), 
+        don't pollute it with context from previous conversation.
         
         Args:
-            user_message: Current user question (possibly short like "a 220kV?")
+            user_message: Current user question
             conversation_history: Formatted string of previous conversation
             
         Returns:
-            Standalone question suitable for document retrieval
+            Original or enhanced question for document retrieval
         """
-        # Skip if no history or question is already long enough
+        import re
+        
+        # Skip if no history
         if not conversation_history:
             return user_message
         
-        # Heuristic: short questions (< 6 words) or questions starting with
-        # conjunctions/pronouns likely need contextualization
-        words = user_message.strip().split()
-        followup_indicators = ['a', 'i', 'ali', 'što', 'šta', 'kako', 'zašto', 'koliko', 
-                               'da', 'li', 'taj', 'ta', 'to', 'isti', 'ista', 'isto',
-                               'prethodni', 'prethodna', 'gornji', 'donji', 'ovaj', 'ova']
-        
-        is_short = len(words) < 6
-        starts_with_followup = words[0].lower().rstrip('?.,!') in followup_indicators if words else False
-        
-        if not (is_short or starts_with_followup):
-            # Question seems complete enough
-            return user_message
-        
-        print(f"🔄 Contextualizing follow-up question: '{user_message}'")
-        
-        # Build contextualization prompt
-        contextualize_prompt = f"""Na osnovu prethodne konverzacije i novog pitanja, napravi JEDNO samostalno pitanje koje se može razumeti bez prethodnog konteksta.
-
-**Prethodna konverzacija:**
-{conversation_history}
-
-**Novo pitanje:** {user_message}
-
-**INSTRUKCIJE:**
-- Ako novo pitanje referencira nešto iz prethodne konverzacije (npr. "a 220kV?" umesto punog pitanja), napravi kompletno pitanje
-- Ako je novo pitanje već samostalno i potpuno, samo ga vrati bez izmena
-- Vrati SAMO reformulisano pitanje, bez objašnjenja
-- Koristi isti jezik kao u originalnom pitanju (srpski)
-
-**Samostalno pitanje:**"""
-
-        messages = [
-            {"role": "system", "content": "Ti si asistent koji reformuliše kratka follow-up pitanja u samostalna pitanja. Odgovaraj SAMO sa reformulisanim pitanjem, bez dodatnih objašnjenja."},
-            {"role": "user", "content": contextualize_prompt}
+        # Check if user's question already contains a specific object reference
+        # If yes, it's a NEW topic - don't add old context
+        object_patterns = [
+            r'\b(TS|RP|PRP|HE|TE)\s+\w+',           # TS Niš, RP Đerdap, etc.
+            r'\b(BG|NI|NS|PA|KG|KR|VA|VR|SD|ZR|LE|JA|BB|OBR|DRM|DJE|ML|PO)\s*\d*\b',  # BG5, NI2, etc.
+            r'\b(beograd|nis|novi sad|pancevo|kragujevac|kraljevo|valjevo|vranje|smederevo|zrenjanin|leskovac|jagodina|bajina basta|obrenovac|drmno|djerdap|mladost|pozega)\s*\d*\b',  # Full names
+            r'\bDV\s*\d+',                           # DV 402, DV 193/1
+            r'\btrafo(stanica)?\s+\w+',              # Trafostanica X
         ]
         
-        # Log what is being sent to LLM for contextualization
-        print("=" * 60)
-        print("CONTEXTUALIZATION REQUEST TO LLM")
-        print("=" * 60)
-        logger.info("=" * 60)
-        logger.info("CONTEXTUALIZATION REQUEST TO LLM")
-        logger.info("=" * 60)
-        for msg in messages:
-            print(f"[{msg['role'].upper()}]:")
-            print(msg['content'])
-            print("-" * 40)
-            logger.info(f"[{msg['role'].upper()}]:")
-            logger.info(msg['content'])
-            logger.info("-" * 40)
-        print("=" * 60)
-        logger.info("=" * 60)
-        
-        try:
-            # Use the main LLM (via llm_client.chat)
-            standalone_question = self.llm_client.chat(messages)
-            
-            if standalone_question and len(standalone_question.strip()) > len(user_message):
-                standalone_question = standalone_question.strip().strip('"').strip("'")
-                print(f"✅ Contextualized to: '{standalone_question}'")
-                logger.info(f"Contextualized '{user_message}' -> '{standalone_question}'")
-                return standalone_question
-            else:
-                print(f"ℹ️ Keeping original question (no improvement)")
+        question_lower = user_message.lower()
+        for pattern in object_patterns:
+            if re.search(pattern, question_lower, re.IGNORECASE):
+                # Question has its own object - treat as new topic
+                print(f"🆕 New topic detected in question (own object reference)")
                 return user_message
-                
-        except Exception as e:
-            logger.warning(f"Contextualization failed: {e}")
-            print(f"⚠️ Contextualization failed: {e}, using original question")
+        
+        # Check for follow-up indicators
+        words = user_message.strip().split()
+        if not words:
             return user_message
+            
+        followup_indicators = ['a', 'i', 'ali', 'što', 'šta', 'kako', 'zašto', 'koliko', 
+                               'da', 'li', 'taj', 'ta', 'to', 'isti', 'ista', 'isto',
+                               'prethodni', 'prethodna', 'gornji', 'donji', 'ovaj', 'ova',
+                               'jos', 'još', 'dodatno', 'takodje', 'takođe']
+        
+        is_short = len(words) < 5
+        starts_with_followup = words[0].lower().rstrip('?.,!') in followup_indicators
+        
+        # Only enhance if it looks like a true follow-up
+        if not (is_short and starts_with_followup):
+            # Question seems standalone
+            return user_message
+        
+        # Extract the most recent TS/RP from history for true follow-ups
+        ts_pattern = r'(?:TS|RP)\s+([A-Za-zčćžšđČĆŽŠĐ\s]+\d*)'
+        ts_matches = re.findall(ts_pattern, conversation_history, re.IGNORECASE)
+        
+        if ts_matches:
+            recent_ts = ts_matches[-1].strip()
+            if recent_ts and len(recent_ts) > 2:
+                enhanced_query = f"{user_message} TS {recent_ts}"
+                print(f"🔄 Follow-up enhanced: '{user_message}' → '{enhanced_query}'")
+                logger.info(f"Enhanced '{user_message}' -> '{enhanced_query}'")
+                return enhanced_query
+        
+        return user_message
 
     def _extract_stations_from_dv_info(self, dv_info: str) -> list:
         """
@@ -786,30 +710,6 @@ Tvoj odgovor:"""
             logger.error(f"Error calling LLM: {e}")
             print(f"❌ Error calling LLM: {e}")
             return None
-    
-    def _check_if_found_in_chunks(self, answer):
-        """Check if LLM found information in the provided chunks using LLMClient."""
-        check_prompt = f"""Analiziraj sledeći odgovor i odluči da li je LLM uspeo da pronađe relevantne informacije u dostupnim dokumentima ili nije.
-
-Odgovor: {answer}
-
-PRAVILA:
-- DA = LLM je pronašao konkretne informacije, naveo detalje iz dokumenata, citirao izvore
-- NE = LLM kaže da nema informacija, da ne može da pronađe, odgovor je generičan bez konkretnih podataka
-
-Odgovori SAMO sa jednom rečju: DA ili NE"""
-
-        try:
-            result = self.llm_client.classify(check_prompt, options=["DA", "NE"], default="DA")
-            found = result == "DA"
-            logger.info(f"Informacije pronađene u chunkovima: {'DA' if found else 'NE'}")
-            print(f"🔍 Informacije pronađene u chunkovima: {'✅ DA' if found else '❌ NE'}")
-            return found
-        except Exception as e:
-            logger.warning(f"Provera neuspela: {e}")
-            self._print(f"⚠️ Provera neuspela: {e}")
-        
-        return True  # Default to True if check fails (assume answer is good)
 
     def chat(self, user_message, session_id=None):
         """Simplified chat with LangChain memory support.
@@ -902,9 +802,9 @@ Odgovori SAMO sa jednom rečju: DA ili NE"""
 **INSTRUKCIJE:**
 1. Odgovori KONCIZNO (4-8 rečenica) - bez nepotrebnih detalja
 2. Koristi SAMO činjenice koje su EKSPLICITNO navedene u dokumentima iznad
-3. Ako tražena informacija NIJE u dokumentima, reci "Ne mogu pronaći tu informaciju u dostupnim dokumentima"
-4. NE SMEŠ dodavati informacije koje nisu u dokumentima - čak i ako "znaš" nešto, ignoriši to
-5. NE navodi izvore na kraju - oni se dodaju automatski"""
+3. NE SMEŠ dodavati informacije koje nisu u dokumentima
+4. NE navodi izvore na kraju - oni se dodaju automatski
+5. VAŽNO: Reci "Ne mogu pronaći tu informaciju" SAMO ako zaista nema odgovora u dokumentima - NIKADA ne dodaj tu rečenicu kao disclaimer na kraj odgovora koji već ima korisne podatke!"""
         else:
             # Without history
             prompt = f"""**Korisničko pitanje:** {user_message}
@@ -915,9 +815,9 @@ Odgovori SAMO sa jednom rečju: DA ili NE"""
 **INSTRUKCIJE:**
 1. Odgovori KONCIZNO (4-8 rečenica) - bez nepotrebnih detalja
 2. Koristi SAMO činjenice koje su EKSPLICITNO navedene u dokumentima iznad
-3. Ako tražena informacija NIJE u dokumentima, reci "Ne mogu pronaći tu informaciju u dostupnim dokumentima"
-4. NE SMEŠ dodavati informacije koje nisu u dokumentima - čak i ako "znaš" nešto, ignoriši to
-5. NE navodi izvore na kraju - oni se dodaju automatski"""
+3. NE SMEŠ dodavati informacije koje nisu u dokumentima
+4. NE navodi izvore na kraju - oni se dodaju automatski
+5. VAŽNO: Reci "Ne mogu pronaći tu informaciju" SAMO ako zaista nema odgovora u dokumentima - NIKADA ne dodaj tu rečenicu kao disclaimer na kraj odgovora koji već ima korisne podatke!"""
         
         # Simple messages list for LLM
         messages = [

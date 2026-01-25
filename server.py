@@ -347,10 +347,20 @@ def chat_completions():
             content_to_store = user_message[7:].strip()
             try:
                 rag_chat.ensure_stored_knowledge_lazy()
-                entry_id = rag_chat.stored_knowledge.add_entry(content_to_store)
-                response_text = f"✅ Knowledge stored successfully with ID: {entry_id}"
+                entry = rag_chat.stored_knowledge.add_entry(content_to_store, stored_by="expert")
+                response_text = f"""✅ **Informacija uspešno sačuvana!**
+
+**ID:** `{entry['id'][:8]}...`
+
+**Naslov:** {entry.get('title', 'N/A')}
+
+**Sadržaj:** {content_to_store}
+
+**Vreme:** {entry['timestamp']}
+
+Ova informacija će sada biti dostupna svim korisnicima u svim budućim sesijama."""
             except Exception as e:
-                response_text = f"❌ Failed to store knowledge: {e}"
+                response_text = f"❌ Greška pri čuvanju informacije: {e}"
             
             return _create_response(response_text, model, stream)
         

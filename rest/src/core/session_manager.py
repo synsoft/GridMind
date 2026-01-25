@@ -1,31 +1,88 @@
 #!/usr/bin/env python3
 """
 Session Manager - upravljanje LangChain memorijom po sesijama.
-Svaka sesija ima izolovanu ConversationBufferWindowMemory.
+Koristi ConversationSummaryBufferMemory za efikasno čuvanje konteksta:
+- Poslednjih 5 poruka se čuva u celosti
+- Starije poruke se automatski sumarizuju
 """
 
 import time
 import threading
-from typing import Dict, Optional
+from typing import Dict, Optional, Callable
 from datetime import datetime, timedelta
 
 # Import from langchain_classic (langchain v2.x)
-from langchain_classic.memory import ConversationBufferWindowMemory
+from langchain_classic.memory import ConversationSummaryBufferMemory
+from langchain_classic.llms.base import LLM
+from langchain_classic.prompts import PromptTemplate
+
+
+# Serbian summary prompt for conversation summarization
+SERBIAN_SUMMARY_PROMPT = PromptTemplate(
+    input_variables=["summary", "new_lines"],
+    template="""Progresivno sumiraj razgovor, dodajući na prethodni rezime i vraćajući novi rezime.
+Rezime treba da bude na SRPSKOM jeziku (latinica).
+Fokusiraj se na ključne tehničke informacije: nazive trafostanica (TS), dalekovoda (DV), naponske nivoe (kV), uklopna stanja.
+
+Trenutni rezime:
+{summary}
+
+Nove linije razgovora:
+{new_lines}
+
+Novi rezime (na srpskom, latinica):"""
+)
+
+
+def _default_llm_call(prompt: str) -> str:
+    """Default LLM call that returns a placeholder (used when no LLM is configured)."""
+    return "Summary not available"
+
+
+class SimpleLLMWrapper(LLM):
+    """Simple LLM wrapper for LangChain that uses our existing LLM client."""
+    
+    llm_call: Callable[[str], str] = _default_llm_call
+    
+    @property
+    def _llm_type(self) -> str:
+        return "custom"
+    
+    def _call(self, prompt: str, stop=None, run_manager=None, **kwargs) -> str:
+        """Call the LLM with the given prompt."""
+        try:
+            return self.llm_call(prompt)
+        except Exception as e:
+            print(f"⚠️ LLM call for summarization failed: {e}")
+            return "Summary not available"
+    
+    @property
+    def _identifying_params(self) -> dict:
+        return {}
 
 
 class SessionMemoryManager:
-    def __init__(self, window_size: int = 10, session_timeout_minutes: int = 30):
+    def __init__(self, 
+                 max_token_limit: int = 2000,
+                 session_timeout_minutes: int = 30,
+                 llm_call: Callable[[str], str] = None):
         """
-        Initialize session memory manager.
+        Initialize session memory manager with summary buffer.
         
         Args:
-            window_size: Number of conversation turns to keep in memory (default 10)
+            max_token_limit: Approximate token limit before summarization kicks in (default 2000)
             session_timeout_minutes: Minutes of inactivity before session expires (default 30)
+            llm_call: Function to call LLM for summarization (receives prompt, returns response)
         """
-        self.window_size = window_size
+        self.max_token_limit = max_token_limit
         self.session_timeout = timedelta(minutes=session_timeout_minutes)
         
-        # Dictionary: session_id -> {'memory': ConversationBufferWindowMemory, 'last_access': datetime}
+        # Create LLM wrapper for summarization (use default if not provided)
+        effective_llm_call = llm_call if llm_call is not None else _default_llm_call
+        self.llm_wrapper = SimpleLLMWrapper(llm_call=effective_llm_call)
+        self.llm_call = llm_call
+        
+        # Dictionary: session_id -> {'memory': ConversationSummaryBufferMemory, 'last_access': datetime}
         self.sessions: Dict[str, Dict] = {}
         
         # Lock for thread-safe access
@@ -35,9 +92,18 @@ class SessionMemoryManager:
         self.cleanup_thread = threading.Thread(target=self._cleanup_loop, daemon=True)
         self.cleanup_thread.start()
         
-        print(f"✅ Session Memory Manager initialized (window={window_size}, timeout={session_timeout_minutes}min)")
+        print(f"✅ Session Memory Manager initialized (max_tokens={max_token_limit}, timeout={session_timeout_minutes}min, with summarization)")
     
-    def get_or_create_memory(self, session_id: str) -> ConversationBufferWindowMemory:
+    def set_llm_call(self, llm_call: Callable[[str], str]):
+        """Set or update the LLM call function for summarization."""
+        self.llm_call = llm_call
+        self.llm_wrapper = SimpleLLMWrapper(llm_call=llm_call)
+        # Update existing sessions
+        with self.lock:
+            for session_data in self.sessions.values():
+                session_data['memory'].llm = self.llm_wrapper
+    
+    def get_or_create_memory(self, session_id: str) -> ConversationSummaryBufferMemory:
         """
         Get existing memory for session or create new one.
         
@@ -45,7 +111,7 @@ class SessionMemoryManager:
             session_id: Unique session identifier
             
         Returns:
-            ConversationBufferWindowMemory instance for this session
+            ConversationSummaryBufferMemory instance for this session
         """
         with self.lock:
             current_time = datetime.now()
@@ -65,11 +131,13 @@ class SessionMemoryManager:
                     print(f"♻️  Reusing existing session memory: {session_id[:8]}...")
                     return session_data['memory']
             
-            # Create new session
-            memory = ConversationBufferWindowMemory(
-                k=self.window_size,
+            # Create new session with summary buffer memory and Serbian prompt
+            memory = ConversationSummaryBufferMemory(
+                llm=self.llm_wrapper,
+                max_token_limit=self.max_token_limit,
                 memory_key="chat_history",
-                return_messages=True
+                return_messages=True,
+                prompt=SERBIAN_SUMMARY_PROMPT
             )
             
             self.sessions[session_id] = {
@@ -95,11 +163,25 @@ class SessionMemoryManager:
             {"input": user_input},
             {"output": ai_output}
         )
-        print(f"💾 Saved interaction to session {session_id[:8]}...")
+        
+        # Log buffer status
+        try:
+            buffer = memory.load_memory_variables({})
+            msg_count = len(buffer.get('chat_history', []))
+            has_summary = bool(memory.moving_summary_buffer)
+            print(f"💾 Saved interaction to session {session_id[:8]}... (msgs: {msg_count}, has_summary: {has_summary})")
+            if has_summary:
+                print(f"📝 Full Summary:")
+                print(f"{'='*60}")
+                print(memory.moving_summary_buffer)
+                print(f"{'='*60}")
+        except Exception as e:
+            print(f"💾 Saved interaction to session {session_id[:8]}...")
     
     def get_conversation_history(self, session_id: str) -> str:
         """
         Get formatted conversation history for session.
+        Includes both the summary of older messages and recent messages.
         
         Args:
             session_id: Session identifier
@@ -110,14 +192,20 @@ class SessionMemoryManager:
         memory = self.get_or_create_memory(session_id)
         
         try:
-            # Get messages from memory
-            messages = memory.load_memory_variables({}).get('chat_history', [])
+            # Get buffer content (includes summary + recent messages)
+            buffer = memory.load_memory_variables({})
+            messages = buffer.get('chat_history', [])
             
-            if not messages:
+            if not messages and not memory.moving_summary_buffer:
                 return ""
             
-            # Format as conversation
-            formatted = []
+            formatted_parts = []
+            
+            # Add summary if exists
+            if memory.moving_summary_buffer:
+                formatted_parts.append(f"[Rezime prethodnog razgovora]: {memory.moving_summary_buffer}")
+            
+            # Format recent messages
             for msg in messages:
                 if hasattr(msg, 'type'):
                     role = "User" if msg.type == "human" else "Assistant"
@@ -127,10 +215,16 @@ class SessionMemoryManager:
                     role = "User" if msg.get('type') == 'human' else "Assistant"
                     content = msg.get('content', '')
                 
-                formatted.append(f"{role}: {content}")
+                # Truncate long responses for context
+                if role == "Assistant" and len(content) > 500:
+                    content = content[:500] + "..."
+                
+                formatted_parts.append(f"{role}: {content}")
             
-            history = "\n".join(formatted)
-            print(f"📜 Retrieved conversation history for {session_id[:8]}... ({len(messages)} messages)")
+            history = "\n".join(formatted_parts)
+            msg_count = len(messages)
+            has_summary = bool(memory.moving_summary_buffer)
+            print(f"📜 Retrieved history for {session_id[:8]}... ({msg_count} recent msgs, summary: {has_summary})")
             return history
             
         except Exception as e:
@@ -160,14 +254,21 @@ class SessionMemoryManager:
             if session_id in self.sessions:
                 session_data = self.sessions[session_id]
                 memory = session_data['memory']
-                messages = memory.load_memory_variables({}).get('chat_history', [])
+                
+                try:
+                    messages = memory.load_memory_variables({}).get('chat_history', [])
+                    has_summary = bool(memory.moving_summary_buffer)
+                except:
+                    messages = []
+                    has_summary = False
                 
                 return {
                     'session_id': session_id,
                     'created': session_data['created'].isoformat(),
                     'last_access': session_data['last_access'].isoformat(),
                     'message_count': len(messages),
-                    'window_size': self.window_size
+                    'has_summary': has_summary,
+                    'max_token_limit': self.max_token_limit
                 }
             return None
     

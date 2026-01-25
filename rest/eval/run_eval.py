@@ -48,8 +48,6 @@ def main():
 
     # Initialize chat (reads config.json internally)
     chat = OllamaRAGChat()
-    # Disable follow-up detection for eval (always search chunks)
-    chat._is_followup_question = lambda x: False
 
     # Load existing results if file exists
     results = []
