@@ -83,7 +83,35 @@
       "title": "Elektroenergetski objekti koji su u vlasništvu Elektromreže Srbije",
       "stored_by": "expert",
       "timestamp": "2025-12-22T09:44:04.844368"
+    },
+    {
+      "id": "56624af8-4579-4503-bbdc-cd37b5a054ff",
+      "content": "Izvod - je sabirničko polje koje omogućava priključenje energetskog elementa na sistem sabirnica putem prekidača i rastavljača",
+      "title": "Sabirničko polje za priključenje energetskog elementa",
+      "stored_by": "expert",
+      "timestamp": "2026-01-30T20:17:31.660138"
+    },
+    {
+      "id": "54c42777-d895-4b11-95d3-cb8068793fa1",
+      "content": "Kada se kaže da je neki sistem sabirnica neraspoloživ, ili nije dostupan,  to znači da ne može ni jedan izvod da se nalazi na njemu odnosno da je sve izvode potrebno prebaciti na drugi sistem sabirnica, što dalje znači da se svi elektroenergetski elementi koji su povezani sa tim izvodima dalekovod\n*   transformator\n    \n*   kablovski vod\n    \n*   spojno polje\n    \n*   merno polje\n    \n*   rezervno polje\n    \nprebacuju na da drugi sistem sabirnica",
+      "title": "Prebacivanje elemenata na drugi sistem sabirnica",
+      "stored_by": "expert",
+      "timestamp": "2026-01-30T20:21:44.071524"
+    },
+    {
+      "id": "e9610302-8fd5-4480-907e-34f8335b8864",
+      "content": "Kada se kaže da je neki sistem sabirnica neraspoloživ, ili nije dostupan, to znači da ne može ni jedan izvod da se nalazi na njemu odnosno da je sve izvode potrebno prebaciti na drugi sistem sabirnica, što dalje znači da se svi elektroenergetski elementi:\n*   dalekovod\n    \n*   transformator\n    \n*   kablovski vod\n    \n*   spojno polje\n    \n*   merno polje\n    \n*   rezervno polje    \n    \nse prebacuju na drugi sistem sabirnica. Primer:\n  \nAko je normalno uklopno stanje TS Jagodina 4 sledeće: (ili 2.) sistem sabirnica: DV 105/3, DV 1141/1, DV 1141/2, DV 105/2 i TR1 (ili TR2); (ili 1.) sistem sabirnica: DV 152/4, DV 123/6, DV 1227 i TR2 (ili TR1); spojno polje 110 kV je isključeno, rastavljači su uključeni; aktivna je diferencijalna zaštita sabirnica.\n  \nI ako se postavi pitanje: Ukoliko mi je u TS Jagodina 4 neraspoloživ prvi sistem sabirnica koje uklopno stanje je potrebno napraviti?\nTačan odgovor je:\n*   Preko rastavljača u poljima:\n    \n    *   DV 152/4 prebaciti na II sistem\n        \n    *   DV 123/6 prebaciti na II sistem\n        \n    *   DV 1227 prebaciti na II sistem\n        \n    *   TR2 (ili TR1) prebaciti na II sistem\n        \n*   Proveriti da je:\n    \n    *   I sistem sabirnica bez napona i bez izvoda\n        \n    *   Diferencijalna zaštita sabirnica i dalje aktivna nad II sistemom\n        \n*   Spojno polje ostaje isključeno.",
+      "title": "Prebacivanje elektroenergetskih elemenata na drugi sistem sabirnica",
+      "stored_by": "expert",
+      "timestamp": "2026-01-30T20:33:00.680725"
+    },
+    {
+      "id": "c39847ff-5be4-4a43-9ba4-1223b44e75f4",
+      "content": "Kada se kaže da je neki sistem sabirnica neraspoloživ, ili nije dostupan, to znači da ne može ni jedan izvod da se nalazi na njemu odnosno da je sve izvode potrebno prebaciti na drugi sistem sabirnica, što dalje znači da se svi elektroenergetski elementi:\n*   dalekovod\n*   transformator\n*   kablovski vod\n*   spojno polje\n*   merno polje\n*   rezervno polje    \nse prebacuju na drugi sistem sabirnica. Primer:\nAko je normalno uklopno stanje TS Jagodina 4 sledeće: (ili 2.) sistem sabirnica: DV 105/3, DV 1141/1, DV 1141/2, DV 105/2 i TR1 (ili TR2); (ili 1.) sistem sabirnica: DV 152/4, DV 123/6, DV 1227 i TR2 (ili TR1); spojno polje 110 kV je isključeno, rastavljači su uključeni; aktivna je diferencijalna zaštita sabirnica.\nI ako se postavi pitanje: Ukoliko mi je u TS Jagodina 4 neraspoloživ prvi sistem sabirnica koje uklopno stanje je potrebno napraviti?\nTačan odgovor je:\n*   Preko rastavljača u poljima:\n    *   DV 152/4 prebaciti na II sistem\n    *   DV 123/6 prebaciti na II sistem\n    *   DV 1227 prebaciti na II sistem\n    *   TR2 (ili TR1) prebaciti na II sistem\n*   Proveriti da je:\n    *   I sistem sabirnica bez napona i bez izvoda\n    *   Diferencijalna zaštita sabirnica i dalje aktivna nad II sistemom\n*   Spojno polje ostaje isključeno.\n  \n## Novo uklopno stanje\n> **II sistem sabirnica:**\n> \n> DV 105/3, DV 1141/1, DV 1141/2, DV 105/2,  \n> DV 152/4, DV 123/6, DV 1227,  \n> TR1 i TR2\n> **I sistem sabirnica:** bez izvoda\n> **Spojno polje:** isključeno\n> **Diferencijalna zaštita:** aktivna nad II sistemom",
+      "title": "Prebacivanje elektroenergetskih elemenata na drugi sistem sabirnica",
+      "stored_by": "expert",
+      "timestamp": "2026-01-30T20:43:54.008248"
     }
   ],
-  "last_updated": "2026-01-26T00:19:22.888598"
+  "last_updated": "2026-01-30T20:43:54.264706"
 }
