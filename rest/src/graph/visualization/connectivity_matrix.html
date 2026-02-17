@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GridMind - Matrica Povezanosti</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header h1 {
+            font-size: 1.4rem;
+        }
+        
+        .header h1 span {
+            color: #e94560;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .main {
+            padding: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            flex: 1;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e94560;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+        
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .filter-label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .filter-group select, .filter-group input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .voltage-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            opacity: 0.5;
+        }
+        
+        .voltage-badge.active {
+            opacity: 1;
+        }
+        
+        .voltage-400 { background: #E91E63; color: white; }
+        .voltage-220 { background: #9C27B0; color: white; }
+        .voltage-110 { background: #2196F3; color: white; }
+        
+        /* Matrix Table */
+        .matrix-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .matrix-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .matrix-header h2 {
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .table-wrapper {
+            overflow: auto;
+            max-height: 600px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .eeo-link {
+            color: #e94560;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .eeo-link:hover {
+            text-decoration: underline;
+        }
+        
+        .dv-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #f0f2f5;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+        
+        .connectivity-tuple {
+            font-family: monospace;
+            color: #666;
+        }
+        
+        /* Graph Mini View */
+        .graph-mini {
+            height: 300px;
+            background: #fafafa;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow: auto;
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            color: #333;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .path-step {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .path-step-num {
+            width: 30px;
+            height: 30px;
+            background: #e94560;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .path-step-content {
+            flex: 1;
+        }
+        
+        .path-step-type {
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: uppercase;
+        }
+        
+        .path-step-name {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        /* Empty state */
+        .empty-state {
+            padding: 60px;
+            text-align: center;
+            color: #999;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #e94560;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #d63850;
+        }
+        
+        .btn-secondary {
+            background: #f0f2f5;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e2e5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><span>Grid</span>Mind - Matrica Povezanosti</h1>
+        <div class="nav-links">
+            <a href="/graph">Graf</a>
+            <a href="/diagram">Jednopolna Šema</a>
+            <a href="/matrix" class="active">Matrica</a>
+            <a href="/simulator">Simulator</a>
+        </div>
+    </div>
+    
+    <div class="main">
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value" id="statConnections">0</div>
+                <div class="stat-label">Međuobjektnih veza</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statEEO">0</div>
+                <div class="stat-label">Povezanih EEO</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat400">0</div>
+                <div class="stat-label">400 kV veza</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat220">0</div>
+                <div class="stat-label">220 kV veza</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat110">0</div>
+                <div class="stat-label">110 kV veza</div>
+            </div>
+        </div>
+        
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-group">
+                <span class="filter-label">Naponski nivo:</span>
+                <span class="voltage-badge voltage-400 active" data-voltage="400" onclick="toggleVoltage(400)">400 kV</span>
+                <span class="voltage-badge voltage-220 active" data-voltage="220" onclick="toggleVoltage(220)">220 kV</span>
+                <span class="voltage-badge voltage-110 active" data-voltage="110" onclick="toggleVoltage(110)">110 kV</span>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">EEO:</span>
+                <select id="filterEEO">
+                    <option value="">Svi</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Pretraga:</span>
+                <input type="text" id="searchInput" placeholder="DV oznaka ili EEO...">
+            </div>
+            <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+            <button class="btn btn-primary" onclick="exportCSV()">⬇ Export CSV</button>
+        </div>
+        
+        <!-- Matrix Table -->
+        <div class="matrix-container">
+            <div class="matrix-header">
+                <h2>Matrica povezanosti (x, i, y, j)</h2>
+                <span id="resultCount">0 veza</span>
+            </div>
+            <div class="table-wrapper">
+                <table id="matrixTable">
+                    <thead>
+                        <tr>
+                            <th>x (EEO)</th>
+                            <th>i (DVP)</th>
+                            <th>y (EEO)</th>
+                            <th>j (DVP)</th>
+                            <th>Napon</th>
+                            <th>DV/KB</th>
+                            <th>Tuple</th>
+                            <th>Akcije</th>
+                        </tr>
+                    </thead>
+                    <tbody id="matrixBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Path Modal -->
+    <div class="modal" id="pathModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="pathModalTitle">Putanja</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="pathModalBody">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allData = [];
+        let activeVoltages = new Set([400, 220, 110]);
+        let filterEEO = '';
+        let searchText = '';
+        
+        // Učitaj podatke
+        async function loadData() {
+            try {
+                const response = await fetch('/api/graph/connectivity');
+                const data = await response.json();
+                allData = data.entries || [];
+                
+                updateStats(data);
+                populateEEOFilter();
+                renderTable();
+            } catch (error) {
+                console.error('Greška:', error);
+                document.getElementById('matrixBody').innerHTML = `
+                    <tr><td colspan="8" class="empty-state">Greška pri učitavanju: ${error.message}</td></tr>
+                `;
+            }
+        }
+        
+        // Statistike
+        function updateStats(data) {
+            document.getElementById('statConnections').textContent = data.total || 0;
+            document.getElementById('statEEO').textContent = data.unique_eeo || 0;
+            document.getElementById('stat400').textContent = data.by_voltage?.[400] || 0;
+            document.getElementById('stat220').textContent = data.by_voltage?.[220] || 0;
+            document.getElementById('stat110').textContent = data.by_voltage?.[110] || 0;
+        }
+        
+        // EEO filter dropdown
+        function populateEEOFilter() {
+            const eeos = new Set();
+            allData.forEach(entry => {
+                eeos.add(entry.eeo_x_id);
+                eeos.add(entry.eeo_y_id);
+            });
+            
+            const select = document.getElementById('filterEEO');
+            [...eeos].sort().forEach(eeo => {
+                const option = document.createElement('option');
+                option.value = eeo;
+                option.textContent = eeo;
+                select.appendChild(option);
+            });
+        }
+        
+        // Toggle voltage filter
+        function toggleVoltage(v) {
+            const badge = document.querySelector(`[data-voltage="${v}"]`);
+            if (activeVoltages.has(v)) {
+                activeVoltages.delete(v);
+                badge.classList.remove('active');
+            } else {
+                activeVoltages.add(v);
+                badge.classList.add('active');
+            }
+            renderTable();
+        }
+        
+        // Filter data
+        function getFilteredData() {
+            return allData.filter(entry => {
+                // Voltage filter
+                if (!activeVoltages.has(entry.voltage_kv)) return false;
+                
+                // EEO filter
+                if (filterEEO && entry.eeo_x_id !== filterEEO && entry.eeo_y_id !== filterEEO) {
+                    return false;
+                }
+                
+                // Search
+                if (searchText) {
+                    const search = searchText.toLowerCase();
+                    const match = 
+                        entry.eeo_x_id.toLowerCase().includes(search) ||
+                        entry.eeo_y_id.toLowerCase().includes(search) ||
+                        (entry.line_id && entry.line_id.toLowerCase().includes(search));
+                    if (!match) return false;
+                }
+                
+                return true;
+            });
+        }
+        
+        // Render table
+        function renderTable() {
+            const filtered = getFilteredData();
+            const tbody = document.getElementById('matrixBody');
+            
+            document.getElementById('resultCount').textContent = `${filtered.length} veza`;
+            
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="empty-state">Nema rezultata</td></tr>`;
+                return;
+            }
+            
+            tbody.innerHTML = filtered.map(entry => {
+                const voltageClass = `voltage-${entry.voltage_kv}`;
+                const tuple = `(${entry.eeo_x_id}, ${entry.dvp_x_index}, ${entry.eeo_y_id}, ${entry.dvp_y_index})`;
+                
+                return `
+                    <tr>
+                        <td><a href="/diagram?eeo=${entry.eeo_x_id}" class="eeo-link">${entry.eeo_x_id}</a></td>
+                        <td>${entry.dvp_x_index}</td>
+                        <td><a href="/diagram?eeo=${entry.eeo_y_id}" class="eeo-link">${entry.eeo_y_id}</a></td>
+                        <td>${entry.dvp_y_index}</td>
+                        <td><span class="voltage-badge ${voltageClass}" style="opacity:1">${entry.voltage_kv} kV</span></td>
+                        <td><span class="dv-badge">${entry.line_id || 'DV'}</span></td>
+                        <td><span class="connectivity-tuple">${tuple}</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="showPath('${entry.eeo_x_id}', '${entry.eeo_y_id}')">
+                                Putanja
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        // Show path modal
+        async function showPath(source, target) {
+            const modal = document.getElementById('pathModal');
+            const title = document.getElementById('pathModalTitle');
+            const body = document.getElementById('pathModalBody');
+            
+            title.textContent = `Putanja: ${source} → ${target}`;
+            body.innerHTML = '<div class="empty-state">Učitavanje...</div>';
+            modal.classList.add('show');
+            
+            try {
+                const response = await fetch(`/api/graph/path?source=${source}&target=${target}`);
+                const data = await response.json();
+                
+                if (data.path && data.path.length > 0) {
+                    body.innerHTML = data.path.map((node, i) => {
+                        // Odredi tip čvora
+                        let type = 'čvor';
+                        if (node.includes('_GSS_')) type = 'sabirnica';
+                        else if (node.includes('_DVP_')) type = 'polje';
+                        else if (node.includes('_IRSU')) type = 'IRSU';
+                        else if (node.includes('DV_')) type = 'dalekovod';
+                        else if (node.length <= 5) type = 'EEO';
+                        
+                        return `
+                            <div class="path-step">
+                                <div class="path-step-num">${i + 1}</div>
+                                <div class="path-step-content">
+                                    <div class="path-step-type">${type}</div>
+                                    <div class="path-step-name">${node}</div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    body.innerHTML = '<div class="empty-state">Nema putanje između ova dva EEO</div>';
+                }
+            } catch (error) {
+                body.innerHTML = `<div class="empty-state">Greška: ${error.message}</div>`;
+            }
+        }
+        
+        function closeModal() {
+            document.getElementById('pathModal').classList.remove('show');
+        }
+        
+        // Reset filters
+        function resetFilters() {
+            activeVoltages = new Set([400, 220, 110]);
+            filterEEO = '';
+            searchText = '';
+            
+            document.querySelectorAll('.voltage-badge').forEach(b => b.classList.add('active'));
+            document.getElementById('filterEEO').value = '';
+            document.getElementById('searchInput').value = '';
+            
+            renderTable();
+        }
+        
+        // Export CSV
+        function exportCSV() {
+            const filtered = getFilteredData();
+            const headers = ['x_EEO', 'i_DVP', 'y_EEO', 'j_DVP', 'Napon_kV', 'Line_ID'];
+            
+            let csv = headers.join(',') + '\n';
+            filtered.forEach(entry => {
+                csv += [
+                    entry.eeo_x_id,
+                    entry.dvp_x_index,
+                    entry.eeo_y_id,
+                    entry.dvp_y_index,
+                    entry.voltage_kv,
+                    entry.line_id || ''
+                ].join(',') + '\n';
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'connectivity_matrix.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Event listeners
+        document.getElementById('filterEEO').addEventListener('change', (e) => {
+            filterEEO = e.target.value;
+            renderTable();
+        });
+        
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchText = e.target.value;
+            renderTable();
+        });
+        
+        // Close modal on outside click
+        document.getElementById('pathModal').addEventListener('click', (e) => {
+            if (e.target.id === 'pathModal') closeModal();
+        });
+        
+        // Init
+        loadData();
+    </script>
+</body>
+</html>

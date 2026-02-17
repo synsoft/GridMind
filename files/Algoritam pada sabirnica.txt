@@ -1,0 +1,42 @@
+### Kada se postavi pitanje: Koje trafostanice tj. postrojenja ostaju bez napajanja prilikom ispada nekih sabirnica usled dejstva diferencijalne zaštite sabirnica, potrebno je držati se sedećih koraka (ALGORITAM RAZMIŠLJANJA ZA AI):
+1. Iz uputstva za pogon trafostanice koja je pogođena kvarom utvrditi koji izvodi su ispali, zavisno od navedenog sistema sabirnica u pitanju. Pri tom UVEK imati na umu da kod delovanja diferencijalne zaštite sabirnica ispada i spjno polje, čime se izoluje zdrav sistem sabirnica od sistema sabirnica pogođenog kvarom. 
+
+- Primer za navedenu tačku 1. Prilikom ispad prvog sistema sabirnica 110 kV u TS Beograd 20 ispadaju sledeći izvodi prema tački 5 iz uputstva za pogon (odnosno 5.2): DV 129А/1, DV 129А/2, (mešoviti vod -> kabl + dalekovod) MV 1250, DV 1240А, (mešoviti vod -> kabl + dalekovod) MV 1288 i TR1.
+Prilikom ispada drugog sistema sabirnica 110 kV u TS Beograd 20 ispadaju sledeći izvodi: DV 129B/1, DV 129B/2, MV 1251, DV 1240B i TR2.
+U daljem tekstu držaćemo se samo ispada prvog sistema sabirnica zbog opširnosti.
+2.	Iz uputstva za pogon trafostanice koja je pogođena kvarom utvrditi na osnovu tačke 4 ‘’ПАРАЛЕЛАН РАД СА СУСЕДНИМ ЕЛЕКТРОЕНЕРГЕТСКИМ ОБЈЕКТИМА’’ sa kojim postrojenjima ispali dalekovodi spajaju postrojenje pogođeno kvarom. Takođe, u istoj tački 4, pronaći uklopna stanja susednih objekata i utvrditi da li postoji način da ti objekti ostanu napojeni posle ispada navedenih sabirnica. Ovo se radi tako što se utvrdi da li pored dalekovoda koji dolaze iz pravca postrjenja pogođenog kvarom, u predmetnom susednom postrojenju postoje i drugi dalekovodi. Ako postoje i ako su uključeni, tada utvrditi kuda ti dalekovodi vode i da li su uključeni in a drugom kraju i ako jesu tada je zaključak da to prvo susedno postrojenje neće ostati bez napona. Ako se utvrdi da ne postoje drugi vodoni ili postoje ali se drže normalno isključenim, tada je zaključak da to prvo susedno postrjenje ostaje bez napona. Ovaj postupak ponoviti za svaki ispali izvod.
+
+Primer za navedenu tačku 2:  Ako je ispao prvi sistem sabirnica u TS Beograd 20 jedan od ispalih vodova je mešoviti vod MV 1250 koji spaja TS Beograd 20 i TS Beograd 14. U tački 4 Uputstva za Beograd 20 dato je sledeće u vezi TS Beograd 14:       
+-	главни систем сабирница: КБ 1216 (са искљученим прекидачем), МВ 1250, ТР1 и ТР2;
+-	подужни растављач укључен. 
+
+Kako se pored ispalog MV 1250 spominje i još jedan kabl u TS Beograd 14, a to je KB 1216, traži se gde taj kabl završava, tj koji mu je drugi kraj. Pošto je navedeno da je ovaj kabl sa isključenim prekidačem u TS Beograd 14, nije nužno ispitivat dalje, može se odmah zaključiti da TS Beograd 14 ostaje bez napajanja, ali zbog primera nastavljamo. Kako se isti kabl KB 1216 spominje i u TS Beograd 15, zaključujemo da KB 1216 spaja TS Beograd 14 i TS Beograd 15 za koju piše sledeće: 
+4.7 ТС Београд 15
+-	главни систем сабирница: КБ 1216, КБ 1151, ТР1 и ТР2;
+-	подужни растављач укључен.
+Dakle, u TS Beograd 14 postoji još jedan vod i to kabl KB 1216 prema TS Beograd 15, ali se kabl KB 1215 drži normalno isključenim, što znači da posle ispada MV 1250 u TS Beograd 20 zbog ispadasabirnica, TS Beograd 14 ostaje bez napajanja. Dalje, Ako je ispao prvi sistem sabirnica u TS Beograd 20, jedan od ispalih vodova je i DV 1240A prema TS Beograd 1. U tački 4 Uputstva za Beograd 20 dato je sledeće u vezi TS Beograd 1:
+4.3 ТС Београд 1:
+-	главни систем сабирница: ДВ 1240А, ДВ 1240Б, КБ 171, ТР1, ТР2, ТР3 и ТР4;
+-	подужни растављач укључен.
+Prema gornjem se taključuje da TS Beograd 1 ima još dva voda i to DV 1240B ka zdravom sistemu sabirnica u TS Beograd 20 i kabl KB 171 ka TS Beograd 6.
+4.5 ТС Београд 6:
+-	1A систем сабирница: КБ 171 и Т1;
+-	1Б систем сабирница: КБ 172/1 (са искљученим прекидачем) и Т2;
+-	подужно спојно поље укључено.
+Dakle, zaklučuje se da TS Beograd 1 neće ostati bez napajanja. Dodatno, zaključuje se da ni TS Beograd 6 ne ostaje bez napajanja jer ostaje spojena sa TS Beograd 1 preko kabla KB 171.
+
+Analiziramo sledeći ispali dalekovod koji ispada usled delovanja diferencijalne zaštite sabirnica u TS Beograd 20 na 110 kV. To je DV 129A/1 ka TS Beograd 19. U tački 4 Uputstva za Beograd 20 dato je sledeće u vezi TS Beograd 19:
+4.9 ТС Београд 19
+-	главни систем сабирница: ДВ 129А/1, ДВ 129Б/1, ТР1 и ТР2;
+-	подужни растављач укључен.
+Dakle, u TS Beogra 19 postoje samo dva DV i to DV 129A/1 (onaj koji je ispao u TS Beograd 20 jer je bio na prvom sistemu abirnica koji je ispao) i DV 129B/1 koji takođe ide do TS Beograd 20 ali do drugog sistema sabirnica koji je ‘’zdrav’’ i nije ispao, tako da se zaklučuje da TS Beograd 19 ne ostaje bez napajanja.
+Ostao je još jedan ispali izvod u TS Beograd 20, a to je DV 129A/2 koji ide ka TS Beograd 3. Ovo (kuda ide DV 129A/2) se ne vidi eksplicitno u tački 4 Uputstva za pogon TS Beograd 20 kao što je to bilo u prošlim slučajevima, ali pošto DV 129A/2 stoji u normalnom uklopnom stanju TS Beograd 20 tj u tački 5.2:
+5.2 Постројење 110 kV:
+-	систем сабирница: ДВ 129А/1, ДВ 129А/2, МВ 1250, ДВ 1240А, МВ 1288 и ТР1 (или ТР2);
+-	2. систем сабирница: ДВ 129Б/1, ДВ 129Б/2, МВ 1251, ДВ 1240Б, и ТР2 (или ТР1);
+-	спојно поље укључено;
+-	активна је диференцијална заштита сабирница.
+Potrebno je, kao i za prethodne vodove, taj vod pronaći negde u tački 4 uputstva za pogon TS Beograd 20, i pošto nigde nema eksplicitnog spomninjanja kao u ranijim slučajevima treba proveriti tačku 4.4 koja kaže:
+4.4 ТС Београд 3
+-	нормално уклопно стање дефинисано Упутством за погон ТС Београд 3.
+Dalje, potrebno je da se iskoristi i navedeno Uputstvo za pogon TS Beograd 3, gde će se pronaći drugi kraj ДВ 129А/1. Kako je TS Beograd 3, velika trafostanica koja ima i transformatore 220/110 kV, kao i mnoštvo drugih 110 kV dalekovoda, zaključije se da ispad ДВ 129А/1 u TS Beograd 20 zbog ispada prvog Sistema sabirnica, neće uticati na napajanje TS Beograd 3.

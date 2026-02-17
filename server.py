@@ -21,6 +21,7 @@ Endpoints:
 
 import json
 import os
+import re
 import sys
 import time
 import uuid
@@ -516,7 +517,8 @@ def root():
             "Internal RAGAgent (no REST API calls)",
             "Stored Knowledge with BGE reranker",
             "Session Memory (LangChain)",
-            "OpenAI-compatible API"
+            "OpenAI-compatible API",
+            "Knowledge Graph Visualization"
         ],
         "endpoints": {
             "/health": "Health check (GET)",
@@ -524,9 +526,582 @@ def root():
             "/retrieve": "Document retrieval (POST)",
             "/v1/chat/completions": "Chat completions (POST)",
             "/admin/stored-knowledge": "List stored knowledge (GET)",
-            "/admin/sessions": "List sessions (GET)"
+            "/admin/sessions": "List sessions (GET)",
+            "/api/graph/export": "Export graph as JSON (GET)",
+            "/graph": "Graph visualization (GET)"
         }
     })
+
+
+# ============================================================================
+# Knowledge Graph Endpoints
+# ============================================================================
+
+# Global graph instance (lazy loaded)
+_knowledge_graph = None
+_graph_exporter = None
+
+def get_knowledge_graph():
+    """Get or create knowledge graph instance."""
+    global _knowledge_graph, _graph_exporter
+    
+    if _knowledge_graph is None:
+        from pathlib import Path
+        import sys
+        
+        # Add rest directory to path
+        rest_dir = Path(__file__).parent / "rest"
+        if str(rest_dir) not in sys.path:
+            sys.path.insert(0, str(rest_dir))
+        
+        # Dodaj parser path
+        parser_dir = Path(__file__).parent / "rest" / "src" / "graph" / "parsers"
+        if str(parser_dir) not in sys.path:
+            sys.path.insert(0, str(parser_dir))
+        
+        from src.graph.builders.graph_builder_v2 import GraphBuilderV2
+        from src.graph.visualization import VisJsExporter
+        
+        # Build or load graph (sa keširanjem)
+        files_dir = Path(__file__).parent / "files"
+        builder = GraphBuilderV2()
+        _knowledge_graph = builder.build_or_load(files_dir)
+        _graph_exporter = VisJsExporter(_knowledge_graph)
+        
+        logger.info(f"[KG] Knowledge Graph loaded: {_knowledge_graph.get_stats()}")
+    
+    return _knowledge_graph, _graph_exporter
+
+
+@app.route('/api/graph/export', methods=['GET'])
+def export_graph():
+    """Export knowledge graph as JSON for vis.js."""
+    try:
+        graph, exporter = get_knowledge_graph()
+        
+        # Get filter params
+        node_types = request.args.get('nodeTypes')
+        edge_types = request.args.get('edgeTypes')
+        
+        filter_node_types = node_types.split(',') if node_types else None
+        filter_edge_types = edge_types.split(',') if edge_types else None
+        
+        data = exporter.export_json(
+            filter_node_types=filter_node_types,
+            filter_edge_types=filter_edge_types
+        )
+        
+        return jsonify(data)
+    
+    except Exception as e:
+        logger.error(f"[KG] Export error: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/graph/stats', methods=['GET'])
+def graph_stats():
+    """Get knowledge graph statistics."""
+    try:
+        graph, _ = get_knowledge_graph()
+        return jsonify(graph.get_stats())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/graph/node/<node_id>', methods=['GET'])
+def get_node(node_id):
+    """Get node details."""
+    try:
+        graph, _ = get_knowledge_graph()
+        node = graph.get_node(node_id)
+        if node:
+            return jsonify(node)
+        return jsonify({"error": "Node not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/graph/path', methods=['GET'])
+def find_path():
+    """Find path between two nodes."""
+    try:
+        graph, _ = get_knowledge_graph()
+        
+        source = request.args.get('source')
+        target = request.args.get('target')
+        respect_status = request.args.get('respectStatus', 'true').lower() == 'true'
+        
+        if not source or not target:
+            return jsonify({"error": "source and target required"}), 400
+        
+        path = graph.find_path(source, target, respect_status=respect_status)
+        
+        return jsonify({
+            "source": source,
+            "target": target,
+            "path": path,
+            "length": len(path) if path else 0
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/graph/connectivity', methods=['GET'])
+def get_connectivity():
+    """Get connectivity matrix entries for visualization."""
+    try:
+        graph, _ = get_knowledge_graph()
+        
+        # Get entries from internal connectivity matrix
+        entries = []
+        unique_eeo = set()
+        by_voltage = {400: 0, 220: 0, 110: 0}
+        
+        # Use the graph's internal connectivity matrix
+        for entry in graph._connectivity_matrix:
+            entries.append({
+                'eeo_x_id': entry.eeo_x_id,
+                'dvp_x_index': entry.dvp_x_index,
+                'eeo_y_id': entry.eeo_y_id,
+                'dvp_y_index': entry.dvp_y_index,
+                'voltage_kv': entry.voltage_kv,
+                'line_id': entry.line_id or '',
+                'line_type': entry.line_type
+            })
+            
+            unique_eeo.add(entry.eeo_x_id)
+            unique_eeo.add(entry.eeo_y_id)
+            if entry.voltage_kv in by_voltage:
+                by_voltage[entry.voltage_kv] += 1
+        
+        # Remove duplicates
+        seen = set()
+        unique_entries = []
+        for e in entries:
+            key = (e['eeo_x_id'], e['eeo_y_id'], e['voltage_kv'])
+            rev_key = (e['eeo_y_id'], e['eeo_x_id'], e['voltage_kv'])
+            if key not in seen and rev_key not in seen:
+                seen.add(key)
+                unique_entries.append(e)
+        
+        return jsonify({
+            'entries': unique_entries,
+            'total': len(unique_entries),
+            'unique_eeo': len(unique_eeo),
+            'by_voltage': by_voltage
+        })
+        
+    except Exception as e:
+        logger.error(f"[KG] Connectivity error: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/matrix', methods=['GET'])
+def connectivity_matrix_viewer():
+    """Serve connectivity matrix page."""
+    from flask import send_file
+    from pathlib import Path
+    
+    html_path = Path(__file__).parent / "rest" / "src" / "graph" / "visualization" / "connectivity_matrix.html"
+    return send_file(html_path)
+
+
+@app.route('/graph', methods=['GET'])
+def graph_viewer():
+    """Serve graph visualization page."""
+    from flask import send_file
+    from pathlib import Path
+    
+    html_path = Path(__file__).parent / "rest" / "src" / "graph" / "visualization" / "graph_viewer.html"
+    return send_file(html_path)
+
+
+@app.route('/diagram', methods=['GET'])
+def single_line_viewer():
+    """Serve single line diagram page."""
+    from flask import send_file
+    from pathlib import Path
+    
+    html_path = Path(__file__).parent / "rest" / "src" / "graph" / "visualization" / "single_line_viewer.html"
+    return send_file(html_path)
+
+
+@app.route('/api/graph/diagram/<eeo_id>', methods=['GET'])
+def get_diagram(eeo_id):
+    """Generate single line diagram SVG for EEO."""
+    try:
+        graph, _ = get_knowledge_graph()
+        
+        # Import generator
+        from rest.src.graph.visualization.single_line_diagram import generate_single_line_diagram
+        
+        svg = generate_single_line_diagram(graph, eeo_id)
+        
+        return Response(svg, mimetype='image/svg+xml')
+    
+    except Exception as e:
+        logger.error(f"[KG] Diagram error: {e}")
+        return Response(
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100"><text x="10" y="50" fill="red">{str(e)}</text></svg>',
+            mimetype='image/svg+xml'
+        )
+
+
+# ============================================================================
+# Simulator uklopnih stanja API
+# ============================================================================
+
+@app.route('/simulator', methods=['GET'])
+def simulator_viewer():
+    """Serve switching state simulator page."""
+    from flask import send_file
+    from pathlib import Path
+    html_path = Path(__file__).parent / "rest" / "src" / "graph" / "visualization" / "simulator.html"
+    return send_file(html_path)
+
+
+@app.route('/simulator-v2', methods=['GET'])
+def simulator_v2_viewer():
+    """Serve v2 single-line diagram simulator page."""
+    from flask import send_file
+    from pathlib import Path
+    html_path = Path(__file__).parent / "rest" / "src" / "graph" / "visualization" / "simulator_v2.html"
+    return send_file(html_path)
+
+
+@app.route('/api/graph/simulator/eeo-data/<eeo_id>', methods=['GET'])
+def get_eeo_simulator_data(eeo_id):
+    """Get full EEO topology for interactive simulator rendering."""
+    try:
+        graph, _ = get_knowledge_graph()
+        
+        eeo_node = graph.get_node(eeo_id)
+        if not eeo_node:
+            return jsonify({"error": f"EEO {eeo_id} not found"}), 404
+        
+        voltage_levels = sorted(eeo_node.get('voltage_levels', []), reverse=True)
+        eeo_nodes = graph._nodes_by_eeo.get(eeo_id, set())
+        
+        # Collect busbars, fields, elements, transformers
+        busbars = {}   # voltage -> [{id, index}]
+        fields = {}    # voltage -> [{id, name, gss_index, elements: [{id, type, status}]}]
+        transformers = []
+        
+        for node_id in eeo_nodes:
+            node = graph.get_node(node_id)
+            if not node:
+                continue
+            
+            nt = node.get('node_type')
+            voltage = node.get('voltage_kv')
+            
+            if nt == 'GSS':
+                busbars.setdefault(voltage, []).append({
+                    'id': node_id,
+                    'index': node.get('index', 1),
+                })
+            elif nt in ('DVP', 'KBP', 'TRPVN', 'TRPNN', 'GSP', 'PSP'):
+                elements = []
+                for neighbor in graph._graph.neighbors(node_id):
+                    n = graph.get_node(neighbor)
+                    if n and n.get('node_type') in ('SR', 'P', 'SMT', 'IRSU', 'NMT', 'IR', 'OP'):
+                        elements.append({
+                            'id': neighbor,
+                            'type': n['node_type'],
+                            'status': n.get('status'),
+                            'connected_busbar': n.get('connected_busbar'),
+                        })
+                
+                fields.setdefault(voltage, []).append({
+                    'id': node_id,
+                    'name': node.get('name', node_id),
+                    'line_name': node.get('line_name', ''),
+                    'gss_index': node.get('gss_index', 1),
+                    'type': nt,
+                    'elements': elements,
+                })
+            elif nt == 'TR':
+                transformers.append({
+                    'id': node_id,
+                    'name': node.get('name', node_id),
+                    'vn_kv': node.get('vn_kv'),
+                    'nn_kv': node.get('nn_kv'),
+                    'power_mva': node.get('power_mva'),
+                })
+        
+        # Get available uklopna stanja from parser data
+        available_states = []
+        try:
+            from rest.src.graph.builders.graph_builder_v2 import GraphBuilderV2
+            builder = GraphBuilderV2()
+            from pathlib import Path
+            files_dir = Path(__file__).parent / "files"
+            # Parse only this EEO's file
+            for f in files_dir.glob("*.txt"):
+                parsed = builder.parser.parse_file(f)
+                if parsed and parsed.kod == eeo_id:
+                    for state_name, voltage_states in parsed.uklopna_stanja.items():
+                        state_info = {'name': state_name, 'voltages': {}}
+                        for vkv, us in voltage_states.items():
+                            state_info['voltages'][str(vkv)] = {
+                                'gs1': us.polja_gs1,
+                                'gs2': us.polja_gs2,
+                                'spojno_polje': us.spojno_polje,
+                                'dzs_aktivna': us.dzs_aktivna,
+                            }
+                        available_states.append(state_info)
+                    break
+        except Exception as e:
+            logger.warning(f"[SIM] Could not load uklopna stanja: {e}")
+        
+        return jsonify({
+            'eeo_id': eeo_id,
+            'name': eeo_node.get('name', eeo_id),
+            'voltage_levels': voltage_levels,
+            'busbars': {str(k): v for k, v in busbars.items()},
+            'fields': {str(k): v for k, v in fields.items()},
+            'transformers': transformers,
+            'available_states': available_states,
+        })
+        
+    except Exception as e:
+        logger.error(f"[SIM] EEO data error: {e}")
+        import traceback; traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/graph/simulator/toggle/<node_id>', methods=['POST'])
+def toggle_element(node_id):
+    """Toggle element status (P, SR, IRSU)."""
+    try:
+        graph, _ = get_knowledge_graph()
+        
+        node = graph.get_node(node_id)
+        if not node:
+            return jsonify({"error": f"Node {node_id} not found"}), 404
+        
+        nt = node.get('node_type', '')
+        if nt not in ('P', 'SR', 'IRSU', 'IR', 'OP'):
+            return jsonify({"error": f"Cannot toggle {nt} - only P, SR, IRSU, IR, OP"}), 400
+        
+        # Toggle status
+        current = node.get('status', 1)
+        new_status = 0 if current == 1 else 1
+        graph._graph.nodes[node_id]['status'] = new_status
+        
+        logger.info(f"[SIM] Toggled {node_id}: {current} -> {new_status}")
+        
+        # Return updated energization for this EEO
+        eeo_id = node.get('eeo_id')
+        energized = _compute_energization(graph, eeo_id) if eeo_id else {}
+        
+        return jsonify({
+            'node_id': node_id,
+            'old_status': current,
+            'new_status': new_status,
+            'energized': energized,
+        })
+        
+    except Exception as e:
+        logger.error(f"[SIM] Toggle error: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/graph/simulator/set-status/<node_id>/<int:status>', methods=['POST'])
+def set_element_status(node_id, status):
+    """Set element status explicitly (0 or 1)."""
+    try:
+        graph, _ = get_knowledge_graph()
+        
+        node = graph.get_node(node_id)
+        if not node:
+            return jsonify({"error": f"Node {node_id} not found"}), 404
+        
+        if status not in (0, 1):
+            return jsonify({"error": "Status must be 0 or 1"}), 400
+        
+        graph._graph.nodes[node_id]['status'] = status
+        
+        return jsonify({'node_id': node_id, 'status': status})
+        
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/graph/simulator/reset/<eeo_id>', methods=['POST'])
+def reset_eeo_state(eeo_id):
+    """Reset all switching elements in EEO to normal (all closed)."""
+    try:
+        graph, _ = get_knowledge_graph()
+        
+        eeo_nodes = graph._nodes_by_eeo.get(eeo_id, set())
+        toggled = 0
+        
+        for node_id in eeo_nodes:
+            node = graph.get_node(node_id)
+            if node and node.get('node_type') in ('P', 'SR', 'IRSU', 'IR', 'OP'):
+                if node.get('status') != 1:
+                    graph._graph.nodes[node_id]['status'] = 1
+                    toggled += 1
+        
+        energized = _compute_energization(graph, eeo_id)
+        
+        return jsonify({
+            'eeo_id': eeo_id,
+            'toggled': toggled,
+            'message': f'Reset {toggled} elements to closed',
+            'energized': energized,
+        })
+        
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/graph/simulator/apply-state/<eeo_id>', methods=['POST'])
+def apply_uklopno_stanje(eeo_id):
+    """Apply predefined uklopno stanje to EEO."""
+    try:
+        graph, _ = get_knowledge_graph()
+        data = request.get_json() or {}
+        state_name = data.get('state_name', 'normalno')
+        
+        # Get uklopno stanje data
+        states_data = data.get('states', {})
+        
+        eeo_nodes = graph._nodes_by_eeo.get(eeo_id, set())
+        toggled = 0
+        
+        # First reset all to closed
+        for node_id in eeo_nodes:
+            node = graph.get_node(node_id)
+            if node and node.get('node_type') in ('P', 'SR', 'IRSU', 'IR', 'OP'):
+                graph._graph.nodes[node_id]['status'] = 1
+        
+        # Apply specific state rules
+        # states_data format: {"110": {"gs1": ["DV.."], "gs2": ["DV.."]}}
+        for voltage_str, vs in states_data.items():
+            gs1_fields = set(vs.get('gs1', []))
+            gs2_fields = set(vs.get('gs2', []))
+            all_state_fields = gs1_fields | gs2_fields
+            
+            # Find fields at this voltage that are NOT in the state -> open them
+            voltage = int(voltage_str)
+            for node_id in eeo_nodes:
+                node = graph.get_node(node_id)
+                if not node or node.get('node_type') not in ('DVP', 'KBP', 'TRPVN', 'TRPNN', 'GSP', 'PSP'):
+                    continue
+                if node.get('voltage_kv') != voltage:
+                    continue
+                    
+                field_name = node.get('line_name', '')
+                field_name_norm = re.sub(r'\s+', '', field_name).upper()
+                
+                # Check if field is in state
+                in_state = False
+                for sf in all_state_fields:
+                    sf_norm = re.sub(r'\s+', '', sf).upper()
+                    if sf_norm == field_name_norm or sf_norm in field_name_norm or field_name_norm in sf_norm:
+                        in_state = True
+                        break
+                
+                if not in_state:
+                    # Open all switchgear in this field
+                    for neighbor in graph._graph.neighbors(node_id):
+                        n = graph.get_node(neighbor)
+                        if n and n.get('node_type') in ('P', 'SR', 'IRSU', 'IR', 'OP'):
+                            if n.get('status') != 0:
+                                graph._graph.nodes[neighbor]['status'] = 0
+                                toggled += 1
+        
+        energized = _compute_energization(graph, eeo_id)
+        
+        return jsonify({
+            'eeo_id': eeo_id,
+            'state': state_name,
+            'toggled': toggled,
+            'energized': energized,
+        })
+        
+    except Exception as e:
+        logger.error(f"[SIM] Apply state error: {e}")
+        import traceback; traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/graph/simulator/energized/<eeo_id>', methods=['GET'])
+def get_energization(eeo_id):
+    """Get energization analysis for EEO."""
+    try:
+        graph, _ = get_knowledge_graph()
+        energized = _compute_energization(graph, eeo_id)
+        return jsonify(energized)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+def _compute_energization(graph, eeo_id: str) -> dict:
+    """Compute energization status for all elements in an EEO.
+    
+    Only traverses GALVANSKA_VEZA edges (not SADRZI) to correctly
+    model electrical connectivity through the breaker chain.
+    """
+    eeo_nodes = graph._nodes_by_eeo.get(eeo_id, set())
+    
+    # Source nodes = busbars (GSS) - they are always energized
+    source_nodes = set()
+    for node_id in eeo_nodes:
+        node = graph.get_node(node_id)
+        if node and node.get('node_type') == 'GSS':
+            source_nodes.add(node_id)
+    
+    # BFS from each source, only via GALVANSKA_VEZA edges, respecting switch status
+    from collections import deque
+    
+    reachable = set()
+    for source in source_nodes:
+        visited = set()
+        queue = deque([source])
+        
+        while queue:
+            current = queue.popleft()
+            if current in visited:
+                continue
+            visited.add(current)
+            reachable.add(current)
+            
+            # Only follow GALVANSKA_VEZA edges
+            for u, v, edge_data in graph._graph.edges(current, data=True):
+                neighbor = v if u == current else u
+                if neighbor in visited:
+                    continue
+                
+                # Only traverse galvanska veza edges (not SADRZI)
+                if edge_data.get('edge_type') not in ('GALVANSKI_VEZAN', 'GALVANSKA_VEZA', 'connected_to'):
+                    continue
+                
+                n_node = graph.get_node(neighbor)
+                if n_node:
+                    # If it's a switching element and it's open, don't traverse past it
+                    if n_node.get('node_type') in ('P', 'SR', 'IRSU', 'IR', 'OP') and n_node.get('status') == 0:
+                        # Mark the switch itself but don't continue past
+                        continue
+                
+                queue.append(neighbor)
+    
+    # Build result: for each node in this EEO, is it reachable from a busbar?
+    result = {}
+    for node_id in eeo_nodes:
+        node = graph.get_node(node_id)
+        if node:
+            result[node_id] = {
+                'energized': node_id in reachable,
+                'type': node.get('node_type', ''),
+                'status': node.get('status'),
+            }
+    
+    return result
 
 
 # ============================================================================

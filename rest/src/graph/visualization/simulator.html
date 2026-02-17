@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GridMind - Simulator Uklopnih Stanja</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f1a;
+            color: #eee;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+            z-index: 100;
+            position: relative;
+        }
+        .header h1 { font-size: 1.3rem; font-weight: 500; }
+        .header h1 span { color: #e94560; }
+        .header h1 .sub { color: #888; font-size: 0.9rem; margin-left: 8px; }
+
+        .controls { display: flex; gap: 10px; align-items: center; }
+        
+        /* Searchable Dropdown */
+        .search-select {
+            position: relative;
+            min-width: 260px;
+        }
+        .search-select-input {
+            width: 100%;
+            padding: 8px 35px 8px 12px;
+            font-size: 13px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-select-input::placeholder { color: #888; }
+        .search-select-input:focus {
+            border-color: #e94560;
+            background: rgba(255,255,255,0.12);
+        }
+        .search-select-arrow {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 9px;
+            pointer-events: none;
+            transition: transform 0.2s;
+        }
+        .search-select.open .search-select-arrow { transform: translateY(-50%) rotate(180deg); }
+        .search-select-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 4px;
+            background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 6px;
+            max-height: 360px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+        }
+        .search-select.open .search-select-dropdown { display: block; }
+        .search-select-group {
+            padding: 6px 12px 3px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #e94560;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .search-select-item {
+            padding: 7px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s;
+        }
+        .search-select-item:hover, .search-select-item.highlighted {
+            background: rgba(233,69,96,0.15);
+        }
+        .search-select-item .badge {
+            font-size: 10px;
+            padding: 1px 6px;
+            border-radius: 10px;
+            background: rgba(233,69,96,0.2);
+            color: #e94560;
+            font-weight: 600;
+            min-width: 18px;
+            text-align: center;
+        }
+        .search-select-item.stub { color: #666; }
+        .search-select-item.stub .badge { background: rgba(255,255,255,0.05); color: #555; }
+        .search-select-empty {
+            padding: 12px;
+            text-align: center;
+            color: #555;
+            font-size: 12px;
+        }
+        .search-select-dropdown::-webkit-scrollbar { width: 6px; }
+        .search-select-dropdown::-webkit-scrollbar-track { background: transparent; }
+        .search-select-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: #e94560; color: white; }
+        .btn-primary:hover { background: #d63850; }
+        .btn-success { background: #27ae60; color: white; }
+        .btn-success:hover { background: #219a52; }
+        .btn-warning { background: #f39c12; color: white; }
+        .btn-warning:hover { background: #d68910; }
+        .btn-ghost { 
+            background: transparent; color: #aaa; 
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .btn-ghost:hover { background: rgba(255,255,255,0.1); color: white; }
+
+        /* Layout */
+        .app-layout {
+            display: flex;
+            height: calc(100vh - 52px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #14142a;
+            border-right: 1px solid rgba(255,255,255,0.08);
+            overflow-y: auto;
+            padding: 16px;
+            flex-shrink: 0;
+        }
+        .sidebar h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 10px;
+            margin-top: 16px;
+        }
+        .sidebar h3:first-child { margin-top: 0; }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 2px;
+        }
+        .stat-value.energized { color: #4CAF50; }
+        .stat-value.deenergized { color: #F44336; }
+
+        /* State buttons */
+        .state-btn {
+            display: block;
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.04);
+            color: #ccc;
+            text-align: left;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        .state-btn:hover { 
+            background: rgba(233,69,96,0.15);
+            border-color: rgba(233,69,96,0.3);
+            color: white;
+        }
+        .state-btn.active {
+            background: rgba(233,69,96,0.2);
+            border-color: #e94560;
+            color: #e94560;
+        }
+        .state-btn .state-name { font-weight: 600; }
+        .state-btn .state-info { 
+            font-size: 10px; color: #666; margin-top: 3px; 
+        }
+
+        /* Log panel */
+        .log-panel {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
+            padding: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 11px;
+        }
+        .log-entry { 
+            padding: 2px 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .log-entry .time { color: #555; }
+        .log-entry .action { color: #f39c12; }
+        .log-entry .detail { color: #aaa; }
+        .log-entry.toggle-on .detail { color: #4CAF50; }
+        .log-entry.toggle-off .detail { color: #F44336; }
+
+        /* Diagram area */
+        .diagram-area {
+            flex: 1;
+            overflow: auto;
+            position: relative;
+        }
+        .diagram-container {
+            min-width: 100%;
+            min-height: 100%;
+            position: relative;
+        }
+        .diagram-container svg {
+            display: block;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: fixed;
+            background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 12px;
+            z-index: 1000;
+            pointer-events: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            max-width: 250px;
+            display: none;
+        }
+        .tooltip .tt-type {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+        }
+        .tooltip .tt-id {
+            font-weight: 600;
+            margin: 4px 0;
+        }
+        .tooltip .tt-status {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .tooltip .tt-status.on {
+            background: rgba(76,175,80,0.2);
+            color: #4CAF50;
+        }
+        .tooltip .tt-status.off {
+            background: rgba(244,67,54,0.2);
+            color: #F44336;
+        }
+        .tooltip .tt-hint {
+            margin-top: 6px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(15,15,26,0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #e94560;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 12px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Empty state */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #555;
+            text-align: center;
+        }
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        /* Zoom controls */
+        .zoom-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 20;
+        }
+        .zoom-btn {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            background: rgba(26,26,46,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ccc;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .zoom-btn:hover { 
+            background: rgba(233,69,96,0.2);
+            border-color: rgba(233,69,96,0.4);
+            color: white;
+        }
+
+        /* SVG interactive styles */
+        .clickable-element {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .clickable-element:hover {
+            opacity: 0.8;
+            filter: brightness(1.3);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 3px; 
+        }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+        /* Field info panel */
+        .field-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .field-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+        .field-item:hover { background: rgba(255,255,255,0.04); }
+        .field-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .field-dot.on { background: #4CAF50; }
+        .field-dot.off { background: #F44336; }
+        .field-dot.partial { background: #f39c12; }
+        .field-name { flex: 1; color: #aaa; }
+        .field-voltage { 
+            font-size: 10px; 
+            padding: 1px 6px; 
+            border-radius: 3px; 
+            font-weight: 600;
+        }
+        .v400 { background: rgba(233,30,99,0.2); color: #E91E63; }
+        .v220 { background: rgba(156,39,176,0.2); color: #9C27B0; }
+        .v110 { background: rgba(33,150,243,0.2); color: #2196F3; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>
+            <span>Grid</span>Mind 
+            <span class="sub">Simulator Uklopnih Stanja</span>
+        </h1>
+        <div class="controls">
+            <div class="search-select" id="eeoSearchSelect">
+                <input type="text" class="search-select-input" id="eeoSearchInput"
+                       placeholder="🔍 Pretraži EEO..." autocomplete="off">
+                <span class="search-select-arrow">▼</span>
+                <div class="search-select-dropdown" id="eeoDropdown"></div>
+            </div>
+            <button class="btn btn-primary" onclick="loadEEO()">Prikaži</button>
+            <button class="btn btn-success" onclick="resetAll()">Reset</button>
+            <button class="btn btn-ghost" onclick="downloadSVG()">SVG</button>
+            <a href="/simulator-v2" class="btn btn-ghost">V2</a>
+            <a href="/diagram" class="btn btn-ghost">Šema</a>
+            <a href="/matrix" class="btn btn-ghost">Matrica</a>
+            <a href="/graph" class="btn btn-ghost">Graf</a>
+        </div>
+    </div>
+
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <h3>Statistika</h3>
+            <div class="stat-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="stat-value" id="statFields">-</div>
+                    <div class="stat-label">Polja</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statElements">-</div>
+                    <div class="stat-label">Elementi</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value energized" id="statEnergized">-</div>
+                    <div class="stat-label">Pod naponom</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value deenergized" id="statDeenergized">-</div>
+                    <div class="stat-label">Bez napona</div>
+                </div>
+            </div>
+
+            <h3>Uklopna stanja</h3>
+            <div id="statesContainer">
+                <button class="state-btn active" onclick="applyState('normalno')">
+                    <div class="state-name">Normalno</div>
+                    <div class="state-info">Svi prekidači uključeni</div>
+                </button>
+            </div>
+
+            <h3>Polja</h3>
+            <div class="field-list" id="fieldList">
+                <div style="color: #555; font-size: 11px;">Izaberi EEO...</div>
+            </div>
+
+            <h3>Dnevnik</h3>
+            <div class="log-panel" id="logPanel">
+                <div class="log-entry">
+                    <span class="time">--:--</span>
+                    <span class="detail">Spreman za simulaciju</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diagram -->
+        <div class="diagram-area" id="diagramArea">
+            <div class="empty-state" id="emptyState">
+                <div class="icon">⚡</div>
+                <div>Izaberite EEO iz padajućeg menija</div>
+                <div style="font-size: 12px; margin-top: 8px; color: #444;">
+                    Kliknite na prekidače i rastavljače da promenite stanje
+                </div>
+            </div>
+            <div class="diagram-container" id="diagramContainer" style="display:none;"></div>
+            
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomIn()">+</button>
+                <button class="zoom-btn" onclick="zoomOut()">−</button>
+                <button class="zoom-btn" onclick="resetZoom()">⟲</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip">
+        <div class="tt-type"></div>
+        <div class="tt-id"></div>
+        <div class="tt-status"></div>
+        <div class="tt-hint">Klikni za promenu stanja</div>
+    </div>
+
+    <script>
+    // ========================================================================
+    // STATE
+    // ========================================================================
+    let currentEEO = null;
+    let eeoData = null;
+    let energizedState = {};
+    let currentScale = 1;
+    let currentStateName = 'normalno';
+
+    // Colors
+    const COLORS = {
+        400: '#E91E63',
+        220: '#9C27B0',
+        110: '#2196F3',
+        busbar: '#888',
+        closed: '#4CAF50',
+        open: '#F44336',
+        energized: '#4CAF50',
+        deenergized: '#555',
+        transformer: '#FF9800',
+        bg: '#0f0f1a',
+        grid: '#1a1a2e',
+        text: '#ccc',
+        textDim: '#666',
+        fieldBg: 'rgba(255,255,255,0.02)',
+    };
+
+    // Layout constants
+    const LAYOUT = {
+        marginTop: 80,
+        marginLeft: 80,
+        marginRight: 120,
+        busbarYGap: 220,
+        fieldWidth: 90,
+        fieldGap: 20,
+        busbarGap: 30,
+
+        // Element sizes
+        breakerW: 22,
+        breakerH: 28,
+        disconnW: 22,
+        disconnH: 24,
+        ctW: 18,
+        ctH: 18,
+    };
+
+    // ========================================================================
+    // INIT
+    // ========================================================================
+    document.addEventListener('DOMContentLoaded', () => {
+        loadEEOList();
+        initSearchSelect();
+    });
+
+    // ========================================================================
+    // SEARCHABLE DROPDOWN
+    // ========================================================================
+    let allEEOs = [];
+    let selectedEEOValue = '';
+    let highlightIndex = -1;
+
+    function initSearchSelect() {
+        const wrapper = document.getElementById('eeoSearchSelect');
+        const input = document.getElementById('eeoSearchInput');
+        const dropdown = document.getElementById('eeoDropdown');
+
+        input.addEventListener('focus', () => {
+            wrapper.classList.add('open');
+            input.select();
+            renderDropdown(input.value);
+        });
+
+        input.addEventListener('input', () => {
+            wrapper.classList.add('open');
+            highlightIndex = -1;
+            renderDropdown(input.value);
+        });
+
+        input.addEventListener('keydown', (e) => {
+            const items = dropdown.querySelectorAll('.search-select-item');
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                highlightIndex = Math.min(highlightIndex + 1, items.length - 1);
+                updateHighlight(items);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                highlightIndex = Math.max(highlightIndex - 1, 0);
+                updateHighlight(items);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (highlightIndex >= 0 && items[highlightIndex]) {
+                    items[highlightIndex].click();
+                }
+            } else if (e.key === 'Escape') {
+                wrapper.classList.remove('open');
+                input.blur();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!wrapper.contains(e.target)) {
+                wrapper.classList.remove('open');
+            }
+        });
+    }
+
+    function updateHighlight(items) {
+        items.forEach((it, i) => {
+            it.classList.toggle('highlighted', i === highlightIndex);
+        });
+        if (items[highlightIndex]) {
+            items[highlightIndex].scrollIntoView({ block: 'nearest' });
+        }
+    }
+
+    function selectEEO(eeoId, label) {
+        const input = document.getElementById('eeoSearchInput');
+        const wrapper = document.getElementById('eeoSearchSelect');
+        selectedEEOValue = eeoId;
+        input.value = label;
+        wrapper.classList.remove('open');
+        loadEEO();
+    }
+
+    function renderDropdown(filter) {
+        const dropdown = document.getElementById('eeoDropdown');
+        const query = (filter || '').toLowerCase().trim();
+
+        const filtered = allEEOs.filter(e => {
+            const haystack = `${e.id} ${e.label}`.toLowerCase();
+            return !query || haystack.includes(query);
+        });
+
+        if (filtered.length === 0) {
+            dropdown.innerHTML = '<div class="search-select-empty">Nema rezultata</div>';
+            return;
+        }
+
+        // Split into groups: those with fields vs stubs
+        const withFields = filtered.filter(e => e.fieldCount > 0);
+        const stubs = filtered.filter(e => e.fieldCount === 0);
+
+        let html = '';
+        if (withFields.length > 0) {
+            html += `<div class="search-select-group">Sa poljima (${withFields.length})</div>`;
+            withFields.forEach(e => {
+                html += `<div class="search-select-item" onclick="selectEEO('${e.id}', '${e.id} - ${e.label.replace(/'/g, "\\'")}')">
+                    <span>${e.id} - ${e.label}</span>
+                    <span class="badge">${e.fieldCount}</span>
+                </div>`;
+            });
+        }
+        if (stubs.length > 0) {
+            html += `<div class="search-select-group">Povezani objekti (${stubs.length})</div>`;
+            stubs.forEach(e => {
+                html += `<div class="search-select-item stub" onclick="selectEEO('${e.id}', '${e.id} - ${e.label.replace(/'/g, "\\'")}')">
+                    <span>${e.id} - ${e.label}</span>
+                    <span class="badge">0</span>
+                </div>`;
+            });
+        }
+        dropdown.innerHTML = html;
+    }
+
+    async function loadEEOList() {
+        try {
+            const resp = await fetch('/api/graph/export?nodeTypes=EEO');
+            const data = await resp.json();
+            
+            const eeos = data.nodes
+                .filter(n => n.nodeType === 'EEO')
+                .sort((a, b) => a.label.localeCompare(b.label));
+
+            // Count fields per EEO (all field types)
+            const fieldTypes = ['DVP', 'KBP', 'TRPVN', 'TRPNN', 'GSP', 'PSP'];
+            const dvpResp = await fetch('/api/graph/export?nodeTypes=' + fieldTypes.join(','));
+            const dvpData = await dvpResp.json();
+            const fieldCountMap = {};
+            dvpData.nodes.forEach(n => {
+                const eeoId = n.eeoId;
+                if (eeoId) fieldCountMap[eeoId] = (fieldCountMap[eeoId] || 0) + 1;
+            });
+
+            allEEOs = eeos.map(eeo => ({
+                id: eeo.id,
+                label: eeo.label,
+                fieldCount: fieldCountMap[eeo.id] || 0
+            }));
+
+            // Sort: with fields first (descending by count), then stubs alphabetically
+            allEEOs.sort((a, b) => {
+                if (a.fieldCount > 0 && b.fieldCount === 0) return -1;
+                if (a.fieldCount === 0 && b.fieldCount > 0) return 1;
+                if (a.fieldCount > 0 && b.fieldCount > 0) return b.fieldCount - a.fieldCount;
+                return a.id.localeCompare(b.id);
+            });
+
+            renderDropdown('');
+
+            // Check URL params
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('eeo')) {
+                const found = allEEOs.find(e => e.id === params.get('eeo'));
+                if (found) {
+                    selectEEO(found.id, `${found.id} - ${found.label}`);
+                }
+            }
+        } catch (e) {
+            console.error('Failed to load EEO list:', e);
+        }
+    }
+
+    // ========================================================================
+    // LOAD EEO
+    // ========================================================================
+    async function loadEEO() {
+        const eeoId = selectedEEOValue;
+        if (!eeoId) return;
+
+        currentEEO = eeoId;
+        history.replaceState(null, '', `?eeo=${eeoId}`);
+
+        // Show loading
+        document.getElementById('emptyState').style.display = 'none';
+        const container = document.getElementById('diagramContainer');
+        container.style.display = 'block';
+        container.innerHTML = `<div class="loading-overlay"><div class="spinner"></div><div style="color:#888">Učitavanje ${eeoId}...</div></div>`;
+
+        try {
+            const resp = await fetch(`/api/graph/simulator/eeo-data/${eeoId}`);
+            if (!resp.ok) throw new Error(await resp.text());
+            eeoData = await resp.json();
+
+            // Load energization
+            const engResp = await fetch(`/api/graph/simulator/energized/${eeoId}`);
+            energizedState = await engResp.json();
+
+            // Build states UI
+            buildStatesUI(eeoData.available_states);
+
+            // Render diagram
+            renderDiagram();
+            updateStats();
+            updateFieldList();
+            addLog('load', `Učitan ${eeoData.name}`);
+
+        } catch (e) {
+            container.innerHTML = `<div class="empty-state"><div style="color:#e94560">Greška: ${e.message}</div></div>`;
+        }
+    }
+
+    // ========================================================================
+    // RENDER INTERACTIVE SVG DIAGRAM
+    // ========================================================================
+    function renderDiagram() {
+        if (!eeoData) return;
+
+        const voltages = eeoData.voltage_levels;
+        const allFields = eeoData.fields;
+
+        // Calculate dimensions
+        let maxFieldCount = 0;
+        for (const v of voltages) {
+            const flds = allFields[String(v)] || [];
+            maxFieldCount = Math.max(maxFieldCount, flds.length);
+        }
+
+        const totalW = Math.max(1200, LAYOUT.marginLeft + maxFieldCount * (LAYOUT.fieldWidth + LAYOUT.fieldGap) + LAYOUT.marginRight + 200);
+        const totalH = LAYOUT.marginTop + voltages.length * LAYOUT.busbarYGap + 100;
+
+        let svg = `<svg xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 ${totalW} ${totalH}" 
+            width="${totalW}" height="${totalH}"
+            style="background: ${COLORS.bg}">`;
+
+        // Defs
+        svg += renderDefs();
+
+        // Title
+        svg += `<text x="${totalW/2}" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="${COLORS.text}">${eeoData.name}</text>`;
+        svg += `<text x="${totalW/2}" y="50" text-anchor="middle" font-size="12" fill="${COLORS.textDim}">Simulator uklopnih stanja — klikni na prekidače za promenu</text>`;
+
+        // Render each voltage level
+        let yOffset = LAYOUT.marginTop;
+
+        for (const voltage of voltages) {
+            const color = getVoltageColor(voltage);
+            const busbars = eeoData.busbars[String(voltage)] || [];
+            const fields = allFields[String(voltage)] || [];
+            const numBusbars = Math.max(busbars.length, 1);
+
+            // Voltage label
+            svg += `<text x="15" y="${yOffset + 30}" font-size="15" font-weight="bold" fill="${color}">${voltage} kV</text>`;
+
+            // Busbars
+            const busbarX1 = LAYOUT.marginLeft;
+            const busbarX2 = Math.max(busbarX1 + 200, LAYOUT.marginLeft + fields.length * (LAYOUT.fieldWidth + LAYOUT.fieldGap) + 40);
+
+            for (let bi = 0; bi < numBusbars; bi++) {
+                const by = yOffset + 20 + bi * LAYOUT.busbarGap;
+                const bbId = busbars[bi]?.id || `${currentEEO}_GSS_${voltage}_${bi+1}`;
+                const isEnergized = energizedState[bbId]?.energized !== false;
+                const bbColor = isEnergized ? color : COLORS.deenergized;
+
+                svg += `<line x1="${busbarX1}" y1="${by}" x2="${busbarX2}" y2="${by}" 
+                    stroke="${bbColor}" stroke-width="5" stroke-linecap="round"/>`;
+                svg += `<text x="${busbarX1 + 2}" y="${by - 8}" font-size="9" fill="${COLORS.textDim}">GS${bi+1}</text>`;
+            }
+
+            // Fields
+            const fieldStartX = LAYOUT.marginLeft + 30;
+            for (let fi = 0; fi < fields.length; fi++) {
+                const fx = fieldStartX + fi * (LAYOUT.fieldWidth + LAYOUT.fieldGap);
+                const field = fields[fi];
+                const gssIdx = (field.gss_index || 1) - 1;
+                const busbarY = yOffset + 20 + gssIdx * LAYOUT.busbarGap;
+
+                svg += renderField(fx, busbarY, field, voltage);
+            }
+
+            yOffset += LAYOUT.busbarYGap;
+        }
+
+        // Transformers on the right side
+        if (eeoData.transformers.length > 0) {
+            svg += renderTransformers(totalW, eeoData.transformers, voltages);
+        }
+
+        // Legend
+        svg += renderLegend(20, totalH - 80);
+
+        svg += '</svg>';
+
+        const container = document.getElementById('diagramContainer');
+        container.innerHTML = svg;
+
+        // Attach click handlers
+        attachClickHandlers();
+    }
+
+    function renderDefs() {
+        return `<defs>
+            <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feFlood flood-color="#4CAF50" flood-opacity="0.3"/>
+                <feComposite in2="blur" operator="in"/>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feFlood flood-color="#F44336" flood-opacity="0.3"/>
+                <feComposite in2="blur" operator="in"/>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+        </defs>`;
+    }
+
+    function renderField(x, busbarY, field, voltage) {
+        let svg = '';
+        const elements = field.elements || [];
+        const centerX = x + LAYOUT.fieldWidth / 2;
+        const fieldType = field.type || 'DVP';
+
+        // Get element map
+        const elMap = {};
+        for (const el of elements) {
+            if (el.type === 'SR') {
+                if (!elMap.SR) elMap.SR = [];
+                elMap.SR.push(el);
+            } else {
+                elMap[el.type] = el;
+            }
+        }
+
+        // Determine energization of chain segments
+        const srEnergized = elMap.SR?.[0] ? (energizedState[elMap.SR[0].id]?.energized !== false) : true;
+        const pEnergized = elMap.P ? (energizedState[elMap.P.id]?.energized !== false) : true;
+        const smtEnergized = elMap.SMT ? (energizedState[elMap.SMT.id]?.energized !== false) : true;
+        const irsuEnergized = elMap.IRSU ? (energizedState[elMap.IRSU.id]?.energized !== false) : true;
+        const opEnergized = elMap.OP ? (energizedState[elMap.OP.id]?.energized !== false) : true;
+
+        // Background for field — glow if partially de-energized
+        const allEnergized = srEnergized && pEnergized && smtEnergized && (irsuEnergized || !elMap.IRSU) && (opEnergized || !elMap.OP);
+        const anyDeenergized = !srEnergized || !pEnergized || !smtEnergized || (!irsuEnergized && elMap.IRSU) || (!opEnergized && elMap.OP);
+        const bgColor = allEnergized ? 'rgba(76,175,80,0.03)' : 
+                        (anyDeenergized ? 'rgba(244,67,54,0.05)' : COLORS.fieldBg);
+        const borderColor = allEnergized ? 'rgba(76,175,80,0.08)' : 
+                           (anyDeenergized ? 'rgba(244,67,54,0.1)' : 'rgba(255,255,255,0.03)');
+        svg += `<rect x="${x - 2}" y="${busbarY - 5}" width="${LAYOUT.fieldWidth + 4}" height="175" 
+            rx="4" fill="${bgColor}" stroke="${borderColor}" stroke-width="1"/>`;
+
+        let y = busbarY;
+
+        // Wire color function based on position in chain
+        const wireAboveP = srEnergized ? '#888' : COLORS.deenergized;
+        const wireBelowP = pEnergized ? '#888' : COLORS.deenergized;
+
+        // Vertical line from busbar to SR
+        svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y + 5}" stroke="${wireAboveP}" stroke-width="1.5"/>`;
+        y += 5;
+
+        // SR (sabirnički rastavljač)
+        const sr = elMap.SR?.[0];
+        svg += renderDisconnector(centerX, y, sr, 'SR');
+        y += LAYOUT.disconnH + 4;
+
+        // Connecting line SR -> P
+        svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+6}" stroke="${wireAboveP}" stroke-width="1.5"/>`;
+        y += 6;
+
+        // P (prekidač)
+        const p = elMap.P;
+        svg += renderBreaker(centerX, y, p);
+        y += LAYOUT.breakerH + 4;
+
+        // Connecting line P -> SMT
+        svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+6}" stroke="${wireBelowP}" stroke-width="1.5"/>`;
+        y += 6;
+
+        // SMT
+        svg += renderCT(centerX, y, elMap.SMT);
+        y += LAYOUT.ctH + 4;
+
+        // --- Field-type-specific chain after SMT ---
+
+        if (fieldType === 'TRPVN') {
+            // TRPVN: SMT -> OP + TR symbol
+            // OP (uzemljivač)
+            svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+4}" stroke="${wireBelowP}" stroke-width="1.5"/>`;
+            y += 4;
+            svg += renderGroundSwitch(centerX, y, elMap.OP);
+            y += LAYOUT.disconnH + 4;
+            // TR symbol: two overlapping circles
+            const trColor = opEnergized ? COLORS.transformer : COLORS.deenergized;
+            svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+2}" stroke="${trColor}" stroke-width="1.5"/>`;
+            y += 2;
+            const r = 9;
+            svg += `<circle cx="${centerX}" cy="${y + r}" r="${r}" fill="none" stroke="${trColor}" stroke-width="2"/>`;
+            svg += `<circle cx="${centerX}" cy="${y + r + r}" r="${r}" fill="none" stroke="${trColor}" stroke-width="2"/>`;
+            y += r * 2 + r + 2;
+
+        } else if (fieldType === 'TRPNN') {
+            // TRPNN: SMT -> NMT -> OP + TR symbol
+            svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+4}" stroke="${wireBelowP}" stroke-width="1.5"/>`;
+            y += 4;
+            // NMT
+            if (elMap.NMT) {
+                svg += renderCT(centerX, y, elMap.NMT);
+                y += LAYOUT.ctH + 4;
+            }
+            // OP
+            svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+4}" stroke="${wireBelowP}" stroke-width="1.5"/>`;
+            y += 4;
+            svg += renderGroundSwitch(centerX, y, elMap.OP);
+            y += LAYOUT.disconnH + 4;
+            // TR symbol
+            const trColor2 = opEnergized ? COLORS.transformer : COLORS.deenergized;
+            svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+2}" stroke="${trColor2}" stroke-width="1.5"/>`;
+            y += 2;
+            const r2 = 9;
+            svg += `<circle cx="${centerX}" cy="${y + r2}" r="${r2}" fill="none" stroke="${trColor2}" stroke-width="2"/>`;
+            svg += `<circle cx="${centerX}" cy="${y + r2 + r2}" r="${r2}" fill="none" stroke="${trColor2}" stroke-width="2"/>`;
+            y += r2 * 2 + r2 + 2;
+
+        } else if (fieldType === 'GSP') {
+            // GSP: SMT -> SR_2 -> (connects to second busbar)
+            svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+6}" stroke="${wireBelowP}" stroke-width="1.5"/>`;
+            y += 6;
+            // Second SR
+            const sr2 = elMap.SR?.[1];
+            svg += renderDisconnector(centerX, y, sr2, 'SR');
+            y += LAYOUT.disconnH + 4;
+            // Arrow down to GS2
+            const arrowColor = smtEnergized ? '#FF9800' : COLORS.deenergized;
+            svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+10}" stroke="${arrowColor}" stroke-width="1.5"/>`;
+            svg += `<polygon points="${centerX-4},${y+6} ${centerX+4},${y+6} ${centerX},${y+12}" fill="${arrowColor}"/>`;
+            y += 14;
+
+        } else {
+            // DVP/KBP (default): SMT -> IRSU -> arrow / TR circles
+            // Connecting line SMT -> IRSU
+            svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+6}" stroke="${wireBelowP}" stroke-width="1.5"/>`;
+            y += 6;
+
+            // IRSU
+            const irsu = elMap.IRSU;
+            svg += renderDisconnector(centerX, y, irsu, 'IRSU');
+            y += LAYOUT.disconnH + 4;
+
+            // Check if TR or DV/KB/MV
+            let shortName = field.line_name || field.name || field.id;
+            shortName = shortName.replace(/^DVP_/, '').replace(/_\d+$/, '');
+            const isTR = /^TR\d/i.test(shortName);
+
+            if (isTR) {
+                const trColor3 = irsuEnergized ? COLORS.transformer : COLORS.deenergized;
+                svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+4}" stroke="${trColor3}" stroke-width="1.5"/>`;
+                y += 4;
+                const r3 = 9;
+                svg += `<circle cx="${centerX}" cy="${y + r3}" r="${r3}" fill="none" stroke="${trColor3}" stroke-width="2"/>`;
+                svg += `<circle cx="${centerX}" cy="${y + r3 + r3}" r="${r3}" fill="none" stroke="${trColor3}" stroke-width="2"/>`;
+                y += r3 * 2 + r3 + 2;
+            } else {
+                const arrowColor2 = irsuEnergized ? COLORS.textDim : COLORS.deenergized;
+                svg += `<line x1="${centerX}" y1="${y}" x2="${centerX}" y2="${y+12}" stroke="${arrowColor2}" stroke-width="1.5"/>`;
+                svg += `<polygon points="${centerX-4},${y+8} ${centerX+4},${y+8} ${centerX},${y+14}" fill="${arrowColor2}"/>`;
+                y += 16;
+            }
+        }
+
+        // Field label
+        let shortName = field.line_name || field.name || field.id;
+        shortName = shortName.replace(/^DVP_/, '').replace(/_\d+$/, '');
+        if (shortName.length > 12) shortName = shortName.substring(0, 10) + '..';
+        // Add type prefix for non-DVP
+        if (fieldType === 'TRPVN') shortName = '▲' + shortName;
+        else if (fieldType === 'TRPNN') shortName = '▼' + shortName;
+        else if (fieldType === 'GSP') shortName = '⇅SP';
+
+        const labelColor = allEnergized ? COLORS.text : (anyDeenergized ? '#F44336' : COLORS.textDim);
+        svg += `<text x="${centerX}" y="${y + 10}" text-anchor="middle" font-size="9" fill="${labelColor}" font-weight="${allEnergized ? 'normal' : 'bold'}">${shortName}</text>`;
+
+        return svg;
+    }
+
+    function renderGroundSwitch(cx, y, element) {
+        // OP (uzemljivač / ground switch) - three diminishing horizontal lines
+        const h = LAYOUT.disconnH;
+        if (!element) {
+            let svg = '';
+            svg += `<line x1="${cx}" y1="${y}" x2="${cx}" y2="${y+h/2}" stroke="#555" stroke-width="1.5"/>`;
+            svg += `<line x1="${cx-7}" y1="${y+h/2}" x2="${cx+7}" y2="${y+h/2}" stroke="#555" stroke-width="2"/>`;
+            svg += `<line x1="${cx-4}" y1="${y+h/2+3}" x2="${cx+4}" y2="${y+h/2+3}" stroke="#555" stroke-width="1.5"/>`;
+            svg += `<line x1="${cx-2}" y1="${y+h/2+6}" x2="${cx+2}" y2="${y+h/2+6}" stroke="#555" stroke-width="1"/>`;
+            return svg;
+        }
+
+        const status = element.status ?? 1;
+        const isOn = status === 1;
+        const color = isOn ? COLORS.closed : COLORS.open;
+
+        let svg = `<g class="clickable-element" data-node-id="${element.id}" data-type="OP" data-status="${status}"
+            onmouseover="showTooltip(event, '${element.id}', 'Uzemljivač', ${status})"
+            onmouseout="hideTooltip()"
+            onclick="toggleElement('${element.id}')">`;
+
+        // Vertical line down
+        svg += `<line x1="${cx}" y1="${y}" x2="${cx}" y2="${y+h/2}" stroke="${color}" stroke-width="1.5"/>`;
+        
+        if (isOn) {
+            // Closed: ground symbol (3 diminishing horizontal lines)
+            svg += `<line x1="${cx-7}" y1="${y+h/2}" x2="${cx+7}" y2="${y+h/2}" stroke="${color}" stroke-width="2"/>`;
+            svg += `<line x1="${cx-4}" y1="${y+h/2+3}" x2="${cx+4}" y2="${y+h/2+3}" stroke="${color}" stroke-width="1.5"/>`;
+            svg += `<line x1="${cx-2}" y1="${y+h/2+6}" x2="${cx+2}" y2="${y+h/2+6}" stroke="${color}" stroke-width="1"/>`;
+        } else {
+            // Open: angled line away from ground
+            svg += `<line x1="${cx}" y1="${y+h/2}" x2="${cx+10}" y2="${y+h-4}" stroke="${color}" stroke-width="2.5"/>`;
+            svg += `<line x1="${cx-5}" y1="${y+h-2}" x2="${cx+5}" y2="${y+h-2}" stroke="${color}" stroke-width="1.5"/>`;
+        }
+
+        svg += `</g>`;
+        return svg;
+    }
+
+    function renderBreaker(cx, y, element) {
+        const w = LAYOUT.breakerW;
+        const h = LAYOUT.breakerH;
+        const x1 = cx - w/2;
+
+        if (!element) {
+            // No data - gray
+            return `<rect x="${x1}" y="${y}" width="${w}" height="${h}" rx="3" 
+                fill="#333" stroke="#555" stroke-width="1"/>`;
+        }
+
+        const status = element.status ?? 1;
+        const isOn = status === 1;
+        const isEnergized = energizedState[element.id]?.energized !== false;
+        const color = isOn ? COLORS.closed : COLORS.open;
+        const filter = isOn ? 'url(#glow-green)' : 'url(#glow-red)';
+
+        let svg = `<g class="clickable-element" data-node-id="${element.id}" data-type="P" data-status="${status}"
+            onmouseover="showTooltip(event, '${element.id}', 'Prekidač', ${status})"
+            onmouseout="hideTooltip()"
+            onclick="toggleElement('${element.id}')">`;
+
+        // Main rectangle
+        svg += `<rect x="${x1}" y="${y}" width="${w}" height="${h}" rx="3"
+            fill="${color}" stroke="${isEnergized ? color : '#555'}" stroke-width="1.5" filter="${filter}"/>`;
+
+        // X for open
+        if (!isOn) {
+            svg += `<line x1="${x1+4}" y1="${y+4}" x2="${x1+w-4}" y2="${y+h-4}" stroke="white" stroke-width="2"/>`;
+            svg += `<line x1="${x1+w-4}" y1="${y+4}" x2="${x1+4}" y2="${y+h-4}" stroke="white" stroke-width="2"/>`;
+        } else {
+            // Vertical bar for closed
+            svg += `<line x1="${cx}" y1="${y+5}" x2="${cx}" y2="${y+h-5}" stroke="white" stroke-width="2.5"/>`;
+        }
+
+        svg += `</g>`;
+        return svg;
+    }
+
+    function renderDisconnector(cx, y, element, type) {
+        const w = LAYOUT.disconnW;
+        const h = LAYOUT.disconnH;
+
+        if (!element) {
+            return `<circle cx="${cx}" cy="${y + h/2}" r="5" fill="none" stroke="#555" stroke-width="1"/>`;
+        }
+
+        const status = element.status ?? 1;
+        const isOn = status === 1;
+        const isEnergized = energizedState[element.id]?.energized !== false;
+        const color = isOn ? COLORS.closed : COLORS.open;
+        const label = type === 'SR' ? 'Rastavljač' : 'IRSU';
+
+        let svg = `<g class="clickable-element" data-node-id="${element.id}" data-type="${type}" data-status="${status}"
+            onmouseover="showTooltip(event, '${element.id}', '${label}', ${status})"
+            onmouseout="hideTooltip()"
+            onclick="toggleElement('${element.id}')">`;
+
+        // Pivot point (top)
+        svg += `<circle cx="${cx}" cy="${y + 4}" r="4" fill="none" stroke="${color}" stroke-width="1.5"/>`;
+
+        if (isOn) {
+            // Closed: vertical blade down
+            svg += `<line x1="${cx}" y1="${y + 8}" x2="${cx}" y2="${y + h - 2}" stroke="${color}" stroke-width="3"/>`;
+        } else {
+            // Open: angled blade
+            svg += `<line x1="${cx}" y1="${y + 8}" x2="${cx + 10}" y2="${y + h - 6}" stroke="${color}" stroke-width="3"/>`;
+        }
+
+        // Bottom contact
+        svg += `<line x1="${cx - 5}" y1="${y + h - 2}" x2="${cx + 5}" y2="${y + h - 2}" stroke="${color}" stroke-width="2"/>`;
+
+        svg += `</g>`;
+        return svg;
+    }
+
+    function renderCT(cx, y, element) {
+        const r = 8;
+        const id = element?.id || '';
+        const isEnergized = element ? (energizedState[id]?.energized !== false) : true;
+        const color = isEnergized ? '#9C27B0' : '#444';
+
+        let svg = `<circle cx="${cx}" cy="${y + r + 1}" r="${r}" fill="none" stroke="${color}" stroke-width="1.5"/>`;
+        // Small dot in center
+        svg += `<circle cx="${cx}" cy="${y + r + 1}" r="2" fill="${color}"/>`;
+        return svg;
+    }
+
+    function renderTransformers(totalW, transformers, voltages) {
+        let svg = '';
+        const tx = totalW - 140;
+
+        for (let i = 0; i < transformers.length; i++) {
+            const tr = transformers[i];
+            const ty = LAYOUT.marginTop + 30 + i * 100;
+
+            // Two overlapping circles
+            svg += `<circle cx="${tx}" cy="${ty}" r="16" fill="none" stroke="${COLORS.transformer}" stroke-width="2"/>`;
+            svg += `<circle cx="${tx}" cy="${ty + 20}" r="16" fill="none" stroke="${COLORS.transformer}" stroke-width="2"/>`;
+
+            // Label
+            const name = (tr.name || tr.id).replace(/^TR_/, '');
+            svg += `<text x="${tx + 25}" y="${ty + 5}" font-size="11" fill="${COLORS.text}">${name}</text>`;
+            svg += `<text x="${tx + 25}" y="${ty + 20}" font-size="10" fill="${COLORS.textDim}">${tr.vn_kv || '?'}/${tr.nn_kv || '?'} kV</text>`;
+            if (tr.power_mva) {
+                svg += `<text x="${tx + 25}" y="${ty + 33}" font-size="10" fill="${COLORS.textDim}">${tr.power_mva} MVA</text>`;
+            }
+        }
+        return svg;
+    }
+
+    function renderLegend(lx, ly) {
+        let svg = `<rect x="${lx}" y="${ly}" width="360" height="55" rx="6" fill="rgba(26,26,46,0.9)" stroke="rgba(255,255,255,0.08)"/>`;
+        
+        // Closed breaker
+        svg += `<rect x="${lx+12}" y="${ly+10}" width="16" height="16" rx="2" fill="${COLORS.closed}"/>`;
+        svg += `<line x1="${lx+20}" y1="${ly+14}" x2="${lx+20}" y2="${ly+22}" stroke="white" stroke-width="2"/>`;
+        svg += `<text x="${lx+34}" y="${ly+23}" font-size="10" fill="${COLORS.textDim}">P uključen</text>`;
+        
+        // Open breaker
+        svg += `<rect x="${lx+110}" y="${ly+10}" width="16" height="16" rx="2" fill="${COLORS.open}"/>`;
+        svg += `<line x1="${lx+114}" y1="${ly+13}" x2="${lx+122}" y2="${ly+23}" stroke="white" stroke-width="1.5"/>`;
+        svg += `<line x1="${lx+122}" y1="${ly+13}" x2="${lx+114}" y2="${ly+23}" stroke="white" stroke-width="1.5"/>`;
+        svg += `<text x="${lx+132}" y="${ly+23}" font-size="10" fill="${COLORS.textDim}">P isključen</text>`;
+        
+        // Disconnector closed
+        svg += `<circle cx="${lx+226}" cy="${ly+14}" r="3" fill="none" stroke="${COLORS.closed}" stroke-width="1.5"/>`;
+        svg += `<line x1="${lx+226}" y1="${ly+17}" x2="${lx+226}" y2="${ly+25}" stroke="${COLORS.closed}" stroke-width="2.5"/>`;
+        svg += `<text x="${lx+236}" y="${ly+23}" font-size="10" fill="${COLORS.textDim}">R uključen</text>`;
+        
+        // Click hint
+        svg += `<text x="${lx+12}" y="${ly+45}" font-size="10" fill="${COLORS.textDim}">Klikni na element za promenu stanja</text>`;
+        svg += `<circle cx="${lx+230}" cy="${ly+41}" r="7" fill="none" stroke="#9C27B0" stroke-width="1.5"/>`;
+        svg += `<circle cx="${lx+230}" cy="${ly+41}" r="2" fill="#9C27B0"/>`;
+        svg += `<text x="${lx+242}" y="${ly+45}" font-size="10" fill="${COLORS.textDim}">SMT</text>`;
+        
+        return svg;
+    }
+
+    // ========================================================================
+    // CLICK HANDLERS
+    // ========================================================================
+    function attachClickHandlers() {
+        // Click handlers are inline via onclick attributes on SVG elements
+        // No delegation needed — avoids double-toggle
+    }
+
+    async function toggleElement(nodeId) {
+        try {
+            const resp = await fetch(`/api/graph/simulator/toggle/${encodeURIComponent(nodeId)}`, { method: 'POST' });
+            if (!resp.ok) throw new Error(await resp.text());
+            
+            const result = await resp.json();
+            energizedState = result.energized;
+
+            // Update local eeoData element status
+            if (eeoData) {
+                for (const [v, fields] of Object.entries(eeoData.fields)) {
+                    for (const f of fields) {
+                        for (const el of f.elements) {
+                            if (el.id === nodeId) {
+                                el.status = result.new_status;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Update the element visually
+            const statusText = result.new_status === 1 ? 'UKLJUČEN' : 'ISKLJUČEN';
+            const shortId = nodeId.split('_').slice(-2).join('_');
+            addLog(result.new_status === 1 ? 'toggle-on' : 'toggle-off', 
+                `${shortId} → ${statusText}`);
+
+            // Re-render diagram
+            renderDiagram();
+            updateStats();
+            updateFieldList();
+
+        } catch (e) {
+            console.error('Toggle error:', e);
+            addLog('error', `Greška: ${e.message}`);
+        }
+    }
+
+    // ========================================================================
+    // UKLOPNA STANJA
+    // ========================================================================
+    function buildStatesUI(states) {
+        const container = document.getElementById('statesContainer');
+        
+        // Always have "Normalno" button
+        let html = `
+            <button class="state-btn ${currentStateName === 'normalno' ? 'active' : ''}" 
+                onclick="applyState('normalno')">
+                <div class="state-name">Normalno</div>
+                <div class="state-info">Svi prekidači uključeni</div>
+            </button>`;
+
+        if (states && states.length > 0) {
+            for (const state of states) {
+                if (state.name === 'normalno') continue;
+                
+                const label = formatStateName(state.name);
+                const voltInfo = Object.entries(state.voltages)
+                    .map(([v, d]) => `${v}kV: GS1=${d.gs1?.length || 0} GS2=${d.gs2?.length || 0}`)
+                    .join(', ');
+                
+                html += `
+                    <button class="state-btn ${currentStateName === state.name ? 'active' : ''}" 
+                        onclick="applyState('${state.name}', ${JSON.stringify(state.voltages).replace(/"/g, '&quot;')})">
+                        <div class="state-name">${label}</div>
+                        <div class="state-info">${voltInfo}</div>
+                    </button>`;
+            }
+        }
+
+        container.innerHTML = html;
+    }
+
+    function formatStateName(name) {
+        return name
+            .replace(/_/g, ' ')
+            .replace(/bez/g, 'Bez')
+            .replace(/dzs/g, 'DZS')
+            .replace(/tr/g, 'TR')
+            .replace(/^(\w)/, (m) => m.toUpperCase());
+    }
+
+    async function applyState(stateName, statesData) {
+        if (!currentEEO) return;
+        currentStateName = stateName;
+
+        try {
+            if (stateName === 'normalno') {
+                // Reset all
+                const resp = await fetch(`/api/graph/simulator/reset/${currentEEO}`, { method: 'POST' });
+                const result = await resp.json();
+                energizedState = result.energized;
+                addLog('state', `Primenjeno: Normalno (${result.toggled} promena)`);
+            } else {
+                const resp = await fetch(`/api/graph/simulator/apply-state/${currentEEO}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ state_name: stateName, states: statesData }),
+                });
+                const result = await resp.json();
+                energizedState = result.energized;
+                addLog('state', `Primenjeno: ${formatStateName(stateName)} (${result.toggled} promena)`);
+            }
+
+            // Reload EEO data to get updated element statuses
+            const resp2 = await fetch(`/api/graph/simulator/eeo-data/${currentEEO}`);
+            eeoData = await resp2.json();
+
+            // Update state buttons
+            document.querySelectorAll('.state-btn').forEach(btn => btn.classList.remove('active'));
+            event?.target?.closest('.state-btn')?.classList.add('active');
+
+            renderDiagram();
+            updateStats();
+            updateFieldList();
+            buildStatesUI(eeoData.available_states);
+
+        } catch (e) {
+            console.error('Apply state error:', e);
+            addLog('error', `Greška: ${e.message}`);
+        }
+    }
+
+    async function resetAll() {
+        if (!currentEEO) return;
+        currentStateName = 'normalno';
+
+        try {
+            const resp = await fetch(`/api/graph/simulator/reset/${currentEEO}`, { method: 'POST' });
+            const result = await resp.json();
+            energizedState = result.energized;
+            
+            // Reload EEO data for updated element statuses
+            const resp2 = await fetch(`/api/graph/simulator/eeo-data/${currentEEO}`);
+            eeoData = await resp2.json();
+
+            addLog('state', `Reset: sve uključeno (${result.toggled} promena)`);
+            
+            renderDiagram();
+            updateStats();
+            updateFieldList();
+            buildStatesUI(eeoData.available_states);
+        } catch (e) {
+            addLog('error', `Greška: ${e.message}`);
+        }
+    }
+
+    // ========================================================================
+    // UI UPDATES
+    // ========================================================================
+    function updateStats() {
+        if (!eeoData) return;
+
+        let totalFields = 0;
+        let totalElements = 0;
+        let energizedCount = 0;
+        let deenergizedCount = 0;
+
+        for (const [v, fields] of Object.entries(eeoData.fields)) {
+            totalFields += fields.length;
+            for (const f of fields) {
+                totalElements += f.elements.length;
+            }
+        }
+
+        // Count switching elements energized/de-energized
+        for (const [nodeId, info] of Object.entries(energizedState)) {
+            if (['P', 'SR', 'IRSU', 'IR', 'OP'].includes(info.type)) {
+                if (info.energized) energizedCount++;
+                else deenergizedCount++;
+            }
+        }
+
+        document.getElementById('statFields').textContent = totalFields;
+        document.getElementById('statElements').textContent = totalElements;
+        document.getElementById('statEnergized').textContent = energizedCount;
+        document.getElementById('statDeenergized').textContent = deenergizedCount;
+    }
+
+    function updateFieldList() {
+        if (!eeoData) return;
+
+        const container = document.getElementById('fieldList');
+        let html = '';
+
+        for (const [voltage, fields] of Object.entries(eeoData.fields)) {
+            for (const f of fields) {
+                // Field energization: check if breaker (P) is energized
+                let breakerEnergized = true;
+                let breakerOpen = false;
+                for (const el of f.elements) {
+                    if (el.type === 'P') {
+                        breakerEnergized = energizedState[el.id]?.energized !== false;
+                        breakerOpen = (energizedState[el.id]?.status === 0);
+                    }
+                }
+
+                const dotClass = breakerEnergized ? 'on' : (breakerOpen ? 'off' : 'partial');
+                const vClass = voltage >= 400 ? 'v400' : (voltage >= 220 ? 'v220' : 'v110');
+                const name = (f.line_name || f.name || f.id).replace(/^DVP_/, '');
+
+                html += `<div class="field-item">
+                    <div class="field-dot ${dotClass}"></div>
+                    <div class="field-name">${name}</div>
+                    <div class="field-voltage ${vClass}">${voltage}</div>
+                </div>`;
+            }
+        }
+
+        container.innerHTML = html || '<div style="color:#555; font-size:11px">Nema polja</div>';
+    }
+
+    // ========================================================================
+    // TOOLTIP
+    // ========================================================================
+    function showTooltip(event, nodeId, type, status) {
+        const tt = document.getElementById('tooltip');
+        const shortId = nodeId.split('_').slice(-3).join(' ');
+        const statusText = status === 1 ? 'UKLJUČEN' : 'ISKLJUČEN';
+        const statusClass = status === 1 ? 'on' : 'off';
+
+        tt.querySelector('.tt-type').textContent = type;
+        tt.querySelector('.tt-id').textContent = shortId;
+        tt.querySelector('.tt-status').textContent = statusText;
+        tt.querySelector('.tt-status').className = `tt-status ${statusClass}`;
+
+        tt.style.display = 'block';
+        tt.style.left = (event.clientX + 15) + 'px';
+        tt.style.top = (event.clientY - 10) + 'px';
+    }
+
+    function hideTooltip() {
+        document.getElementById('tooltip').style.display = 'none';
+    }
+
+    // ========================================================================
+    // LOG
+    // ========================================================================
+    function addLog(type, message) {
+        const panel = document.getElementById('logPanel');
+        const time = new Date().toLocaleTimeString('sr', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        
+        const entry = document.createElement('div');
+        entry.className = `log-entry ${type}`;
+        entry.innerHTML = `<span class="time">${time}</span> <span class="detail">${message}</span>`;
+        
+        panel.insertBefore(entry, panel.firstChild);
+        
+        // Keep max 50 entries
+        while (panel.children.length > 50) {
+            panel.removeChild(panel.lastChild);
+        }
+    }
+
+    // ========================================================================
+    // ZOOM
+    // ========================================================================
+    function zoomIn() {
+        currentScale = Math.min(currentScale * 1.2, 4);
+        applyZoom();
+    }
+
+    function zoomOut() {
+        currentScale = Math.max(currentScale / 1.2, 0.2);
+        applyZoom();
+    }
+
+    function resetZoom() {
+        currentScale = 1;
+        applyZoom();
+    }
+
+    function applyZoom() {
+        const svg = document.querySelector('#diagramContainer svg');
+        if (svg) {
+            svg.style.transform = `scale(${currentScale})`;
+            svg.style.transformOrigin = 'top left';
+        }
+    }
+
+    // ========================================================================
+    // DOWNLOAD
+    // ========================================================================
+    function downloadSVG() {
+        const svg = document.querySelector('#diagramContainer svg');
+        if (!svg) return;
+        const data = new XMLSerializer().serializeToString(svg);
+        const blob = new Blob([data], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `simulator-${currentEEO || 'diagram'}.svg`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    // ========================================================================
+    // HELPERS
+    // ========================================================================
+    function getVoltageColor(voltage) {
+        if (voltage >= 400) return COLORS[400];
+        if (voltage >= 220) return COLORS[220];
+        return COLORS[110];
+    }
+    </script>
+</body>
+</html>

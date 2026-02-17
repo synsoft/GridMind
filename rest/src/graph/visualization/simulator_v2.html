@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GridMind - Jednopolna šema (v2)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f1a;
+            color: #eee;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+            z-index: 100;
+            position: relative;
+        }
+        .header h1 { font-size: 1.3rem; font-weight: 500; }
+        .header h1 span { color: #e94560; }
+        .header h1 .sub { color: #888; font-size: 0.9rem; margin-left: 8px; }
+
+        .controls { display: flex; gap: 8px; align-items: center; }
+
+        /* Searchable Dropdown */
+        .search-select {
+            position: relative;
+            min-width: 240px;
+        }
+        .search-select-input {
+            width: 100%;
+            padding: 7px 30px 7px 10px;
+            font-size: 13px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            cursor: pointer;
+            outline: none;
+        }
+        .search-select-input::placeholder { color: #777; }
+        .search-select-input:focus { border-color: #e94560; }
+        .search-select-arrow {
+            position: absolute; right: 10px; top: 50%;
+            transform: translateY(-50%); color: #888; font-size: 9px; pointer-events: none;
+        }
+        .search-select.open .search-select-arrow { transform: translateY(-50%) rotate(180deg); }
+        .search-select-dropdown {
+            display: none;
+            position: absolute; top: 100%; left: 0; right: 0; margin-top: 4px;
+            background: #1a1a2e; border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 6px; max-height: 360px; overflow-y: auto; z-index: 1000;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+        }
+        .search-select.open .search-select-dropdown { display: block; }
+        .search-select-group {
+            padding: 5px 10px 3px; font-size: 10px; text-transform: uppercase;
+            letter-spacing: 1px; color: #e94560; font-weight: 600;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .search-select-item {
+            padding: 6px 10px; font-size: 13px; cursor: pointer;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .search-select-item:hover { background: rgba(233,69,96,0.15); }
+        .search-select-item .badge {
+            font-size: 10px; padding: 1px 6px; border-radius: 10px;
+            background: rgba(233,69,96,0.2); color: #e94560; font-weight: 600;
+        }
+        .search-select-item.stub { color: #666; }
+        .search-select-item.stub .badge { background: rgba(255,255,255,0.05); color: #555; }
+        .search-select-empty { padding: 12px; text-align: center; color: #555; font-size: 12px; }
+        .search-select-dropdown::-webkit-scrollbar { width: 6px; }
+        .search-select-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+        .btn {
+            padding: 7px 14px; font-size: 12px; border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 6px; cursor: pointer; text-decoration: none; color: white;
+            background: rgba(255,255,255,0.06); transition: background 0.2s;
+        }
+        .btn:hover { background: rgba(255,255,255,0.12); }
+        .btn-primary { background: #e94560; border-color: #e94560; }
+        .btn-success { background: #4CAF50; border-color: #4CAF50; }
+
+        /* Main layout */
+        .app-layout {
+            display: flex;
+            height: calc(100vh - 52px);
+        }
+
+        .sidebar {
+            width: 230px;
+            background: #12121f;
+            border-right: 1px solid rgba(255,255,255,0.06);
+            overflow-y: auto;
+            padding: 12px;
+            flex-shrink: 0;
+        }
+        .sidebar h3 {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+            color: #888; margin: 14px 0 6px; font-weight: 600;
+        }
+        .sidebar h3:first-child { margin-top: 0; }
+
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .stat-card {
+            background: rgba(255,255,255,0.03); border-radius: 6px; padding: 8px; text-align: center;
+        }
+        .stat-value { font-size: 20px; font-weight: 700; }
+        .stat-label { font-size: 9px; color: #666; text-transform: uppercase; }
+        .stat-value.energized { color: #4CAF50; }
+        .stat-value.deenergized { color: #F44336; }
+
+        .state-btn {
+            display: block; width: 100%; text-align: left; padding: 8px 10px;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 6px; color: #ccc; cursor: pointer; margin-bottom: 4px;
+        }
+        .state-btn:hover { background: rgba(255,255,255,0.08); }
+        .state-btn.active { border-color: #e94560; background: rgba(233,69,96,0.1); }
+        .state-name { font-weight: 600; font-size: 12px; }
+        .state-info { font-size: 10px; color: #666; margin-top: 2px; }
+
+        .field-list { max-height: 200px; overflow-y: auto; }
+        .field-item {
+            display: flex; align-items: center; gap: 6px; padding: 3px 0;
+            font-size: 11px; border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .field-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+        .field-dot.on { background: #4CAF50; }
+        .field-dot.off { background: #F44336; }
+        .field-name { flex: 1; color: #bbb; }
+        .field-voltage { font-size: 10px; font-weight: 600; }
+        .field-voltage.v400 { color: #E91E63; }
+        .field-voltage.v220 { color: #9C27B0; }
+        .field-voltage.v110 { color: #2196F3; }
+
+        .log-panel { max-height: 120px; overflow-y: auto; font-size: 10px; }
+        .log-entry { display: flex; gap: 6px; padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,0.02); }
+        .log-entry .time { color: #555; white-space: nowrap; }
+        .log-entry .detail { color: #888; }
+        .log-entry.toggle-on .detail { color: #4CAF50; }
+        .log-entry.toggle-off .detail { color: #F44336; }
+        .log-entry.error .detail { color: #e94560; }
+
+        /* Deenergized list panel */
+        .deenergized-panel { max-height: 200px; overflow-y: auto; }
+        .deenergized-panel .de-empty { color: #555; font-size: 11px; padding: 4px 0; }
+        .de-item {
+            display: flex; align-items: center; gap: 6px; padding: 4px 6px;
+            border-radius: 4px; font-size: 11px; margin-bottom: 2px;
+            background: rgba(244,67,54,0.06); border-left: 2px solid #F44336;
+            cursor: default;
+        }
+        .de-item:hover { background: rgba(244,67,54,0.12); }
+        .de-item .de-icon { font-size: 10px; flex-shrink: 0; width: 16px; text-align: center; }
+        .de-item .de-info { flex: 1; min-width: 0; }
+        .de-item .de-name { color: #ddd; font-weight: 600; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .de-item .de-field { color: #777; font-size: 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .de-item .de-voltage { font-size: 9px; padding: 1px 5px; border-radius: 3px; font-weight: 600; flex-shrink: 0; }
+        .de-counter { font-size: 10px; color: #F44336; font-weight: 600; }
+
+        .diagram-area {
+            flex: 1;
+            overflow: auto;
+            position: relative;
+        }
+        .diagram-container { min-height: 100%; }
+
+        .empty-state {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; height: 100%; color: #555;
+        }
+        .empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+
+        .zoom-controls {
+            position: fixed; bottom: 20px; right: 20px;
+            display: flex; flex-direction: column; gap: 4px; z-index: 50;
+        }
+        .zoom-btn {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(26,26,46,0.9); border: 1px solid rgba(255,255,255,0.15);
+            color: white; font-size: 18px; cursor: pointer;
+        }
+        .zoom-btn:hover { background: rgba(233,69,96,0.3); }
+
+        .tooltip {
+            display: none; position: fixed; background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 6px;
+            padding: 8px 12px; z-index: 200; pointer-events: none;
+            font-size: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+        .tt-type { font-weight: 600; color: #e94560; font-size: 10px; text-transform: uppercase; }
+        .tt-id { color: #ccc; margin: 2px 0; }
+        .tt-status.on { color: #4CAF50; font-weight: 600; }
+        .tt-status.off { color: #F44336; font-weight: 600; }
+        .tt-hint { font-size: 10px; color: #555; margin-top: 4px; }
+
+        .loading-overlay {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; height: 300px; gap: 12px;
+        }
+        .spinner {
+            width: 32px; height: 32px; border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #e94560; border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>
+            <span>Grid</span>Mind
+            <span class="sub">Jednopolna šema v2</span>
+        </h1>
+        <div class="controls">
+            <div class="search-select" id="eeoSearchSelect">
+                <input type="text" class="search-select-input" id="eeoSearchInput"
+                       placeholder="🔍 Pretraži EEO..." autocomplete="off">
+                <span class="search-select-arrow">▼</span>
+                <div class="search-select-dropdown" id="eeoDropdown"></div>
+            </div>
+            <button class="btn btn-primary" onclick="loadEEO()">Prikaži</button>
+            <button class="btn btn-success" onclick="resetAll()">Reset</button>
+            <button class="btn" onclick="downloadSVG()">SVG</button>
+            <a href="/simulator" class="btn">V1</a>
+            <a href="/diagram" class="btn">Šema</a>
+            <a href="/matrix" class="btn">Matrica</a>
+            <a href="/graph" class="btn">Graf</a>
+        </div>
+    </div>
+
+    <div class="app-layout">
+        <div class="sidebar" id="sidebar">
+            <h3>Statistika</h3>
+            <div class="stat-grid" id="statsGrid">
+                <div class="stat-card"><div class="stat-value" id="statFields">-</div><div class="stat-label">Polja</div></div>
+                <div class="stat-card"><div class="stat-value" id="statElements">-</div><div class="stat-label">Elementi</div></div>
+                <div class="stat-card"><div class="stat-value energized" id="statEnergized">-</div><div class="stat-label">Pod naponom</div></div>
+                <div class="stat-card"><div class="stat-value deenergized" id="statDeenergized">-</div><div class="stat-label">Bez napona</div></div>
+            </div>
+
+            <h3>Uklopna stanja</h3>
+            <div id="statesContainer">
+                <button class="state-btn active" onclick="applyState('normalno')">
+                    <div class="state-name">Normalno</div>
+                    <div class="state-info">Svi prekidači uključeni</div>
+                </button>
+            </div>
+
+            <h3>Bez napona <span class="de-counter" id="deCounter"></span></h3>
+            <div class="deenergized-panel" id="deenergizedList">
+                <div class="de-empty">Sve pod naponom</div>
+            </div>
+
+            <h3>Polja</h3>
+            <div class="field-list" id="fieldList">
+                <div style="color: #555; font-size: 11px;">Izaberi EEO...</div>
+            </div>
+
+            <h3>Dnevnik</h3>
+            <div class="log-panel" id="logPanel">
+                <div class="log-entry">
+                    <span class="time">--:--</span>
+                    <span class="detail">Spreman za simulaciju</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="diagram-area" id="diagramArea">
+            <div class="empty-state" id="emptyState">
+                <div class="icon">⚡</div>
+                <div>Izaberite EEO iz padajućeg menija</div>
+                <div style="font-size: 12px; margin-top: 8px; color: #444;">
+                    Kliknite na prekidače i rastavljače da promenite stanje
+                </div>
+            </div>
+            <div class="diagram-container" id="diagramContainer" style="display:none;"></div>
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomIn()">+</button>
+                <button class="zoom-btn" onclick="zoomOut()">−</button>
+                <button class="zoom-btn" onclick="resetZoom()">⟲</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip">
+        <div class="tt-type"></div>
+        <div class="tt-id"></div>
+        <div class="tt-status"></div>
+        <div class="tt-hint">Klikni za promenu stanja</div>
+    </div>
+
+    <script>
+    // ========================================================================
+    // STATE
+    // ========================================================================
+    let currentEEO = null;
+    let eeoData = null;
+    let energizedState = {};
+    let currentScale = 1;
+    let currentStateName = 'normalno';
+
+    // Voltage colors (matching the image)
+    const V_COLORS = {
+        400: { main: '#E91E63', wire: '#E91E63', dim: '#8B1139' },
+        220: { main: '#4CAF50', wire: '#4CAF50', dim: '#2E7D32' },
+        110: { main: '#2196F3', wire: '#2196F3', dim: '#1565C0' },
+    };
+
+    const COLORS = {
+        bg: '#0f0f1a',
+        text: '#ccc',
+        textDim: '#666',
+        closed: '#4CAF50',
+        open: '#F44336',
+        deenergized: '#333',
+        transformer: '#FF9800',
+    };
+
+    // Element sizes
+    const EL = {
+        breakerSize: 14,      // Square side for P
+        disconnR: 6,          // Circle radius for SR/IRSU
+        smtR: 5,              // SMT circle radius
+        spacing: 30,          // Vertical space between elements
+        fieldWidth: 55,       // Horizontal distance between field centers
+        busbarThick: 5,
+        busbarGap: 28,        // Vertical gap between GSS1 and GSS2
+    };
+
+    // ========================================================================
+    // SEARCHABLE DROPDOWN (reused from v1)
+    // ========================================================================
+    let allEEOs = [];
+    let selectedEEOValue = '';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadEEOList();
+        initSearchSelect();
+    });
+
+    function initSearchSelect() {
+        const wrapper = document.getElementById('eeoSearchSelect');
+        const input = document.getElementById('eeoSearchInput');
+
+        input.addEventListener('focus', () => { wrapper.classList.add('open'); input.select(); renderDropdown(input.value); });
+        input.addEventListener('input', () => { wrapper.classList.add('open'); renderDropdown(input.value); });
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') { wrapper.classList.remove('open'); input.blur(); }
+            if (e.key === 'Enter') {
+                const first = document.querySelector('.search-select-item');
+                if (first) first.click();
+            }
+        });
+        document.addEventListener('click', (e) => { if (!wrapper.contains(e.target)) wrapper.classList.remove('open'); });
+    }
+
+    function selectEEO(eeoId, label) {
+        const input = document.getElementById('eeoSearchInput');
+        selectedEEOValue = eeoId;
+        input.value = label;
+        document.getElementById('eeoSearchSelect').classList.remove('open');
+        loadEEO();
+    }
+
+    function renderDropdown(filter) {
+        const dropdown = document.getElementById('eeoDropdown');
+        const q = (filter || '').toLowerCase().trim();
+        const filtered = allEEOs.filter(e => !q || `${e.id} ${e.label}`.toLowerCase().includes(q));
+        if (!filtered.length) { dropdown.innerHTML = '<div class="search-select-empty">Nema rezultata</div>'; return; }
+        const withF = filtered.filter(e => e.fieldCount > 0);
+        const stubs = filtered.filter(e => e.fieldCount === 0);
+        let html = '';
+        if (withF.length) {
+            html += `<div class="search-select-group">Sa poljima (${withF.length})</div>`;
+            withF.forEach(e => { html += `<div class="search-select-item" onclick="selectEEO('${e.id}','${e.id} - ${e.label.replace(/'/g,"\\'")}')"><span>${e.id} - ${e.label}</span><span class="badge">${e.fieldCount}</span></div>`; });
+        }
+        if (stubs.length) {
+            html += `<div class="search-select-group">Povezani (${stubs.length})</div>`;
+            stubs.forEach(e => { html += `<div class="search-select-item stub" onclick="selectEEO('${e.id}','${e.id} - ${e.label.replace(/'/g,"\\'")}')"><span>${e.id} - ${e.label}</span><span class="badge">0</span></div>`; });
+        }
+        dropdown.innerHTML = html;
+    }
+
+    async function loadEEOList() {
+        try {
+            const [eeoResp, dvpResp] = await Promise.all([
+                fetch('/api/graph/export?nodeTypes=EEO'),
+                fetch('/api/graph/export?nodeTypes=DVP')
+            ]);
+            const eeoData = await eeoResp.json();
+            const dvpData = await dvpResp.json();
+
+            const countMap = {};
+            dvpData.nodes.forEach(n => { const eid = n.eeoId; if (eid) countMap[eid] = (countMap[eid]||0)+1; });
+
+            allEEOs = eeoData.nodes.filter(n => n.nodeType === 'EEO')
+                .map(n => ({ id: n.id, label: n.label, fieldCount: countMap[n.id]||0 }))
+                .sort((a,b) => (a.fieldCount>0&&b.fieldCount===0)?-1:(a.fieldCount===0&&b.fieldCount>0)?1:b.fieldCount-a.fieldCount||a.id.localeCompare(b.id));
+
+            renderDropdown('');
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('eeo')) { const f = allEEOs.find(e=>e.id===params.get('eeo')); if(f) selectEEO(f.id,`${f.id} - ${f.label}`); }
+        } catch(e) { console.error('Failed to load EEO list:', e); }
+    }
+
+    // ========================================================================
+    // LOAD EEO
+    // ========================================================================
+    async function loadEEO() {
+        const eeoId = selectedEEOValue;
+        if (!eeoId) return;
+        currentEEO = eeoId;
+        history.replaceState(null, '', `?eeo=${eeoId}`);
+
+        document.getElementById('emptyState').style.display = 'none';
+        const container = document.getElementById('diagramContainer');
+        container.style.display = 'block';
+        container.innerHTML = `<div class="loading-overlay"><div class="spinner"></div><div style="color:#888">Učitavanje ${eeoId}...</div></div>`;
+
+        try {
+            const [dataResp, engResp] = await Promise.all([
+                fetch(`/api/graph/simulator/eeo-data/${eeoId}`),
+                fetch(`/api/graph/simulator/energized/${eeoId}`)
+            ]);
+            eeoData = await dataResp.json();
+            energizedState = await engResp.json();
+
+            buildStatesUI(eeoData.available_states);
+            renderDiagram();
+            updateStats();
+            updateFieldList();
+            addLog('load', `Učitan ${eeoData.name}`);
+        } catch (e) {
+            container.innerHTML = `<div class="empty-state"><div style="color:#e94560">Greška: ${e.message}</div></div>`;
+        }
+    }
+
+    // ========================================================================
+    // RENDER SINGLE-LINE DIAGRAM (v2 - like real jednopolna šema)
+    // ========================================================================
+    function renderDiagram() {
+        if (!eeoData) return;
+
+        const voltages = [...eeoData.voltage_levels].sort((a,b) => b-a); // 400, 220, 110
+        const allFields = eeoData.fields;
+        const busbars = eeoData.busbars;
+        const transformers = eeoData.transformers || [];
+
+        // Compute layout geometry
+        // High-voltage fields go UP, low-voltage fields go DOWN
+        // Transformers bridge between voltage sections
+
+        // Count fields per voltage
+        const fieldCounts = {};
+        voltages.forEach(v => { fieldCounts[v] = (allFields[String(v)] || []).length; });
+
+        const maxFieldCount = Math.max(...Object.values(fieldCounts), 1);
+        const diagramWidth = Math.max(900, maxFieldCount * EL.fieldWidth + 300);
+
+        // Vertical layout: 
+        // For a 3-level TS (400/220/110):
+        //   400kV fields going UP at top
+        //   400kV busbars
+        //   --- transformers 400/220 ---
+        //   220kV busbars 
+        //   220kV fields going DOWN (or up if small)
+        //   --- transformers 220/110 or 400/110 ---
+        //   110kV busbars
+        //   110kV fields going DOWN at bottom
+        //
+        // For 2-level (e.g., 400/110):
+        //   Fields UP from top busbars
+        //   Top busbars
+        //   --- transformers ---
+        //   Bottom busbars
+        //   Fields DOWN from bottom busbars
+
+        // Calculate field chain height (5 elements * spacing)
+        const chainHeight = 5 * EL.spacing + 20; // SR + P + SMT + IRSU + NMT + label
+
+        // Build vertical sections
+        const sections = []; // { voltage, busbarY, fieldsDir: 'up'|'down', fields, busbars }
+        
+        let curY = 40; // Start with some padding for title
+
+        if (voltages.length >= 2) {
+            // Top voltage: fields go UP
+            const topV = voltages[0];
+            const topFields = allFields[String(topV)] || [];
+            const topBusbars = busbars[String(topV)] || [];
+            const numTopBB = Math.max(topBusbars.length, 1);
+            
+            curY += chainHeight + 30; // Space for upward fields + padding
+            sections.push({
+                voltage: topV, busbarY: curY, fieldsDir: 'up',
+                fields: topFields, busbars: topBusbars, numBusbars: numTopBB
+            });
+            curY += numTopBB * EL.busbarGap + 20;
+
+            // Middle voltages (if 3-level, e.g., 220kV)
+            for (let i = 1; i < voltages.length - 1; i++) {
+                const midV = voltages[i];
+                const midFields = allFields[String(midV)] || [];
+                const midBusbars = busbars[String(midV)] || [];
+                const numMidBB = Math.max(midBusbars.length, 1);
+
+                // Transformer zone
+                curY += 60; // space for transformer between levels
+
+                sections.push({
+                    voltage: midV, busbarY: curY, fieldsDir: 'up',
+                    fields: midFields, busbars: midBusbars, numBusbars: numMidBB
+                });
+                curY += numMidBB * EL.busbarGap + 20;
+            }
+
+            // Bottom voltage: fields go DOWN
+            const botV = voltages[voltages.length - 1];
+            const botFields = allFields[String(botV)] || [];
+            const botBusbars = busbars[String(botV)] || [];
+            const numBotBB = Math.max(botBusbars.length, 1);
+
+            curY += 60; // transformer zone
+            sections.push({
+                voltage: botV, busbarY: curY, fieldsDir: 'down',
+                fields: botFields, busbars: botBusbars, numBusbars: numBotBB
+            });
+            curY += numBotBB * EL.busbarGap + chainHeight + 50;
+        } else {
+            // Single voltage level
+            const v = voltages[0];
+            const fields = allFields[String(v)] || [];
+            const bb = busbars[String(v)] || [];
+            curY += chainHeight + 30;
+            sections.push({
+                voltage: v, busbarY: curY, fieldsDir: 'down',
+                fields: fields, busbars: bb, numBusbars: Math.max(bb.length, 1)
+            });
+            curY += Math.max(bb.length,1) * EL.busbarGap + chainHeight + 50;
+        }
+
+        const totalH = curY + 30;
+
+        // --- Build SVG ---
+        let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${diagramWidth} ${totalH}" 
+            width="${diagramWidth}" height="${totalH}" style="background: ${COLORS.bg}">`;
+        svg += renderDefs();
+
+        // Title
+        svg += `<text x="${diagramWidth/2}" y="25" text-anchor="middle" font-size="18" font-weight="bold" fill="${COLORS.text}">${eeoData.name}</text>`;
+
+        // Render each section
+        for (const sec of sections) {
+            svg += renderSection(sec, diagramWidth);
+        }
+
+        // Render transformers between sections
+        svg += renderTransformersBridge(sections, transformers, diagramWidth);
+
+        // Legend
+        svg += renderLegend(20, totalH - 50);
+
+        svg += '</svg>';
+
+        document.getElementById('diagramContainer').innerHTML = svg;
+    }
+
+    function renderDefs() {
+        return `<defs>
+            <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2" result="blur"/>
+                <feFlood flood-color="#4CAF50" flood-opacity="0.4"/>
+                <feComposite in2="blur" operator="in"/>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2" result="blur"/>
+                <feFlood flood-color="#F44336" flood-opacity="0.4"/>
+                <feComposite in2="blur" operator="in"/>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+        </defs>`;
+    }
+
+    // ========================================================================
+    // RENDER SECTION (one voltage level)
+    // ========================================================================
+    function renderSection(sec, totalW) {
+        let svg = '';
+        const vc = getVC(sec.voltage);
+        const busbarY1 = sec.busbarY;
+        const fields = sec.fields;
+        const numBB = sec.numBusbars;
+
+        // Calculate field area width
+        const fieldsWidth = fields.length * EL.fieldWidth;
+        const fieldStartX = Math.max(80, (totalW - fieldsWidth) / 2);
+
+        // Sort busbars by index
+        const sortedBB = [...(sec.busbars || [])].sort((a,b) => a.index - b.index);
+
+        // Draw busbars
+        const bbX1 = fieldStartX - 30;
+        const bbX2 = fieldStartX + fieldsWidth + 30;
+
+        for (let bi = 0; bi < numBB; bi++) {
+            const by = busbarY1 + bi * EL.busbarGap;
+            const bbId = sortedBB[bi]?.id || `GSS_${sec.voltage}_${bi+1}`;
+            const isEng = energizedState[bbId]?.energized !== false;
+            const bbColor = isEng ? vc.main : COLORS.deenergized;
+            const bbIdx = sortedBB[bi]?.index || (bi+1);
+
+            svg += `<line x1="${bbX1}" y1="${by}" x2="${bbX2}" y2="${by}" 
+                stroke="${bbColor}" stroke-width="${EL.busbarThick}" stroke-linecap="round"/>`;
+            // Label
+            svg += `<text x="${bbX1 - 5}" y="${by + 4}" text-anchor="end" font-size="11" font-weight="bold" fill="${vc.main}">${bbIdx}</text>`;
+        }
+
+        // Voltage label on left
+        svg += `<text x="${bbX1 - 35}" y="${busbarY1 + (numBB-1)*EL.busbarGap/2 + 4}" text-anchor="end" font-size="13" font-weight="bold" fill="${vc.main}">${sec.voltage} kV</text>`;
+
+        // Render fields
+        for (let fi = 0; fi < fields.length; fi++) {
+            const field = fields[fi];
+            const cx = fieldStartX + fi * EL.fieldWidth + EL.fieldWidth / 2;
+            const gssIdx = (field.gss_index || 1) - 1;
+            const connectY = busbarY1 + gssIdx * EL.busbarGap;
+
+            svg += renderFieldV2(cx, connectY, field, sec.voltage, sec.fieldsDir);
+        }
+
+        return svg;
+    }
+
+    // ========================================================================
+    // RENDER FIELD (v2 - vertical chain up or down from busbar)
+    // ========================================================================
+    function renderFieldV2(cx, busbarY, field, voltage, dir) {
+        let svg = '';
+        const vc = getVC(voltage);
+        const elements = field.elements || [];
+        const sign = dir === 'up' ? -1 : 1;
+
+        // Build element map
+        const elMap = {};
+        for (const el of elements) {
+            if (el.type === 'SR') {
+                if (!elMap.SR) elMap.SR = [];
+                elMap.SR.push(el);
+            } else {
+                elMap[el.type] = el;
+            }
+        }
+
+        const sr = elMap.SR?.[0];
+        const p = elMap.P;
+        const smt = elMap.SMT;
+        const irsu = elMap.IRSU;
+
+        // Energization of each segment
+        const srEng = sr ? energizedState[sr.id]?.energized !== false : true;
+        const pEng = p ? energizedState[p.id]?.energized !== false : true;
+        const smtEng = smt ? energizedState[smt.id]?.energized !== false : true;
+        const irsuEng = irsu ? energizedState[irsu.id]?.energized !== false : true;
+
+        // Wire color (voltage colored when energized)
+        const wirePreP = srEng ? vc.main : COLORS.deenergized;
+        const wirePostP = pEng ? vc.main : COLORS.deenergized;
+
+        // Chain positions: busbar -> SR -> P -> SMT -> IRSU -> NMT (arrow/endpoint)
+        let y = busbarY;
+        const step = EL.spacing * sign;
+
+        // === Wire from busbar to SR ===
+        const srY = y + step * 0.4;
+        svg += `<line x1="${cx}" y1="${y}" x2="${cx}" y2="${srY}" stroke="${wirePreP}" stroke-width="2"/>`;
+
+        // === SR (green circle = closed, red = open) ===
+        svg += renderSR(cx, srY, sr, vc);
+
+        // === Wire SR -> P ===
+        const pY = srY + step;
+        svg += `<line x1="${cx}" y1="${srY + (sign > 0 ? EL.disconnR*2 : -EL.disconnR*2)}" x2="${cx}" y2="${pY}" stroke="${wirePreP}" stroke-width="2"/>`;
+
+        // === P (filled square) ===
+        svg += renderP(cx, pY, p, vc);
+
+        // === Wire P -> SMT ===
+        const smtY = pY + step;
+        svg += `<line x1="${cx}" y1="${pY + sign * EL.breakerSize/2}" x2="${cx}" y2="${smtY}" stroke="${wirePostP}" stroke-width="2"/>`;
+
+        // === SMT (small concentric circle) ===
+        svg += renderSMT(cx, smtY, smt, pEng, vc);
+
+        // === Wire SMT -> IRSU ===
+        const irsuY = smtY + step * 0.8;
+        svg += `<line x1="${cx}" y1="${smtY + sign * EL.smtR}" x2="${cx}" y2="${irsuY}" stroke="${wirePostP}" stroke-width="2"/>`;
+
+        // === IRSU (circle like SR) ===
+        svg += renderIRSU(cx, irsuY, irsu, vc);
+
+        // === NMT / endpoint arrow ===
+        const endY = irsuY + step * 0.7;
+        const arrowColor = irsuEng ? vc.main : COLORS.deenergized;
+        svg += `<line x1="${cx}" y1="${irsuY + sign * EL.disconnR}" x2="${cx}" y2="${endY}" stroke="${arrowColor}" stroke-width="2"/>`;
+
+        // Field label
+        let label = field.line_name || field.name || field.id;
+        label = label.replace(/^DV/, '');
+        if (label.length > 8) label = label.substring(0, 7) + '…';
+
+        const labelY = endY + sign * 14;
+        const labelColor = (srEng && pEng) ? vc.main : COLORS.deenergized;
+        svg += `<text x="${cx}" y="${labelY}" text-anchor="middle" font-size="10" font-weight="bold" fill="${labelColor}" 
+            transform="rotate(${dir === 'down' ? 45 : -45}, ${cx}, ${labelY})">${label}</text>`;
+
+        return svg;
+    }
+
+    // ========================================================================
+    // ELEMENT RENDERERS (matching image style)
+    // ========================================================================
+
+    // Prekidač — filled square (red=open, green=closed)
+    function renderP(cx, cy, element, vc) {
+        const s = EL.breakerSize;
+        if (!element) return `<rect x="${cx-s/2}" y="${cy-s/2}" width="${s}" height="${s}" fill="#333" stroke="#555"/>`;
+
+        const status = element.status ?? 1;
+        const isOn = status === 1;
+        const isEng = energizedState[element.id]?.energized !== false;
+        const color = isOn ? vc.main : COLORS.open;
+        const glowFilter = isOn ? 'url(#glow-green)' : 'url(#glow-red)';
+
+        let svg = `<g class="clickable-element" data-node-id="${element.id}" style="cursor:pointer"
+            onmouseover="showTooltip(event,'${element.id}','Prekidač',${status})"
+            onmouseout="hideTooltip()"
+            onclick="toggleElement('${element.id}')">`;
+
+        svg += `<rect x="${cx-s/2}" y="${cy-s/2}" width="${s}" height="${s}" 
+            fill="${isOn ? color : COLORS.open}" stroke="${isEng ? color : '#444'}" stroke-width="1.5"/>`;
+
+        if (!isOn) {
+            // X mark for open
+            const m = 3;
+            svg += `<line x1="${cx-s/2+m}" y1="${cy-s/2+m}" x2="${cx+s/2-m}" y2="${cy+s/2-m}" stroke="white" stroke-width="1.5"/>`;
+            svg += `<line x1="${cx+s/2-m}" y1="${cy-s/2+m}" x2="${cx-s/2+m}" y2="${cy+s/2-m}" stroke="white" stroke-width="1.5"/>`;
+        }
+
+        svg += '</g>';
+        return svg;
+    }
+
+    // Rastavljač (SR) — circle (green filled = closed, open outline = open)
+    function renderSR(cx, cy, element, vc) {
+        const r = EL.disconnR;
+        if (!element) return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#555" stroke-width="1.5"/>`;
+
+        const status = element.status ?? 1;
+        const isOn = status === 1;
+        const isEng = energizedState[element.id]?.energized !== false;
+        const color = isOn ? '#4CAF50' : COLORS.open;
+
+        let svg = `<g class="clickable-element" style="cursor:pointer"
+            onmouseover="showTooltip(event,'${element.id}','Rastavljač',${status})"
+            onmouseout="hideTooltip()"
+            onclick="toggleElement('${element.id}')">`;
+
+        if (isOn) {
+            svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}" stroke="${isEng ? color : '#444'}" stroke-width="1.5"/>`;
+        } else {
+            svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${COLORS.open}" stroke-width="2"/>`;
+            // Small gap line to show open
+            svg += `<line x1="${cx-r+1}" y1="${cy}" x2="${cx+r-1}" y2="${cy}" stroke="${COLORS.open}" stroke-width="1.5"/>`;
+        }
+
+        svg += '</g>';
+        return svg;
+    }
+
+    // IRSU — same as SR visually
+    function renderIRSU(cx, cy, element, vc) {
+        const r = EL.disconnR;
+        if (!element) return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#555" stroke-width="1.5"/>`;
+
+        const status = element.status ?? 1;
+        const isOn = status === 1;
+        const isEng = energizedState[element.id]?.energized !== false;
+        const color = isOn ? '#4CAF50' : COLORS.open;
+
+        let svg = `<g class="clickable-element" style="cursor:pointer"
+            onmouseover="showTooltip(event,'${element.id}','IRSU',${status})"
+            onmouseout="hideTooltip()"
+            onclick="toggleElement('${element.id}')">`;
+
+        if (isOn) {
+            svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}" stroke="${isEng ? color : '#444'}" stroke-width="1.5"/>`;
+        } else {
+            svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${COLORS.open}" stroke-width="2"/>`;
+            svg += `<line x1="${cx-r+1}" y1="${cy}" x2="${cx+r-1}" y2="${cy}" stroke="${COLORS.open}" stroke-width="1.5"/>`;
+        }
+
+        svg += '</g>';
+        return svg;
+    }
+
+    // SMT — small concentric circle (purple)
+    function renderSMT(cx, cy, element, isEng, vc) {
+        const r = EL.smtR;
+        const color = isEng ? '#9C27B0' : '#444';
+        let svg = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}" stroke-width="1.5"/>`;
+        svg += `<circle cx="${cx}" cy="${cy}" r="2" fill="${color}"/>`;
+        return svg;
+    }
+
+    // ========================================================================
+    // TRANSFORMERS (bridge between voltage sections)
+    // ========================================================================
+    function renderTransformersBridge(sections, transformers, totalW) {
+        let svg = '';
+        if (sections.length < 2 || !transformers.length) return svg;
+
+        // Position transformers between the sections they connect
+        for (let ti = 0; ti < transformers.length; ti++) {
+            const tr = transformers[ti];
+            const vnKV = tr.vn_kv;
+            const nnKV = tr.nn_kv;
+
+            // Find the sections for vn and nn
+            const secVN = sections.find(s => s.voltage === vnKV);
+            const secNN = sections.find(s => s.voltage === nnKV);
+
+            if (!secVN || !secNN) continue;
+
+            // Position between the two sections
+            const topY = secVN.busbarY + (secVN.numBusbars - 1) * EL.busbarGap + 10;
+            const botY = secNN.busbarY - 10;
+            const midY = (topY + botY) / 2;
+
+            // Horizontal position: spread transformers across width
+            const trX = totalW - 100 - ti * 130;
+            if (trX < 100) continue;
+
+            const r = 18;
+            const vcTop = getVC(vnKV);
+            const vcBot = getVC(nnKV);
+            const trEng = energizedState[tr.id]?.energized !== false;
+            const topColor = trEng ? vcTop.main : COLORS.deenergized;
+            const botColor = trEng ? vcBot.main : COLORS.deenergized;
+
+            // Wire from top busbar down to transformer
+            svg += `<line x1="${trX}" y1="${secVN.busbarY + (secVN.numBusbars-1)*EL.busbarGap}" x2="${trX}" y2="${midY - r}" 
+                stroke="${topColor}" stroke-width="2"/>`;
+
+            // Top circle (VN side)
+            svg += `<circle cx="${trX}" cy="${midY - r/2}" r="${r}" fill="none" stroke="${topColor}" stroke-width="2.5"/>`;
+            // Bottom circle (NN side)  
+            svg += `<circle cx="${trX}" cy="${midY + r/2}" r="${r}" fill="none" stroke="${botColor}" stroke-width="2.5"/>`;
+
+            // Wire from transformer to bottom busbar
+            svg += `<line x1="${trX}" y1="${midY + r}" x2="${trX}" y2="${secNN.busbarY}" 
+                stroke="${botColor}" stroke-width="2"/>`;
+
+            // Label
+            const name = (tr.name || tr.id).replace(/^NI2_/, '');
+            svg += `<text x="${trX + r + 6}" y="${midY - 5}" font-size="12" font-weight="bold" fill="${COLORS.text}">${name}</text>`;
+            svg += `<text x="${trX + r + 6}" y="${midY + 10}" font-size="10" fill="${COLORS.textDim}">${tr.power_mva || '?'} MVA</text>`;
+
+            // Connect to busbars (horizontal lines)
+            const fieldsW = Math.max(...sections.map(s => s.fields.length)) * EL.fieldWidth;
+            const bbEnd = (totalW - fieldsW) / 2 + fieldsW + 30;
+            if (trX > bbEnd + 10) {
+                svg += `<line x1="${bbEnd}" y1="${secVN.busbarY}" x2="${trX}" y2="${secVN.busbarY}" stroke="${topColor}" stroke-width="2" stroke-dasharray="4,3"/>`;
+                svg += `<line x1="${bbEnd}" y1="${secNN.busbarY}" x2="${trX}" y2="${secNN.busbarY}" stroke="${botColor}" stroke-width="2" stroke-dasharray="4,3"/>`;
+            }
+        }
+        return svg;
+    }
+
+    // ========================================================================
+    // LEGEND
+    // ========================================================================
+    function renderLegend(lx, ly) {
+        let svg = `<rect x="${lx}" y="${ly}" width="420" height="36" rx="4" fill="rgba(26,26,46,0.9)" stroke="rgba(255,255,255,0.08)"/>`;
+
+        // P closed
+        const s = 10;
+        svg += `<rect x="${lx+10}" y="${ly+10}" width="${s}" height="${s}" fill="#4CAF50"/>`;
+        svg += `<text x="${lx+24}" y="${ly+19}" font-size="9" fill="#888">P uklj.</text>`;
+
+        // P open
+        svg += `<rect x="${lx+78}" y="${ly+10}" width="${s}" height="${s}" fill="${COLORS.open}"/>`;
+        svg += `<text x="${lx+92}" y="${ly+19}" font-size="9" fill="#888">P isklj.</text>`;
+
+        // SR closed (green circle)
+        svg += `<circle cx="${lx+158}" cy="${ly+15}" r="5" fill="#4CAF50"/>`;
+        svg += `<text x="${lx+168}" y="${ly+19}" font-size="9" fill="#888">R uklj.</text>`;
+
+        // SR open (red outline)
+        svg += `<circle cx="${lx+226}" cy="${ly+15}" r="5" fill="none" stroke="${COLORS.open}" stroke-width="1.5"/>`;
+        svg += `<text x="${lx+236}" y="${ly+19}" font-size="9" fill="#888">R isklj.</text>`;
+
+        // SMT
+        svg += `<circle cx="${lx+300}" cy="${ly+15}" r="4" fill="none" stroke="#9C27B0" stroke-width="1.5"/>`;
+        svg += `<circle cx="${lx+300}" cy="${ly+15}" r="1.5" fill="#9C27B0"/>`;
+        svg += `<text x="${lx+308}" y="${ly+19}" font-size="9" fill="#888">SMT</text>`;
+
+        // Transformer
+        svg += `<circle cx="${lx+355}" cy="${ly+12}" r="5" fill="none" stroke="${COLORS.transformer}" stroke-width="1.5"/>`;
+        svg += `<circle cx="${lx+355}" cy="${ly+20}" r="5" fill="none" stroke="${COLORS.transformer}" stroke-width="1.5"/>`;
+        svg += `<text x="${lx+365}" y="${ly+19}" font-size="9" fill="#888">Trafo</text>`;
+
+        return svg;
+    }
+
+    // ========================================================================
+    // TOGGLE, STATES, UI (same as v1)
+    // ========================================================================
+    async function toggleElement(nodeId) {
+        try {
+            const resp = await fetch(`/api/graph/simulator/toggle/${encodeURIComponent(nodeId)}`, { method: 'POST' });
+            if (!resp.ok) throw new Error(await resp.text());
+            const result = await resp.json();
+            energizedState = result.energized;
+
+            if (eeoData) {
+                for (const [v, fields] of Object.entries(eeoData.fields)) {
+                    for (const f of fields) {
+                        for (const el of f.elements) {
+                            if (el.id === nodeId) el.status = result.new_status;
+                        }
+                    }
+                }
+            }
+
+            const shortId = nodeId.split('_').slice(-2).join('_');
+            addLog(result.new_status === 1 ? 'toggle-on' : 'toggle-off',
+                `${shortId} → ${result.new_status === 1 ? 'UKLJUČEN' : 'ISKLJUČEN'}`);
+
+            renderDiagram();
+            updateStats();
+            updateFieldList();
+        } catch (e) {
+            console.error('Toggle error:', e);
+            addLog('error', `Greška: ${e.message}`);
+        }
+    }
+
+    function buildStatesUI(states) {
+        const container = document.getElementById('statesContainer');
+        let html = `<button class="state-btn ${currentStateName==='normalno'?'active':''}" onclick="applyState('normalno')">
+            <div class="state-name">Normalno</div><div class="state-info">Svi prekidači uključeni</div></button>`;
+
+        if (states) {
+            for (const state of states) {
+                if (state.name === 'normalno') continue;
+                const label = state.name.replace(/_/g,' ').replace(/bez/g,'Bez').replace(/dzs/g,'DZS').replace(/^(\w)/,(m)=>m.toUpperCase());
+                const info = Object.entries(state.voltages).map(([v,d])=>`${v}kV: GS1=${d.gs1?.length||0} GS2=${d.gs2?.length||0}`).join(', ');
+                html += `<button class="state-btn ${currentStateName===state.name?'active':''}" 
+                    onclick="applyState('${state.name}',${JSON.stringify(state.voltages).replace(/"/g,'&quot;')})">
+                    <div class="state-name">${label}</div><div class="state-info">${info}</div></button>`;
+            }
+        }
+        container.innerHTML = html;
+    }
+
+    async function applyState(stateName, statesData) {
+        if (!currentEEO) return;
+        currentStateName = stateName;
+        try {
+            if (stateName === 'normalno') {
+                const r = await (await fetch(`/api/graph/simulator/reset/${currentEEO}`, { method: 'POST' })).json();
+                energizedState = r.energized;
+                addLog('state', `Normalno (${r.toggled} promena)`);
+            } else {
+                const r = await (await fetch(`/api/graph/simulator/apply-state/${currentEEO}`, {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ state_name: stateName, states: statesData })
+                })).json();
+                energizedState = r.energized;
+                addLog('state', `${stateName} (${r.toggled} promena)`);
+            }
+            const r2 = await (await fetch(`/api/graph/simulator/eeo-data/${currentEEO}`)).json();
+            eeoData = r2;
+            renderDiagram(); updateStats(); updateFieldList(); buildStatesUI(eeoData.available_states);
+        } catch (e) { addLog('error', e.message); }
+    }
+
+    async function resetAll() {
+        if (!currentEEO) return;
+        currentStateName = 'normalno';
+        try {
+            const r = await (await fetch(`/api/graph/simulator/reset/${currentEEO}`, { method: 'POST' })).json();
+            energizedState = r.energized;
+            const r2 = await (await fetch(`/api/graph/simulator/eeo-data/${currentEEO}`)).json();
+            eeoData = r2;
+            addLog('state', `Reset (${r.toggled} promena)`);
+            renderDiagram(); updateStats(); updateFieldList(); buildStatesUI(eeoData.available_states);
+        } catch (e) { addLog('error', e.message); }
+    }
+
+    function updateStats() {
+        if (!eeoData) return;
+        let tf=0, te=0, en=0, de=0;
+        for (const [v,fields] of Object.entries(eeoData.fields)) { tf += fields.length; for (const f of fields) te += f.elements.length; }
+        for (const [nid, info] of Object.entries(energizedState)) {
+            if (['P','SR','IRSU'].includes(info.type)) { if (info.energized) en++; else de++; }
+        }
+        document.getElementById('statFields').textContent = tf;
+        document.getElementById('statElements').textContent = te;
+        document.getElementById('statEnergized').textContent = en;
+        document.getElementById('statDeenergized').textContent = de;
+    }
+
+    function updateFieldList() {
+        if (!eeoData) return;
+        let html = '';
+        for (const [voltage, fields] of Object.entries(eeoData.fields)) {
+            for (const f of fields) {
+                let bEng=true;
+                for (const el of f.elements) { if (el.type==='P') bEng = energizedState[el.id]?.energized!==false; }
+                const dot = bEng ? 'on' : 'off';
+                const vCls = voltage>=400?'v400':voltage>=220?'v220':'v110';
+                const name = (f.line_name||f.name||f.id).replace(/^DVP_/,'');
+                html += `<div class="field-item"><div class="field-dot ${dot}"></div><div class="field-name">${name}</div><div class="field-voltage ${vCls}">${voltage}</div></div>`;
+            }
+        }
+        document.getElementById('fieldList').innerHTML = html || '<div style="color:#555;font-size:11px">Nema polja</div>';
+        updateDeenergizedList();
+    }
+
+    function updateDeenergizedList() {
+        if (!eeoData) return;
+
+        // Build element-to-field lookup
+        const elToField = {};
+        for (const [voltage, fields] of Object.entries(eeoData.fields)) {
+            for (const f of fields) {
+                const fieldName = (f.line_name || f.name || f.id).replace(/^DVP_/, '');
+                for (const el of f.elements) {
+                    elToField[el.id] = { fieldName, voltage: parseInt(voltage) };
+                }
+            }
+        }
+
+        // Type labels and icons
+        const typeLabels = { P: 'Prekidač', SR: 'Rastavljač', IRSU: 'Rastavljač uzemljenja', SMT: 'SMT', NMT: 'NMT', GSS: 'Sabirnica' };
+        const typeIcons = { P: '◼', SR: '●', IRSU: '⏚', SMT: '◉', NMT: '◎', GSS: '═' };
+
+        // Collect de-energized elements with details
+        const deItems = [];
+        for (const [nodeId, info] of Object.entries(energizedState)) {
+            if (!info.energized && ['P', 'SR', 'IRSU'].includes(info.type)) {
+                const fieldInfo = elToField[nodeId];
+                const shortId = nodeId.split('_').slice(-2).join('_');
+                deItems.push({
+                    id: nodeId,
+                    shortId,
+                    type: info.type,
+                    typeLabel: typeLabels[info.type] || info.type,
+                    icon: typeIcons[info.type] || '?',
+                    fieldName: fieldInfo?.fieldName || '—',
+                    voltage: fieldInfo?.voltage || 0,
+                    status: info.status
+                });
+            }
+        }
+
+        // Sort by voltage (desc), then field name, then type
+        deItems.sort((a, b) => b.voltage - a.voltage || a.fieldName.localeCompare(b.fieldName) || a.type.localeCompare(b.type));
+
+        // Update counter
+        const counter = document.getElementById('deCounter');
+        counter.textContent = deItems.length > 0 ? `(${deItems.length})` : '';
+
+        // Build HTML
+        const container = document.getElementById('deenergizedList');
+        if (deItems.length === 0) {
+            container.innerHTML = '<div class="de-empty">Sve pod naponom ✓</div>';
+            return;
+        }
+
+        let html = '';
+        let lastVoltage = null;
+        for (const item of deItems) {
+            // Voltage group separator
+            if (item.voltage !== lastVoltage) {
+                const vCls = item.voltage >= 400 ? 'v400' : item.voltage >= 220 ? 'v220' : 'v110';
+                html += `<div style="font-size:9px;color:#666;padding:4px 2px 2px;margin-top:${lastVoltage !== null ? '4' : '0'}px;border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <span class="field-voltage ${vCls}">${item.voltage} kV</span></div>`;
+                lastVoltage = item.voltage;
+            }
+            html += `<div class="de-item" title="${item.id}">
+                <div class="de-icon">${item.icon}</div>
+                <div class="de-info">
+                    <div class="de-name">${item.typeLabel} — ${item.shortId}</div>
+                    <div class="de-field">Polje: ${item.fieldName}</div>
+                </div>
+            </div>`;
+        }
+
+        container.innerHTML = html;
+    }
+
+    // ========================================================================
+    // TOOLTIP, LOG, ZOOM, DOWNLOAD, HELPERS
+    // ========================================================================
+    function showTooltip(event, nodeId, type, status) {
+        const tt = document.getElementById('tooltip');
+        tt.querySelector('.tt-type').textContent = type;
+        tt.querySelector('.tt-id').textContent = nodeId.split('_').slice(-3).join(' ');
+        const stText = status === 1 ? 'UKLJUČEN' : 'ISKLJUČEN';
+        tt.querySelector('.tt-status').textContent = stText;
+        tt.querySelector('.tt-status').className = `tt-status ${status===1?'on':'off'}`;
+        tt.style.display = 'block'; tt.style.left = (event.clientX+15)+'px'; tt.style.top = (event.clientY-10)+'px';
+    }
+    function hideTooltip() { document.getElementById('tooltip').style.display = 'none'; }
+
+    function addLog(type, message) {
+        const panel = document.getElementById('logPanel');
+        const time = new Date().toLocaleTimeString('sr',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+        const entry = document.createElement('div');
+        entry.className = `log-entry ${type}`;
+        entry.innerHTML = `<span class="time">${time}</span> <span class="detail">${message}</span>`;
+        panel.insertBefore(entry, panel.firstChild);
+        while (panel.children.length > 50) panel.removeChild(panel.lastChild);
+    }
+
+    function zoomIn() { currentScale = Math.min(currentScale*1.2, 4); applyZoom(); }
+    function zoomOut() { currentScale = Math.max(currentScale/1.2, 0.2); applyZoom(); }
+    function resetZoom() { currentScale = 1; applyZoom(); }
+    function applyZoom() {
+        const svg = document.querySelector('#diagramContainer svg');
+        if (svg) { svg.style.transform = `scale(${currentScale})`; svg.style.transformOrigin = 'top left'; }
+    }
+
+    function downloadSVG() {
+        const svg = document.querySelector('#diagramContainer svg');
+        if (!svg) return;
+        const blob = new Blob([new XMLSerializer().serializeToString(svg)], {type:'image/svg+xml'});
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+        a.download = `sema-${currentEEO||'diagram'}.svg`; a.click();
+    }
+
+    function getVC(voltage) {
+        if (voltage >= 400) return V_COLORS[400];
+        if (voltage >= 220) return V_COLORS[220];
+        return V_COLORS[110];
+    }
+    </script>
+</body>
+</html>

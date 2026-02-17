@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GridMind - Jednopolna Šema</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .header h1 span {
+            color: #e94560;
+        }
+        
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .select-wrapper {
+            position: relative;
+        }
+        
+        .select-wrapper select {
+            appearance: none;
+            padding: 10px 40px 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            cursor: pointer;
+            min-width: 250px;
+        }
+        
+        .select-wrapper::after {
+            content: '▼';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 10px;
+            pointer-events: none;
+        }
+        
+        .select-wrapper select option {
+            background: #1a1a2e;
+            color: white;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #e94560;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #d63850;
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Main content */
+        .main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Diagram container */
+        .diagram-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+            overflow: auto;
+            max-width: 100%;
+            max-height: calc(100vh - 150px);
+        }
+        
+        .diagram-container svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Info panel */
+        .info-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 15px 25px;
+            margin-top: 20px;
+            display: flex;
+            gap: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .info-item {
+            text-align: center;
+        }
+        
+        .info-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e94560;
+        }
+        
+        .info-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        /* Loading */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px;
+            color: #666;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #eee;
+            border-top-color: #e94560;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Zoom controls */
+        .zoom-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .zoom-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid #ddd;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        
+        .zoom-btn:hover {
+            background: #f5f5f5;
+            transform: scale(1.1);
+        }
+        
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 100px;
+            color: #999;
+        }
+        
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><span>Grid</span>Mind - Jednopolna Šema</h1>
+        
+        <div class="controls">
+            <div class="select-wrapper">
+                <select id="eeoSelect">
+                    <option value="">-- Izaberi EEO --</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" onclick="loadDiagram()">Prikaži</button>
+            <button class="btn btn-secondary" onclick="downloadSVG()">⬇ Download SVG</button>
+            <a href="/graph" class="btn btn-secondary">← Nazad na graf</a>
+        </div>
+    </div>
+    
+    <div class="main">
+        <div class="info-panel" id="infoPanel" style="display: none;">
+            <div class="info-item">
+                <div class="info-value" id="infoName">-</div>
+                <div class="info-label">EEO</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value" id="infoVoltage">-</div>
+                <div class="info-label">Naponski nivoi</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value" id="infoFields">-</div>
+                <div class="info-label">Polja</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value" id="infoTR">-</div>
+                <div class="info-label">Transformatora</div>
+            </div>
+        </div>
+        
+        <div class="diagram-container" id="diagramContainer">
+            <div class="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9 17H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4"/>
+                    <path d="M12 12v9"/>
+                    <path d="M8 21h8"/>
+                    <circle cx="12" cy="8" r="2"/>
+                </svg>
+                <p>Izaberite EEO iz padajućeg menija<br>da biste videli jednopolnu šemu</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="zoom-controls">
+        <button class="zoom-btn" onclick="zoomIn()">+</button>
+        <button class="zoom-btn" onclick="zoomOut()">−</button>
+        <button class="zoom-btn" onclick="resetZoom()">⟲</button>
+    </div>
+
+    <script>
+        let currentScale = 1;
+        let currentEEO = null;
+        
+        // Učitaj listu EEO
+        async function loadEEOList() {
+            try {
+                const response = await fetch('/api/graph/export?nodeTypes=EEO');
+                const data = await response.json();
+                
+                const select = document.getElementById('eeoSelect');
+                
+                // Sortiraj po imenu
+                const eeos = data.nodes.sort((a, b) => a.label.localeCompare(b.label));
+                
+                eeos.forEach(eeo => {
+                    const option = document.createElement('option');
+                    option.value = eeo.id;
+                    option.textContent = `${eeo.id} - ${eeo.label}`;
+                    select.appendChild(option);
+                });
+                
+                // Ako ima query param
+                const urlParams = new URLSearchParams(window.location.search);
+                const eeoParam = urlParams.get('eeo');
+                if (eeoParam) {
+                    select.value = eeoParam;
+                    loadDiagram();
+                }
+                
+            } catch (error) {
+                console.error('Greška:', error);
+            }
+        }
+        
+        // Učitaj dijagram
+        async function loadDiagram() {
+            const eeoId = document.getElementById('eeoSelect').value;
+            if (!eeoId) return;
+            
+            currentEEO = eeoId;
+            const container = document.getElementById('diagramContainer');
+            
+            container.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <div>Učitavanje šeme...</div>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch(`/api/graph/diagram/${eeoId}`);
+                
+                if (!response.ok) {
+                    throw new Error('Greška pri učitavanju');
+                }
+                
+                const svg = await response.text();
+                container.innerHTML = svg;
+                
+                // Ažuriraj URL
+                history.replaceState(null, '', `?eeo=${eeoId}`);
+                
+                // Prikaži info panel
+                await loadEEOInfo(eeoId);
+                
+                // Reset zoom
+                currentScale = 1;
+                
+            } catch (error) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <p style="color: #e94560;">Greška: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Učitaj info o EEO
+        async function loadEEOInfo(eeoId) {
+            try {
+                const response = await fetch(`/api/graph/node/${eeoId}`);
+                const data = await response.json();
+                
+                document.getElementById('infoName').textContent = eeoId;
+                document.getElementById('infoVoltage').textContent = 
+                    (data.voltage_levels || []).join('/') + ' kV';
+                
+                // Broj polja i TR
+                const statsResponse = await fetch('/api/graph/export?nodeTypes=DVP,TR');
+                const statsData = await statsResponse.json();
+                
+                const fields = statsData.nodes.filter(n => n.eeoId === eeoId && n.nodeType === 'DVP');
+                const trs = statsData.nodes.filter(n => n.eeoId === eeoId && n.nodeType === 'TR');
+                
+                document.getElementById('infoFields').textContent = fields.length;
+                document.getElementById('infoTR').textContent = trs.length;
+                
+                document.getElementById('infoPanel').style.display = 'flex';
+                
+            } catch (error) {
+                console.error('Info error:', error);
+            }
+        }
+        
+        // Zoom funkcije
+        function zoomIn() {
+            currentScale = Math.min(currentScale * 1.2, 3);
+            applyZoom();
+        }
+        
+        function zoomOut() {
+            currentScale = Math.max(currentScale / 1.2, 0.3);
+            applyZoom();
+        }
+        
+        function resetZoom() {
+            currentScale = 1;
+            applyZoom();
+        }
+        
+        function applyZoom() {
+            const svg = document.querySelector('#diagramContainer svg');
+            if (svg) {
+                svg.style.transform = `scale(${currentScale})`;
+                svg.style.transformOrigin = 'top left';
+            }
+        }
+        
+        // Download SVG
+        function downloadSVG() {
+            const svg = document.querySelector('#diagramContainer svg');
+            if (!svg) return;
+            
+            const svgData = new XMLSerializer().serializeToString(svg);
+            const blob = new Blob([svgData], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `jednopolna-sema-${currentEEO || 'diagram'}.svg`;
+            a.click();
+            
+            URL.revokeObjectURL(url);
+        }
+        
+        // Inicijalizacija
+        document.addEventListener('DOMContentLoaded', loadEEOList);
+    </script>
+</body>
+</html>

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GridMind - Knowledge Graph Vizualizacija</title>
+    <!-- vis.js from CDN -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+        }
+        
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background: #16213e;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid #0f3460;
+        }
+        
+        .sidebar h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #e94560;
+        }
+        
+        .sidebar h2 {
+            font-size: 0.9rem;
+            color: #888;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 0.85rem;
+            color: #0f3460;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #0f3460;
+        }
+        
+        /* Filters */
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-label {
+            display: block;
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .checkbox-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 8px;
+            background: #0f3460;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .checkbox-item:hover {
+            background: #1a4a7a;
+        }
+        
+        .checkbox-item input {
+            cursor: pointer;
+        }
+        
+        .checkbox-item.checked {
+            background: #e94560;
+        }
+        
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .stat-card {
+            background: #0f3460;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e94560;
+        }
+        
+        .stat-label {
+            font-size: 0.7rem;
+            color: #888;
+        }
+        
+        /* Node details */
+        .node-details {
+            background: #0f3460;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .node-details.visible {
+            display: block;
+        }
+        
+        .node-details h3 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #e94560;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #1a1a2e;
+            font-size: 0.8rem;
+        }
+        
+        .detail-label {
+            color: #888;
+        }
+        
+        .detail-value {
+            color: #eee;
+            font-weight: 500;
+        }
+        
+        /* Legend */
+        .legend-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.7rem;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        
+        /* Graph container */
+        .graph-container {
+            flex: 1;
+            position: relative;
+        }
+        
+        #graph {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Controls */
+        .graph-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .control-btn {
+            padding: 10px 15px;
+            background: #16213e;
+            border: 1px solid #0f3460;
+            color: #eee;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .control-btn:hover {
+            background: #0f3460;
+        }
+        
+        /* Loading */
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #0f3460;
+            border-top: 3px solid #e94560;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Search */
+        .search-box {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            background: #0f3460;
+            border: 1px solid #1a4a7a;
+            border-radius: 6px;
+            color: #eee;
+            font-size: 0.9rem;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #e94560;
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #16213e;
+            border: 1px solid #0f3460;
+            border-radius: 0 0 6px 6px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+        
+        .search-result-item {
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #0f3460;
+        }
+        
+        .search-result-item:hover {
+            background: #0f3460;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>GridMind</h1>
+            <h2>Knowledge Graph Vizualizacija</h2>
+            
+            <!-- Search -->
+            <div class="section">
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Pretraži čvorove...">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="section">
+                <div class="section-title">Statistike</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="statNodes">0</div>
+                        <div class="stat-label">Čvorova</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statEdges">0</div>
+                        <div class="stat-label">Ivica</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statEEO">0</div>
+                        <div class="stat-label">EEO</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statDV">0</div>
+                        <div class="stat-label">Dalekovoda</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filters -->
+            <div class="section">
+                <div class="section-title">Filteri čvorova</div>
+                <div class="checkbox-list" id="nodeFilters">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            
+            <!-- Legend -->
+            <div class="section">
+                <div class="section-title">Legenda</div>
+                <div class="legend-grid" id="legend">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            
+            <!-- Node Details -->
+            <div class="section">
+                <div class="section-title">Detalji čvora</div>
+                <div class="node-details" id="nodeDetails">
+                    <h3 id="detailTitle">-</h3>
+                    <div id="detailContent"></div>
+                </div>
+                <div id="noSelection" style="color: #666; font-size: 0.8rem;">
+                    Kliknite na čvor za detalje
+                </div>
+            </div>
+        </div>
+        
+        <div class="graph-container">
+            <div id="graph">
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <div>Učitavanje grafa...</div>
+                </div>
+            </div>
+            
+            <div class="graph-controls">
+                <button class="control-btn" onclick="fitNetwork()">🔍 Prikaži sve</button>
+                <button class="control-btn" onclick="togglePhysics()">⚡ Fizika: <span id="physicsState">ON</span></button>
+                <button class="control-btn" onclick="exportPNG()">📷 Export PNG</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Konfiguracija
+        const NODE_COLORS = {
+            EEO: "#E91E63",
+            GSS: "#4CAF50",
+            PSS: "#8BC34A",
+            DVP: "#2196F3",
+            KBP: "#00BCD4",
+            TRP: "#FF9800",
+            GSP: "#9C27B0",
+            PSP: "#673AB7",
+            P: "#F44336",
+            SR: "#CDDC39",
+            SMT: "#795548",
+            NMT: "#607D8B",
+            IRSU: "#FF5722",
+            TR: "#FFC107",
+            DV: "#3F51B5",
+            KB: "#009688"
+        };
+        
+        let network = null;
+        let allNodes = [];
+        let allEdges = [];
+        let physicsEnabled = true;
+        let activeFilters = new Set(Object.keys(NODE_COLORS));
+        
+        // Inicijalizacija
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadGraphData();
+            buildFilters();
+            buildLegend();
+            setupSearch();
+        });
+        
+        // Učitaj podatke
+        async function loadGraphData() {
+            try {
+                const response = await fetch('/api/graph/export');
+                const data = await response.json();
+                
+                allNodes = data.nodes;
+                allEdges = data.edges;
+                
+                updateStats(data.metadata?.stats);
+                initNetwork();
+                
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                console.error('Greška pri učitavanju:', error);
+                document.getElementById('loading').innerHTML = `
+                    <div style="color: #e94560;">
+                        Greška pri učitavanju grafa.<br>
+                        <small>${error.message}</small>
+                    </div>
+                `;
+            }
+        }
+        
+        // Inicijalizuj mrežu
+        function initNetwork() {
+            const container = document.getElementById('graph');
+            
+            const nodes = new vis.DataSet(filterNodes());
+            const edges = new vis.DataSet(allEdges);
+            
+            const options = {
+                nodes: {
+                    borderWidth: 2,
+                    shadow: true,
+                    font: {
+                        color: '#fff',
+                        strokeWidth: 2,
+                        strokeColor: '#000'
+                    }
+                },
+                edges: {
+                    smooth: {
+                        type: 'continuous'
+                    },
+                    shadow: true
+                },
+                physics: {
+                    stabilization: {
+                        iterations: 100
+                    },
+                    barnesHut: {
+                        gravitationalConstant: -2000,
+                        springLength: 150,
+                        springConstant: 0.01
+                    }
+                },
+                interaction: {
+                    hover: true,
+                    tooltipDelay: 100,
+                    hideEdgesOnDrag: true
+                }
+            };
+            
+            network = new vis.Network(container, { nodes, edges }, options);
+            
+            // Event listeners
+            network.on('click', (params) => {
+                if (params.nodes.length > 0) {
+                    showNodeDetails(params.nodes[0]);
+                } else {
+                    hideNodeDetails();
+                }
+            });
+            
+            network.on('stabilizationIterationsDone', () => {
+                network.setOptions({ physics: { stabilization: false } });
+            });
+        }
+        
+        // Filtriraj čvorove
+        function filterNodes() {
+            return allNodes.filter(node => activeFilters.has(node.nodeType));
+        }
+        
+        // Ažuriraj mrežu
+        function updateNetwork() {
+            if (!network) return;
+            
+            const filteredNodes = filterNodes();
+            const filteredNodeIds = new Set(filteredNodes.map(n => n.id));
+            
+            // Filtriraj ivice
+            const filteredEdges = allEdges.filter(e => 
+                filteredNodeIds.has(e.from) && filteredNodeIds.has(e.to)
+            );
+            
+            network.setData({
+                nodes: new vis.DataSet(filteredNodes),
+                edges: new vis.DataSet(filteredEdges)
+            });
+        }
+        
+        // Statistike
+        function updateStats(stats) {
+            if (!stats) return;
+            
+            document.getElementById('statNodes').textContent = stats.total_nodes || 0;
+            document.getElementById('statEdges').textContent = stats.total_edges || 0;
+            document.getElementById('statEEO').textContent = stats.nodes_by_type?.EEO || 0;
+            document.getElementById('statDV').textContent = stats.nodes_by_type?.DV || 0;
+        }
+        
+        // Filteri
+        function buildFilters() {
+            const container = document.getElementById('nodeFilters');
+            container.innerHTML = '';
+            
+            Object.entries(NODE_COLORS).forEach(([type, color]) => {
+                const count = allNodes.filter(n => n.nodeType === type).length;
+                if (count === 0) return;
+                
+                const item = document.createElement('label');
+                item.className = 'checkbox-item checked';
+                item.innerHTML = `
+                    <input type="checkbox" checked data-type="${type}">
+                    <span style="background: ${color}; width: 8px; height: 8px; border-radius: 2px;"></span>
+                    ${type} (${count})
+                `;
+                
+                item.querySelector('input').addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        activeFilters.add(type);
+                        item.classList.add('checked');
+                    } else {
+                        activeFilters.delete(type);
+                        item.classList.remove('checked');
+                    }
+                    updateNetwork();
+                });
+                
+                container.appendChild(item);
+            });
+        }
+        
+        // Legenda
+        function buildLegend() {
+            const container = document.getElementById('legend');
+            container.innerHTML = '';
+            
+            Object.entries(NODE_COLORS).forEach(([type, color]) => {
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background: ${color}"></div>
+                    <span>${type}</span>
+                `;
+                container.appendChild(item);
+            });
+        }
+        
+        // Pretraga
+        function setupSearch() {
+            const input = document.getElementById('searchInput');
+            const results = document.getElementById('searchResults');
+            
+            input.addEventListener('input', () => {
+                const query = input.value.toLowerCase();
+                if (query.length < 2) {
+                    results.style.display = 'none';
+                    return;
+                }
+                
+                const matches = allNodes
+                    .filter(n => n.id.toLowerCase().includes(query) || 
+                                (n.label && n.label.toLowerCase().includes(query)))
+                    .slice(0, 10);
+                
+                if (matches.length === 0) {
+                    results.style.display = 'none';
+                    return;
+                }
+                
+                results.innerHTML = matches.map(n => `
+                    <div class="search-result-item" data-id="${n.id}">
+                        <span style="color: ${NODE_COLORS[n.nodeType] || '#888'}">${n.nodeType}</span>
+                        ${n.id}
+                    </div>
+                `).join('');
+                
+                results.style.display = 'block';
+                
+                results.querySelectorAll('.search-result-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const nodeId = item.dataset.id;
+                        network.focus(nodeId, { scale: 1.5, animation: true });
+                        network.selectNodes([nodeId]);
+                        showNodeDetails(nodeId);
+                        results.style.display = 'none';
+                        input.value = '';
+                    });
+                });
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!input.contains(e.target) && !results.contains(e.target)) {
+                    results.style.display = 'none';
+                }
+            });
+        }
+        
+        // Detalji čvora
+        function showNodeDetails(nodeId) {
+            const node = allNodes.find(n => n.id === nodeId);
+            if (!node) return;
+            
+            const detailsDiv = document.getElementById('nodeDetails');
+            const noSelection = document.getElementById('noSelection');
+            
+            document.getElementById('detailTitle').textContent = node.id;
+            document.getElementById('detailTitle').style.color = NODE_COLORS[node.nodeType] || '#e94560';
+            
+            const content = [];
+            content.push(`<div class="detail-row"><span class="detail-label">Tip</span><span class="detail-value">${node.nodeType}</span></div>`);
+            
+            if (node.label && node.label !== node.id) {
+                content.push(`<div class="detail-row"><span class="detail-label">Naziv</span><span class="detail-value">${node.label}</span></div>`);
+            }
+            if (node.eeoId) {
+                content.push(`<div class="detail-row"><span class="detail-label">EEO</span><span class="detail-value">${node.eeoId}</span></div>`);
+            }
+            if (node.voltageKv) {
+                content.push(`<div class="detail-row"><span class="detail-label">Napon</span><span class="detail-value">${node.voltageKv} kV</span></div>`);
+            }
+            
+            // Susedi
+            const neighbors = network.getConnectedNodes(nodeId);
+            content.push(`<div class="detail-row"><span class="detail-label">Susedi</span><span class="detail-value">${neighbors.length}</span></div>`);
+            
+            document.getElementById('detailContent').innerHTML = content.join('');
+            
+            detailsDiv.classList.add('visible');
+            noSelection.style.display = 'none';
+        }
+        
+        function hideNodeDetails() {
+            document.getElementById('nodeDetails').classList.remove('visible');
+            document.getElementById('noSelection').style.display = 'block';
+        }
+        
+        // Kontrole
+        function fitNetwork() {
+            if (network) {
+                network.fit({ animation: true });
+            }
+        }
+        
+        function togglePhysics() {
+            physicsEnabled = !physicsEnabled;
+            if (network) {
+                network.setOptions({ physics: { enabled: physicsEnabled } });
+            }
+            document.getElementById('physicsState').textContent = physicsEnabled ? 'ON' : 'OFF';
+        }
+        
+        function exportPNG() {
+            if (!network) return;
+            
+            const canvas = document.querySelector('#graph canvas');
+            const link = document.createElement('a');
+            link.download = 'gridmind-graph.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>
